@@ -1,0 +1,21 @@
+{
+  "fast_ma": 20,
+  "slow_ma": 60,
+  "slope_days": 5,
+  "pivot_radius": 2,
+  "structure_days": 60,
+  "pullback_days": 5,
+  "volume_baseline_days": 20,
+  "volume_ratio_max": 0.8,
+  "support_distance_max": 0.04,
+  "minimum_pullback": 0.02,
+  "minimum_slope": 0.0,
+  "atr_days": 14,
+  "stop_atr_buffer": 0.5,
+  "max_risk_fraction": 0.10,
+  "min_reward_risk": 1.5,
+  "min_average_volume": 300000,
+  "max_daily_gap": 0.15,
+  "target_count": 5,
+  "max_candidates": 10
+}

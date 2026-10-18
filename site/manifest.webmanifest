@@ -1,0 +1,13 @@
+{
+  "id": "./",
+  "name": "台股波段觀察室",
+  "short_name": "台股觀察室",
+  "description": "以官方行情與量化條件建立的每日波段觀察名單",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f1",
+  "theme_color": "#133c38",
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}

@@ -1,0 +1,6 @@
+[project]
+name = "taiwan-stock-screener"
+version = "0.1.0"
+description = "Official Taiwan market data and configurable swing-trade screening"
+requires-python = ">=3.11"
+dependencies = []
