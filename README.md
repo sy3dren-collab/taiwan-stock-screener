@@ -1,5 +1,7 @@
 # 台股波段觀察室
 
+正式網站（手機／電腦）：**https://sy3dren-collab.github.io/taiwan-stock-screener/**
+
 使用臺灣證券交易所、證券櫃檯買賣中心的公開收盤行情，建立 **1～4 週波段交易研究候選名單**。Python 標準函式庫完成資料取得、SQLite 儲存與量化篩選；原生 HTML/CSS/JavaScript 網站以 GitHub Pages 發布。沒有下單功能。手機版的資料流程與維護分工見 [系統架構](docs/architecture.md)。
 
 ## 目前狀態與驗證範圍
@@ -8,7 +10,7 @@
 
 截至該日共 1,942 檔股票有有效行情，1,927 檔歷史足夠，預設策略有 **1 檔**符合全部條件。候選少於五檔時明確提示，不會放寬條件或加入模擬行情。測試用價格只存在 tests 的合成 fixture，不會寫入正式網站或正式歷史資料。
 
-上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。程式已推送至 main，官方歷史資料已推送至 market-data，GitHub Actions 已觸發。**GitHub Pages 尚未啟用**：建立網站 API 回覆 `403 Resource not accessible by integration`，目前 GitHub 整合無權替儲存庫建立 Pages。請儲存庫管理者在 **Settings → Pages → Source** 選擇 **GitHub Actions**，再重跑工作流程；尚不可將預期網址當作已上線網站。
+上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。程式與官方歷史資料已分別推送至 main 與 market-data。GitHub Pages 已啟用，2026-10-18 的[正式工作流程](https://github.com/sy3dren-collab/taiwan-stock-screener/actions/runs/39106182226)已成功完成官方資料更新、歷史保存及網站部署。正式首頁、行情 JSON、JavaScript、CSS、網站圖示與 manifest 均確認 HTTP 200，部署資產與儲存庫相符。
 
 ## 本機操作
 
@@ -53,7 +55,7 @@ python3 -m screener update
 
 兩個市場都應成功取得超過 100 檔真實 OHLCV，再檢查更新結果的 `status` 為 `ok`、`as_of` 日期正確、`sufficient_history_count` 合理。沒有候選不代表故障，可能沒有股票符合條件；歷史不足會另外提示。
 
-HTTPS 網域 `www.twse.com.tw`、`www.tpex.org.tw`、`api.github.com`、`sy3dren-collab.github.io` 目前均可連線，四個必要網域也已保存至環境設定草稿。草稿保存本身不代表新環境已發布；後續環境仍應保留這些網域。GitHub Actions 的 GitHub-hosted runner 不使用這份雲端網路設定，但仍可能遇到官方限流／阻擋。目前剩餘 Pages 啟用問題是 GitHub 整合授權，並非官方行情連線問題。
+HTTPS 網域 `www.twse.com.tw`、`www.tpex.org.tw`、`api.github.com`、`sy3dren-collab.github.io` 目前均可連線，四個必要網域也已保存至環境設定草稿。草稿保存本身不代表新環境已發布；後續環境仍應保留這些網域。GitHub Actions 的 GitHub-hosted runner 不使用這份雲端網路設定，但仍可能遇到官方限流／阻擋。本儲存庫的 Pages 已由管理者啟用；若 fork 到其他儲存庫，仍須由該儲存庫管理者選擇 GitHub Actions 作為 Pages 來源。
 
 ### 網頁測試（選用開發工具）
 
