@@ -1,0 +1,2834 @@
+{
+  "schema_version": 1,
+  "status": "preliminary",
+  "generated_at": "2026-10-18T17:09:57.199060+08:00",
+  "models": [
+    {
+      "model_id": "user_range_reclaim",
+      "name": "你的策略：整理區間＋大量收復",
+      "description": "長時間整理後，假跌破收復區間或量化近似頭肩底突破頸線；收復／突破當天必須放量。",
+      "status": "preliminary",
+      "data_start": "2026-04-20",
+      "start": "2026-07-29",
+      "end": "2026-10-16",
+      "warmup_sessions": 69,
+      "simulated_sessions": 55,
+      "signal_count": 10,
+      "closed_count": 6,
+      "open_count": 4,
+      "metrics": {
+        "initial_capital": 1000000,
+        "final_equity": 995911.0,
+        "total_return": -0.004089,
+        "max_drawdown": 0.02554602,
+        "win_rate": 0.5,
+        "profit_factor": 0.582134,
+        "average_trade_return": -0.008418026666666663,
+        "average_holding_sessions": 12.833333333333334,
+        "realized_net_pnl": -9491.0
+      },
+      "closed_trades": [
+        {
+          "market": "TWSE",
+          "code": "1416",
+          "name": "廣豐",
+          "signal_date": "2026-08-07",
+          "entry_date": "2026-08-10",
+          "entry_index": 8,
+          "entry_price": 11.05,
+          "quantity": 3000,
+          "entry_fee": 47,
+          "stop": 10.52,
+          "target": 11.9,
+          "cost": 33197.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-08-17",
+          "exit_price": 11.85,
+          "exit_fee": 50,
+          "sell_tax": 106,
+          "exit_reason": "收盤達目標",
+          "holding_sessions": 6,
+          "calendar_days": 7,
+          "net_pnl": 2197.0,
+          "net_return": 0.06618068
+        },
+        {
+          "market": "TWSE",
+          "code": "2387",
+          "name": "精元",
+          "signal_date": "2026-08-05",
+          "entry_date": "2026-08-06",
+          "entry_index": 6,
+          "entry_price": 37.8,
+          "quantity": 4000,
+          "entry_fee": 215,
+          "stop": 36.28,
+          "target": 43.9,
+          "cost": 151415.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-08-19",
+          "exit_price": 35.8,
+          "exit_fee": 204,
+          "sell_tax": 429,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 10,
+          "calendar_days": 13,
+          "net_pnl": -8848.0,
+          "net_return": -0.05843543
+        },
+        {
+          "market": "TWSE",
+          "code": "2348",
+          "name": "海悅",
+          "signal_date": "2026-08-04",
+          "entry_date": "2026-08-05",
+          "entry_index": 5,
+          "entry_price": 67.9,
+          "quantity": 2000,
+          "entry_fee": 193,
+          "stop": 65.257,
+          "target": 82.3,
+          "cost": 135993.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-09-01",
+          "exit_price": 70.2,
+          "exit_fee": 200,
+          "sell_tax": 421,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": 3786.0,
+          "net_return": 0.02783967
+        },
+        {
+          "market": "TWSE",
+          "code": "2439",
+          "name": "美律",
+          "signal_date": "2026-08-20",
+          "entry_date": "2026-08-21",
+          "entry_index": 17,
+          "entry_price": 81.8,
+          "quantity": 2000,
+          "entry_fee": 233,
+          "stop": 77.5,
+          "target": 95.4,
+          "cost": 163833.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-09-08",
+          "exit_price": 76.4,
+          "exit_fee": 217,
+          "sell_tax": 458,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 13,
+          "calendar_days": 18,
+          "net_pnl": -11708.0,
+          "net_return": -0.07146301
+        },
+        {
+          "market": "TWSE",
+          "code": "1102",
+          "name": "亞泥",
+          "signal_date": "2026-08-14",
+          "entry_date": "2026-08-17",
+          "entry_index": 13,
+          "entry_price": 33.35,
+          "quantity": 5000,
+          "entry_fee": 237,
+          "stop": 31.261,
+          "target": 37.1,
+          "cost": 166987.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-09-11",
+          "exit_price": 35.0,
+          "exit_fee": 249,
+          "sell_tax": 525,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 25,
+          "net_pnl": 7239.0,
+          "net_return": 0.04335068
+        },
+        {
+          "market": "TWSE",
+          "code": "5531",
+          "name": "鄉林",
+          "signal_date": "2026-09-03",
+          "entry_date": "2026-09-04",
+          "entry_index": 27,
+          "entry_price": 7.43,
+          "quantity": 5000,
+          "entry_fee": 52,
+          "stop": 7.118,
+          "target": 8.8,
+          "cost": 37202.0,
+          "signal_variant": "假跌破後大量收復",
+          "exit_date": "2026-09-15",
+          "exit_price": 7.04,
+          "exit_fee": 50,
+          "sell_tax": 105,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 8,
+          "calendar_days": 11,
+          "net_pnl": -2157.0,
+          "net_return": -0.05798075
+        }
+      ],
+      "open_positions": [
+        {
+          "market": "TWSE",
+          "code": "4746",
+          "name": "台耀",
+          "signal_date": "2026-09-17",
+          "entry_date": "2026-09-18",
+          "entry_index": 37,
+          "entry_price": 47.75,
+          "quantity": 4000,
+          "entry_fee": 272,
+          "stop": 44.413,
+          "target": 56.7,
+          "cost": 191272.0,
+          "signal_variant": "假跌破後大量收復",
+          "last_quote_date": "2026-10-16",
+          "last_close": 48.25,
+          "holding_sessions": 18,
+          "pending_exit": null
+        },
+        {
+          "market": "TWSE",
+          "code": "2505",
+          "name": "國揚",
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_index": 39,
+          "entry_price": 17.05,
+          "quantity": 5000,
+          "entry_fee": 121,
+          "stop": 16.543,
+          "target": 19.25,
+          "cost": 85371.0,
+          "signal_variant": "假跌破後大量收復",
+          "last_quote_date": "2026-10-16",
+          "last_close": 18.15,
+          "holding_sessions": 16,
+          "pending_exit": null
+        },
+        {
+          "market": "TPEX",
+          "code": "5512",
+          "name": "力麒",
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_index": 39,
+          "entry_price": 7.77,
+          "quantity": 6000,
+          "entry_fee": 66,
+          "stop": 7.438,
+          "target": 8.35,
+          "cost": 46686.0,
+          "signal_variant": "假跌破後大量收復",
+          "last_quote_date": "2026-10-16",
+          "last_close": 7.64,
+          "holding_sessions": 16,
+          "pending_exit": null
+        },
+        {
+          "market": "TWSE",
+          "code": "2014",
+          "name": "中鴻",
+          "signal_date": "2026-09-24",
+          "entry_date": "2026-09-29",
+          "entry_index": 42,
+          "entry_price": 16.9,
+          "quantity": 11000,
+          "entry_fee": 264,
+          "stop": 16.071,
+          "target": 18.45,
+          "cost": 186164.0,
+          "signal_variant": "假跌破後大量收復",
+          "last_quote_date": "2026-10-16",
+          "last_close": 17.15,
+          "holding_sessions": 13,
+          "pending_exit": null
+        }
+      ],
+      "equity_curve": [
+        {
+          "date": "2026-07-28",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-29",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-31",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-03",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 1000800.0,
+          "cash": 864007.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 1001907.0,
+          "cash": 712592.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 1007284.0,
+          "cash": 712592.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 1002810.0,
+          "cash": 679395.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 999873.0,
+          "cash": 679395.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 1001018.0,
+          "cash": 679395.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 1000072.0,
+          "cash": 679395.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 998927.0,
+          "cash": 679395.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 998800.0,
+          "cash": 547802.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 994868.0,
+          "cash": 547802.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 997555.0,
+          "cash": 690369.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 1005620.0,
+          "cash": 690369.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 1008298.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 1005759.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 1003070.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 1006156.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 999288.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 997744.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 995355.0,
+          "cash": 526536.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 997345.0,
+          "cash": 666315.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 996001.0,
+          "cash": 666315.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 995603.0,
+          "cash": 666315.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 994991.0,
+          "cash": 629113.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 992152.0,
+          "cash": 629113.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 992202.0,
+          "cash": 781238.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 993198.0,
+          "cash": 781238.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 993247.0,
+          "cash": 781238.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 991057.0,
+          "cash": 955464.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 990658.0,
+          "cash": 955464.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 990509.0,
+          "cash": 990509.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 990509.0,
+          "cash": 990509.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 990509.0,
+          "cash": 990509.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 989592.0,
+          "cash": 799237.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 989392.0,
+          "cash": 799237.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 989810.0,
+          "cash": 667180.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 991720.0,
+          "cash": 667180.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 989451.0,
+          "cash": 667180.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 984274.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 996132.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-01",
+          "equity": 993232.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-02",
+          "equity": 989341.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-05",
+          "equity": 982540.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-06",
+          "equity": 987548.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-07",
+          "equity": 985874.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 990188.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 989231.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 987010.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 991273.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 989976.0,
+          "cash": 481016.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 995911.0,
+          "cash": 481016.0,
+          "positions": 4
+        }
+      ],
+      "rejected_orders": {
+        "前日持倉預留限制": 0
+      },
+      "deferred_exits": {},
+      "warnings": [
+        "原始未還原權息價格：未計入股息、除權／減資調整，結果不能視為完整投資報酬。",
+        "日線開盤價與滑價僅為成交模型，未模擬完整漲跌停參考價、開盤委託佇列及部分成交。",
+        "收盤觸發後次日開盤執行，跳空可能使停損失效；停牌／成交受限可能超過 20 個交易日。",
+        "只比較固定策略，未進行參數最佳化；尚未完成跨年度與獨立樣本外驗證。",
+        "僅 6 筆已平倉交易，樣本不足以推論穩定勝率。",
+        "有效模擬僅 55 個交易日，不涵蓋完整年度與多種市場循環。"
+      ]
+    },
+    {
+      "model_id": "trend_pullback",
+      "name": "原策略：趨勢回檔再轉強",
+      "description": "均線多頭、高低點抬高、近支撐量縮，紅 K 收盤突破前日高點。",
+      "status": "preliminary",
+      "data_start": "2026-04-20",
+      "start": "2026-07-29",
+      "end": "2026-10-16",
+      "warmup_sessions": 69,
+      "simulated_sessions": 55,
+      "signal_count": 23,
+      "closed_count": 10,
+      "open_count": 4,
+      "metrics": {
+        "initial_capital": 1000000,
+        "final_equity": 945748.0,
+        "total_return": -0.054252,
+        "max_drawdown": 0.065253,
+        "win_rate": 0.2,
+        "profit_factor": 0.16827,
+        "average_trade_return": -0.029287711,
+        "average_holding_sessions": 10.7,
+        "realized_net_pnl": -49962.0
+      },
+      "closed_trades": [
+        {
+          "market": "TWSE",
+          "code": "2347",
+          "name": "聯強",
+          "signal_date": "2026-08-12",
+          "entry_date": "2026-08-13",
+          "entry_index": 11,
+          "entry_price": 91.7,
+          "quantity": 2000,
+          "entry_fee": 261,
+          "stop": 87.45,
+          "target": 98.3,
+          "cost": 183661.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-08-19",
+          "exit_price": 86.0,
+          "exit_fee": 245,
+          "sell_tax": 516,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 5,
+          "calendar_days": 6,
+          "net_pnl": -12422.0,
+          "net_return": -0.06763548
+        },
+        {
+          "market": "TWSE",
+          "code": "1232",
+          "name": "大統益",
+          "signal_date": "2026-07-29",
+          "entry_date": "2026-07-30",
+          "entry_index": 1,
+          "entry_price": 158.5,
+          "quantity": 1000,
+          "entry_fee": 225,
+          "stop": 148.607,
+          "target": 178.0,
+          "cost": 158725.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-08-26",
+          "exit_price": 156.0,
+          "exit_fee": 222,
+          "sell_tax": 468,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": -3415.0,
+          "net_return": -0.0215152
+        },
+        {
+          "market": "TWSE",
+          "code": "9940",
+          "name": "信義",
+          "signal_date": "2026-08-20",
+          "entry_date": "2026-08-21",
+          "entry_index": 17,
+          "entry_price": 20.85,
+          "quantity": 5000,
+          "entry_fee": 148,
+          "stop": 20.277,
+          "target": 21.85,
+          "cost": 104398.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-09-01",
+          "exit_price": 20.05,
+          "exit_fee": 142,
+          "sell_tax": 300,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 8,
+          "calendar_days": 11,
+          "net_pnl": -4590.0,
+          "net_return": -0.04396636
+        },
+        {
+          "market": "TWSE",
+          "code": "1101",
+          "name": "台泥",
+          "signal_date": "2026-09-09",
+          "entry_date": "2026-09-10",
+          "entry_index": 31,
+          "entry_price": 24.75,
+          "quantity": 8000,
+          "entry_fee": 282,
+          "stop": 23.911,
+          "target": 26.1,
+          "cost": 198282.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-09-15",
+          "exit_price": 23.95,
+          "exit_fee": 273,
+          "sell_tax": 574,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 4,
+          "calendar_days": 5,
+          "net_pnl": -7529.0,
+          "net_return": -0.03797117
+        },
+        {
+          "market": "TWSE",
+          "code": "4938",
+          "name": "和碩",
+          "signal_date": "2026-08-24",
+          "entry_date": "2026-08-25",
+          "entry_index": 19,
+          "entry_price": 89.3,
+          "quantity": 2000,
+          "entry_fee": 254,
+          "stop": 85.704,
+          "target": 100.5,
+          "cost": 178854.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-09-21",
+          "exit_price": 90.2,
+          "exit_fee": 257,
+          "sell_tax": 541,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": 748.0,
+          "net_return": 0.00418218
+        },
+        {
+          "market": "TPEX",
+          "code": "6292",
+          "name": "迅德",
+          "signal_date": "2026-08-26",
+          "entry_date": "2026-08-27",
+          "entry_index": 21,
+          "entry_price": 62.4,
+          "quantity": 3000,
+          "entry_fee": 266,
+          "stop": 58.554,
+          "target": 69.0,
+          "cost": 187466.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-09-23",
+          "exit_price": 65.9,
+          "exit_fee": 281,
+          "sell_tax": 593,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": 9360.0,
+          "net_return": 0.04992905
+        },
+        {
+          "market": "TWSE",
+          "code": "2546",
+          "name": "根基",
+          "signal_date": "2026-09-03",
+          "entry_date": "2026-09-04",
+          "entry_index": 27,
+          "entry_price": 106.5,
+          "quantity": 1000,
+          "entry_fee": 151,
+          "stop": 100.661,
+          "target": 120.0,
+          "cost": 106651.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-10-05",
+          "exit_price": 105.0,
+          "exit_fee": 149,
+          "sell_tax": 315,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 31,
+          "net_pnl": -2115.0,
+          "net_return": -0.01983104
+        },
+        {
+          "market": "TWSE",
+          "code": "6112",
+          "name": "邁達特",
+          "signal_date": "2026-09-30",
+          "entry_date": "2026-10-01",
+          "entry_index": 44,
+          "entry_price": 48.15,
+          "quantity": 4000,
+          "entry_fee": 274,
+          "stop": 45.9,
+          "target": 53.1,
+          "cost": 192874.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-10-06",
+          "exit_price": 45.15,
+          "exit_fee": 257,
+          "sell_tax": 541,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 4,
+          "calendar_days": 5,
+          "net_pnl": -13072.0,
+          "net_return": -0.06777482
+        },
+        {
+          "market": "TWSE",
+          "code": "6133",
+          "name": "金橋",
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_index": 51,
+          "entry_price": 27.05,
+          "quantity": 7000,
+          "entry_fee": 269,
+          "stop": 25.802,
+          "target": 31.0,
+          "cost": 189619.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-10-14",
+          "exit_price": 25.8,
+          "exit_fee": 257,
+          "sell_tax": 541,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 2,
+          "calendar_days": 1,
+          "net_pnl": -9817.0,
+          "net_return": -0.05177224
+        },
+        {
+          "market": "TWSE",
+          "code": "3550",
+          "name": "聯穎",
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_index": 51,
+          "entry_price": 24.3,
+          "quantity": 8000,
+          "entry_fee": 277,
+          "stop": 23.246,
+          "target": 27.45,
+          "cost": 194677.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "exit_date": "2026-10-16",
+          "exit_price": 23.55,
+          "exit_fee": 268,
+          "sell_tax": 565,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 4,
+          "calendar_days": 3,
+          "net_pnl": -7110.0,
+          "net_return": -0.03652203
+        }
+      ],
+      "open_positions": [
+        {
+          "market": "TWSE",
+          "code": "2520",
+          "name": "冠德",
+          "signal_date": "2026-10-07",
+          "entry_date": "2026-10-08",
+          "entry_index": 49,
+          "entry_price": 37.05,
+          "quantity": 5000,
+          "entry_fee": 263,
+          "stop": 35.961,
+          "target": 39.6,
+          "cost": 185513.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "last_quote_date": "2026-10-16",
+          "last_close": 37.55,
+          "holding_sessions": 6,
+          "pending_exit": null
+        },
+        {
+          "market": "TPEX",
+          "code": "1595",
+          "name": "川寶",
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_index": 53,
+          "entry_price": 71.5,
+          "quantity": 2000,
+          "entry_fee": 203,
+          "stop": 67.343,
+          "target": 91.0,
+          "cost": 143203.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "last_quote_date": "2026-10-16",
+          "last_close": 74.4,
+          "holding_sessions": 2,
+          "pending_exit": null
+        },
+        {
+          "market": "TWSE",
+          "code": "3042",
+          "name": "晶技",
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_index": 53,
+          "entry_price": 193.5,
+          "quantity": 1000,
+          "entry_fee": 275,
+          "stop": 187.839,
+          "target": 235.5,
+          "cost": 193775.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "last_quote_date": "2026-10-16",
+          "last_close": 188.0,
+          "holding_sessions": 2,
+          "pending_exit": null
+        },
+        {
+          "market": "TWSE",
+          "code": "6116",
+          "name": "彩晶",
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_index": 53,
+          "entry_price": 15.05,
+          "quantity": 13000,
+          "entry_fee": 278,
+          "stop": 14.277,
+          "target": 17.5,
+          "cost": 195928.0,
+          "signal_variant": "趨勢回檔再轉強",
+          "last_quote_date": "2026-10-16",
+          "last_close": 14.95,
+          "holding_sessions": 2,
+          "pending_exit": null
+        }
+      ],
+      "equity_curve": [
+        {
+          "date": "2026-07-28",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-29",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 996088.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-07-31",
+          "equity": 994594.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-03",
+          "equity": 993598.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 991607.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 992603.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 995590.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 996585.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 996088.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 994594.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 995092.0,
+          "cash": 841275.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 992925.0,
+          "cash": 657614.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 989740.0,
+          "cash": 657614.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 987052.0,
+          "cash": 657614.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 982472.0,
+          "cash": 657614.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 982670.0,
+          "cash": 828853.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 984163.0,
+          "cash": 828853.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 985795.0,
+          "cash": 724455.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 983803.0,
+          "cash": 724455.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 979326.0,
+          "cash": 545601.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 980569.0,
+          "cash": 700911.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 976888.0,
+          "cash": 513445.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 978830.0,
+          "cash": 513445.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 980173.0,
+          "cash": 513445.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 978531.0,
+          "cash": 613253.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 979626.0,
+          "cash": 613253.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 971960.0,
+          "cash": 613253.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 987766.0,
+          "cash": 506602.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 993540.0,
+          "cash": 506602.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 988961.0,
+          "cash": 506602.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 988562.0,
+          "cash": 506602.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 986109.0,
+          "cash": 308320.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 978545.0,
+          "cash": 308320.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 975559.0,
+          "cash": 308320.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 970380.0,
+          "cash": 499073.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 974860.0,
+          "cash": 499073.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 979342.0,
+          "cash": 499073.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 984915.0,
+          "cash": 499073.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 984517.0,
+          "cash": 678675.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 979938.0,
+          "cash": 678675.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 980535.0,
+          "cash": 875501.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 981032.0,
+          "cash": 875501.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 980535.0,
+          "cash": 875501.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 979540.0,
+          "cash": 875501.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-01",
+          "equity": 977419.0,
+          "cash": 682627.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-10-02",
+          "equity": 976224.0,
+          "cash": 682627.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-10-05",
+          "equity": 965770.0,
+          "cash": 787163.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-06",
+          "equity": 966965.0,
+          "cash": 966965.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-10-07",
+          "equity": 966965.0,
+          "cash": 966965.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 967128.0,
+          "cash": 781452.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 969368.0,
+          "cash": 781452.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 958266.0,
+          "cash": 397156.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 958414.0,
+          "cash": 576958.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 934747.0,
+          "cash": 44052.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 945748.0,
+          "cash": 231619.0,
+          "positions": 4
+        }
+      ],
+      "rejected_orders": {
+        "前日持倉預留限制": 0,
+        "次日開盤後風險條件不合格": 4,
+        "整張資金或流動性不足": 2,
+        "超過追價上限": 2
+      },
+      "deferred_exits": {},
+      "warnings": [
+        "原始未還原權息價格：未計入股息、除權／減資調整，結果不能視為完整投資報酬。",
+        "日線開盤價與滑價僅為成交模型，未模擬完整漲跌停參考價、開盤委託佇列及部分成交。",
+        "收盤觸發後次日開盤執行，跳空可能使停損失效；停牌／成交受限可能超過 20 個交易日。",
+        "只比較固定策略，未進行參數最佳化；尚未完成跨年度與獨立樣本外驗證。",
+        "僅 10 筆已平倉交易，樣本不足以推論穩定勝率。",
+        "有效模擬僅 55 個交易日，不涵蓋完整年度與多種市場循環。"
+      ]
+    },
+    {
+      "model_id": "volume_breakout",
+      "name": "比較策略：帶量突破",
+      "description": "均線多頭且上升，收盤帶量突破前高；以 ATR 設停損、固定 R 倍設模型目標。",
+      "status": "preliminary",
+      "data_start": "2026-04-20",
+      "start": "2026-07-29",
+      "end": "2026-10-16",
+      "warmup_sessions": 69,
+      "simulated_sessions": 55,
+      "signal_count": 407,
+      "closed_count": 22,
+      "open_count": 3,
+      "metrics": {
+        "initial_capital": 1000000,
+        "final_equity": 837977.0,
+        "total_return": -0.162023,
+        "max_drawdown": 0.1665934,
+        "win_rate": 0.18181818181818182,
+        "profit_factor": 0.345318,
+        "average_trade_return": -0.036819746818181814,
+        "average_holding_sessions": 10.772727272727273,
+        "realized_net_pnl": -142303.0
+      },
+      "closed_trades": [
+        {
+          "market": "TWSE",
+          "code": "2015",
+          "name": "豐興",
+          "signal_date": "2026-07-29",
+          "entry_date": "2026-07-30",
+          "entry_index": 1,
+          "entry_price": 66.0,
+          "quantity": 3000,
+          "entry_fee": 282,
+          "stop": 63.543,
+          "target": 69.714,
+          "cost": 198282.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-06",
+          "exit_price": 62.9,
+          "exit_fee": 268,
+          "sell_tax": 566,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 6,
+          "calendar_days": 7,
+          "net_pnl": -10416.0,
+          "net_return": -0.05253124
+        },
+        {
+          "market": "TWSE",
+          "code": "2540",
+          "name": "愛山林",
+          "signal_date": "2026-07-29",
+          "entry_date": "2026-07-30",
+          "entry_index": 1,
+          "entry_price": 58.1,
+          "quantity": 3000,
+          "entry_fee": 248,
+          "stop": 55.429,
+          "target": 62.543,
+          "cost": 174548.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-07",
+          "exit_price": 54.4,
+          "exit_fee": 232,
+          "sell_tax": 489,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 7,
+          "calendar_days": 8,
+          "net_pnl": -12069.0,
+          "net_return": -0.0691443
+        },
+        {
+          "market": "TWSE",
+          "code": "6214",
+          "name": "精誠",
+          "signal_date": "2026-07-31",
+          "entry_date": "2026-08-03",
+          "entry_index": 3,
+          "entry_price": 151.5,
+          "quantity": 1000,
+          "entry_fee": 215,
+          "stop": 144.571,
+          "target": 172.857,
+          "cost": 151715.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-11",
+          "exit_price": 141.5,
+          "exit_fee": 201,
+          "sell_tax": 424,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 7,
+          "calendar_days": 8,
+          "net_pnl": -10840.0,
+          "net_return": -0.07144976
+        },
+        {
+          "market": "TWSE",
+          "code": "5880",
+          "name": "合庫金",
+          "signal_date": "2026-07-30",
+          "entry_date": "2026-07-31",
+          "entry_index": 2,
+          "entry_price": 26.85,
+          "quantity": 7000,
+          "entry_fee": 267,
+          "stop": 26.093,
+          "target": 28.814,
+          "cost": 188217.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-12",
+          "exit_price": 23.95,
+          "exit_fee": 238,
+          "sell_tax": 502,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 9,
+          "calendar_days": 12,
+          "net_pnl": -21307.0,
+          "net_return": -0.11320444
+        },
+        {
+          "market": "TWSE",
+          "code": "9939",
+          "name": "宏全",
+          "signal_date": "2026-08-06",
+          "entry_date": "2026-08-07",
+          "entry_index": 7,
+          "entry_price": 143.0,
+          "quantity": 1000,
+          "entry_fee": 203,
+          "stop": 134.286,
+          "target": 158.929,
+          "cost": 143203.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-13",
+          "exit_price": 137.0,
+          "exit_fee": 195,
+          "sell_tax": 411,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 5,
+          "calendar_days": 6,
+          "net_pnl": -6809.0,
+          "net_return": -0.04754789
+        },
+        {
+          "market": "TWSE",
+          "code": "9934",
+          "name": "成霖",
+          "signal_date": "2026-08-10",
+          "entry_date": "2026-08-11",
+          "entry_index": 9,
+          "entry_price": 11.9,
+          "quantity": 13000,
+          "entry_fee": 220,
+          "stop": 11.336,
+          "target": 13.329,
+          "cost": 154920.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-17",
+          "exit_price": 11.15,
+          "exit_fee": 206,
+          "sell_tax": 434,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 5,
+          "calendar_days": 6,
+          "net_pnl": -10610.0,
+          "net_return": -0.06848696
+        },
+        {
+          "market": "TWSE",
+          "code": "2539",
+          "name": "櫻花建",
+          "signal_date": "2026-07-29",
+          "entry_date": "2026-07-30",
+          "entry_index": 1,
+          "entry_price": 42.8,
+          "quantity": 4000,
+          "entry_fee": 243,
+          "stop": 40.471,
+          "target": 47.007,
+          "cost": 171443.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-21",
+          "exit_price": 35.4,
+          "exit_fee": 201,
+          "sell_tax": 424,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 17,
+          "calendar_days": 22,
+          "net_pnl": -30468.0,
+          "net_return": -0.17771504
+        },
+        {
+          "market": "TWSE",
+          "code": "2033",
+          "name": "佳大",
+          "signal_date": "2026-08-11",
+          "entry_date": "2026-08-12",
+          "entry_index": 10,
+          "entry_price": 20.8,
+          "quantity": 8000,
+          "entry_fee": 237,
+          "stop": 19.171,
+          "target": 23.307,
+          "cost": 166637.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-26",
+          "exit_price": 23.65,
+          "exit_fee": 269,
+          "sell_tax": 567,
+          "exit_reason": "收盤達目標",
+          "holding_sessions": 11,
+          "calendar_days": 14,
+          "net_pnl": 21727.0,
+          "net_return": 0.13038521
+        },
+        {
+          "market": "TWSE",
+          "code": "1808",
+          "name": "潤隆",
+          "signal_date": "2026-08-21",
+          "entry_date": "2026-08-24",
+          "entry_index": 18,
+          "entry_price": 37.1,
+          "quantity": 5000,
+          "entry_fee": 264,
+          "stop": 34.857,
+          "target": 41.286,
+          "cost": 185764.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-08-31",
+          "exit_price": 34.6,
+          "exit_fee": 246,
+          "sell_tax": 519,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 6,
+          "calendar_days": 7,
+          "net_pnl": -13529.0,
+          "net_return": -0.07282897
+        },
+        {
+          "market": "TWSE",
+          "code": "2324",
+          "name": "仁寶",
+          "signal_date": "2026-08-12",
+          "entry_date": "2026-08-13",
+          "entry_index": 11,
+          "entry_price": 40.15,
+          "quantity": 4000,
+          "entry_fee": 228,
+          "stop": 36.443,
+          "target": 46.814,
+          "cost": 160828.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-09",
+          "exit_price": 38.75,
+          "exit_fee": 220,
+          "sell_tax": 465,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": -6513.0,
+          "net_return": -0.04049668
+        },
+        {
+          "market": "TWSE",
+          "code": "2027",
+          "name": "大成鋼",
+          "signal_date": "2026-08-13",
+          "entry_date": "2026-08-14",
+          "entry_index": 12,
+          "entry_price": 50.1,
+          "quantity": 3000,
+          "entry_fee": 214,
+          "stop": 46.764,
+          "target": 57.671,
+          "cost": 150514.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-10",
+          "exit_price": 48.25,
+          "exit_fee": 206,
+          "sell_tax": 434,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": -6404.0,
+          "net_return": -0.04254754
+        },
+        {
+          "market": "TWSE",
+          "code": "1909",
+          "name": "榮成",
+          "signal_date": "2026-08-17",
+          "entry_date": "2026-08-18",
+          "entry_index": 14,
+          "entry_price": 11.2,
+          "quantity": 17000,
+          "entry_fee": 271,
+          "stop": 10.741,
+          "target": 12.867,
+          "cost": 190671.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-10",
+          "exit_price": 10.65,
+          "exit_fee": 257,
+          "sell_tax": 543,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 18,
+          "calendar_days": 23,
+          "net_pnl": -10421.0,
+          "net_return": -0.05465435
+        },
+        {
+          "market": "TPEX",
+          "code": "6840",
+          "name": "東研信超",
+          "signal_date": "2026-08-27",
+          "entry_date": "2026-08-28",
+          "entry_index": 22,
+          "entry_price": 98.8,
+          "quantity": 2000,
+          "entry_fee": 281,
+          "stop": 89.571,
+          "target": 115.757,
+          "cost": 197881.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-14",
+          "exit_price": 90.4,
+          "exit_fee": 257,
+          "sell_tax": 542,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 12,
+          "calendar_days": 17,
+          "net_pnl": -17880.0,
+          "net_return": -0.09035734
+        },
+        {
+          "market": "TPEX",
+          "code": "3141",
+          "name": "晶宏",
+          "signal_date": "2026-09-02",
+          "entry_date": "2026-09-03",
+          "entry_index": 26,
+          "entry_price": 99.6,
+          "quantity": 2000,
+          "entry_fee": 283,
+          "stop": 90.571,
+          "target": 117.357,
+          "cost": 199483.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-15",
+          "exit_price": 88.3,
+          "exit_fee": 251,
+          "sell_tax": 529,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 9,
+          "calendar_days": 12,
+          "net_pnl": -23663.0,
+          "net_return": -0.11862164
+        },
+        {
+          "market": "TWSE",
+          "code": "2254",
+          "name": "巨鎧精密-創",
+          "signal_date": "2026-09-10",
+          "entry_date": "2026-09-11",
+          "entry_index": 32,
+          "entry_price": 65.7,
+          "quantity": 3000,
+          "entry_fee": 280,
+          "stop": 61.643,
+          "target": 73.514,
+          "cost": 197380.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-09-18",
+          "exit_price": 75.1,
+          "exit_fee": 321,
+          "sell_tax": 675,
+          "exit_reason": "收盤達目標",
+          "holding_sessions": 6,
+          "calendar_days": 7,
+          "net_pnl": 26924.0,
+          "net_return": 0.13640693
+        },
+        {
+          "market": "TWSE",
+          "code": "2897",
+          "name": "王道銀行",
+          "signal_date": "2026-09-14",
+          "entry_date": "2026-09-15",
+          "entry_index": 34,
+          "entry_price": 11.3,
+          "quantity": 17000,
+          "entry_fee": 273,
+          "stop": 10.807,
+          "target": 12.136,
+          "cost": 192373.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-02",
+          "exit_price": 10.7,
+          "exit_fee": 259,
+          "sell_tax": 545,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 12,
+          "calendar_days": 17,
+          "net_pnl": -11277.0,
+          "net_return": -0.05862049
+        },
+        {
+          "market": "TWSE",
+          "code": "2905",
+          "name": "三商",
+          "signal_date": "2026-09-15",
+          "entry_date": "2026-09-16",
+          "entry_index": 35,
+          "entry_price": 18.95,
+          "quantity": 8000,
+          "entry_fee": 216,
+          "stop": 17.921,
+          "target": 20.707,
+          "cost": 151816.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-05",
+          "exit_price": 17.85,
+          "exit_fee": 203,
+          "sell_tax": 428,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 12,
+          "calendar_days": 19,
+          "net_pnl": -9647.0,
+          "net_return": -0.06354403
+        },
+        {
+          "market": "TWSE",
+          "code": "6416",
+          "name": "瑞祺電通",
+          "signal_date": "2026-09-10",
+          "entry_date": "2026-09-11",
+          "entry_index": 32,
+          "entry_price": 112.0,
+          "quantity": 1000,
+          "entry_fee": 159,
+          "stop": 102.643,
+          "target": 126.214,
+          "cost": 112159.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-13",
+          "exit_price": 116.5,
+          "exit_fee": 166,
+          "sell_tax": 349,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 32,
+          "net_pnl": 3826.0,
+          "net_return": 0.03411229
+        },
+        {
+          "market": "TPEX",
+          "code": "6122",
+          "name": "擎邦",
+          "signal_date": "2026-09-24",
+          "entry_date": "2026-09-29",
+          "entry_index": 42,
+          "entry_price": 57.8,
+          "quantity": 3000,
+          "entry_fee": 247,
+          "stop": 55.2,
+          "target": 64.2,
+          "cost": 173647.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-13",
+          "exit_price": 65.7,
+          "exit_fee": 280,
+          "sell_tax": 591,
+          "exit_reason": "收盤達目標",
+          "holding_sessions": 10,
+          "calendar_days": 14,
+          "net_pnl": 22582.0,
+          "net_return": 0.13004544
+        },
+        {
+          "market": "TWSE",
+          "code": "2801",
+          "name": "彰銀",
+          "signal_date": "2026-09-14",
+          "entry_date": "2026-09-15",
+          "entry_index": 34,
+          "entry_price": 28.7,
+          "quantity": 6000,
+          "entry_fee": 245,
+          "stop": 27.043,
+          "target": 31.564,
+          "cost": 172445.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-15",
+          "exit_price": 28.8,
+          "exit_fee": 246,
+          "sell_tax": 518,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 30,
+          "net_pnl": -409.0,
+          "net_return": -0.00237177
+        },
+        {
+          "market": "TWSE",
+          "code": "1615",
+          "name": "大山",
+          "signal_date": "2026-10-13",
+          "entry_date": "2026-10-14",
+          "entry_index": 52,
+          "entry_price": 52.8,
+          "quantity": 3000,
+          "entry_fee": 225,
+          "stop": 52.121,
+          "target": 60.157,
+          "cost": 158625.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-16",
+          "exit_price": 50.0,
+          "exit_fee": 213,
+          "sell_tax": 450,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 3,
+          "calendar_days": 2,
+          "net_pnl": -9288.0,
+          "net_return": -0.05855319
+        },
+        {
+          "market": "TPEX",
+          "code": "3597",
+          "name": "映興",
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_index": 53,
+          "entry_price": 50.5,
+          "quantity": 3000,
+          "entry_fee": 215,
+          "stop": 48.193,
+          "target": 63.814,
+          "cost": 151715.0,
+          "signal_variant": "帶量突破",
+          "exit_date": "2026-10-16",
+          "exit_price": 48.85,
+          "exit_fee": 208,
+          "sell_tax": 439,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 2,
+          "calendar_days": 1,
+          "net_pnl": -5812.0,
+          "net_return": -0.03830867
+        }
+      ],
+      "open_positions": [
+        {
+          "market": "TPEX",
+          "code": "3483",
+          "name": "力致",
+          "signal_date": "2026-10-13",
+          "entry_date": "2026-10-14",
+          "entry_index": 52,
+          "entry_price": 90.1,
+          "quantity": 2000,
+          "entry_fee": 256,
+          "stop": 83.2,
+          "target": 102.4,
+          "cost": 180456.0,
+          "signal_variant": "帶量突破",
+          "last_quote_date": "2026-10-16",
+          "last_close": 90.0,
+          "holding_sessions": 3,
+          "pending_exit": null
+        },
+        {
+          "market": "TWSE",
+          "code": "1312",
+          "name": "國喬",
+          "signal_date": "2026-10-13",
+          "entry_date": "2026-10-14",
+          "entry_index": 52,
+          "entry_price": 17.65,
+          "quantity": 11000,
+          "entry_fee": 276,
+          "stop": 16.314,
+          "target": 20.321,
+          "cost": 194426.0,
+          "signal_variant": "帶量突破",
+          "last_quote_date": "2026-10-16",
+          "last_close": 16.15,
+          "holding_sessions": 3,
+          "pending_exit": "收盤停損"
+        },
+        {
+          "market": "TWSE",
+          "code": "4904",
+          "name": "遠傳",
+          "signal_date": "2026-10-15",
+          "entry_date": "2026-10-16",
+          "entry_index": 54,
+          "entry_price": 112.5,
+          "quantity": 1000,
+          "entry_fee": 160,
+          "stop": 109.071,
+          "target": 120.857,
+          "cost": 112660.0,
+          "signal_variant": "帶量突破",
+          "last_quote_date": "2026-10-16",
+          "last_close": 113.5,
+          "holding_sessions": 1,
+          "pending_exit": null
+        }
+      ],
+      "equity_curve": [
+        {
+          "date": "2026-07-28",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-29",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 1000509.0,
+          "cash": 455727.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-07-31",
+          "equity": 1005484.0,
+          "cash": 267510.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-03",
+          "equity": 992851.0,
+          "cash": 115795.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 969603.0,
+          "cash": 115795.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 986779.0,
+          "cash": 115795.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 964079.0,
+          "cash": 303661.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 966130.0,
+          "cash": 322937.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 961651.0,
+          "cash": 322937.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 922369.0,
+          "cash": 308892.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 937277.0,
+          "cash": 309165.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 917870.0,
+          "cash": 284731.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 935610.0,
+          "cash": 134217.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 932075.0,
+          "cash": 278527.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 923148.0,
+          "cash": 87856.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 924941.0,
+          "cash": 87856.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 901345.0,
+          "cash": 87856.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 897215.0,
+          "cash": 228831.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 897325.0,
+          "cash": 43067.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 910964.0,
+          "cash": 43067.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 905787.0,
+          "cash": 231431.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 897027.0,
+          "cash": 231431.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 887360.0,
+          "cash": 33550.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 885867.0,
+          "cash": 205785.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 882381.0,
+          "cash": 205785.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 886364.0,
+          "cash": 205785.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 876041.0,
+          "cash": 6302.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 894409.0,
+          "cash": 6302.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 881765.0,
+          "cash": 6302.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 865090.0,
+          "cash": 6302.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 862800.0,
+          "cash": 160617.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 849558.0,
+          "cash": 484977.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 843771.0,
+          "cash": 175438.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 861592.0,
+          "cash": 355439.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 857124.0,
+          "cash": 166441.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 860471.0,
+          "cash": 14625.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 871123.0,
+          "cash": 14625.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 864104.0,
+          "cash": 238929.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 867041.0,
+          "cash": 238929.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 856837.0,
+          "cash": 238929.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 855144.0,
+          "cash": 238929.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 851409.0,
+          "cash": 238929.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 849701.0,
+          "cash": 65282.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 852736.0,
+          "cash": 65282.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-10-01",
+          "equity": 860102.0,
+          "cash": 65282.0,
+          "positions": 5
+        },
+        {
+          "date": "2026-10-02",
+          "equity": 859357.0,
+          "cash": 246378.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-05",
+          "equity": 853483.0,
+          "cash": 388547.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-06",
+          "equity": 843129.0,
+          "cash": 388547.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-07",
+          "equity": 849601.0,
+          "cash": 388547.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 862542.0,
+          "cash": 388547.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 870707.0,
+          "cash": 388547.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 870408.0,
+          "cash": 700761.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 884718.0,
+          "cash": 167254.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 840028.0,
+          "cash": 187575.0,
+          "positions": 4
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 837977.0,
+          "cash": 370155.0,
+          "positions": 3
+        }
+      ],
+      "rejected_orders": {
+        "前日持倉預留限制": 342,
+        "次日開盤後風險條件不合格": 4,
+        "整張資金或流動性不足": 6,
+        "超過追價上限": 12,
+        "開盤近漲停，保守不追單": 3
+      },
+      "deferred_exits": {},
+      "warnings": [
+        "原始未還原權息價格：未計入股息、除權／減資調整，結果不能視為完整投資報酬。",
+        "日線開盤價與滑價僅為成交模型，未模擬完整漲跌停參考價、開盤委託佇列及部分成交。",
+        "收盤觸發後次日開盤執行，跳空可能使停損失效；停牌／成交受限可能超過 20 個交易日。",
+        "只比較固定策略，未進行參數最佳化；尚未完成跨年度與獨立樣本外驗證。",
+        "僅 22 筆已平倉交易，樣本不足以推論穩定勝率。",
+        "有效模擬僅 55 個交易日，不涵蓋完整年度與多種市場循環。"
+      ]
+    },
+    {
+      "model_id": "rsi_recovery",
+      "name": "比較策略：趨勢中的 RSI 回升",
+      "description": "均線多頭且上升，簡單平均 RSI 向上穿越門檻，紅 K 突破前日高點，且接近短均線。",
+      "status": "preliminary",
+      "data_start": "2026-04-20",
+      "start": "2026-07-29",
+      "end": "2026-10-16",
+      "warmup_sessions": 69,
+      "simulated_sessions": 55,
+      "signal_count": 12,
+      "closed_count": 4,
+      "open_count": 1,
+      "metrics": {
+        "initial_capital": 1000000,
+        "final_equity": 979806.0,
+        "total_return": -0.020194,
+        "max_drawdown": 0.037059,
+        "win_rate": 0.25,
+        "profit_factor": 0.445579,
+        "average_trade_return": -0.0276916225,
+        "average_holding_sessions": 12.75,
+        "realized_net_pnl": -17645.0
+      },
+      "closed_trades": [
+        {
+          "market": "TPEX",
+          "code": "3484",
+          "name": "崧騰",
+          "signal_date": "2026-08-27",
+          "entry_date": "2026-08-28",
+          "entry_index": 22,
+          "entry_price": 50.8,
+          "quantity": 3000,
+          "entry_fee": 217,
+          "stop": 49.043,
+          "target": 54.5,
+          "cost": 152617.0,
+          "signal_variant": "RSI 回升",
+          "exit_date": "2026-09-04",
+          "exit_price": 47.1,
+          "exit_fee": 201,
+          "sell_tax": 423,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 6,
+          "calendar_days": 7,
+          "net_pnl": -11941.0,
+          "net_return": -0.07824161
+        },
+        {
+          "market": "TPEX",
+          "code": "6577",
+          "name": "勁豐",
+          "signal_date": "2026-08-17",
+          "entry_date": "2026-08-18",
+          "entry_index": 14,
+          "entry_price": 81.8,
+          "quantity": 2000,
+          "entry_fee": 233,
+          "stop": 77.025,
+          "target": 96.8,
+          "cost": 163833.0,
+          "signal_variant": "RSI 回升",
+          "exit_date": "2026-09-14",
+          "exit_price": 78.4,
+          "exit_fee": 223,
+          "sell_tax": 470,
+          "exit_reason": "持有時間到期",
+          "holding_sessions": 20,
+          "calendar_days": 27,
+          "net_pnl": -7726.0,
+          "net_return": -0.04715778
+        },
+        {
+          "market": "TPEX",
+          "code": "4147",
+          "name": "中裕",
+          "signal_date": "2026-09-02",
+          "entry_date": "2026-09-03",
+          "entry_index": 26,
+          "entry_price": 63.2,
+          "quantity": 3000,
+          "entry_fee": 270,
+          "stop": 60.525,
+          "target": 69.8,
+          "cost": 189870.0,
+          "signal_variant": "RSI 回升",
+          "exit_date": "2026-09-14",
+          "exit_price": 59.5,
+          "exit_fee": 254,
+          "sell_tax": 535,
+          "exit_reason": "收盤停損",
+          "holding_sessions": 8,
+          "calendar_days": 11,
+          "net_pnl": -12159.0,
+          "net_return": -0.06403855
+        },
+        {
+          "market": "TPEX",
+          "code": "8099",
+          "name": "大世科",
+          "signal_date": "2026-09-18",
+          "entry_date": "2026-09-21",
+          "entry_index": 38,
+          "entry_price": 60.0,
+          "quantity": 3000,
+          "entry_fee": 256,
+          "stop": 57.432,
+          "target": 64.2,
+          "cost": 180256.0,
+          "signal_variant": "RSI 回升",
+          "exit_date": "2026-10-16",
+          "exit_price": 65.1,
+          "exit_fee": 278,
+          "sell_tax": 585,
+          "exit_reason": "收盤達目標",
+          "holding_sessions": 17,
+          "calendar_days": 25,
+          "net_pnl": 14181.0,
+          "net_return": 0.07867145
+        }
+      ],
+      "open_positions": [
+        {
+          "market": "TPEX",
+          "code": "6690",
+          "name": "安碁資訊",
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_index": 53,
+          "entry_price": 180.5,
+          "quantity": 1000,
+          "entry_fee": 257,
+          "stop": 174.071,
+          "target": 201.0,
+          "cost": 180757.0,
+          "signal_variant": "RSI 回升",
+          "last_quote_date": "2026-10-16",
+          "last_close": 179.5,
+          "holding_sessions": 2,
+          "pending_exit": null
+        }
+      ],
+      "equity_curve": [
+        {
+          "date": "2026-07-28",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-29",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-07-31",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-03",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 1000000.0,
+          "cash": 1000000.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 995659.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 996655.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 996655.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 996655.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 998049.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 995261.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 996854.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 995858.0,
+          "cash": 836167.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 994172.0,
+          "cash": 683550.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 991732.0,
+          "cash": 683550.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 990638.0,
+          "cash": 683550.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 995266.0,
+          "cash": 683550.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 980968.0,
+          "cash": 493680.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 983705.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 980420.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 988783.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 977333.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 973551.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 969169.0,
+          "cash": 634356.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 968174.0,
+          "cash": 968174.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 968174.0,
+          "cash": 968174.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 968174.0,
+          "cash": 968174.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 968174.0,
+          "cash": 968174.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 968174.0,
+          "cash": 968174.0,
+          "positions": 0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 966525.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 968616.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 968317.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 968317.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 966226.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 965629.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-01",
+          "equity": 967720.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-02",
+          "equity": 968019.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-05",
+          "equity": 965629.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-06",
+          "equity": 965331.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-07",
+          "equity": 963538.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 962941.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 962941.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 973992.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 975784.0,
+          "cash": 787918.0,
+          "positions": 1
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 974629.0,
+          "cash": 607161.0,
+          "positions": 2
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 979806.0,
+          "cash": 801598.0,
+          "positions": 1
+        }
+      ],
+      "rejected_orders": {
+        "前日持倉預留限制": 0,
+        "次日開盤後風險條件不合格": 2,
+        "超過追價上限": 3,
+        "整張資金或流動性不足": 1
+      },
+      "deferred_exits": {},
+      "warnings": [
+        "原始未還原權息價格：未計入股息、除權／減資調整，結果不能視為完整投資報酬。",
+        "日線開盤價與滑價僅為成交模型，未模擬完整漲跌停參考價、開盤委託佇列及部分成交。",
+        "收盤觸發後次日開盤執行，跳空可能使停損失效；停牌／成交受限可能超過 20 個交易日。",
+        "只比較固定策略，未進行參數最佳化；尚未完成跨年度與獨立樣本外驗證。",
+        "僅 4 筆已平倉交易，樣本不足以推論穩定勝率。",
+        "有效模擬僅 55 個交易日，不涵蓋完整年度與多種市場循環。"
+      ]
+    }
+  ],
+  "errors": [],
+  "price_basis": "unadjusted",
+  "strategy_parameters": {
+    "fast_ma": 20,
+    "slow_ma": 60,
+    "slope_days": 5,
+    "pivot_radius": 2,
+    "structure_days": 60,
+    "pullback_days": 5,
+    "volume_baseline_days": 20,
+    "volume_ratio_max": 0.8,
+    "support_distance_max": 0.04,
+    "minimum_pullback": 0.02,
+    "minimum_slope": 0.0,
+    "atr_days": 14,
+    "stop_atr_buffer": 0.5,
+    "max_risk_fraction": 0.1,
+    "min_reward_risk": 1.5,
+    "min_average_volume": 300000,
+    "max_daily_gap": 0.15,
+    "target_count": 5,
+    "max_candidates": 10
+  },
+  "execution_parameters": {
+    "initial_capital": 1000000,
+    "max_positions": 5,
+    "lot_size": 1000,
+    "profit_min_sessions": 5,
+    "max_hold_sessions": 20,
+    "fee_rate": 0.001425,
+    "minimum_fee": 20,
+    "sell_tax_rate": 0.003,
+    "slippage_rate": 0.001,
+    "max_entry_gap": 0.01,
+    "max_participation": 0.01,
+    "opening_limit_guard": 0.095
+  },
+  "model_parameters": {
+    "breakout_days": 20,
+    "breakout_volume_multiple": 1.5,
+    "breakout_stop_atr": 2.0,
+    "breakout_target_r": 2.0,
+    "rsi_days": 14,
+    "rsi_recovery_level": 40,
+    "rsi_stop_atr": 0.5,
+    "range_days": 60,
+    "range_edge_days": 10,
+    "recovery_days": 10,
+    "range_width_max": 0.25,
+    "range_drift_max": 0.08,
+    "minimum_break_fraction": 0.005,
+    "maximum_break_fraction": 0.08,
+    "reclaim_buffer": 0.005,
+    "event_volume_multiple": 1.5,
+    "pattern_days": 60,
+    "pattern_pivot_radius": 2,
+    "head_depth_min": 0.03,
+    "shoulder_tolerance": 0.05,
+    "shoulder_min_spacing": 5,
+    "shoulder_max_spacing": 25,
+    "shoulder_time_ratio_max": 2.0,
+    "neckline_difference_max": 0.1
+  },
+  "active_model": "trend_pullback",
+  "user_model": "user_range_reclaim"
+}
