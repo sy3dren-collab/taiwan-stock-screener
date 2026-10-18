@@ -51,10 +51,12 @@ function chart(stock) {
 function card(stock, rank) {
   const el = node('article', 'stock-card');
   const top = node('div', 'stock-top');
-  const identity = node('div');
-  identity.append(node('div','rank',`觀察 ${String(rank).padStart(2,'0')}`),node('h3','',stock.name));
+  const identity = node('div','stock-identity');
+  const heading = node('h3','stock-title');
+  heading.append(node('span','stock-code',stock.code),document.createTextNode(' '),node('span','stock-name',stock.name));
+  identity.append(node('div','rank',`觀察 ${String(rank).padStart(2,'0')}`),heading);
   const meta = node('div','stock-meta');
-  meta.append(node('span','',stock.code),node('span','badge',stock.market==='TWSE'?'上市':'上櫃'));
+  meta.append(node('span','badge',stock.market==='TWSE'?'上市':'上櫃'));
   identity.append(meta);
   const color = stock.change_pct > 0 ? 'up' : stock.change_pct < 0 ? 'down' : '';
   const quote = node('div',`quote ${color}`);
