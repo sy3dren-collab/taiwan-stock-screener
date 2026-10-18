@@ -8,7 +8,7 @@
 
 截至該日共 1,942 檔股票有有效行情，1,927 檔歷史足夠，預設策略有 **1 檔**符合全部條件。候選少於五檔時明確提示，不會放寬條件或加入模擬行情。測試用價格只存在 tests 的合成 fixture，不會寫入正式網站或正式歷史資料。
 
-上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。**GitHub Pages 線上部署尚未確認**：目前雲端對 `api.github.com` 的代理請求仍回傳 HTTP 403。部署 API 與網站驗證所需網域已加入環境設定草稿，需套用後才能由此環境繼續啟用／查驗 Pages。
+上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。程式已推送至 main，官方歷史資料已推送至 market-data，GitHub Actions 已觸發。**GitHub Pages 尚未啟用**：建立網站 API 回覆 `403 Resource not accessible by integration`，目前 GitHub 整合無權替儲存庫建立 Pages。請儲存庫管理者在 **Settings → Pages → Source** 選擇 **GitHub Actions**，再重跑工作流程；尚不可將預期網址當作已上線網站。
 
 ## 本機操作
 
@@ -53,7 +53,7 @@ python3 -m screener update
 
 兩個市場都應成功取得超過 100 檔真實 OHLCV，再檢查更新結果的 `status` 為 `ok`、`as_of` 日期正確、`sufficient_history_count` 合理。沒有候選不代表故障，可能沒有股票符合條件；歷史不足會另外提示。
 
-官方行情所需 HTTPS 網域 `www.twse.com.tw`、`www.tpex.org.tw` 已可正常連線。後續由此環境操作 GitHub Pages 與確認正式網站，還需要 `api.github.com`、`sy3dren-collab.github.io`；已將四個網域一併保存至環境設定草稿。請在環境設定檢閱、儲存並發布以啟用新增設定；保存草稿不會立即改變執行中的網路。GitHub Actions 的 GitHub-hosted runner 不使用這份雲端網路設定，但仍可能遇到官方限流／阻擋。
+HTTPS 網域 `www.twse.com.tw`、`www.tpex.org.tw`、`api.github.com`、`sy3dren-collab.github.io` 目前均可連線，四個必要網域也已保存至環境設定草稿。草稿保存本身不代表新環境已發布；後續環境仍應保留這些網域。GitHub Actions 的 GitHub-hosted runner 不使用這份雲端網路設定，但仍可能遇到官方限流／阻擋。目前剩餘 Pages 啟用問題是 GitHub 整合授權，並非官方行情連線問題。
 
 ### 網頁測試（選用開發工具）
 
