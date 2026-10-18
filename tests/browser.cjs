@@ -44,6 +44,20 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
       await page.locator('#status.error').waitFor();
       assert.equal(await page.locator('.stock-card').count(),0);
     }
+    if(snapshot.strategies){
+      await page.locator('#strategy-select').selectOption('user_range_reclaim');
+      assert.equal(await page.locator('.stock-card').count(),snapshot.strategies.user_range_reclaim.candidates.length);
+      assert.match(await page.locator('#strategy-description').innerText(),/當天必須放量/);
+      await page.locator('#strategy-select').selectOption(snapshot.active_model);
+      assert.equal(await page.locator('.stock-card').count(),snapshot.candidates.length);
+    }
+    const realBacktest=await (await page.request.get('http://127.0.0.1:8765/backtest.json')).json();
+    await page.locator('.research-card').first().waitFor();
+    assert.equal(await page.locator('.research-card').count(),realBacktest.models.length);
+    assert.match(await page.locator('#backtest-status').innerText(),/未還原權息/);
+    assert.match(await page.locator('#backtest-detail h3').innerText(),/你的策略/);
+    await page.locator('.research-card').nth(1).getByRole('button',{name:'查看進出場'}).click();
+    assert.match(await page.locator('#backtest-detail h3').innerText(),/原策略/);
     const manifestResponse=await page.request.get('http://127.0.0.1:8765/manifest.webmanifest');
     assert.equal(manifestResponse.ok(),true);
     const manifest=await manifestResponse.json();
@@ -90,7 +104,11 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     await page.reload();await page.locator('#status.error').waitFor();
     assert.match(await page.locator('#status').innerText(),/HTTP 503/);
     assert.equal(await page.locator('.stock-card').count(),0);
+    await page.route('**/backtest.json',route=>route.fulfill({status:503,body:'unavailable'}));
+    await page.reload();await page.locator('#backtest-status.error').waitFor();
+    assert.match(await page.locator('#backtest-status').innerText(),/HTTP 503/);
+    assert.equal(await page.locator('.research-card').count(),0);
     assert.deepEqual(errors,[]);
-    console.log('PASS browser: real error state, cards, OHLCV chart colors, safe text, filters, sorting, parameters, mobile layout, HTTP failure');
+    console.log('PASS browser: independent user strategy, four research models, trade records, real snapshot, charts, filters, mobile layout and source/report errors');
   } finally {if(browser)await browser.close();server.kill();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

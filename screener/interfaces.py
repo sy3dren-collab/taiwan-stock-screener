@@ -1,6 +1,6 @@
-"""Point-in-time extension boundary for future historical backtests.
+"""Point-in-time signal boundary shared with historical research.
 
-No portfolio simulation, position sizing or performance claims are implemented.
+Preliminary portfolio simulation lives in backtest.py; this module only exposes signals.
 """
 from typing import Protocol
 

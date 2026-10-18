@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import date, datetime, timedelta
+from dataclasses import asdict
 import json
 import logging
 from pathlib import Path
@@ -10,7 +11,8 @@ from zoneinfo import ZoneInfo
 
 from .data import DataError, OfficialClient, Store, URLS
 from .strategy import Parameters
-from .interfaces import screen_as_of
+from .models import MODELS, ModelSettings, required_bars, screen_model
+from .execution import Execution, entry_plan
 
 TAIPEI = ZoneInfo("Asia/Taipei")
 
@@ -53,6 +55,11 @@ def run(args) -> int:
     try:
         config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         parameters = Parameters(**config)
+        model_path = getattr(args, "model_config", None)
+        model_settings = ModelSettings(**json.loads(Path(model_path).read_text())) if model_path else ModelSettings()
+        active_model = getattr(args, "model", "trend_pullback")
+        execution_path = getattr(args, "execution_config", None)
+        execution = Execution(**json.loads(Path(execution_path).read_text())) if execution_path else Execution()
         if args.lookback_days < 100:
             raise ValueError("lookback-days 至少為 100，避免預設 MA60 缺少歷史資料")
         if args.end > default_end():
@@ -70,16 +77,26 @@ def run(args) -> int:
         # A long gap is an error, not a silently successful stale screen.
         if (args.end - date.fromisoformat(as_of)).days > 7:
             raise DataError(f"最新行情停留在 {as_of}，距請求日期超過 7 天；請檢查資料來源／長假")
-        result.update(screen_as_of(store, as_of, parameters))
+        histories = store.histories(as_of)
+        screens = {model: {**screen_model(histories, as_of, parameters, model, model_settings), **details, "model_id": model, "required_bars": required_bars(parameters, model_settings, model)} for model, details in MODELS.items()}
+        for model_screen in screens.values():
+            for candidate in model_screen["candidates"]:
+                candidate["entry_plan"] = entry_plan(candidate, execution, parameters)
+        result.update(screens[active_model])
+        result.update(strategies=screens, active_model=active_model, user_model="user_range_reclaim", model_parameters=asdict(model_settings))
+        result["execution_parameters"] = asdict(execution)
         result["status"] = "ok"
+        result["source_warnings"] = []
         if as_of != args.end.isoformat():
             result["warnings"].append(f"請求截至 {args.end}，最新官方交易資料為 {as_of}；可能為休市或資料尚未公布，請核對官方公告。")
+            result["source_warnings"].append(result["warnings"][-1])
         if result["shortfall"]:
             result["warnings"].append(f"僅 {len(result['candidates'])} 檔符合全部條件，少於目標 {parameters.target_count} 檔；未放寬條件湊數。")
         if result["sufficient_history_count"] < result["universe_count"]:
-            result["warnings"].append(f"{result['universe_count'] - result['sufficient_history_count']} 檔歷史不足 {parameters.required_bars} 根，未參與策略判斷。")
+            result["warnings"].append(f"{result['universe_count'] - result['sufficient_history_count']} 檔歷史不足 {result['required_bars']} 根，未參與策略判斷。")
         if args.command == "screen":
             result["warnings"].append("此為離線重新選股，未重新查詢官方資料來源。")
+            result["source_warnings"].append(result["warnings"][-1])
         return_code = 0
     except Exception as exc:
         result["status"] = "error"
@@ -100,6 +117,9 @@ def main():
     parser.add_argument("--db", default=".state/prices.sqlite3")
     parser.add_argument("--output", default="site/results.json")
     parser.add_argument("--config", default="strategy.json")
+    parser.add_argument("--model-config", default="models.json")
+    parser.add_argument("--model", choices=list(MODELS), default="trend_pullback")
+    parser.add_argument("--execution-config", default="execution.json")
     parser.add_argument("--end", type=date.fromisoformat, default=default_end())
     parser.add_argument("--start", type=date.fromisoformat, help="指定補抓起日；省略則增量更新")
     parser.add_argument("--lookback-days", type=int, default=180)

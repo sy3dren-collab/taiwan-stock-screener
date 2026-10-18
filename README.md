@@ -88,9 +88,11 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 - 執行失敗寫出 `status: error`、具體原因、空候選，並回傳非零結束碼。網站不以舊候選或模擬行情冒充本日結果。
 - 每日結果是收盤後快照，不是即時行情；網站顯示行情日期、產生時間、更新警示，距今超過 4 天另顯示資料可能過期。
 
-## 策略定義與調整
+## 原策略定義與調整
 
-編輯 `strategy.json` 後重新執行 `update` 或 `screen`。所有條件為 AND；參數錯誤立即失敗。預設：
+此節是原策略 `trend_pullback`。你的「整理區間＋大量收復／近似頭肩底」已獨立為 `user_range_reclaim`；另有帶量突破及 RSI 回升兩個比較模型。完整規則、量化門檻與成交假設見 [獨立策略與初步回測](docs/strategies.md)。
+
+`strategy.json` 設定原策略與共同風險／流動性門檻；`models.json` 設定型態、量能及比較模型；`execution.json` 設定持有、資金及費用。調整後重跑 `update` 與 `python3 -m screener.backtest`。下列原策略條件為 AND：
 
 | 條件 | 精確規則與預設 |
 | --- | --- |
@@ -107,7 +109,7 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 | 異常跳動 | 最近 60 根之相鄰收盤變化絕對值 > 15% 時排除（原始價、未還原權息；此條件不能識別所有公司行動） |
 | 數量 | 目標至少 5 檔、最多 10 檔；不足不補，超過依分數取前 10，分數相同依市場、代號排序 |
 
-分數＝40 ×（1 − 支撐距離／距離上限）＋30 ×（1 − 量縮比）＋20 × min（風報比／3, 1）＋10 × min（均線升幅／5%, 1）。分數只是透明的相對排序，不是勝率。策略沒有經回測證明可獲利，1～4 週是研究持有期，不是報酬保證或自動出場規則。
+分數＝40 ×（1 − 支撐距離／距離上限）＋30 ×（1 − 量縮比）＋20 × min（風報比／3, 1）＋10 × min（均線升幅／5%, 1）。分數只是透明的相對排序，不是勝率。策略沒有經回測證明可獲利，1～4 週是研究持有目標。初步回測已明訂收盤觸發後次日開盤進出、停利最少觀察 5 日及第 20 日時間出場；不是報酬保證。
 
 沒有當日行情或少於所需歷史根數（預設 65 根）的股票不參與判斷。圖表呈現最近最多 60 根原始 K 線與成交量，紅漲綠跌，灰色為開收相同。滑鼠停在 K 線可查看日期與 OHLCV；另列支撐、停損、參考目標及風險報酬比。
 
@@ -125,7 +127,7 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 
 ### 歷史持久化與錯誤發布
 
-- 第二份隔離 checkout `.state` 專用於 `market-data` 分支：保存 `prices.sqlite3` 與 `latest-results.json`。首次沒有分支時，僅清空這份 CI 專用 checkout 的來源檔案以建立獨立資料分支；不動原始 main checkout。
+- 第二份隔離 checkout `.state` 專用於 `market-data` 分支：保存 `prices.sqlite3`、`latest-results.json` 與 `latest-backtest.json`。首次沒有分支時，僅清空這份 CI 專用 checkout 的來源檔案以建立獨立資料分支；不動原始 main checkout。
 - 每次從資料分支恢復，不依賴易被驅逐的 Actions cache。即使更新中途失敗，也保存已完成的原子日期與錯誤結果，便於繼續回補。SQLite 是二進位檔，長期每天提交會增加 Git 大小；規模擴大時應改用物件儲存／分區檔及保留政策。
 - 完成更新後以 Pages artifact 發布 `site/`，資料庫不包含在 Pages artifact。請注意：若儲存庫公開，`market-data` 分支中的公開來源歷史與診斷 JSON 仍可被下載。
 - 官方更新失敗時仍嘗試發布明確的錯誤頁，發布後工作流程標記失敗；不悄悄繼續顯示舊候選。若 GitHub 推送／Pages 本身失敗，舊頁面可能仍在，需查看其資料日期與 Actions 紀錄。
@@ -139,7 +141,12 @@ screener/data.py        官方報表解析、下載、SQLite
 screener/strategy.py    量化參數、波段結構、評分與選股
 screener/interfaces.py 歷史資料 Protocol 與指定日期訊號入口
 screener/__main__.py    更新／離線選股 CLI、錯誤 JSON
-strategy.json          可調整策略參數
+strategy.json          原策略與共同風險／流動性參數
+models.json            你的獨立型態策略及比較模型參數
+execution.json         交易成本、資金與 5～20 日持有規則
+screener/backtest.py    四模型初步歷史模擬
+screener/models.py      獨立策略與量化型態
+screener/execution.py   模型成交價、跳動單位與進場計畫
 site/                  靜態網站與結果 JSON
 tests/                離線單元、端到端管線、選用真實 API、Chromium UI 測試
 .github/workflows/     每日更新、資料分支持久化與 Pages 發布
@@ -147,6 +154,16 @@ tests/                離線單元、端到端管線、選用真實 API、Chromi
 
 離線測試涵蓋兩市場解析與單位換算、日期與價量檢查、資料更正、增量範圍、失敗日不落庫、正向與反向策略案例、預設策略可選出候選、不足不湊數、最多十檔、未來資料隔離、錯誤輸出。真實 API 測試預設跳過，需依上方命令明確啟用。瀏覽器測試另驗證手機無水平溢出、K 線紅漲綠跌、搜尋／排序／市場過濾、參數表、資料來源失敗狀態及股票名稱不被當作 HTML 執行。
 
-## 預留回測介面
+## 初步回測與限制
 
-`HistoricalFeed.histories(as_of)` 與 `screen_as_of(feed, as_of, parameters)` 可供後續回測逐交易日呼叫；SQLite 查詢以及選股入口均不讀取指定日以後資料。第一版只產生訊號，沒有報酬模擬／勝率。後續仍需加入還原權息、上市下市與存活者偏差處理、次日進出場、漲跌停／停牌可成交限制、手續費、證交稅、滑價與持倉管理，才能合理評估策略。
+已加入四模型獨立回測，輸出 `site/backtest.json`：共同期間的估算報酬、含成本勝率、每日淨值回撤、每筆模型進出場日期與價格、未平倉部位。網站可切換四組候選，並查看各策略的交易紀錄。你的方法單獨標示，兩種型態均強制要求收復／突破當天大量，不混入其他模型條件。
+
+```bash
+python3 -m screener.backtest
+python3 -m screener.backtest --start 2026-08-01 --end 2026-10-16
+python3 -m screener screen --model user_range_reclaim
+```
+
+這是**原始未還原權息的初步模擬**：尚未計入股息、完整公司行動、開盤撮合佇列及下市處理，未完成多年度與獨立樣本外驗證。期末估算報酬含未平倉，勝率只計已平倉；不足 30 筆會提示樣本少。規則、費用、暖機、部位上限與限制均揭露於 [策略文件](docs/strategies.md)，不把初步結果稱為策略已通過績效驗證。
+
+`HistoricalFeed.histories(as_of)`、`screen_as_of` 及 `screen_model` 保留指定日期訊號介面；`simulate` 逐日切斷未來資料、以前日收盤預定隔日名單。GitHub Actions 每日更新後比較四模型、保存回測 JSON 並發布結果，失敗時輸出錯誤並標記工作流程失敗。

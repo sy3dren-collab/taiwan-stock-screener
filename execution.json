@@ -1,0 +1,14 @@
+{
+  "initial_capital": 1000000,
+  "max_positions": 5,
+  "lot_size": 1000,
+  "profit_min_sessions": 5,
+  "max_hold_sessions": 20,
+  "fee_rate": 0.001425,
+  "minimum_fee": 20,
+  "sell_tax_rate": 0.003,
+  "slippage_rate": 0.001,
+  "max_entry_gap": 0.01,
+  "max_participation": 0.01,
+  "opening_limit_guard": 0.095
+}

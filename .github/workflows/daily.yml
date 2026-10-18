@@ -62,14 +62,26 @@ jobs:
         env:
           LOOKBACK_DAYS: ${{ inputs.lookback_days || '180' }}
         run: python -m screener update --lookback-days "$LOOKBACK_DAYS"
+      - name: Compare independent swing models
+        id: backtest
+        continue-on-error: true
+        env:
+          UPDATE_OUTCOME: ${{ steps.update.outcome }}
+        run: |
+          if [ "$UPDATE_OUTCOME" = "success" ]; then
+            python -m screener.backtest
+          else
+            python -m screener.backtest --upstream-error
+          fi
       - name: Preserve history and diagnostic result
         run: |
           set -euo pipefail
           cp site/results.json .state/latest-results.json
+          cp site/backtest.json .state/latest-backtest.json
           cd .state
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add latest-results.json
+          git add latest-results.json latest-backtest.json
           if [ -f prices.sqlite3 ]; then git add prices.sqlite3; fi
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh official market history and screening status"
@@ -88,16 +100,24 @@ jobs:
           print('Status:', result['status'])
           print('As of:', result.get('as_of'))
           print('Candidates:', len(result['candidates']))
-          for error in result.get('errors', []):
+          backtest = json.load(open('site/backtest.json'))
+          print('Backtest:', backtest['status'])
+          for model in backtest.get('models', []):
+              print(model['name'], 'closed:', model['closed_count'], 'estimated return:', model['metrics']['total_return'])
+          for error in result.get('errors', []) + backtest.get('errors', []):
               print('Error:', error)
           PY
       - name: Export result
         id: outcome
         env:
           OUTCOME: ${{ steps.update.outcome }}
-        run: echo "update_outcome=$OUTCOME" >> "$GITHUB_OUTPUT"
+          BACKTEST_OUTCOME: ${{ steps.backtest.outcome }}
+        run: |
+          echo "update_outcome=$OUTCOME" >> "$GITHUB_OUTPUT"
+          echo "backtest_outcome=$BACKTEST_OUTCOME" >> "$GITHUB_OUTPUT"
     outputs:
       update_outcome: ${{ steps.outcome.outputs.update_outcome }}
+      backtest_outcome: ${{ steps.outcome.outputs.backtest_outcome }}
 
   deploy:
     needs: build
@@ -110,7 +130,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Fail run if official data update failed
-        if: needs.build.outputs.update_outcome != 'success'
+        if: needs.build.outputs.update_outcome != 'success' || needs.build.outputs.backtest_outcome != 'success'
         run: |
-          echo 'Official update failed. An explicit error page was deployed; no fake prices were used.' >&2
+          echo 'Official update or preliminary backtest failed. An explicit error was deployed; no fabricated prices or returns were used.' >&2
           exit 1

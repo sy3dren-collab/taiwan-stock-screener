@@ -10,7 +10,10 @@ flowchart TD
     B --> C[日期、格式、價量與兩市場完整性驗證]
     C -->|成功，逐日原子儲存| D[(SQLite 歷史資料庫)]
     D <-->|每日保存／下次恢復| E[market-data 資料分支]
-    D --> F[可調整波段策略：strategy.json]
+    D --> F[四組獨立選股模型：strategy.json / models.json]
+    D --> L[相同成本與持有規則的初步回測]
+    L --> M[backtest.json：四模型與交易紀錄]
+    M --> I
     F --> G[results.json：候選、原因、K 線與風險參考]
     C -->|來源失敗| H[錯誤 JSON：空候選與具體原因]
     G --> I[GitHub Pages 靜態網站]
@@ -41,4 +44,4 @@ flowchart TD
 
 ## 第一版界線
 
-這是每日收盤後的研究工具，尚未建立即時推播、使用者帳號、投資組合、回測報酬系統或交易委託。後續回測可以透過 `HistoricalFeed` 與 `screen_as_of` 介面擴充，部署與操作步驟請見 [README](../README.md)。
+這是每日收盤後的研究工具。已加入你的獨立區間型態策略、三個比較模型、5～20 日持有與成本模型，以及原始未還原權息的初步回測。尚無即時推播、帳號、券商持倉或交易委託；回測也尚未完成權息調整及樣本外驗證。完整規則見 [策略文件](strategies.md)，部署操作見 [README](../README.md)。
