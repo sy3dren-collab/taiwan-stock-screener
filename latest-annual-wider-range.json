@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T14:15:14.649878+00:00",
+  "generated_at": "2026-10-19T14:25:51.491361+00:00",
   "research_model_id": "F",
   "status": "completed",
   "classification": "retrospective_diagnostic",
@@ -9,7 +9,9 @@
   "data_quality": {
     "status": "diagnostic_ready",
     "issues": [],
-    "data_sha256": "6d03bef3132fca3031ebe20aa123f51742bd3d51bf0a9e0f5ae8fc6d2f8c12f3",
+    "data_sha256": "683957587f50b3b2190d01794f8fb0a43f81337d9aee4bef70e7e95372a68a33",
+    "fingerprint_version": 2,
+    "evidence_sha256": "1abec1600131407939c2c55eca97bfcadbd57f28cd2570c06ac1f6b1d3803ffb",
     "requested_start": "2025-04-01",
     "requested_end": "2026-10-16",
     "test_start": "2025-10-17",
@@ -28,8 +30,8 @@
     ]
   },
   "version": {
-    "git_commit": "fe89eec1e941f192060a4d8ae83146cacc71673b",
-    "code_sha256": "73114b0a7059bea5be34db6f1dbe2c038fe523d8f32f0be303b6b5ef30aeddea",
+    "git_commit": "493df9542b400634d03d436bf3c51c23d425859f",
+    "code_sha256": "8df37e1e4c04d8e90cba260807896830d4c397c3ff5260ab013b7b18fd32ad2d",
     "working_tree_dirty": false
   },
   "experiments": [],
@@ -5126,7 +5128,7 @@
       "signals": 0
     }
   ],
-  "elapsed_seconds": 38.028,
+  "elapsed_seconds": 55.384,
   "reconciliation": {
     "cash_events_imported": 2683,
     "references_restored": 0,
@@ -7768,5 +7770,5 @@
     ],
     "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
   },
-  "run_id": "20261019T141616697458-F-annual-research-ba5d4b55"
+  "run_id": "20261019T142723242095-F-annual-research-0b1cb88e"
 }
