@@ -6,17 +6,20 @@ const server=spawn('python3',['-m','http.server','8766','--bind','127.0.0.1','--
  for(const width of [320,390,1280]){
   const p=await browser.newPage({viewport:{width,height:844},isMobile:width<500,hasTouch:width<500});const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   await p.goto('http://127.0.0.1:8766');await p.locator('.naked-candidate').first().waitFor();
-  assert.equal(await p.locator('.naked-candidate').count(),3);assert.match(await p.locator('#naked-active').innerText(),/尚無通過驗證/);
+  assert.equal(await p.locator('.naked-candidate').count(),1);assert.match(await p.locator('#naked-active').innerText(),/尚無通過驗證/);
   await p.waitForFunction(()=>document.querySelector('#empty-message').textContent.includes('尚無通過驗證'));
   assert.equal(await p.locator('.stock-card').count(),0);assert.equal(await p.locator('#naked-charts svg').count(),0);
-  assert.match(await p.locator('#optimization-history').innerText(),/未捏造/);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.match(await p.locator('#optimization-history').innerText(),/未捏造/);
+  await p.locator('.run-entry').first().waitFor();assert.equal(await p.locator('.naked-candidate').filter({hasText:'F｜'}).count(),1);
+  await p.locator('.run-entry summary').first().click();assert.match(await p.locator('#run-history').innerText(),/不是0%/);
+assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   if(width===390)await p.screenshot({path:'/tmp/naked-research-mobile.png',fullPage:true});
-  await p.locator('#legacy-research summary').first().click();assert.equal(await p.locator('.research-card').count(),4);
+  await p.locator('#legacy-research summary').first().click();assert.equal(await p.locator('.research-card').count(),3);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   // Errors must remove claims, charts and candidates, including after a reload.
   await p.route('**/research.json',route=>route.fulfill({status:503,body:'unavailable'}));await p.reload();await p.locator('#naked-active.error').waitFor();
   assert.match(await p.locator('#naked-active').innerText(),/HTTP 503/);assert.equal(await p.locator('.naked-candidate').count(),0);assert.equal(await p.locator('#naked-charts svg').count(),0);
   assert.deepEqual(errors,[]);await p.close();
  }
- console.log('PASS naked mobile 320/390 and desktop: no unverified recommendations, three blocked candidates, archive, no fake charts, source/report errors');
+ console.log('PASS naked mobile 320/390 and desktop: no unverified recommendations, one focused strategy and result history, archive, no fake charts, source/report errors');
 }finally{if(browser)await browser.close();server.kill()}})().catch(e=>{console.error(e);process.exitCode=1});

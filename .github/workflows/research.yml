@@ -1,28 +1,35 @@
-name: Bounded naked K research
+name: Single fusion strategy research
 on:
   workflow_dispatch:
     inputs:
       task:
-        description: 'backfill / research / final-test (final requires a pristine, frozen study)'
+        description: 'backfill / research / final-test; all results are recorded, never auto-promoted'
         type: choice
         options: [backfill, research, final-test]
         default: research
   schedule:
-    - cron: '0 17 * * *' # 01:00 Taipei, bounded incremental backfill and research only.
+    - cron: '0 17 * * *' # 01:00 Taipei; bounded backfill and the single strategy only.
 permissions:
   contents: write
+  pages: write
+  id-token: write
 concurrency:
   group: official-research-state
   cancel-in-progress: false
 jobs:
   study:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    outputs:
+      backfill_outcome: ${{ steps.backfill.outcome }}
+      research_outcome: ${{ steps.research.outcome }}
+      final_outcome: ${{ steps.final.outcome }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - name: Engine, leakage and validation tests
+      - name: Engine, leakage and result-reporting tests
         run: python -m unittest discover -s tests -v
       - uses: actions/checkout@v4
         with: {path: .history, fetch-depth: 1}
@@ -32,27 +39,47 @@ jobs:
         if: inputs.task == 'backfill' || github.event_name == 'schedule'
         continue-on-error: true
         run: python -m screener.quality backfill
-      - name: Bounded research
+      - name: Single-strategy research and per-run report
+        id: research
         if: inputs.task != 'final-test'
+        continue-on-error: true
         run: python -m screener.optimizer research
-      - name: One-use final holdout
+      - name: One-use final holdout and per-run report
+        id: final
         if: inputs.task == 'final-test'
+        continue-on-error: true
         run: python -m screener.optimizer final-test
       - name: Data status and safe daily output
         run: |
           python -m screener.quality audit
           python -m screener.daily screen --offline
-      - run: bash scripts/save-history.sh
+      - name: Save all run reports, experiments and history
+        run: bash scripts/save-history.sh
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: site}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: naked-k-evidence
+          name: fusion-research-evidence
           retention-days: 7
           path: |
             site/research.json
+            site/research-history.json
+            site/latest-backtest.md
             site/data-quality.json
             site/final-test.json
+            .state/runs/
             .state/experiments/
-      - name: Preserve ingestion error as failure
-        if: steps.backfill.outcome == 'failure'
+  publish:
+    needs: study
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: publish
+      - name: Preserve failure after publishing the recorded result
+        if: needs.study.outputs.backfill_outcome == 'failure' || needs.study.outputs.research_outcome == 'failure' || needs.study.outputs.final_outcome == 'failure'
         run: exit 1

@@ -1,7 +1,7 @@
 """Bounded experiments; research never writes the production strategy registry."""
 from dataclasses import asdict,replace
 from datetime import datetime,timezone,timedelta,date
-import argparse,hashlib,json,subprocess,time
+import argparse,hashlib,json,subprocess,time,os
 from pathlib import Path
 from statistics import mean
 
@@ -14,7 +14,7 @@ from .validation import Gates,folds,assess,final_once,holdout_reason
 
 
 def code_version():
-    files=['data.py','quality.py','naked.py','naked_backtest.py','performance.py','validation.py','optimizer.py','execution.py','daily.py','strategy.py']
+    files=['data.py','quality.py','naked.py','naked_backtest.py','performance.py','validation.py','optimizer.py','execution.py','daily.py','strategy.py','fusion.py']
     digest=hashlib.sha256()
     for f in files:digest.update(Path(__file__).with_name(f).read_bytes())
     git=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True,check=True).stdout.strip()
@@ -78,7 +78,7 @@ def research(store,cfg,output_dir,max_experiments=None,seconds=None,evaluator=ev
     training_quality=audit_dataset(store,{**cfg['study'],'as_of':research_end})
     version=code_version();now=datetime.now(timezone.utc).isoformat()
     result={'schema_version':1,'generated_at':now,'status':'blocked','mode':'research','active_strategy':None,
-            'message':'尚無通過驗證的策略','data_quality':quality,'training_data_quality':training_quality,'version':version,'experiments':[],
+            'message':'尚無通過驗證的策略','research_model_id':'F','data_quality':quality,'training_data_quality':training_quality,'version':version,'experiments':[],
             'candidates':[{'model_id':k,'name':v,'status':'blocked','metrics':None} for k,v in NAMES.items()],
             'final_holdout':{'status':'blocked','executed':False,'reason':holdout_reason(cfg['study'],json.loads(Path('docs/data-exposure.json').read_text()))},
             'budget':{'maximum_experiments':limit,'maximum_seconds':duration},'paper_trading':{'status':'inactive','orders_enabled':False}}
@@ -100,7 +100,7 @@ def research(store,cfg,output_dir,max_experiments=None,seconds=None,evaluator=ev
                 if state['failed']:continue
                 current,baseline,previous,base_report=(state[k] for k in ('current','baseline','previous','base_report'))
                 if serial>=limit or time.monotonic()>=deadline:break
-                serial+=1;reason='固定裸 K 基準，與其他兩類共用資金、成本、資料及時序切分';changed=[]
+                serial+=1;reason='單一合併策略固定基準，使用相同資金、成本、資料及時序切分';changed=[]
                 baseline_parameters=asdict(current)
                 if iteration:
                     current,field,reason=next_hypothesis(current,previous['training'],iteration);changed=[field]
@@ -169,8 +169,10 @@ def main():
     parser=argparse.ArgumentParser(description='有界裸 K 自動研究，不覆寫正式策略')
     parser.add_argument('command',choices=['research','final-test']);parser.add_argument('--db',default='.state/prices.sqlite3');parser.add_argument('--config',default='naked_k.json')
     parser.add_argument('--output');parser.add_argument('--experiments',default='.state/experiments');parser.add_argument('--max-experiments',type=int);parser.add_argument('--seconds',type=float)
-    a=parser.parse_args();cfg=json.loads(Path(a.config).read_text());s=Store(a.db)
+    parser.add_argument('--runs',default='.state/runs')
+    a=parser.parse_args();s=None
     try:
+        cfg=json.loads(Path(a.config).read_text());s=Store(a.db)
         if a.command=='research':result=research(s,cfg,a.experiments,a.max_experiments,a.seconds)
         else:
             quality=audit_dataset(s,cfg['study']);p=Path(a.experiments)/'frozen_candidate.json';frozen=json.loads(p.read_text()) if p.exists() else None
@@ -184,9 +186,18 @@ def main():
                 final_gates=replace(Gates(**frozen['gates']),minimum_folds=1)
                 gate=assess([strategy],[baseline] if frozen['parameters']!=frozen['baseline_parameters'] else None,[ref],final_gates)
                 return {'strategy':strategy,'baseline':baseline,'benchmark':ref,'assessment':gate,'data_sha256':quality['data_sha256'],'frozen_sha256':frozen['frozen_sha256']}
-            result=final_once(cfg['study'],json.loads(Path('docs/data-exposure.json').read_text()),frozen,quality,Path(a.experiments)/'final-test-consumed.json',execute)
-    finally:s.close()
+            if frozen and frozen.get('model_id') not in NAMES:result={'status':'blocked','executed':False,'reason':'封存候選不是目前唯一合併策略，禁止使用舊候選'}
+            else:result=final_once(cfg['study'],json.loads(Path('docs/data-exposure.json').read_text()),frozen,quality,Path(a.experiments)/'final-test-consumed.json',execute)
+    except Exception as exc:
+        result={'schema_version':1,'status':'error','mode':'research','research_model_id':'F','experiments':[],'run_error':str(exc),'executed':False,'version':code_version()}
+    finally:
+        if s:s.close()
     from .__main__ import write_json
+    from .reporting import record_run
+    result.setdefault('version',code_version());result.setdefault('research_model_id','F')
+    run=record_run(result,a.command,a.experiments,a.runs,Path(a.output).parent if a.output else 'site',os.environ.get('GITHUB_STEP_SUMMARY'))
+    result.update(run_id=run['run_id'],history_url='research-history.json')
     write_json(Path(a.output or ('site/research.json' if a.command=='research' else 'site/final-test.json')),result)
+    if result.get('status')=='error':raise SystemExit(1)
 
 if __name__=='__main__':main()

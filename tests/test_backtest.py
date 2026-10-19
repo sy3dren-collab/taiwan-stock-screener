@@ -11,7 +11,7 @@ import tempfile
 from screener.backtest import simulate
 from screener.data import Bar, DataError
 from screener.execution import Execution, commission, entry_plan, fill_price, tick_price
-from screener.models import ModelSettings, alternative, rsi, screen_model
+from screener.models import ModelSettings, alternative, screen_model
 from screener.strategy import Parameters
 
 
@@ -211,16 +211,7 @@ class UserModelTests(unittest.TestCase):
         self.assertIsNotNone(alternative(bars,Parameters(),'volume_breakout'))
         weak=bars[:-1]+[replace(bars[-1],volume=1000000)]
         self.assertIsNone(alternative(weak,Parameters(),'volume_breakout'))
-        closes=[100+i*.5 for i in range(65)]+[130.5,129,127.5,126,124.5,128.5]
-        bars=[Bar('TWSE','2330','RSI 測試',d,c-.2,c+.3,c-.3,c,1000000) for d,c in zip(dates(71),closes)]
-        bars[64]=replace(bars[64],high=142)
-        result=alternative(bars,Parameters(),'rsi_recovery')
-        self.assertIsNotNone(result)
-        self.assertEqual(result['variant'],'RSI 回升')
 
-    def test_rsi_and_invalid_model_parameters(self):
-        self.assertEqual(rsi([100]*20),50)
-        self.assertEqual(rsi(list(range(20))),100)
-        self.assertEqual(rsi(list(range(20,0,-1))),0)
+    def test_invalid_model_parameters(self):
         for kwargs in ({'range_days':1},{'event_volume_multiple':0},{'recovery_days':1.5},{'head_depth_min':float('nan')}):
             with self.assertRaises(ValueError):ModelSettings(**kwargs)

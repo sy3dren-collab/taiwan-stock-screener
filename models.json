@@ -3,9 +3,6 @@
   "breakout_volume_multiple": 1.5,
   "breakout_stop_atr": 2.0,
   "breakout_target_r": 2.0,
-  "rsi_days": 14,
-  "rsi_recovery_level": 40,
-  "rsi_stop_atr": 0.5,
   "range_days": 60,
   "range_edge_days": 10,
   "recovery_days": 10,
@@ -22,6 +19,5 @@
   "shoulder_min_spacing": 5,
   "shoulder_max_spacing": 25,
   "shoulder_time_ratio_max": 2.0,
-  "neckline_difference_max": 0.1,
-  "rsi_wilder": false
+  "neckline_difference_max": 0.1
 }

@@ -4,6 +4,19 @@
   "active_strategy": null,
   "frozen_version": null,
   "message": "尚無通過驗證的策略",
-  "archived": ["user_range_reclaim", "trend_pullback", "volume_breakout", "rsi_recovery"],
-  "automatic_promotion": false
+  "archived": [
+    "user_range_reclaim",
+    "trend_pullback",
+    "volume_breakout"
+  ],
+  "automatic_promotion": false,
+  "research_strategy": "F",
+  "removed": [
+    "rsi_recovery"
+  ],
+  "archived_research": [
+    "A",
+    "B",
+    "C"
+  ]
 }

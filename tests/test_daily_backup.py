@@ -31,14 +31,14 @@ class DailyTests(unittest.TestCase):
             self.assertEqual(paper(self.s,self.cfg,self.registry,{}, {},Path(d)/'paper',self.day)['status'],'inactive')
             self.assertFalse(Path(d,'paper').exists())
     def test_tampered_frozen_params_are_not_accepted(self):
-        r={'mode':'active','active_strategy':'A','approval_reference':'review','frozen_version':'fake'}
-        f={'walk_forward_passed':True,'model_id':'A','frozen_sha256':'fake','parameters':{'max_risk':.9}}
+        r={'mode':'active','active_strategy':'F','approval_reference':'review','frozen_version':'fake'}
+        f={'walk_forward_passed':True,'model_id':'F','frozen_sha256':'fake','parameters':{'max_risk':.9}}
         self.assertIn('雜湊',approved(r,f,{}))
 
     def test_active_plan_uses_intraday_stop_and_open_risk_cap(self):
         c={'market':'TWSE','code':'2330','date':self.day,'close':100,'stop':94,'target':115}
         view={'candidates':[c],'qualified_count':1,'universe_count':1,'sufficient_history_count':1}
-        frozen={'parameters':self.cfg['signal'],'model_id':'A','frozen_sha256':'a'*64}
+        frozen={'parameters':self.cfg['signal'],'model_id':'F','frozen_sha256':'a'*64}
         with patch('screener.daily.approved',return_value=None),patch('screener.daily.audit_dataset',return_value={'research_ready':True}),patch('screener.daily.screen',return_value=view):
             r=produce(self.s,self.cfg,self.registry,frozen,{},self.day)
         plan=r['candidates'][0]['entry_plan']
@@ -59,12 +59,12 @@ class DailyTests(unittest.TestCase):
     def test_promoted_version_is_isolated_from_research_proposal(self):
         with tempfile.TemporaryDirectory() as d,patch('screener.daily.approved',return_value=None):
             registry=Path(d)/'registry.json';registry.write_text(json.dumps(self.registry))
-            frozen={'frozen_sha256':'a'*64,'model_id':'A','parameters':{'minimum_price':20}}
+            frozen={'frozen_sha256':'a'*64,'model_id':'F','parameters':{'minimum_price':20}}
             final={'status':'completed','executed':True}
             promote(registry,frozen,final,{'status':'ready'},'reviewed-change')
             active=json.loads(registry.read_text());p=Path(active['frozen_file']);old=p.read_bytes()
             proposal=Path(d)/'research-proposal.json';proposal.write_text(json.dumps({'model_id':'B'}))
-            self.assertEqual(p.read_bytes(),old);self.assertEqual(active['active_strategy'],'A')
+            self.assertEqual(p.read_bytes(),old);self.assertEqual(active['active_strategy'],'F')
             with self.assertRaises(DataError):promote(registry,{**frozen,'parameters':{'minimum_price':99}},final,{'status':'ready'},'new-review')
             self.assertEqual(p.read_bytes(),old)
 

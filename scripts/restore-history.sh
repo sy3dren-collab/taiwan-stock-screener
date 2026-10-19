@@ -28,9 +28,17 @@ elif [ -f .history/prices.sqlite3.gz ]; then
 elif [ -f .history/prices.sqlite3 ]; then
   cp .history/prices.sqlite3 .state/prices.sqlite3
 fi
-for folder in experiments paper; do
+for folder in experiments paper runs; do
   if [ -d ".history/$folder" ]; then cp -R ".history/$folder" .state/; fi
 done
-for report in research data-quality final-test; do
-  if [ -f ".history/latest-$report.json" ]; then cp ".history/latest-$report.json" "site/$report.json"; fi
-done
+python - <<'PY'
+import json,shutil
+from pathlib import Path
+for report in ('research','data-quality','final-test'):
+    source=Path(f'.history/latest-{report}.json')
+    if not source.exists():continue
+    data=json.loads(source.read_text())
+    if report in ('research','final-test') and data.get('research_model_id')!='F':continue
+    shutil.copyfile(source,Path('site')/f'{report}.json')
+PY
+python -m screener.reporting export

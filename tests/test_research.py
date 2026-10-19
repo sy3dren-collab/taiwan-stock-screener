@@ -9,7 +9,7 @@ from unittest.mock import patch
 from screener.backtest import simulate
 from screener.data import DataError, Store
 from screener.execution import Execution
-from screener.models import ModelSettings, alternative, screen_model, wilder_rsi
+from screener.models import ModelSettings, alternative, screen_model
 from screener.refinements import Refinements, refined_screen
 from screener.research import diagnose, run_research, validation_start, verify_coverage, verdict, year_start
 from screener.strategy import Parameters
@@ -59,15 +59,6 @@ class ResearchTests(unittest.TestCase):
         with self.assertRaisesRegex(DataError,'暖機'):
             run_research({('TWSE','2330'):bars},Parameters(),Execution(),ModelSettings(),Refinements(),end=bars[-1].date)
 
-    def test_wilder_reference_calculation_and_validation(self):
-        closes=[44.34,44.09,44.15,43.61,44.33,44.83,45.10,45.42,45.84,46.08,45.89,46.03,45.61,46.28,46.28]
-        self.assertAlmostEqual(wilder_rsi(closes),70.464135,places=5)
-        self.assertEqual(wilder_rsi([100]*20),50)
-        self.assertEqual(wilder_rsi(list(range(20))),100)
-        with self.assertRaises(ValueError):wilder_rsi([1,2])
-        with self.assertRaises(ValueError):ModelSettings(rsi_wilder=1)
-        for kwargs in ({'risk_budget_fraction':1},{'failure_sessions':1.5},{'minimum_close_location':1.1},{'max_atr_fraction':float('nan')}):
-            with self.assertRaises(ValueError):Refinements(**kwargs)
 
     def test_personal_refinement_preserves_mandatory_volume_and_independence(self):
         bars=strong_range();day=bars[-1].date;p=Parameters()
@@ -112,21 +103,6 @@ class ResearchTests(unittest.TestCase):
         bars[-1]=replace(bars[-1],volume=1000000)
         self.assertEqual(len(refined_screen(h,day,Parameters(),'trend_pullback')['candidates']),1)
 
-    def test_rsi_refinement_uses_wilder_midline_and_has_valid_positive_path(self):
-        import random
-        from screener.data import Bar
-        rng=random.Random(17);price=100;bars=[]
-        for d in dates(177):
-            price=max(20,price+.15+rng.gauss(0,1))
-            bars.append(Bar('TWSE','2330','純測試RSI',d,price-.3,price+.1,price-.5,price,1000000))
-        # A historical resistance outside ATR14 provides sufficient upside room.
-        bars[-20]=replace(bars[-20],high=max(bars[-20].high,price*1.1))
-        result=refined_screen({('TWSE','2330'):bars},bars[-1].date,Parameters(),'rsi_recovery')
-        self.assertEqual(len(result['candidates']),1)
-        self.assertIn('Wilder 平滑',result['candidates'][0]['reasons'][0])
-        self.assertIn('穿越 50',result['candidates'][0]['reasons'][0])
-        weak=bars[:-1]+[replace(bars[-1],volume=900000)]
-        self.assertEqual(refined_screen({('TWSE','2330'):weak},bars[-1].date,Parameters(),'rsi_recovery')['candidates'],[])
 
     def test_capital_risk_budget_is_enforced_at_next_open(self):
         bars=path()
@@ -178,7 +154,7 @@ class ResearchTests(unittest.TestCase):
         def stream(known,day,p,*args,**kwargs):return {'candidates':[]}
         with patch('screener.research.screen_model',side_effect=stream),patch('screener.research.refined_screen',side_effect=stream):
             r=run_research(h,Parameters(),Execution(),ModelSettings(),Refinements(),start=bars[70].date,end=bars[-1].date)
-        self.assertEqual(len(r['models']),4)
+        self.assertEqual(len(r['models']),3)
         self.assertFalse(r['research_protocol']['parameter_search'])
         for model in r['models']:
             exp=model['experiment']

@@ -5,7 +5,7 @@ if [ "${GITHUB_ACTIONS:-}" != 'true' ]; then
   exit 1
 fi
 python -m screener.backup save --directory .history/backup
-for folder in experiments paper; do
+for folder in experiments paper runs; do
   if [ -d ".state/$folder" ]; then cp -R ".state/$folder" .history/; fi
 done
 for report in results research data-quality final-test paper; do
@@ -16,7 +16,7 @@ git config user.name 'github-actions[bot]'
 git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 git rm --ignore-unmatch prices.sqlite3 prices.sqlite3.gz
 git add backup
-for folder in experiments paper; do
+for folder in experiments paper runs; do
   if [ -d "$folder" ]; then git add "$folder"; fi
 done
 for report in results research data-quality final-test paper; do

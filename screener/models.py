@@ -10,7 +10,6 @@ MODELS = {
     'user_range_reclaim': {'name': '你的策略：整理區間＋大量收復', 'description': '長時間整理後，假跌破收復區間或量化近似頭肩底突破頸線；收復／突破當天必須放量。'},
     'trend_pullback': {'name': '原策略：趨勢回檔再轉強', 'description': '均線多頭、高低點抬高、近支撐量縮，紅 K 收盤突破前日高點。'},
     'volume_breakout': {'name': '比較策略：帶量突破', 'description': '均線多頭且上升，收盤帶量突破前高；以 ATR 設停損、固定 R 倍設模型目標。'},
-    'rsi_recovery': {'name': '比較策略：趨勢中的 RSI 回升', 'description': '均線多頭且上升，簡單平均 RSI 向上穿越門檻，紅 K 突破前日高點，且接近短均線。'},
 }
 
 
@@ -20,10 +19,6 @@ class ModelSettings:
     breakout_volume_multiple: float = 1.5
     breakout_stop_atr: float = 2.0
     breakout_target_r: float = 2.0
-    rsi_wilder: bool = False
-    rsi_days: int = 14
-    rsi_recovery_level: float = 40
-    rsi_stop_atr: float = 0.5
     range_days: int = 60
     range_edge_days: int = 10
     recovery_days: int = 10
@@ -43,14 +38,10 @@ class ModelSettings:
     neckline_difference_max: float = 0.10
 
     def __post_init__(self):
-        integers = {'breakout_days', 'rsi_days', 'range_days', 'range_edge_days', 'recovery_days',
+        integers = {'breakout_days', 'range_days', 'range_edge_days', 'recovery_days',
                     'pattern_days', 'pattern_pivot_radius', 'shoulder_min_spacing', 'shoulder_max_spacing'}
         for field in fields(self):
             value = getattr(self, field.name)
-            if field.name == 'rsi_wilder':
-                if not isinstance(value, bool):
-                    raise ValueError('rsi_wilder 必須是布林值')
-                continue
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
                 raise ValueError(f'{field.name} 必須是正的有限數值')
             if field.name in integers and not isinstance(value, int):
@@ -59,8 +50,6 @@ class ModelSettings:
             raise ValueError('放量倍數必須高於 1；突破量比不可低於 1')
         if any(getattr(self, key) >= 1 for key in ('range_width_max', 'range_drift_max', 'reclaim_buffer', 'head_depth_min', 'shoulder_tolerance', 'neckline_difference_max')):
             raise ValueError('區間與型態比例必須小於 1')
-        if not 0 < self.rsi_recovery_level < 100:
-            raise ValueError('RSI 門檻須介於 0～100')
         if self.range_edge_days*2 > self.range_days or self.range_days < 10:
             raise ValueError('整理區間不足以衡量首尾均價漂移')
         if self.minimum_break_fraction >= self.maximum_break_fraction or self.maximum_break_fraction >= 1:
@@ -74,25 +63,7 @@ class ModelSettings:
 def required_bars(p: Parameters, m: ModelSettings, model: str) -> int:
     if model == 'user_range_reclaim':
         return max(p.required_bars, m.range_days+m.recovery_days, m.pattern_days+1)
-    return max(p.required_bars, m.breakout_days+1, m.rsi_days+2)
-
-
-def rsi(closes: list[float], days: int = 14) -> float:
-    changes = [b-a for a, b in zip(closes[-days-1:], closes[-days:])]
-    gain, loss = mean(max(x, 0) for x in changes), mean(max(-x, 0) for x in changes)
-    return 100 if loss == 0 and gain > 0 else 50 if loss == gain == 0 else 100-100/(1+gain/loss)
-
-
-def wilder_rsi(closes: list[float], days: int = 14) -> float:
-    if len(closes) < days+1:
-        raise ValueError('Wilder RSI 歷史不足')
-    changes = [b-a for a,b in zip(closes,closes[1:])]
-    gain = mean(max(x,0) for x in changes[:days])
-    loss = mean(max(-x,0) for x in changes[:days])
-    for change in changes[days:]:
-        gain = (gain*(days-1)+max(change,0))/days
-        loss = (loss*(days-1)+max(-change,0))/days
-    return 100 if loss == 0 and gain > 0 else 50 if loss == gain == 0 else 100-100/(1+gain/loss)
+    return max(p.required_bars, m.breakout_days+1)
 
 
 def consolidation(bars: list[Bar], m: ModelSettings) -> tuple | None:
@@ -158,6 +129,7 @@ def user_pattern(bars: list[Bar], p: Parameters, m: ModelSettings, atr: float) -
 
 def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | None = None, include_bars: bool = True) -> dict | None:
     m = m or ModelSettings()
+    if model not in MODELS:raise ValueError('未知或已移除策略')
     if len(bars) < required_bars(p, m, model):
         return None
     today, yesterday = bars[-1], bars[-2]
@@ -190,16 +162,6 @@ def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | N
                        'score': min(ratio/3, 1)*50+min((today.close/peak-1)/.05, 1)*50,
                        'reasons': [f'收盤突破前 {m.breakout_days} 日高點 {peak:.2f}', f'量比 {ratio:.2f} ≥ {m.breakout_volume_multiple:g}',
                                    f'停損採 MA 或 {m.breakout_stop_atr:g} ATR；目標為模型 {m.breakout_target_r:g}R']}
-        elif model == 'rsi_recovery':
-            rsi_function = wilder_rsi if m.rsi_wilder else rsi
-            previous, current = rsi_function(closes[:-1], m.rsi_days), rsi_function(closes, m.rsi_days)
-            if not (previous <= m.rsi_recovery_level < current and today.close > yesterday.high and today.close > today.open and today.close/fast-1 <= p.support_distance_max):
-                return None
-            pattern = {'variant': 'RSI 回升', 'support': fast,
-                       'stop': min(b.low for b in bars[-p.pullback_days-1:-1])-m.rsi_stop_atr*atr,
-                       'target': peak, 'score': 50+min(current-m.rsi_recovery_level, 30)/30*50,
-                       'reasons': [f"{'Wilder 平滑' if m.rsi_wilder else '簡單平均'} RSI{m.rsi_days} {previous:.2f} → {current:.2f}，向上穿越 {m.rsi_recovery_level:g}",
-                                   '紅 K 收盤突破前日高點，且接近短均線', f'參考目標為前 {m.breakout_days} 日高點 {peak:.2f}']}
         else:
             raise ValueError('未知策略')
     risk = today.close-pattern['stop']
