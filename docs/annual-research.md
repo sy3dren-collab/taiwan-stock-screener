@@ -44,3 +44,5 @@ python3 -m screener.annual research --variant wider-range
 ```
 
 結果另存 `annual-wider-range.json`，與基準分開；網站只有在資料指紋、成本、風控、進場截止日相同且確實只改區間寬度時才顯示比較。改良結果不自動取代固定基準，夜間預設仍跑基準；Actions手動可指定variant。
+
+2026-10-19實測：30%版本同樣0訊號、0交易、勝率null、淨報酬0%、回撤0%。資料指紋、136日暖機、242日評估、成本、風險與進場截止日與基準一致，只改`range_width`。這個假設未改善訊號數量，不判定勝出。
