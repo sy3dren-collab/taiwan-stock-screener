@@ -53,6 +53,7 @@ jobs:
         run: |
           python -m screener.quality audit
           python -m screener.daily screen --offline
+          python -m scripts.preserve_quote_error
       - name: Save all run reports, experiments and history
         run: bash scripts/save-history.sh
       - uses: actions/configure-pages@v5
