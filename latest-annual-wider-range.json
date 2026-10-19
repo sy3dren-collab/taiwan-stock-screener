@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T14:03:31.232753+00:00",
+  "generated_at": "2026-10-19T14:15:14.649878+00:00",
   "research_model_id": "F",
   "status": "completed",
   "classification": "retrospective_diagnostic",
@@ -28,7 +28,7 @@
     ]
   },
   "version": {
-    "git_commit": "9bab77ccdf977f8a3b868ace36652548bdfc0a44",
+    "git_commit": "fe89eec1e941f192060a4d8ae83146cacc71673b",
     "code_sha256": "73114b0a7059bea5be34db6f1dbe2c038fe523d8f32f0be303b6b5ef30aeddea",
     "working_tree_dirty": false
   },
@@ -5126,7 +5126,7 @@
       "signals": 0
     }
   ],
-  "elapsed_seconds": 52.977,
+  "elapsed_seconds": 38.028,
   "reconciliation": {
     "cash_events_imported": 2683,
     "references_restored": 0,
@@ -7768,5 +7768,5 @@
     ],
     "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
   },
-  "run_id": "20261019T140457462384-F-annual-research-dec2c564"
+  "run_id": "20261019T141616697458-F-annual-research-ba5d4b55"
 }
