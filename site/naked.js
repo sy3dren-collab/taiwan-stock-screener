@@ -17,14 +17,38 @@
    const archive=make('a','完整回測歷史（資料分支）');archive.href='https://github.com/sy3dren-collab/taiwan-stock-screener/tree/research-data/runs';box.append(make('p',`共 ${h.total_runs} 次執行；下方依時間顯示最近20次，沒有依績效挑選。`),archive);
    for(const run of h.runs.slice(0,20)){
     if(run.model_id!=='F')throw Error('回測紀錄與目前策略不同');
-    const entry=document.createElement('details');entry.className='run-entry';const summary=make('summary',`${new Date(run.generated_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false})}（台北）｜${run.command==='final-test'?'封存測試檢查':'研究回測'}｜${labels[run.status]||run.status}｜${run.completed_experiments} 次有效實驗`);entry.append(summary);
+    const annual=run.command==='annual-research';
+    const entry=document.createElement('details');entry.className='run-entry';const summary=make('summary',`${new Date(run.generated_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false})}（台北）｜${annual?'一年回溯研究':run.command==='final-test'?'封存測試檢查':'五年時序研究'}｜${labels[run.status]||run.status}｜${run.completed_experiments} 次有效實驗`);entry.append(summary);
     if(!run.trials.length)entry.append(make('p','本輪未產出有效回測：勝率／淨報酬／回撤皆為 —，不是0%。'));
-    else entry.append(table(['輪次／修改','勝率／平倉筆數','平均驗證淨報酬','最大單折回撤','PF／期望值','是否保留'],run.trials.map(t=>[`${t.iteration}／${t.changed_rules.join(', ')||'固定基準'}`,`${pct(t.win_rate)}／${num(t.closed_count)}`,pct(t.mean_validation_return),pct(t.max_fold_drawdown),`${num(t.profit_factor)}／${num(t.expectancy)}`,t.retained?'保留研究候選':'未保留'])));
+    else entry.append(table(['輪次／修改','勝率／平倉筆數',annual?'一年帳戶淨報酬':'平均驗證淨報酬',annual?'最大回撤':'最大單折回撤','PF／期望值','是否保留'],run.trials.map(t=>[`${t.iteration}／${t.changed_rules.join(', ')||'固定基準'}`,`${pct(t.win_rate)}／${num(t.closed_count)}`,pct(annual?t.annual_net_return:t.mean_validation_return),pct(t.max_fold_drawdown),`${num(t.profit_factor)}／${num(t.expectancy)}`,t.retained?'保留研究候選':'未保留'])));
     const issues=document.createElement('ul');run.issues.forEach(v=>issues.append(make('li',v)));run.trials.forEach(t=>issues.append(make('li',`${t.reason}；${t.error||t.rejection_reasons.join('；')||t.status}`)));entry.append(issues,make('p',`程式版本 ${run.version?.git_commit?.slice(0,12)||'未取得'}。平均跨折報酬不是連續帳戶年報酬，85%僅為長期研究目標。`));
     if(run.download_url&&/^runs\/[A-Za-z0-9_-]+\.json$/.test(run.download_url)){const link=make('a','下載本次完整回測報告');link.href=run.download_url;link.download='';entry.append(link);}
     box.append(entry);
    }
   }catch(error){box.replaceChildren(make('p',`回測紀錄無法讀取：${error.message}。未以範例結果代替。`));}
+ }
+ async function loadAnnual(){
+  const status=q('#annual-status'),stats=q('#annual-metrics'),evidence=q('#annual-evidence'),charts=q('#annual-charts');
+  try{
+   const response=await fetch('annual-backtest.json',{cache:'no-store'});if(!response.ok)throw Error(`HTTP ${response.status}`);const r=await response.json();
+   if(r.schema_version!==1||r.research_model_id!=='F'||r.classification!=='retrospective_diagnostic'||r.promotion_allowed!==false)throw Error('一年研究格式不完整');
+   stats.replaceChildren();evidence.replaceChildren();charts.replaceChildren();status.className='notice warning';
+   if(r.status!=='completed'){
+    status.textContent=r.status==='error'?`一年回測失敗：${r.run_error||'請看完整報告'}`:'正在補齊一年行情與事件資料，尚無有效回測結果。';
+    const list=document.createElement('ul');(r.data_quality?.issues||[]).forEach(x=>list.append(make('li',x)));evidence.append(list);return;
+   }
+   const s=r.strategy,m=s?.metrics;
+   if(!m||!Array.isArray(s.closed_trades)||s.closed_trades.length!==m.closed_count||!Number.isFinite(m.net_return)||!Number.isFinite(m.max_drawdown)||!Array.isArray(s.equity_curve))throw Error('一年績效或交易明細不一致');
+   status.textContent='一年回溯研究已完成；這一年曾用於研究，並非獨立樣本外。正式策略仍未啟用。';
+   stats.append(make('p',`${s.start}～${s.end}，共 ${num(r.period.trading_sessions)} 個交易日；${r.entry_cutoff} 後停止新進場，保留持倉結束時間。`),table(['勝率','一年帳戶淨報酬','已平倉交易','最大回撤','獲利因子'],[[pct(m.win_rate),pct(m.net_return),num(m.closed_count),pct(m.max_drawdown),num(m.profit_factor)]]));
+   if(!m.closed_count)stats.append(make('p','沒有已完成交易，勝率為 —；0%帳戶報酬不能證明策略有效。'));
+   stats.append(make('p',`獲利 ${num(m.winners)} 筆、虧損 ${num(m.losers)} 筆；費稅與滑價 ${num(m.total_costs)} 元，平均持有 ${num(m.average_holding_sessions)} 個交易日。${m.sample_warning}`));
+   const quality=r.data_quality,f=r.signal_funnel||{};
+   evidence.append(make('p',`已核對 ${num(quality.source_proofs)} 份兩市場日報／休市回應，暖機 ${num(quality.warmup_sessions)} 個交易日。共檢查 ${num(f.quoted)} 個股票日，通過資料與流動性檢查 ${num(f.admitted)} 個，策略訊號 ${num(f.signals)} 個。`));
+   const warnings=document.createElement('ul');(quality.limitations||[]).forEach(x=>warnings.append(make('li',x)));evidence.append(warnings,make('p',`未知參考價／事件排除 ${num(f.unresolved_reference_or_event||0)} 個股票日、未支援公司行動 ${num(f.unsupported_corporate_action||0)} 個、停牌／無成交 ${num(f.suspension_or_unquoted||0)} 個。依當時已知資料排除，沒有事後刪除虧損交易。`));
+   const download=make('a','下載這次完整一年回測（含全部交易與資料指紋）');download.href='annual-backtest.json';download.download='';evidence.append(download);
+   charts.append(make('h4','一年研究淨值（含成本）'),curve(s.equity_curve,'equity','一年回溯研究模型淨值'),make('h4','最大回撤走勢'),curve(m.drawdown_curve,'drawdown','一年回溯研究回撤'),table(['月份','淨報酬'],m.monthly.map(x=>[x.period,pct(x.net_return)])),table(['股票代號／名稱','訊號／進場日','出場日','淨損益','出場原因'],s.closed_trades.map(t=>[`${t.entry_code} ${t.name}`,`${t.signal_date}／${t.entry_date}`,t.exit_date,num(t.net_pnl),t.exit_reason])));
+  }catch(error){status.className='notice error';status.textContent=`一年回測報告無法讀取：${error.message}。`;stats.replaceChildren();evidence.replaceChildren();charts.replaceChildren();}
  }
  async function load(){
   try{
@@ -65,5 +89,5 @@
    if(snapshot.status!=='ok')throw Error('封存快照不可用');snapshot.candidates.forEach((s,i)=>q('#legacy-cards').append(card(s,i+1)));
   }catch(error){q('#legacy-cards').replaceChildren(make('p',`封存資料無法讀取：${error.message}`));}
  });
- load();loadRuns();
+ load();loadRuns();loadAnnual();
 })();

@@ -12,7 +12,7 @@
   <meta name="description" content="根據證交所及櫃買中心公開行情，以透明、可調整的波段策略篩選台灣股票。">
   <link rel="stylesheet" href="styles.css?v=8b3d528786e9">
   <script src="app.js?v=67445e442ffd" defer></script>
-  <script src="naked.js?v=54b69d0b600e" defer></script>
+  <script src="naked.js?v=95a222ac2a16" defer></script>
   <script src="backtest.js?v=58bbb01a6f8d" defer></script>
 </head>
 <body>
@@ -23,6 +23,12 @@
       <aside class="overview" aria-label="資料摘要"><span class="live-label"><i></i> 官方收盤資料</span><dl><div><dt>行情日期</dt><dd id="as-of">—</dd></div><div><dt>本日候選</dt><dd><span id="count">—</span><small> 檔</small></dd></div><div><dt>納入股票</dt><dd><span id="universe">—</span><small> 檔</small></dd></div></dl><p id="updated">等待資料載入</p></aside>
     </section>
     <section id="status" class="notice" aria-live="polite">正在讀取選股結果…</section>
+    <section class="naked-research" aria-labelledby="annual-title">
+      <p class="eyebrow">ONE-YEAR STRATEGY RESEARCH</p><h2 id="annual-title">新合併策略・一年回測</h2>
+      <div id="annual-status" class="notice" aria-live="polite">讀取一年研究報告…</div>
+      <div id="annual-metrics"></div><div id="annual-evidence"></div>
+      <details id="annual-detail"><summary>查看淨值、每月績效與完整交易</summary><div id="annual-charts"></div></details>
+    </section>
     <section class="results-section" aria-labelledby="results-title">
       <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">今日符合唯一策略的候選</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
       <div class="strategy-picker"><label for="strategy-select">選股策略</label><select id="strategy-select"><option value="trend_pullback">原策略：趨勢回檔再轉強</option></select><p id="strategy-description"></p></div>

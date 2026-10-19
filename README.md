@@ -6,6 +6,23 @@
 
 網站封存區保留三個原策略的一年結果；RSI 回升已移除。完整舊四模型原始研究仍可由 `archive/` 與 Git 歷史追溯，[舊規則](docs/legacy-strategies.md)與[舊 README](docs/legacy-readme.md)。不要用舊 CLI `python -m screener screen/update/backtest` 覆寫研究版首頁；這些入口僅保留相容性。
 
+## 一年研究回測與阻擋修復
+
+依使用者要求優先檢驗 **2025-10-17～2026-10-16** 的單一合併策略，暖機自 **2025-04-01** 起。新的 `screener.annual` 將一年回溯研究與原有五年晉級驗證分開；五年完整性、一次性樣本外與正式啟用條件均保留。**一年已被前輪研究看過，結果只能稱回溯研究，不能稱獨立樣本外或用於晉級。**
+
+修復項目包括優先回補所需期間、兩市場獨立限速及有限並行、截斷回應重試、官方除權息表介接、X／除息日開盤基準，以及理論除息調整價與跳動單位進位後基準的區分。純現金股利按官方數值入帳，付款日未知時不再投入。未支援事件或缺價只依當時已知資料中斷該股訊號暖機；持倉遇未知事件、連續缺價或期末無法結束仍讓整輪失敗，不事後丟棄交易。
+
+```bash
+# 每輪最多220日期、500次HTTP、1200秒；可重跑續接。
+python3 -m screener.annual backfill
+python3 -m screener.annual events
+python3 -m screener.annual research
+```
+
+設定在 `annual_research.json`；規則仍用同一份 `naked_k.json` 與 `execution.json`。結果、全部交易、成本、淨值、月份績效、資料指紋與排除股票日統計在 `site/annual-backtest.json`，每次執行也加入回測帳本。首頁「新合併策略・一年回測」顯示實際結果，與正式策略績效分開。詳細資料政策見[一年研究說明](docs/annual-research.md)。
+
+夜間排程優先續補一年資料並執行一年研究；手動工作可選 `annual-backfill`、`annual-research`，原有 `backfill`／`research`／`final-test` 保留為五年驗證入口。研究 job 上限45分鐘，抓取每主機最多每秒一次、最多三個日期同時處理。資料及一年報告也保存於 `research-data`，每日發布不會抹除它們。
+
 ## 實際完成程度
 
 已建立官方成交金額與來源證據儲存、單一合併策略訊號、含成本與資金限制的日線回測、時序驗證、有限次數優化、晉級阻擋、研究版網站、備份及自動化。**真實五年回測與最終獨立測試尚未完成。** 詳見[交付報告](docs/delivery_report.md)、[原系統稽核](audit_report.md)、[資料來源及缺口](docs/data-sources.md)。
@@ -82,14 +99,14 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 ## Actions、發布及持久化
 
 - **Daily official data and Pages**：平日台北18:30、main程式推送或手動執行。只更新資料、固定唯一策略／停用狀態、紙上觀察與Pages；來源失敗發布明確錯誤並將工作流程標為失敗。
-- **Single fusion strategy research**：每日台北01:00有預算回補／研究，手動可選backfill、research、final-test。每次執行保存結果及Actions摘要，再自動發布研究報告到Pages；不會啟用未驗證候選。
+- **Single fusion strategy research**：每日台北01:00優先續補一年資料並研究，手動可選annual-backfill、annual-research及原五年驗證入口backfill、research、final-test。每次執行保存結果及Actions摘要，再自動發布研究報告到Pages；不會啟用未驗證候選。
 - **Validate research branch**：push／PR／手動跑Python、JS／shell與兩套Chromium測試。
 
 Pages 使用 GitHub Actions 作為來源，本儲存庫已啟用。資料及實驗持久保存到獨立 **research-data** 分支；沒有時可只讀還原舊market-data。`.history`是CI專用第二份checkout，清理僅限該資料checkout，從不清理來源專案。所有修改通過測試才合併main；研究分支保留為檢視紀錄。
 
 SQLite一致性快照壓縮為≤40MiB分片，有SHA-256與還原完整性檢查；分片先完成才原子換manifest。每次執行保存資料、實驗、前瞻帳本、所有回測紀錄與最近報告，Actions診斷artifact保留7天。分支公開可下載；沒有私人憑證。
 
-每日／研究共用concurrency鎖、單job25分鐘，抓取失敗有限重試，已完成日期可續接。排程可能延遲或被GitHub停用，請在[Actions](https://github.com/sy3dren-collab/taiwan-stock-screener/actions)檢查；失敗後可Run workflow補跑，不把舊日期當今日訊號。
+每日／研究共用concurrency鎖、每日job25分鐘、研究job45分鐘，抓取失敗有限重試，已完成日期可續接。排程可能延遲或被GitHub停用，請在[Actions](https://github.com/sy3dren-collab/taiwan-stock-screener/actions)檢查；失敗後可Run workflow補跑，不把舊日期當今日訊號。
 
 實測60次請求／29日期約141秒；全期補抓需數十輪，最長每輪5分鐘，官方限流會更久。每晚研究上限10分鐘但資料不齊即快速停止。公開倉庫的GitHub-hosted標準runner通常不收執行費，實際帳戶政策／儲存額度未查核，不能保證免費；私有fork須另評估。每日提交大型SQLite仍使Git歷史持續增長，40MiB分片只處理單檔限制；長期應改分區／物件儲存與保留政策。
 

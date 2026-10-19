@@ -8,7 +8,7 @@ python -m screener.backup save --directory .history/backup
 for folder in experiments paper runs; do
   if [ -d ".state/$folder" ]; then cp -R ".state/$folder" .history/; fi
 done
-for report in results research data-quality final-test paper; do
+for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events; do
   if [ -f "site/$report.json" ]; then cp "site/$report.json" ".history/latest-$report.json"; fi
 done
 cd .history
@@ -19,7 +19,7 @@ git add backup
 for folder in experiments paper runs; do
   if [ -d "$folder" ]; then git add "$folder"; fi
 done
-for report in results research data-quality final-test paper; do
+for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events; do
   if [ -f "latest-$report.json" ]; then git add "latest-$report.json"; fi
 done
 if ! git diff --cached --quiet; then

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "research_model_id": "F",
+  "classification": "retrospective_diagnostic",
+  "promotion_allowed": false,
+  "active_strategy": null,
+  "status": "blocked",
+  "data_quality": {
+    "issues": ["優先回補 2025-04-01～2026-10-16 官方日報及除權息事件；尚未產生有效一年回測。"]
+  }
+}

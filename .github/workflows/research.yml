@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: 'backfill / research / final-test; all results are recorded, never auto-promoted'
+        description: 'One-year diagnostics / five-year qualification; reports never auto-promote'
         type: choice
-        options: [backfill, research, final-test]
-        default: research
+        options: [annual-backfill, annual-research, backfill, research, final-test]
+        default: annual-research
   schedule:
     - cron: '0 17 * * *' # 01:00 Taipei; bounded backfill and the single strategy only.
 permissions:
@@ -20,11 +20,14 @@ jobs:
   study:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     outputs:
       backfill_outcome: ${{ steps.backfill.outcome }}
       research_outcome: ${{ steps.research.outcome }}
       final_outcome: ${{ steps.final.outcome }}
+      annual_backfill_outcome: ${{ steps.annual_backfill.outcome }}
+      events_outcome: ${{ steps.events.outcome }}
+      annual_outcome: ${{ steps.annual.outcome }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,14 +39,29 @@ jobs:
       - run: bash scripts/restore-history.sh
       - name: Bounded backfill
         id: backfill
-        if: inputs.task == 'backfill' || github.event_name == 'schedule'
+        if: inputs.task == 'backfill'
         continue-on-error: true
         run: python -m screener.quality backfill
       - name: Single-strategy research and per-run report
         id: research
-        if: inputs.task != 'final-test'
+        if: inputs.task == 'research' || inputs.task == 'backfill'
         continue-on-error: true
         run: python -m screener.optimizer research
+      - name: Priority one-year official backfill
+        id: annual_backfill
+        if: inputs.task == 'annual-backfill' || github.event_name == 'schedule'
+        continue-on-error: true
+        run: python -m screener.annual backfill
+      - name: Official cash distributions and ex-date references
+        id: events
+        if: startsWith(inputs.task, 'annual-') || github.event_name == 'schedule'
+        continue-on-error: true
+        run: python -m screener.annual events
+      - name: One-year retrospective diagnostic and per-run report
+        id: annual
+        if: startsWith(inputs.task, 'annual-') || github.event_name == 'schedule'
+        continue-on-error: true
+        run: python -m screener.annual research
       - name: One-use final holdout and per-run report
         id: final
         if: inputs.task == 'final-test'
@@ -70,6 +88,7 @@ jobs:
             site/latest-backtest.md
             site/data-quality.json
             site/final-test.json
+            site/annual-*.json
             .state/runs/
             .state/experiments/
   publish:
@@ -82,5 +101,5 @@ jobs:
       - uses: actions/deploy-pages@v4
         id: publish
       - name: Preserve failure after publishing the recorded result
-        if: needs.study.outputs.backfill_outcome == 'failure' || needs.study.outputs.research_outcome == 'failure' || needs.study.outputs.final_outcome == 'failure'
+        if: needs.study.outputs.backfill_outcome == 'failure' || needs.study.outputs.research_outcome == 'failure' || needs.study.outputs.final_outcome == 'failure' || needs.study.outputs.annual_backfill_outcome == 'failure' || needs.study.outputs.events_outcome == 'failure' || needs.study.outputs.annual_outcome == 'failure'
         run: exit 1

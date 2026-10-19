@@ -160,12 +160,13 @@ def parse_report(market: str, day: date, payload: object) -> list[Bar]:
 
 
 class OfficialClient:
-    def __init__(self, delay: float = 2.0, retries: int = 3, timeout: float = 40, request_budget: int | None = None, deadline: float | None = None):
+    def __init__(self, delay: float = 2.0, retries: int = 3, timeout: float = 40, request_budget: int | None = None, deadline: float | None = None, request_gate=None):
         self.delay, self.retries, self.timeout = delay, retries, timeout
         self.last_request = 0.0
         self.provenance = {}
         self.request_count = 0
         self.request_budget, self.deadline = request_budget, deadline
+        self.request_gate=request_gate
 
     def daily(self, market: str, day: date) -> list[Bar]:
         params = ({"date": day.strftime("%Y%m%d"), "type": "ALLBUT0999", "response": "json"}
@@ -176,11 +177,15 @@ class OfficialClient:
             if self.deadline and time.monotonic()>=self.deadline:raise DataError('官方時間預算已用完')
             time.sleep(max(0, self.delay - (time.monotonic() - self.last_request)))
             self.last_request = time.monotonic()
+            if self.request_gate:self.request_gate(market)
             try:
                 # Retry the same official parameters in a different order, bypassing a cached
                 # truncated transfer without accepting partial JSON or changing the report date.
                 query=list(params.items())
-                if attempt%2:query.reverse()
+                # TPEx's date-first cache variant has repeatedly returned a
+                # truncated transfer for historical reports. Prefer its other
+                # equivalent query order; retain full JSON/TLS validation.
+                if (attempt+(market=='TPEX'))%2:query.reverse()
                 url=URLS[market]+"?"+urlencode(query)
                 headers={"User-Agent": "TaiwanStockScreener/0.1 (public daily report research)", "Accept": "application/json"}
                 if attempt:headers['Cache-Control']='no-cache';headers['Pragma']='no-cache'
