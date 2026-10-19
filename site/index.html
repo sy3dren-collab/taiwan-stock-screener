@@ -12,7 +12,7 @@
   <meta name="description" content="根據證交所及櫃買中心公開行情，以透明、可調整的波段策略篩選台灣股票。">
   <link rel="stylesheet" href="styles.css?v=8b3d528786e9">
   <script src="app.js?v=67445e442ffd" defer></script>
-  <script src="naked.js?v=54b69d0b600e" defer></script>
+  <script src="naked.js?v=95a222ac2a16" defer></script>
   <script src="backtest.js?v=58bbb01a6f8d" defer></script>
 </head>
 <body>
@@ -23,6 +23,12 @@
       <aside class="overview" aria-label="資料摘要"><span class="live-label"><i></i> 官方收盤資料</span><dl><div><dt>行情日期</dt><dd id="as-of">—</dd></div><div><dt>本日候選</dt><dd><span id="count">—</span><small> 檔</small></dd></div><div><dt>納入股票</dt><dd><span id="universe">—</span><small> 檔</small></dd></div></dl><p id="updated">等待資料載入</p></aside>
     </section>
     <section id="status" class="notice" aria-live="polite">正在讀取選股結果…</section>
+    <section class="naked-research" aria-labelledby="annual-title">
+      <p class="eyebrow">ONE-YEAR STRATEGY RESEARCH</p><h2 id="annual-title">新合併策略・一年回測</h2>
+      <div id="annual-status" class="notice" aria-live="polite">讀取一年研究報告…</div>
+      <div id="annual-metrics"></div><div id="annual-evidence"></div>
+      <details id="annual-detail"><summary>查看淨值、每月績效與完整交易</summary><div id="annual-charts"></div></details>
+    </section>
     <section class="results-section" aria-labelledby="results-title">
       <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">今日符合唯一策略的候選</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
       <div class="strategy-picker"><label for="strategy-select">選股策略</label><select id="strategy-select"><option value="trend_pullback">原策略：趨勢回檔再轉強</option></select><p id="strategy-description"></p></div>
@@ -31,7 +37,7 @@
       <div id="empty" class="empty" hidden><span aria-hidden="true">⌁</span><h3>耐心，也是策略的一部分。</h3><p id="empty-message">目前沒有符合條件的股票。</p></div>
     </section>
     <section hidden class="personal-strategy" aria-labelledby="personal-title"><p class="eyebrow">YOUR INDEPENDENT STRATEGY</p><h2 id="personal-title">你的策略，獨立觀察。</h2><p>長時間整理後，觀察「假跌破後收復區間」或「量化近似頭肩底突破」。<strong>收復／突破當天必須出大量。</strong>這組規則不混入其他策略的均線條件。</p><button id="show-user-strategy" type="button" disabled>查看我的策略候選</button><details><summary>查看你的量化條件與可調參數</summary><div id="personal-parameters"></div><p>頭肩底是確認後轉折點的量化近似，不代表人工確認型態。所有門檻都可在 models.json 調整。</p></details></section>
-    <section class="naked-research" aria-labelledby="naked-title"><p class="eyebrow">ONE VERIFIED STRATEGY</p><h2 id="naked-title">單一策略驗證狀態</h2><div id="naked-active" class="notice" aria-live="polite">讀取研究狀態中…</div><div id="naked-performance"></div><h3>官方資料與驗證缺口</h3><div id="naked-quality"></div><h3>目前唯一研究策略</h3><p>長整理與大量收復／突破 → 確認高低點抬高 → 量縮回測結構支撐 → 再放量轉強。初始事件量至少1.5倍、進場量至少1.2倍；回檔量比至多0.8。85%僅為長期目標。</p><div id="naked-comparisons" class="naked-comparisons"></div><h3>每次回測結果</h3><p>包含虧損、失敗與資料不足。每次研究執行後自動更新；可展開查看與下載報告。</p><div id="run-history"></div><h3>本輪策略優化紀錄</h3><div id="optimization-history"></div><h3>績效分析與完整交易</h3><div id="naked-charts"></div></section>
+    <section class="naked-research" aria-labelledby="naked-title"><p class="eyebrow">ONE VERIFIED STRATEGY</p><h2 id="naked-title">單一策略驗證狀態</h2><div id="naked-active" class="notice" aria-live="polite">讀取研究狀態中…</div><div id="naked-performance"></div><h3>五年正式驗證的剩餘缺口</h3><div id="naked-quality"></div><h3>目前唯一研究策略</h3><p>長整理與大量收復／突破 → 確認高低點抬高 → 量縮回測結構支撐 → 再放量轉強。初始事件量至少1.5倍、進場量至少1.2倍；回檔量比至多0.8。85%僅為長期目標。</p><div id="naked-comparisons" class="naked-comparisons"></div><h3>每次回測結果</h3><p>包含虧損、失敗與資料不足。每次研究執行後自動更新；可展開查看與下載報告。</p><div id="run-history"></div><h3>本輪策略優化紀錄</h3><div id="optimization-history"></div><h3>績效分析與完整交易</h3><div id="naked-charts"></div></section>
     <details id="legacy-research" class="legacy-archive"><summary>封存的三個原策略與一年歷史研究（未作正式策略）</summary><p>以下資料只保留稽核用途，未還原權息，最近一年已被使用，不是獨立封存樣本外。原策略沒有刪除，也不再啟用為首頁選股策略。</p><details id="legacy-watchlist"><summary>查看封存的 2026-10-16 名單與 K 線</summary><p>封存快照，原策略已停用；以下不是今日推薦。</p><div id="legacy-cards" class="cards"></div></details>
     <section class="backtest-section" aria-labelledby="backtest-title"><div class="section-heading"><div><p class="eyebrow">PRELIMINARY RESEARCH</p><h2 id="backtest-title">封存三個原策略：已使用的歷史研究。</h2></div><span class="research-badge">未還原權息</span></div><div id="backtest-status" class="notice" aria-live="polite">正在讀取初步回測…</div><p id="backtest-period"></p><div id="research-protocol"></div><div id="backtest-models" class="backtest-models"></div><div id="backtest-assumptions"></div><div id="backtest-detail"></div></section>
     </details>

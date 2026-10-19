@@ -11,7 +11,10 @@ const server=spawn('python3',['-m','http.server','8766','--bind','127.0.0.1','--
   assert.equal(await p.locator('.stock-card').count(),0);assert.equal(await p.locator('#naked-charts svg').count(),0);
   assert.match(await p.locator('#optimization-history').innerText(),/未捏造/);
   await p.locator('.run-entry').first().waitFor();assert.equal(await p.locator('.naked-candidate').filter({hasText:'F｜'}).count(),1);
-  await p.locator('.run-entry summary').first().click();assert.match(await p.locator('#run-history').innerText(),/不是0%/);
+  await p.locator('.run-entry summary').first().click();
+  const latest=JSON.parse(require('node:fs').readFileSync('site/research-history.json','utf8')).runs[0];
+  if(!latest.trials.length)assert.match(await p.locator('#run-history').innerText(),/不是0%/);
+  else{assert.equal(await p.locator('.run-entry').first().locator('table tr').count(),latest.trials.length+1);if(latest.command==='annual-research')assert.match(await p.locator('.run-entry').first().innerText(),/一年帳戶淨報酬/);}
 assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   if(width===390)await p.screenshot({path:'/tmp/naked-research-mobile.png',fullPage:true});
   await p.locator('#legacy-research summary').first().click();assert.equal(await p.locator('.research-card').count(),3);

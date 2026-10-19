@@ -23,7 +23,7 @@ class Risk:
         if self.risk_budget>=1 or self.trailing_buffer>=1 or not isinstance(self.max_unquoted_sessions,int):raise ValueError('風控比例或停牌期限不合法')
 
 
-def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,events=(),deadline=None,signal_provider=None,entry_cutoff=None,benchmark=False):
+def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,events=(),deadline=None,signal_provider=None,entry_cutoff=None,benchmark=False,security_barriers=()):
     histories={k:sorted((b for b in bars if b.date<=end),key=lambda b:b.date) for k,bars in histories.items()}
     for bars in histories.values():
         if len({b.date for b in bars})!=len(bars):raise DataError('重複 K 棒')
@@ -52,6 +52,9 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
     for session,day in enumerate(days):
         if deadline and time.monotonic()>=deadline:raise ResearchBudgetExceeded('本輪運算預算已用完；未產出部分績效冒充完整回測')
         quotes=raw[day]
+        for barrier in security_barriers:
+            if barrier['date']==day and (barrier['market'],barrier['code']) in positions:
+                raise DataError(f"{barrier['market']} {barrier['code']} 持倉遇尚未支援公司行動 {barrier.get('kind','未知')}，停止完整回測")
         for item in receivables:
             if not item['paid'] and item['payable_date'] and item['payable_date']<=day:
                 cash+=item['amount'];item['paid']=True
@@ -83,6 +86,7 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
         # Fixed closing list; no replacement after seeing today's unavailable orders.
         for signal in orders:
             key=(signal['market'],signal['code']);bar=quotes.get(key)
+            if any(x['date']==day and (x['market'],x['code'])==key for x in security_barriers):reject('進場日尚未支援公司行動，取消委託');continue
             if any((a.market,a.code)==key for a in todays):reject('進場日公司行動，取消舊基準委託');continue
             if key in positions or len(positions)>=e.max_positions:reject('部位上限');continue
             if not bar or bar.volume<=0 or bar.reference is None:reject('無有效開盤或參考價');continue
@@ -114,7 +118,10 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
             if bar.reference is None:raise DataError(f'{key} 缺當日參考價，無法確認公司行動及成交限制')
             previous=latest.get(key)
             matching=[a for a in todays if (a.market,a.code)==key]
-            expected=previous.close*math.prod(a.price_factor for a in matching) if previous else bar.reference
+            explicit=[a.reference_price for a in matching if a.reference_price is not None]
+            # Official ex-date opening bases are tick-rounded independently of
+            # the theoretical price adjustment used for signal/stop history.
+            expected=explicit[-1] if explicit else previous.close*math.prod(a.price_factor for a in matching) if previous else bar.reference
             if previous and abs(bar.reference-expected)>.005:
                 raise DataError(f'{key} 參考價不連續或事件比率不符，停止完整回測')
             if any(a.reference_price is not None and abs(a.reference_price-bar.reference)>.005 for a in matching):
@@ -137,7 +144,8 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
         known={}
         for k,bars in histories.items():
             end_index=bisect_right(index[k],day)
-            known[k]=bars[max(0,end_index-p.lookback) if signal_provider is None else 0:end_index]
+            limit=p.lookback if signal_provider is None else getattr(signal_provider,'history_limit',0)
+            known[k]=bars[max(0,end_index-limit) if limit else 0:end_index]
         from .quality import signal_histories
         for key,pos in positions.items():
             bar=quotes.get(key)

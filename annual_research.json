@@ -1,0 +1,11 @@
+{
+  "data_start": "2025-04-01",
+  "start": "2025-10-17",
+  "end": "2026-10-16",
+  "classification": "retrospective_diagnostic",
+  "holdout_status": "contaminated",
+  "max_backfill_dates": 220,
+  "max_requests": 500,
+  "backfill_seconds": 1200,
+  "simulation_seconds": 900
+}

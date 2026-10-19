@@ -34,7 +34,7 @@ done
 python - <<'PY'
 import json,shutil
 from pathlib import Path
-for report in ('research','data-quality','final-test'):
+for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events'):
     source=Path(f'.history/latest-{report}.json')
     if not source.exists():continue
     data=json.loads(source.read_text())

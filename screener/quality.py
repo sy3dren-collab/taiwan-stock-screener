@@ -84,7 +84,7 @@ def adjusted_history(bars, day, events):
         if b.date>day:continue
         factor=math.prod(a.price_factor for a in known if a.market==b.market and a.code==b.code and b.date<a.effective_date)
         volume_factor=math.prod(a.share_factor for a in known if a.market==b.market and a.code==b.code and b.date<a.effective_date)
-        output.append(replace(b,volume=round(b.volume*volume_factor),open=b.open*factor,high=b.high*factor,low=b.low*factor,close=b.close*factor,
+        output.append(b if factor==1 and volume_factor==1 else replace(b,volume=round(b.volume*volume_factor),open=b.open*factor,high=b.high*factor,low=b.low*factor,close=b.close*factor,
                               reference=b.reference*factor if b.reference is not None else None))
     return output
 
@@ -101,7 +101,7 @@ def signal_histories(histories, day, events):
             key=(b.market,b.code)
             for a in identities:
                 if key==(a.market,a.code) and b.date<a.effective_date:key=(a.new_market,a.new_code)
-            result.setdefault(key,[]).append(replace(b,market=key[0],code=key[1]))
+            result.setdefault(key,[]).append(b if key==(b.market,b.code) else replace(b,market=key[0],code=key[1]))
     for bars in result.values():
         bars.sort(key=lambda b:b.date)
         if len({b.date for b in bars})!=len(bars):raise DataError('代碼轉換後出現同日重複行情，禁止猜測合併')

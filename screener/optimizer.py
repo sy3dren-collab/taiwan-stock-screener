@@ -14,11 +14,11 @@ from .validation import Gates,folds,assess,final_once,holdout_reason
 
 
 def code_version():
-    files=['data.py','quality.py','naked.py','naked_backtest.py','performance.py','validation.py','optimizer.py','execution.py','daily.py','strategy.py','fusion.py']
+    files=['data.py','quality.py','naked.py','naked_backtest.py','performance.py','validation.py','optimizer.py','execution.py','daily.py','strategy.py','fusion.py','annual.py','distributions.py']
     digest=hashlib.sha256()
     for f in files:digest.update(Path(__file__).with_name(f).read_bytes())
     git=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True,check=True).stdout.strip()
-    dirty=subprocess.run(['git','status','--porcelain','--untracked-files=all','--','screener','naked_k.json','execution.json'],capture_output=True,text=True,check=True)
+    dirty=subprocess.run(['git','status','--porcelain','--untracked-files=all','--','screener','naked_k.json','execution.json','annual_research.json'],capture_output=True,text=True,check=True)
     return {'git_commit':git,'code_sha256':digest.hexdigest(),'working_tree_dirty':bool(dirty.stdout.strip())}
 
 

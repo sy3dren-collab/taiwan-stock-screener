@@ -10,14 +10,17 @@ from .fusion import MODEL_ID,MODEL_NAME
 
 
 def trial_summary(record):
-    reports=record.get('results',{}).get('validation',[])
+    annual=record.get('results',{}).get('annual')
+    reports=[annual] if annual else record.get('results',{}).get('validation',[])
     trades=[t for r in reports for t in r.get('closed_trades',[])]
     profit=sum(max(0,t['net_pnl']) for t in trades);loss=-sum(min(0,t['net_pnl']) for t in trades)
     return {'experiment_id':record['experiment_id'],'iteration':record.get('iteration'),
             'status':record['status'],'changed_rules':record.get('changed_rules',[]),'reason':record.get('reason'),
             'retained':bool(record.get('retained')),'passed':bool(record.get('assessment',{}).get('passed')),
             'closed_count':len(trades) if reports else None,'win_rate':sum(t['net_pnl']>0 for t in trades)/len(trades) if trades else None,
-            'mean_validation_return':mean(r['metrics']['net_return'] for r in reports) if reports else None,
+            'mean_validation_return':mean(r['metrics']['net_return'] for r in reports) if reports and not annual else None,
+            'annual_net_return':annual['metrics']['net_return'] if annual else None,
+            'report_kind':'annual_diagnostic' if annual else 'walk_forward',
             'max_fold_drawdown':max(r['metrics']['max_drawdown'] for r in reports) if reports else None,
             'profit_factor':profit/loss if loss else None,'expectancy':mean(t['net_pnl'] for t in trades) if trades else None,
             'total_validation_costs':sum(r['metrics'].get('total_costs',0) for r in reports) if reports else None,
@@ -28,11 +31,12 @@ def markdown(run):
     pct=lambda value:'—' if value is None else f'{value:.2%}'
     clean=lambda text:str(text).replace('|','／').replace('\n',' ')
     displayed_time=datetime.fromisoformat(run['generated_at']).astimezone(ZoneInfo('Asia/Taipei')).isoformat()
+    annual=run['command']=='annual-research'
     rows=[f"## 每次回測報告｜{MODEL_NAME}",f"- 執行：{run['run_id']}（{displayed_time}，台北）",
           f"- 狀態：{run['status']}；有效實驗 {run['completed_experiments']} 次；正式策略未因研究自動啟用。",
-          '- 85%為長期研究目標，不是晉級門檻。各驗證折重設現金，平均報酬不是連續帳戶年報酬。',
-          '', '| 輪次 | 勝率 | 已平倉 | 跨折平均淨報酬 | 最大單折回撤 | 保留 |', '| --- | ---: | ---: | ---: | ---: | --- |']
-    for t in run['trials']:rows.append(f"| {t['iteration']} | {pct(t['win_rate'])} | {t['closed_count'] if t['closed_count'] is not None else '—'} | {pct(t['mean_validation_return'])} | {pct(t['max_fold_drawdown'])} | {'是' if t['retained'] else '否'} |")
+          '- 85%為長期研究目標，不是晉級門檻。'+('本輪為一年連續帳戶回溯研究，不能用於正式晉級。' if annual else '各驗證折重設現金，平均報酬不是連續帳戶年報酬。'),
+          '', f"| 輪次 | 勝率 | 已平倉 | {'一年帳戶淨報酬' if annual else '跨折平均淨報酬'} | {'最大回撤' if annual else '最大單折回撤'} | 保留 |", '| --- | ---: | ---: | ---: | ---: | --- |']
+    for t in run['trials']:rows.append(f"| {t['iteration']} | {pct(t['win_rate'])} | {t['closed_count'] if t['closed_count'] is not None else '—'} | {pct(t.get('annual_net_return') if annual else t['mean_validation_return'])} | {pct(t['max_fold_drawdown'])} | {'是' if t['retained'] else '否'} |")
     if not run['trials']:rows.append('| 未執行有效回測 | — | — | — | — | 否 |')
     rows+=['',*[f'- {clean(issue)}' for issue in run['issues']]]
     for t in run['trials']:rows.append(f"- {t['experiment_id']}：{clean(t['reason'])}；{clean(t['error'] or '；'.join(t['rejection_reasons']) or t['status'])}")
@@ -64,6 +68,10 @@ def record_run(result,command,experiment_dir,state_dir='.state/runs',site_dir='s
     state=Path(state_dir);state.mkdir(parents=True,exist_ok=True)
     expanded=[]
     final=result.get('result',{}).get('strategy')
+    if command=='annual-research' and result.get('status')=='completed' and result.get('strategy'):
+        expanded.append({'experiment_id':identifier+'-annual','iteration':'一年回溯基準','status':'completed',
+                         'reason':'固定合併策略完整一年研究回測，非獨立樣本外；不凍結、不晉級',
+                         'retained':False,'results':{'annual':result['strategy']},'assessment':{'passed':False,'reasons':['一年已被研究使用，僅供診斷；未通過五年與獨立驗證']}})
     if command=='final-test' and result.get('executed') and final:
         expanded.append({'experiment_id':identifier+'-final','iteration':'封存測試','status':result['status'],
                          'reason':'凍結後的一次性封存測試，不用於調參','retained':False,
@@ -74,6 +82,7 @@ def record_run(result,command,experiment_dir,state_dir='.state/runs',site_dir='s
         path=Path(experiment_dir)/f'{name}.json'
         expanded.append(json.loads(path.read_text()) if path.exists() else item)
     issues=result.get('data_quality',{}).get('issues',[])[:]
+    if command=='annual-research':issues+=result.get('data_quality',{}).get('limitations',[])
     for issue in [result.get('reason'),result.get('run_error')]:
         if issue and issue not in issues:issues.append(issue)
     run={'schema_version':1,'run_id':identifier,'generated_at':now.isoformat(),'model_id':MODEL_ID,'model_name':MODEL_NAME,
