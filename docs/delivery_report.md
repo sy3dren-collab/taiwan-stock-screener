@@ -76,7 +76,7 @@ A上升結構回調、B盤整突破回測、C多次支撐反轉已寫為客觀�
 - 設定：naked_k.json、execution.json、strategy_registry.json；污染紀錄docs/data-exposure.json。
 - 報告：site/research.json、data-quality.json、final-test.json、paper.json、active-performance.json、results.json；舊研究archive/year-2026-10-16.json。
 - 實驗完整檔與JSONL在資料分支experiments/；目前有效市場實驗為0。三份官方事件來源原文與SHA保存在SQLite corporate_source_evidence，並非完整事件母表。
-- 本次 **98項Python測試全通過，包含2項真實TWSE／TPEx連線測試，無跳過**。預設離線跑法會跳過2項，這兩種結果分開計。
+- 本次 **99項Python測試全通過，包含2項真實TWSE／TPEx連線測試，無跳過**。預設離線跑法會跳過2項，這兩種結果分開計。
 - 兩套Chromium測試通過：320／390手機、1280桌機、無合格策略、HTTP503錯誤清空、K線配色、搜尋／篩選、舊研究與無水平溢出；JS／shell／YAML語法及git diff --check通過。
 - 測試涵蓋未來行情／事件、次日開盤、跳空、費用、同根停損先行、提前目標、到期、移動停損延後生效、鎖跌停、缺價失敗、拆股／股息應收／身份轉換／零清算保留損失、月淨值、時序隔離、有限優化、失敗保留、正式版本隔離、污染阻擋及一次性標記。
 - 一致性備份與還原使用SHA及SQLite完整性驗證；損壞／路徑穿越測試確保不破壞舊DB。整庫真實備份還原另於交付前執行，資料分支持久化與部署紀錄可在GitHub檢查。

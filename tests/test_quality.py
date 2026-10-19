@@ -80,3 +80,14 @@ class QualityTests(unittest.TestCase):
             audit=audit_dataset(s,{**study,'holdout_status':'contaminated'})
             self.assertEqual(audit['status'],'blocked');self.assertTrue(any('污染' in text for text in audit['issues']))
         finally:s.close()
+
+    def test_audit_preserves_old_ingestion_error_without_blocking_error_publication(self):
+        from screener.quality import main
+        with tempfile.TemporaryDirectory() as d:
+            db=Path(d)/'prices.db';s=Store(str(db))
+            s.db.execute('CREATE TABLE ingestion_runs(created_at TEXT,payload TEXT)')
+            s.db.execute('INSERT INTO ingestion_runs VALUES (?,?)',('2025-01-06',json.dumps({'status':'error','error':'prior official interruption'})))
+            s.db.commit();s.close();output=Path(d)/'audit.json'
+            with patch('sys.argv',['quality','audit','--db',str(db),'--output',str(output)]):main()
+            result=json.loads(output.read_text())
+            self.assertEqual(result['status'],'blocked');self.assertEqual(result['backfill']['status'],'error')

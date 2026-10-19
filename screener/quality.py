@@ -202,6 +202,6 @@ def main():
     finally:s.close()
     from .__main__ import write_json
     write_json(Path(a.output),result)
-    if result.get('backfill',{}).get('status')=='error':raise SystemExit(1)
+    if a.command=='backfill' and result.get('backfill',{}).get('status')=='error':raise SystemExit(1)
 
 if __name__=='__main__':main()
