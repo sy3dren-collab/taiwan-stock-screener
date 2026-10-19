@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T13:53:50.152035+00:00",
+  "generated_at": "2026-10-19T14:04:19.442792+00:00",
   "research_model_id": "F",
   "status": "completed",
   "classification": "retrospective_diagnostic",
@@ -5089,10 +5089,10 @@
       "signals": 0
     }
   ],
-  "elapsed_seconds": 50.792,
+  "elapsed_seconds": 56.943,
   "reconciliation": {
     "cash_events_imported": 2683,
-    "references_restored": 1573,
+    "references_restored": 0,
     "unsupported_events": [
       {
         "market": "TPEX",
@@ -7731,5 +7731,5 @@
     ],
     "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
   },
-  "run_id": "20261019T135516697104-F-annual-research-be667752"
+  "run_id": "20261019T140552094837-F-annual-research-ea6ead44"
 }

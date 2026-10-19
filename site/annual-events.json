@@ -16,7 +16,7 @@
   },
   "reconciliation": {
     "cash_events_imported": 2683,
-    "references_restored": 2633,
+    "references_restored": 0,
     "unsupported_events": [
       {
         "market": "TPEX",
