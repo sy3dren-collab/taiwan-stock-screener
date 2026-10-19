@@ -63,6 +63,24 @@ class ParserTests(unittest.TestCase):
             with self.assertRaisesRegex(DataError,'官方資料取得失敗'):
                 OfficialClient(delay=0,retries=1).daily('TWSE',DAY)
 
+    def test_truncated_transfer_retries_same_official_report_without_reusing_partial_json(self):
+        import io,json
+        from http.client import IncompleteRead
+        from urllib.parse import urlparse,parse_qs
+        class Broken:
+            def __enter__(self):return self
+            def __exit__(self,*args):return False
+            def read(self):raise IncompleteRead(b'{"date":"2025/01/06"')
+        client=OfficialClient(delay=0,retries=2,request_budget=2)
+        with patch('screener.data.urlopen',side_effect=[Broken(),io.BytesIO(json.dumps(tpex()).encode())]) as request,patch('screener.data.time.sleep'):
+            result=client.daily('TPEX',DAY)
+        first,second=[c.args[0] for c in request.call_args_list]
+        self.assertNotEqual(first.full_url,second.full_url)
+        self.assertEqual(parse_qs(urlparse(first.full_url).query),parse_qs(urlparse(second.full_url).query))
+        self.assertEqual(second.get_header('Cache-control'),'no-cache')
+        self.assertEqual(client.request_count,2);self.assertEqual(result[0].code,'6488')
+        self.assertEqual(client.provenance['TPEX']['url'],second.full_url)
+
 
 class StoreTests(unittest.TestCase):
     def setUp(self): self.store=Store(':memory:')

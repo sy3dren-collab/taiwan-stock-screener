@@ -170,7 +170,6 @@ class OfficialClient:
     def daily(self, market: str, day: date) -> list[Bar]:
         params = ({"date": day.strftime("%Y%m%d"), "type": "ALLBUT0999", "response": "json"}
                   if market == "TWSE" else {"date": day.strftime("%Y/%m/%d"), "response": "json"})
-        url = URLS[market] + "?" + urlencode(params)
         last = None
         for attempt in range(self.retries):
             if self.request_budget is not None and self.request_count>=self.request_budget:raise DataError('官方請求預算已用完')
@@ -178,7 +177,14 @@ class OfficialClient:
             time.sleep(max(0, self.delay - (time.monotonic() - self.last_request)))
             self.last_request = time.monotonic()
             try:
-                request = Request(url, headers={"User-Agent": "TaiwanStockScreener/0.1 (public daily report research)", "Accept": "application/json"})
+                # Retry the same official parameters in a different order, bypassing a cached
+                # truncated transfer without accepting partial JSON or changing the report date.
+                query=list(params.items())
+                if attempt%2:query.reverse()
+                url=URLS[market]+"?"+urlencode(query)
+                headers={"User-Agent": "TaiwanStockScreener/0.1 (public daily report research)", "Accept": "application/json"}
+                if attempt:headers['Cache-Control']='no-cache';headers['Pragma']='no-cache'
+                request = Request(url, headers=headers)
                 if self.deadline and time.monotonic()>=self.deadline:raise DataError('官方時間預算已用完')
                 timeout=min(self.timeout,max(.1,self.deadline-time.monotonic())) if self.deadline else self.timeout
                 self.request_count+=1
