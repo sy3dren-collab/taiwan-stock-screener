@@ -186,6 +186,10 @@ class OfficialClient:
                 # truncated transfer for historical reports. Prefer its other
                 # equivalent query order; retain full JSON/TLS validation.
                 if (attempt+(market=='TPEX'))%2:query.reverse()
+                # Two equivalent URL variants can both contain cached partial
+                # transfers. The last bounded attempt requests fresh content;
+                # the official date/type/response inputs stay unchanged.
+                if attempt>=2:query.append(('_',str(time.time_ns())))
                 url=URLS[market]+"?"+urlencode(query)
                 headers={"User-Agent": "TaiwanStockScreener/0.1 (public daily report research)", "Accept": "application/json"}
                 if attempt:headers['Cache-Control']='no-cache';headers['Pragma']='no-cache'

@@ -122,19 +122,29 @@ def audit_year(store,cfg):
     coverage={r[0] for r in store.db.execute('SELECT market FROM distribution_sources WHERE start<=? AND end>=? AND LENGTH(payload_sha256)=64',(start,end))}
     if coverage!=set(URLS):issues.append('缺兩市場完整查詢期間的除權息原始表')
     if store.db.execute('PRAGMA integrity_check').fetchone()[0]!='ok':issues.append('SQLite 完整性失敗')
-    digest=hashlib.sha256()
+    digest=hashlib.sha256();evidence=hashlib.sha256()
     for row in store.db.execute('SELECT * FROM bars WHERE date BETWEEN ? AND ? ORDER BY date,market,code',(start,end)):
         digest.update(json.dumps(row,separators=(',',':'),ensure_ascii=False).encode()+b'\n')
     for row in store.db.execute('SELECT * FROM source_batches WHERE date BETWEEN ? AND ? ORDER BY date,market',(start,end)):
-        digest.update(json.dumps(row,separators=(',',':')).encode()+b'\n')
+        evidence.update(json.dumps(row,separators=(',',':')).encode()+b'\n')
     for row in store.db.execute('SELECT payload,source_sha256 FROM distribution_rows WHERE date BETWEEN ? AND ? ORDER BY date,market,code',(start,end)):
-        digest.update(json.dumps(row,separators=(',',':')).encode()+b'\n')
+        # Only parsed historical event inputs influence strategy/results.
+        # Current financial-statement fields in the raw official table must
+        # neither influence signals nor invalidate an unchanged comparison.
+        digest.update(row[0].encode()+b'\n')
+        evidence.update(json.dumps(row,separators=(',',':')).encode()+b'\n')
+    for action in actions(store):
+        if start<=action.effective_date<=end and action.announced_date<=end:
+            digest.update(json.dumps(asdict(action),sort_keys=True,separators=(',',':')).encode()+b'\n')
+    for row in store.db.execute('SELECT * FROM distribution_sources WHERE start<=? AND end>=? ORDER BY market,start,end',(start,end)):
+        evidence.update(json.dumps(row,separators=(',',':')).encode()+b'\n')
     sessions=[r[0] for r in store.db.execute('SELECT DISTINCT date FROM bars WHERE date BETWEEN ? AND ? ORDER BY date',(cfg['start'],end))]
     warmup=store.db.execute('SELECT COUNT(DISTINCT date) FROM bars WHERE date>=? AND date<?',(start,cfg['start'])).fetchone()[0]
     from .naked import NakedParameters
     if warmup<NakedParameters().lookback:issues.append(f'暖機只有 {warmup} 交易日，不足100日')
     if not sessions or sessions[-1]!=end:issues.append('回測結束日缺行情，禁止縮短期間冒充全年')
     return {'status':'blocked' if issues else 'diagnostic_ready','issues':issues,'data_sha256':digest.hexdigest(),
+            'fingerprint_version':2,'evidence_sha256':evidence.hexdigest(),
             'requested_start':start,'requested_end':end,'test_start':cfg['start'],
             'missing_weekdays':len(missing),'source_proofs':proofs,'warmup_sessions':warmup,
             'trading_sessions':len(sessions),'missing_turnover':bad,

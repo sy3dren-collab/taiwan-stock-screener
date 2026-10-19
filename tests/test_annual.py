@@ -103,6 +103,27 @@ class AnnualAdmissionTests(unittest.TestCase):
 
 
 class AnnualIntegrationTests(unittest.TestCase):
+    def test_identical_refetch_preserves_financial_fingerprint_but_not_evidence_hash(self):
+        s=Store(':memory:')
+        try:
+            seq=bars(3)
+            for b in seq:
+                proof={m:{'url':URLS[m]+'?date=test','sha256':'a'*64,'fetched_at':'2025-01-01T00:00:00Z'} for m in URLS}
+                s.save_day(date.fromisoformat(b.date),{'TWSE':[b],'TPEX':[replace(b,market='TPEX',code='6488')]},proof)
+            cfg={'data_start':seq[0].date,'start':seq[1].date,'end':seq[-1].date}
+            first=audit_year(s,cfg)
+            with s.db:s.db.execute("UPDATE source_batches SET fetched_at='2025-10-19T00:00:00Z'")
+            again=audit_year(s,cfg)
+            self.assertEqual(first['data_sha256'],again['data_sha256']);self.assertNotEqual(first['evidence_sha256'],again['evidence_sha256'])
+            self.assertEqual(first['fingerprint_version'],2)
+            with s.db:s.db.execute('UPDATE bars SET close=100.1 WHERE date=?',(seq[-1].date,))
+            changed=audit_year(s,cfg);self.assertNotEqual(first['data_sha256'],changed['data_sha256'])
+            from screener.quality import import_actions
+            from dataclasses import asdict
+            action=CorporateAction('test-cash','TWSE','2330',seq[-1].date,seq[-1].date,'distribution','https://www.twse.com.tw/event',.99,1,1,99)
+            import_actions(s,[asdict(action)])
+            self.assertNotEqual(changed['data_sha256'],audit_year(s,cfg)['data_sha256'])
+        finally:s.close()
     def test_predeclared_variant_changes_one_rule_without_altering_cost_or_formal_strategy(self):
         p=NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal'])
         changed=replace(p,**VARIANTS['wider-range']['changes'])

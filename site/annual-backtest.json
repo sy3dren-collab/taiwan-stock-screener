@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T14:04:19.442792+00:00",
+  "generated_at": "2026-10-19T14:24:23.906310+00:00",
   "research_model_id": "F",
   "status": "completed",
   "classification": "retrospective_diagnostic",
@@ -9,7 +9,9 @@
   "data_quality": {
     "status": "diagnostic_ready",
     "issues": [],
-    "data_sha256": "6d03bef3132fca3031ebe20aa123f51742bd3d51bf0a9e0f5ae8fc6d2f8c12f3",
+    "data_sha256": "683957587f50b3b2190d01794f8fb0a43f81337d9aee4bef70e7e95372a68a33",
+    "fingerprint_version": 2,
+    "evidence_sha256": "1abec1600131407939c2c55eca97bfcadbd57f28cd2570c06ac1f6b1d3803ffb",
     "requested_start": "2025-04-01",
     "requested_end": "2026-10-16",
     "test_start": "2025-10-17",
@@ -28,11 +30,17 @@
     ]
   },
   "version": {
-    "git_commit": "0ac24732c780580676cbce5df398f73fdf909527",
-    "code_sha256": "b1238f4c2343ef0929b3837c807f444353fe6fad3e81e27540223eb8fc3e45ce",
+    "git_commit": "493df9542b400634d03d436bf3c51c23d425859f",
+    "code_sha256": "8df37e1e4c04d8e90cba260807896830d4c397c3ff5260ab013b7b18fd32ad2d",
     "working_tree_dirty": false
   },
   "experiments": [],
+  "variant": {
+    "id": "baseline",
+    "name": "固定基準：整理寬度25%",
+    "changes": {},
+    "reason": "原始合併策略固定基準，不因零訊號刪除結果。"
+  },
   "message": "一年回溯研究，不能作為正式晉級或獨立樣本外績效。",
   "config": {
     "data_start": "2025-04-01",
@@ -46,6 +54,35 @@
     "simulation_seconds": 900
   },
   "parameters": {
+    "lookback": 100,
+    "structure_days": 90,
+    "pivot_radius": 2,
+    "pullback_days": 5,
+    "range_days": 60,
+    "event_days": 20,
+    "range_width": 0.25,
+    "support_tolerance": 0.02,
+    "confirmation_buffer": 0.005,
+    "close_location": 0.7,
+    "stop_buffer": 0.005,
+    "minimum_price": 20,
+    "minimum_turnover": 50000000,
+    "liquidity_days": 20,
+    "min_reward_risk": 1.5,
+    "max_risk": 0.08,
+    "support_touches": 3,
+    "touch_spacing": 5,
+    "range_edge_days": 10,
+    "range_drift_max": 0.08,
+    "event_volume_multiple": 1.5,
+    "entry_volume_multiple": 1.2,
+    "pullback_volume_max": 0.8,
+    "minimum_break_fraction": 0.005,
+    "maximum_break_fraction": 0.08,
+    "minimum_event_age": 2,
+    "extension_max": 0.04
+  },
+  "baseline_parameters": {
     "lookback": 100,
     "structure_days": 90,
     "pivot_radius": 2,
@@ -5089,7 +5126,7 @@
       "signals": 0
     }
   ],
-  "elapsed_seconds": 56.943,
+  "elapsed_seconds": 52.142,
   "reconciliation": {
     "cash_events_imported": 2683,
     "references_restored": 0,
@@ -7731,5 +7768,5 @@
     ],
     "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
   },
-  "run_id": "20261019T140552094837-F-annual-research-ea6ead44"
+  "run_id": "20261019T142549611681-F-annual-research-dc7a5eda"
 }

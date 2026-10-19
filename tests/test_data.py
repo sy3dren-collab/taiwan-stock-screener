@@ -81,6 +81,25 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(client.request_count,2);self.assertEqual(result[0].code,'6488')
         self.assertEqual(client.provenance['TPEX']['url'],second.full_url)
 
+    def test_two_corrupted_cache_variants_use_one_fresh_final_attempt_with_same_financial_inputs(self):
+        import io,json
+        from http.client import IncompleteRead
+        from urllib.parse import urlparse,parse_qs
+        for market,payload in [('TWSE',twse()),('TPEX',tpex())]:
+            class Broken:
+                def __enter__(self):return self
+                def __exit__(self,*args):return False
+                def read(self):raise IncompleteRead(b'{"partial":')
+            client=OfficialClient(delay=0,retries=3,request_budget=3)
+            with patch('screener.data.urlopen',side_effect=[Broken(),Broken(),io.BytesIO(json.dumps(payload).encode())]) as request,patch('screener.data.time.sleep'):
+                result=client.daily(market,DAY)
+            urls=[call.args[0].full_url for call in request.call_args_list]
+            self.assertEqual(len(set(urls)),3);queries=[parse_qs(urlparse(url).query) for url in urls]
+            self.assertNotIn('_',queries[0]);self.assertNotIn('_',queries[1]);self.assertIn('_',queries[2])
+            queries[2].pop('_');self.assertEqual(queries[0],queries[1]);self.assertEqual(queries[1],queries[2])
+            self.assertEqual(client.request_count,3);self.assertEqual(client.provenance[market]['url'],urls[-1])
+            self.assertTrue(result)
+
 
 class StoreTests(unittest.TestCase):
     def setUp(self): self.store=Store(':memory:')
