@@ -3,10 +3,10 @@
   "format": "sqlite-gzip-split",
   "parts": [
     {
-      "name": "prices.b02cbdcd6f560da7ee4a5ec90a7004fe597d5eb33ebf15a96b471aafa1b55590.part0000",
-      "sha256": "b02cbdcd6f560da7ee4a5ec90a7004fe597d5eb33ebf15a96b471aafa1b55590",
-      "bytes": 29701468
+      "name": "prices.6039afa248c6f83508f2c88adfed33215d3145ebfaec5a43d0a7664679d26c65.part0000",
+      "sha256": "6039afa248c6f83508f2c88adfed33215d3145ebfaec5a43d0a7664679d26c65",
+      "bytes": 32208955
     }
   ],
-  "sqlite_sha256": "ef3f53e583ed2fc6cd54786a6f9aa4d710258f5651498a31bd55eef5d027fee2"
+  "sqlite_sha256": "04ff8370e820091900462fc6db23a08551cff60f7ba3d739ede6bd855e149742"
 }

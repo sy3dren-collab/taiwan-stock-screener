@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T09:09:41.632191+08:00",
-  "requested_through": "2026-10-18",
-  "as_of": "2026-10-16",
+  "generated_at": "2026-10-19T20:07:16.414912+08:00",
+  "requested_through": "2026-10-19",
+  "as_of": "2026-10-19",
   "status": "ok",
   "mode": "research",
   "active_strategy": null,
@@ -15,7 +15,7 @@
     "pivot_radius": 2,
     "pullback_days": 5,
     "range_days": 60,
-    "event_days": 15,
+    "event_days": 20,
     "range_width": 0.25,
     "support_tolerance": 0.02,
     "confirmation_buffer": 0.005,
@@ -27,18 +27,25 @@
     "min_reward_risk": 1.5,
     "max_risk": 0.08,
     "support_touches": 3,
-    "touch_spacing": 5
+    "touch_spacing": 5,
+    "range_edge_days": 10,
+    "range_drift_max": 0.08,
+    "event_volume_multiple": 1.5,
+    "entry_volume_multiple": 1.2,
+    "pullback_volume_max": 0.8,
+    "minimum_break_fraction": 0.005,
+    "maximum_break_fraction": 0.08,
+    "minimum_event_age": 2,
+    "extension_max": 0.04
   },
-  "universe_count": 1942,
+  "universe_count": 1948,
   "qualified_count": 0,
   "sufficient_history_count": 0,
   "shortfall": true,
   "warnings": [
-    "請求截至 2026-10-18，最新官方行情 2026-10-16；請核對休市與資料公布狀態，不是今日新訊號",
     "尚無通過驗證的策略"
   ],
   "source_warnings": [
-    "請求截至 2026-10-18，最新官方行情 2026-10-16；請核對休市與資料公布狀態，不是今日新訊號",
     "尚無通過驗證的策略"
   ],
   "errors": [],
