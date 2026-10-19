@@ -7,6 +7,11 @@ on:
         type: choice
         options: [annual-backfill, annual-research, backfill, research, final-test]
         default: annual-research
+      variant:
+        description: 'One-year only: baseline or one predeclared wider-range diagnostic'
+        type: choice
+        options: [baseline, wider-range]
+        default: baseline
   schedule:
     - cron: '0 17 * * *' # 01:00 Taipei; bounded backfill and the single strategy only.
 permissions:
@@ -61,7 +66,9 @@ jobs:
         id: annual
         if: startsWith(inputs.task, 'annual-') || github.event_name == 'schedule'
         continue-on-error: true
-        run: python -m screener.annual research
+        env:
+          ANNUAL_VARIANT: ${{ inputs.variant || 'baseline' }}
+        run: python -m screener.annual research --variant "$ANNUAL_VARIANT"
       - name: One-use final holdout and per-run report
         id: final
         if: inputs.task == 'final-test'

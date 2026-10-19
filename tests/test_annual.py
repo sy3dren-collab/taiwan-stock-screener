@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from screener.annual import GuardedSignals,RequestGate,audit_year,backfill_year,run_year
+from screener.annual import GuardedSignals,RequestGate,VARIANTS,audit_year,backfill_year,run_year
 from screener.data import DataError,Store,URLS
 from screener.distributions import parse_distributions,fetch_distributions,reconcile_distributions
 from screener.execution import Execution
@@ -103,6 +103,18 @@ class AnnualAdmissionTests(unittest.TestCase):
 
 
 class AnnualIntegrationTests(unittest.TestCase):
+    def test_predeclared_variant_changes_one_rule_without_altering_cost_or_formal_strategy(self):
+        p=NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal'])
+        changed=replace(p,**VARIANTS['wider-range']['changes'])
+        from dataclasses import asdict
+        self.assertEqual([k for k,v in asdict(p).items() if asdict(changed)[k]!=v],['range_width'])
+        self.assertEqual(p.range_width,.25);self.assertEqual(changed.range_width,.30)
+        self.assertIsNone(json.loads(Path('strategy_registry.json').read_text())['active_strategy'])
+        wide=fusion_bars()[:130]
+        for i in range(50,110):wide[i]=replace(wide[i],high=121)
+        from screener.naked import evaluate
+        self.assertIsNone(evaluate(wide,'F',p))
+        self.assertIsNotNone(evaluate(wide,'F',changed))
     def test_parallel_fetches_share_one_per_host_rate_and_attempt_budget(self):
         clock=[100.0]
         with patch('screener.annual.time.monotonic',lambda:clock[0]),patch('screener.annual.time.sleep',lambda seconds:clock.__setitem__(0,clock[0]+seconds)):

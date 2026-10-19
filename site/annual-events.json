@@ -1,0 +1,2658 @@
+{
+  "status": "completed",
+  "sources": {
+    "TWSE": {
+      "rows": 1792,
+      "cash_only": 1564,
+      "payload_sha256": "ea41b77191f223c81f5dac40b642379c1524a2ffb42ef19d5d1bb6493d024234",
+      "source_url": "https://www.twse.com.tw/rwd/zh/exRight/TWT49U?response=json&startDate=20250401&endDate=20261016"
+    },
+    "TPEX": {
+      "rows": 1330,
+      "cash_only": 1119,
+      "payload_sha256": "12800cf4b41cb5571eb2e8e3495ea25d7f6426386d1691fef182a04d997fa626",
+      "source_url": "https://www.tpex.org.tw/www/zh-tw/bulletin/exDailyQ?response=json&startDate=2025%2F04%2F01&endDate=2026%2F10%2F16"
+    }
+  },
+  "reconciliation": {
+    "cash_events_imported": 2683,
+    "references_restored": 0,
+    "unsupported_events": [
+      {
+        "market": "TPEX",
+        "code": "6846",
+        "date": "2025-04-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6637",
+        "date": "2025-04-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6461",
+        "date": "2025-05-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6712",
+        "date": "2025-06-03",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1605",
+        "date": "2025-06-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6423",
+        "date": "2025-06-12",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1773",
+        "date": "2025-06-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2545",
+        "date": "2025-06-17",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6762",
+        "date": "2025-06-18",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6266",
+        "date": "2025-06-19",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3311",
+        "date": "2025-06-19",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3349",
+        "date": "2025-06-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3557",
+        "date": "2025-06-26",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2230",
+        "date": "2025-07-01",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6913",
+        "date": "2025-07-01",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8440",
+        "date": "2025-07-02",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5213",
+        "date": "2025-07-03",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5236",
+        "date": "2025-07-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7556",
+        "date": "2025-07-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2947",
+        "date": "2025-07-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5864",
+        "date": "2025-07-04",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5706",
+        "date": "2025-07-07",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2855",
+        "date": "2025-07-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6667",
+        "date": "2025-07-09",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2614",
+        "date": "2025-07-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6865",
+        "date": "2025-07-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3588",
+        "date": "2025-07-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5292",
+        "date": "2025-07-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4114",
+        "date": "2025-07-11",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2027",
+        "date": "2025-07-11",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6735",
+        "date": "2025-07-14",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1609",
+        "date": "2025-07-14",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5904",
+        "date": "2025-07-15",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5514",
+        "date": "2025-07-17",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3665",
+        "date": "2025-07-17",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3713",
+        "date": "2025-07-18",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6191",
+        "date": "2025-07-18",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6541",
+        "date": "2025-07-18",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3284",
+        "date": "2025-07-21",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5386",
+        "date": "2025-07-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6968",
+        "date": "2025-07-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1436",
+        "date": "2025-07-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5548",
+        "date": "2025-07-22",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2884",
+        "date": "2025-07-22",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4442",
+        "date": "2025-07-23",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6219",
+        "date": "2025-07-23",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2838",
+        "date": "2025-07-23",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6691",
+        "date": "2025-07-23",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2937",
+        "date": "2025-07-24",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3546",
+        "date": "2025-07-24",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8927",
+        "date": "2025-07-24",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1229",
+        "date": "2025-07-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2836",
+        "date": "2025-07-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "8404",
+        "date": "2025-07-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1519",
+        "date": "2025-07-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2548",
+        "date": "2025-07-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6189",
+        "date": "2025-07-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6958",
+        "date": "2025-07-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4572",
+        "date": "2025-07-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6873",
+        "date": "2025-07-28",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4911",
+        "date": "2025-07-29",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7734",
+        "date": "2025-07-29",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1449",
+        "date": "2025-07-29",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2889",
+        "date": "2025-07-29",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4205",
+        "date": "2025-07-30",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2528",
+        "date": "2025-07-30",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5607",
+        "date": "2025-07-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5871",
+        "date": "2025-07-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "1294",
+        "date": "2025-07-31",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3672",
+        "date": "2025-07-31",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6294",
+        "date": "2025-07-31",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2801",
+        "date": "2025-07-31",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2597",
+        "date": "2025-08-01",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4768",
+        "date": "2025-08-04",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6016",
+        "date": "2025-08-04",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4912",
+        "date": "2025-08-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6472",
+        "date": "2025-08-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1464",
+        "date": "2025-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2520",
+        "date": "2025-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2546",
+        "date": "2025-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2834",
+        "date": "2025-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6177",
+        "date": "2025-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5206",
+        "date": "2025-08-07",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2892",
+        "date": "2025-08-07",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3056",
+        "date": "2025-08-07",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2948",
+        "date": "2025-08-08",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2729",
+        "date": "2025-08-11",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2885",
+        "date": "2025-08-12",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2812",
+        "date": "2025-08-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2880",
+        "date": "2025-08-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5880",
+        "date": "2025-08-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4148",
+        "date": "2025-08-14",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1615",
+        "date": "2025-08-15",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5222",
+        "date": "2025-08-15",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "9933",
+        "date": "2025-08-15",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7556",
+        "date": "2025-08-18",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3147",
+        "date": "2025-08-19",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6796",
+        "date": "2025-08-19",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4130",
+        "date": "2025-08-20",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4161",
+        "date": "2025-08-20",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4760",
+        "date": "2025-08-20",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3284",
+        "date": "2025-08-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3373",
+        "date": "2025-08-21",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6259",
+        "date": "2025-08-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6922",
+        "date": "2025-08-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1231",
+        "date": "2025-08-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2890",
+        "date": "2025-08-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "8454",
+        "date": "2025-08-21",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3128",
+        "date": "2025-08-22",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3552",
+        "date": "2025-08-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6469",
+        "date": "2025-08-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6612",
+        "date": "2025-08-22",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6877",
+        "date": "2025-08-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8089",
+        "date": "2025-08-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2250",
+        "date": "2025-08-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4927",
+        "date": "2025-08-25",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6955",
+        "date": "2025-08-25",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3317",
+        "date": "2025-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4111",
+        "date": "2025-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4554",
+        "date": "2025-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4741",
+        "date": "2025-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6752",
+        "date": "2025-08-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8403",
+        "date": "2025-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8401",
+        "date": "2025-08-27",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "1240",
+        "date": "2025-08-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3086",
+        "date": "2025-08-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5289",
+        "date": "2025-08-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5468",
+        "date": "2025-08-28",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1453",
+        "date": "2025-08-28",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2038",
+        "date": "2025-08-28",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2364",
+        "date": "2025-08-28",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2539",
+        "date": "2025-08-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3706",
+        "date": "2025-08-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5525",
+        "date": "2025-08-28",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4303",
+        "date": "2025-08-29",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5392",
+        "date": "2025-08-29",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2883",
+        "date": "2025-08-29",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4138",
+        "date": "2025-09-01",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6140",
+        "date": "2025-09-01",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4306",
+        "date": "2025-09-01",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6591",
+        "date": "2025-09-01",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "2949",
+        "date": "2025-09-02",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4549",
+        "date": "2025-09-02",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6482",
+        "date": "2025-09-02",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6703",
+        "date": "2025-09-02",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1734",
+        "date": "2025-09-02",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2543",
+        "date": "2025-09-02",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2845",
+        "date": "2025-09-02",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2867",
+        "date": "2025-09-02",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "9941",
+        "date": "2025-09-02",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3434",
+        "date": "2025-09-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6186",
+        "date": "2025-09-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6279",
+        "date": "2025-09-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4438",
+        "date": "2025-09-03",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "2755",
+        "date": "2025-09-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6720",
+        "date": "2025-09-04",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6870",
+        "date": "2025-09-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2493",
+        "date": "2025-09-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3548",
+        "date": "2025-09-05",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8932",
+        "date": "2025-09-08",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4737",
+        "date": "2025-09-08",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3073",
+        "date": "2025-09-09",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3483",
+        "date": "2025-09-09",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3551",
+        "date": "2025-09-09",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8908",
+        "date": "2025-09-09",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1514",
+        "date": "2025-09-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2442",
+        "date": "2025-09-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4104",
+        "date": "2025-09-09",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8423",
+        "date": "2025-09-10",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5906",
+        "date": "2025-09-11",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6446",
+        "date": "2025-09-11",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "8104",
+        "date": "2025-09-16",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8349",
+        "date": "2025-09-17",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2374",
+        "date": "2025-09-17",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2743",
+        "date": "2025-09-18",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4716",
+        "date": "2025-09-18",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8099",
+        "date": "2025-09-22",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4168",
+        "date": "2025-09-24",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5213",
+        "date": "2025-09-24",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1225",
+        "date": "2025-09-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2542",
+        "date": "2025-09-25",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2881",
+        "date": "2025-09-25",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2540",
+        "date": "2025-09-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3312",
+        "date": "2025-09-30",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3289",
+        "date": "2025-10-01",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4123",
+        "date": "2025-10-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5201",
+        "date": "2025-10-03",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1256",
+        "date": "2025-10-07",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3004",
+        "date": "2025-10-07",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6533",
+        "date": "2025-10-07",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6776",
+        "date": "2025-10-07",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1235",
+        "date": "2025-10-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1449",
+        "date": "2025-10-13",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6590",
+        "date": "2025-10-14",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2236",
+        "date": "2025-10-17",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2465",
+        "date": "2025-10-20",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6499",
+        "date": "2025-10-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1589",
+        "date": "2025-10-22",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3550",
+        "date": "2025-10-27",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2812",
+        "date": "2025-10-28",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6221",
+        "date": "2025-10-31",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5283",
+        "date": "2025-10-31",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3563",
+        "date": "2025-11-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2515",
+        "date": "2025-11-10",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3037",
+        "date": "2025-11-14",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6464",
+        "date": "2025-11-17",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5263",
+        "date": "2025-11-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "2726",
+        "date": "2025-11-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "1815",
+        "date": "2025-11-27",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8431",
+        "date": "2025-12-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3004",
+        "date": "2025-12-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3321",
+        "date": "2025-12-05",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3715",
+        "date": "2025-12-09",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2236",
+        "date": "2025-12-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6949",
+        "date": "2025-12-10",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3543",
+        "date": "2025-12-17",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6804",
+        "date": "2025-12-18",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4739",
+        "date": "2025-12-18",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4991",
+        "date": "2025-12-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3325",
+        "date": "2025-12-23",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6796",
+        "date": "2025-12-29",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5704",
+        "date": "2026-01-05",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2442",
+        "date": "2026-01-06",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4104",
+        "date": "2026-01-08",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4737",
+        "date": "2026-01-08",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3522",
+        "date": "2026-01-12",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "8021",
+        "date": "2026-01-13",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4130",
+        "date": "2026-01-14",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5457",
+        "date": "2026-01-15",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3363",
+        "date": "2026-01-20",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "2070",
+        "date": "2026-01-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3189",
+        "date": "2026-01-26",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6733",
+        "date": "2026-01-28",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3162",
+        "date": "2026-02-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8066",
+        "date": "2026-02-04",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2374",
+        "date": "2026-02-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6969",
+        "date": "2026-02-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5534",
+        "date": "2026-02-05",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2338",
+        "date": "2026-02-09",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6179",
+        "date": "2026-02-23",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2421",
+        "date": "2026-02-24",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6109",
+        "date": "2026-02-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3605",
+        "date": "2026-03-04",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4807",
+        "date": "2026-03-05",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3322",
+        "date": "2026-03-11",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3587",
+        "date": "2026-03-18",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "8926",
+        "date": "2026-03-27",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6182",
+        "date": "2026-04-16",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3605",
+        "date": "2026-04-23",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3362",
+        "date": "2026-04-29",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8074",
+        "date": "2026-05-06",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6712",
+        "date": "2026-05-14",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "8033",
+        "date": "2026-05-14",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5529",
+        "date": "2026-05-28",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3717",
+        "date": "2026-05-28",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3709",
+        "date": "2026-06-01",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3540",
+        "date": "2026-06-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4749",
+        "date": "2026-06-11",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1312",
+        "date": "2026-06-11",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4714",
+        "date": "2026-06-17",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "1586",
+        "date": "2026-06-18",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6721",
+        "date": "2026-06-18",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2313",
+        "date": "2026-06-22",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5291",
+        "date": "2026-06-24",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5227",
+        "date": "2026-06-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "7777",
+        "date": "2026-06-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "1295",
+        "date": "2026-06-29",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6465",
+        "date": "2026-06-29",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1717",
+        "date": "2026-06-29",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4989",
+        "date": "2026-06-29",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3372",
+        "date": "2026-06-30",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6569",
+        "date": "2026-06-30",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6592",
+        "date": "2026-06-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "1294",
+        "date": "2026-07-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5864",
+        "date": "2026-07-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2947",
+        "date": "2026-07-06",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "8112",
+        "date": "2026-07-06",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3546",
+        "date": "2026-07-07",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5274",
+        "date": "2026-07-07",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5547",
+        "date": "2026-07-07",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1229",
+        "date": "2026-07-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5511",
+        "date": "2026-07-09",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7556",
+        "date": "2026-07-09",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5284",
+        "date": "2026-07-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5292",
+        "date": "2026-07-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6446",
+        "date": "2026-07-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6762",
+        "date": "2026-07-10",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7747",
+        "date": "2026-07-10",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5519",
+        "date": "2026-07-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6951",
+        "date": "2026-07-13",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "7610",
+        "date": "2026-07-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3465",
+        "date": "2026-07-14",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3081",
+        "date": "2026-07-15",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2838",
+        "date": "2026-07-15",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2755",
+        "date": "2026-07-16",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5206",
+        "date": "2026-07-16",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6703",
+        "date": "2026-07-16",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2515",
+        "date": "2026-07-16",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4114",
+        "date": "2026-07-17",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6023",
+        "date": "2026-07-17",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3028",
+        "date": "2026-07-17",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "3149",
+        "date": "2026-07-17",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6464",
+        "date": "2026-07-17",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5386",
+        "date": "2026-07-20",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5548",
+        "date": "2026-07-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6870",
+        "date": "2026-07-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6967",
+        "date": "2026-07-21",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1529",
+        "date": "2026-07-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1615",
+        "date": "2026-07-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2887",
+        "date": "2026-07-21",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2548",
+        "date": "2026-07-22",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8048",
+        "date": "2026-07-23",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1720",
+        "date": "2026-07-23",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2890",
+        "date": "2026-07-23",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6944",
+        "date": "2026-07-23",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "7722",
+        "date": "2026-07-23",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5263",
+        "date": "2026-07-24",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4764",
+        "date": "2026-07-24",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "7740",
+        "date": "2026-07-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6016",
+        "date": "2026-07-27",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1530",
+        "date": "2026-07-27",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3163",
+        "date": "2026-07-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4167",
+        "date": "2026-07-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4911",
+        "date": "2026-07-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6492",
+        "date": "2026-07-28",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2449",
+        "date": "2026-07-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2528",
+        "date": "2026-07-28",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5876",
+        "date": "2026-07-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2836",
+        "date": "2026-07-29",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5871",
+        "date": "2026-07-29",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6715",
+        "date": "2026-07-29",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8054",
+        "date": "2026-07-30",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1231",
+        "date": "2026-07-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1514",
+        "date": "2026-07-30",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "9955",
+        "date": "2026-07-30",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6024",
+        "date": "2026-07-31",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6469",
+        "date": "2026-08-04",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2348",
+        "date": "2026-08-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2812",
+        "date": "2026-08-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2834",
+        "date": "2026-08-04",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1519",
+        "date": "2026-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2801",
+        "date": "2026-08-05",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2948",
+        "date": "2026-08-10",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6680",
+        "date": "2026-08-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "8421",
+        "date": "2026-08-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2546",
+        "date": "2026-08-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5880",
+        "date": "2026-08-11",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6005",
+        "date": "2026-08-11",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6958",
+        "date": "2026-08-11",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6023",
+        "date": "2026-08-12",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2880",
+        "date": "2026-08-13",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5314",
+        "date": "2026-08-14",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4123",
+        "date": "2026-08-17",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6698",
+        "date": "2026-08-17",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2885",
+        "date": "2026-08-18",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6225",
+        "date": "2026-08-18",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2496",
+        "date": "2026-08-19",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5206",
+        "date": "2026-08-20",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2539",
+        "date": "2026-08-20",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "4764",
+        "date": "2026-08-20",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5222",
+        "date": "2026-08-20",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6691",
+        "date": "2026-08-20",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6968",
+        "date": "2026-08-24",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7805",
+        "date": "2026-08-24",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "9958",
+        "date": "2026-08-24",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4543",
+        "date": "2026-08-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4554",
+        "date": "2026-08-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4768",
+        "date": "2026-08-25",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6667",
+        "date": "2026-08-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6752",
+        "date": "2026-08-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "7777",
+        "date": "2026-08-25",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5284",
+        "date": "2026-08-25",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3128",
+        "date": "2026-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "3234",
+        "date": "2026-08-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6186",
+        "date": "2026-08-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6612",
+        "date": "2026-08-26",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8084",
+        "date": "2026-08-26",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1583",
+        "date": "2026-08-26",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2753",
+        "date": "2026-08-26",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6914",
+        "date": "2026-08-26",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6955",
+        "date": "2026-08-26",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4303",
+        "date": "2026-08-27",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4707",
+        "date": "2026-08-27",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5287",
+        "date": "2026-08-27",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "5289",
+        "date": "2026-08-27",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7728",
+        "date": "2026-08-27",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1734",
+        "date": "2026-08-27",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2415",
+        "date": "2026-08-27",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3016",
+        "date": "2026-08-27",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4736",
+        "date": "2026-08-27",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8932",
+        "date": "2026-08-28",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1453",
+        "date": "2026-08-28",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2364",
+        "date": "2026-08-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "5283",
+        "date": "2026-08-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "7730",
+        "date": "2026-08-28",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "2937",
+        "date": "2026-08-31",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "5392",
+        "date": "2026-08-31",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "7584",
+        "date": "2026-08-31",
+        "kind": "除權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "1795",
+        "date": "2026-08-31",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3209",
+        "date": "2026-08-31",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "9917",
+        "date": "2026-08-31",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4760",
+        "date": "2026-09-01",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2889",
+        "date": "2026-09-01",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3135",
+        "date": "2026-09-01",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3416",
+        "date": "2026-09-01",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "4977",
+        "date": "2026-09-01",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "9941",
+        "date": "2026-09-01",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "1240",
+        "date": "2026-09-02",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2464",
+        "date": "2026-09-02",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "2845",
+        "date": "2026-09-02",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3013",
+        "date": "2026-09-02",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6669",
+        "date": "2026-09-02",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3114",
+        "date": "2026-09-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "6874",
+        "date": "2026-09-03",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8908",
+        "date": "2026-09-03",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6533",
+        "date": "2026-09-07",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "4549",
+        "date": "2026-09-08",
+        "kind": "除權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6590",
+        "date": "2026-09-08",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2442",
+        "date": "2026-09-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "8473",
+        "date": "2026-09-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "9933",
+        "date": "2026-09-08",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "1815",
+        "date": "2026-09-09",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4160",
+        "date": "2026-09-09",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1438",
+        "date": "2026-09-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "3706",
+        "date": "2026-09-09",
+        "kind": "權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "4541",
+        "date": "2026-09-10",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "5906",
+        "date": "2026-09-10",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "9906",
+        "date": "2026-09-10",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "6830",
+        "date": "2026-09-16",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "3260",
+        "date": "2026-09-21",
+        "kind": "除權息"
+      },
+      {
+        "market": "TPEX",
+        "code": "8042",
+        "date": "2026-09-22",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1235",
+        "date": "2026-09-24",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "6834",
+        "date": "2026-10-02",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2614",
+        "date": "2026-10-06",
+        "kind": "權息"
+      },
+      {
+        "market": "TWSE",
+        "code": "8021",
+        "date": "2026-10-06",
+        "kind": "權"
+      },
+      {
+        "market": "TPEX",
+        "code": "6129",
+        "date": "2026-10-07",
+        "kind": "除權"
+      },
+      {
+        "market": "TWSE",
+        "code": "2890",
+        "date": "2026-10-07",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1449",
+        "date": "2026-10-12",
+        "kind": "權"
+      },
+      {
+        "market": "TWSE",
+        "code": "1727",
+        "date": "2026-10-13",
+        "kind": "權"
+      }
+    ],
+    "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
+  }
+}

@@ -1,15 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T11:55:18.317826+00:00",
+  "generated_at": "2026-10-19T14:05:52.235950+00:00",
   "backfill": {
-    "status": "partial",
-    "completed_dates": 29,
-    "http_requests": 59,
-    "last_completed": "2021-09-17",
-    "elapsed_seconds": 182.35,
+    "status": "complete",
+    "completed_dates": 137,
+    "last_completed": "2026-10-08",
+    "http_requests": 290,
+    "elapsed_seconds": 472.2,
     "error": null,
-    "reason": "resource_budget",
-    "next_run": "相同命令只補未完成／缺成交金額的日期"
+    "reason": "complete",
+    "requested_start": "2025-04-01",
+    "requested_end": "2026-10-16"
   },
   "status": "blocked",
   "research_ready": false,
@@ -17,10 +18,10 @@
   "requested_end": "2026-10-16",
   "actual_start": "2021-06-21",
   "actual_end": "2026-10-16",
-  "bars": 735024,
-  "missing_turnover": 613582,
-  "missing_reference": 614873,
-  "missing_weekdays": 978,
+  "bars": 834070,
+  "missing_turnover": 0,
+  "missing_reference": 2119,
+  "missing_weekdays": 921,
   "first_missing_dates": [
     "2021-09-20",
     "2021-09-21",
@@ -38,16 +39,14 @@
     "2021-10-07",
     "2021-10-08"
   ],
-  "source_proofs": 142,
+  "source_proofs": 938,
   "issues": [
-    "尚缺 978 個工作日官方日報／休市證據",
-    "613582 筆缺官方成交金額；禁止用收盤×成交量補值",
-    "614873 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
-    "682 份市場日報缺來源雜湊／抓取時間證據，須補抓",
+    "尚缺 921 個工作日官方日報／休市證據",
+    "2119 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
     "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
     "最近一年已使用，封存樣本外已污染，禁止最終晉級"
   ],
-  "data_sha256": "3deb20d81bb1af31bdd13180c67500682f3604e7507d71faaaf3d75534a631f1",
-  "corporate_actions_imported": 0,
-  "trading_sessions": 390
+  "data_sha256": "65bf22b3141d46a723c9fd86a1d4e074f7f2afb9b90443c55ff9bb9a7d274d96",
+  "corporate_actions_imported": 2683,
+  "trading_sessions": 443
 }

@@ -69,9 +69,12 @@ def record_run(result,command,experiment_dir,state_dir='.state/runs',site_dir='s
     expanded=[]
     final=result.get('result',{}).get('strategy')
     if command=='annual-research' and result.get('status')=='completed' and result.get('strategy'):
+        variant=result.get('variant',{})
         expanded.append({'experiment_id':identifier+'-annual','iteration':'一年回溯基準','status':'completed',
-                         'reason':'固定合併策略完整一年研究回測，非獨立樣本外；不凍結、不晉級',
+                         'changed_rules':list(variant.get('changes',{})),
+                         'reason':variant.get('reason','固定合併策略完整一年研究回測，非獨立樣本外；不凍結、不晉級'),
                          'retained':False,'results':{'annual':result['strategy']},'assessment':{'passed':False,'reasons':['一年已被研究使用，僅供診斷；未通過五年與獨立驗證']}})
+        expanded[-1]['iteration']=variant.get('name','一年回溯基準')
     if command=='final-test' and result.get('executed') and final:
         expanded.append({'experiment_id':identifier+'-final','iteration':'封存測試','status':result['status'],
                          'reason':'凍結後的一次性封存測試，不用於調參','retained':False,
@@ -90,6 +93,7 @@ def record_run(result,command,experiment_dir,state_dir='.state/runs',site_dir='s
          'completed_experiments':sum(r['status']=='completed' for r in expanded),'version':result.get('version',{}),
          'data_sha256':result.get('training_data_quality',result.get('data_quality',{})).get('data_sha256'),
          'issues':issues,'trials':[trial_summary(r) for r in expanded]}
+    if result.get('variant'):run['variant']=result['variant']
     # Every invocation is a separate immutable snapshot, including blocked/error outcomes.
     write_json(state/f'{identifier}.json',{**run,'report':result,'trial_reports':expanded})
     with (state/'ledger.jsonl').open('a') as stream:stream.write(json.dumps(run,ensure_ascii=False,allow_nan=False)+'\n')
