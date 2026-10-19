@@ -17,6 +17,8 @@
 python3 -m screener.annual backfill
 python3 -m screener.annual events
 python3 -m screener.annual research
+# 唯一預先登記的單條件對照：只將整理寬度25%改成30%。
+python3 -m screener.annual research --variant wider-range
 ```
 
 設定在 `annual_research.json`；規則仍用同一份 `naked_k.json` 與 `execution.json`。結果、全部交易、成本、淨值、月份績效、資料指紋與排除股票日統計在 `site/annual-backtest.json`，每次執行也加入回測帳本。首頁「新合併策略・一年回測」顯示實際結果，與正式策略績效分開。詳細資料政策見[一年研究說明](docs/annual-research.md)。

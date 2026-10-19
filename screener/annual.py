@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 import time
-from dataclasses import asdict
+from dataclasses import asdict,replace
 import hashlib
 import math
 from collections import Counter
@@ -14,6 +14,12 @@ from threading import Lock
 from .data import DataError, OfficialClient, Store, URLS
 from .distributions import fetch_distributions,reconcile_distributions,event_tables
 from .quality import actions
+
+VARIANTS={
+    'baseline':{'name':'固定基準：整理寬度25%','changes':{},'reason':'原始合併策略固定基準，不因零訊號刪除結果。'},
+    'wider-range':{'name':'單條件研究：整理寬度30%','changes':{'range_width':.30},
+                   'reason':'基準在131078個資料准入股票日沒有訊號；18612個轉強K線中15657個先被整理寬度／漂移門檻排除。只測區間寬度25%→30%，漂移、量能、結構及風險全部不變；同一年已知資料，非獨立驗證。'},
+}
 
 
 class RequestGate:
@@ -183,19 +189,21 @@ class GuardedSignals:
         return {'candidates':selected[:10]}
 
 
-def run_year(store,cfg,parameters=None,execution=None,seconds=None):
+def run_year(store,cfg,parameters=None,execution=None,seconds=None,variant='baseline'):
     from .naked import NakedParameters
     from .naked_backtest import Risk,simulate
     from .execution import Execution
     from .optimizer import code_version
+    if variant not in VARIANTS:raise ValueError('未知的一年研究版本')
     now=datetime.now(timezone.utc).isoformat();version=code_version()
     quality=audit_year(store,cfg)
     result={'schema_version':1,'generated_at':now,'research_model_id':'F','status':'blocked',
             'classification':'retrospective_diagnostic','promotion_allowed':False,'active_strategy':None,
-            'data_quality':quality,'version':version,'experiments':[],
+            'data_quality':quality,'version':version,'experiments':[],'variant':{'id':variant,**VARIANTS[variant]},
             'message':'一年回溯研究，不能作為正式晉級或獨立樣本外績效。'}
     if quality['status']!='diagnostic_ready':result['stop_reason']='annual_data_quality';return result
     p=parameters or NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal'])
+    baseline_parameters=asdict(p);p=replace(p,**VARIANTS[variant]['changes'])
     base=json.loads(Path('naked_k.json').read_text());risk=Risk(**base['risk'])
     e=execution or Execution(**json.loads(Path('execution.json').read_text()))
     duration=cfg['simulation_seconds'] if seconds is None else seconds
@@ -211,7 +219,7 @@ def run_year(store,cfg,parameters=None,execution=None,seconds=None):
     provider=GuardedSignals(p,events,sessions,barriers)
     if len(days)<=e.max_hold_sessions:raise DataError('年度回測交易日不足')
     cutoff=days[-e.max_hold_sessions-1]
-    result.update(config=cfg,parameters=asdict(p),execution=asdict(e),risk=asdict(risk),entry_cutoff=cutoff,budget_seconds=duration,
+    result.update(config=cfg,parameters=asdict(p),baseline_parameters=baseline_parameters,execution=asdict(e),risk=asdict(risk),entry_cutoff=cutoff,budget_seconds=duration,
                   period={'start':days[0],'end':days[-1],'trading_sessions':len(days)})
     began=time.monotonic()
     try:
@@ -232,6 +240,7 @@ def main():
     parser.add_argument('--output')
     parser.add_argument('--runs',default='.state/runs')
     parser.add_argument('--experiments',default='.state/experiments')
+    parser.add_argument('--variant',choices=list(VARIANTS),default='baseline')
     args=parser.parse_args();s=None
     try:
         cfg=json.loads(Path(args.config).read_text());s=Store(args.db)
@@ -240,7 +249,7 @@ def main():
                                           'reconciliation':reconcile_distributions(s,cfg['data_start'],cfg['end'])}
         else:
             reconciliation=reconcile_distributions(s,cfg['data_start'],cfg['end'])
-            result=run_year(s,cfg);result['reconciliation']=reconciliation
+            result=run_year(s,cfg,variant=args.variant);result['reconciliation']=reconciliation
     except Exception as exc:
         result={'schema_version':1,'generated_at':datetime.now(timezone.utc).isoformat(),'research_model_id':'F',
                 'status':'error','classification':'retrospective_diagnostic','promotion_allowed':False,'experiments':[],
@@ -248,7 +257,7 @@ def main():
     finally:
         if s:s.close()
     from .__main__ import write_json
-    output=Path(args.output or ('site/annual-backtest.json' if args.command=='research' else f'site/annual-{args.command}.json'))
+    output=Path(args.output or (('site/annual-backtest.json' if args.variant=='baseline' else f'site/annual-{args.variant}.json') if args.command=='research' else f'site/annual-{args.command}.json'))
     if args.command=='research':
         from .reporting import record_run
         from .optimizer import code_version

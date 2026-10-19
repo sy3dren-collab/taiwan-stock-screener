@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "completed_dates": 137,
+  "last_completed": "2026-10-08",
+  "http_requests": 290,
+  "elapsed_seconds": 472.2,
+  "error": null,
+  "reason": "complete",
+  "requested_start": "2025-04-01",
+  "requested_end": "2026-10-16"
+}

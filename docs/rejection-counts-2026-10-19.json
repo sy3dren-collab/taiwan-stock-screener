@@ -1,0 +1,57 @@
+{
+  "classification": "rejection_counts_only_not_a_backtest",
+  "counts": {
+    "evaluate:65": 112466,
+    "pattern:13": 15657,
+    "evaluate:71": 18611,
+    "pattern:14": 1990,
+    "pattern:16": 813,
+    "pattern:24": 143,
+    "pattern:44": 1,
+    "pattern:39": 7,
+    "evaluate:103": 1
+  },
+  "source_lines": {
+    "pattern:13": "if upper/lower-1>p.range_width or drift>p.range_drift_max:return None",
+    "pattern:14": "if len(highs)<2 or len(lows)<2 or highs[-1].high<=highs[-2].high or lows[-1].low<=lows[-2].low:return None",
+    "pattern:16": "if abs(recent_low/support-1)>p.support_tolerance or not support<=today.close<=support*(1+p.extension_max):return None",
+    "pattern:21": "if before_volume<=0 or entry_base<=0:return None",
+    "pattern:24": "if contraction>p.pullback_volume_max or entry_ratio<p.entry_volume_multiple:return None",
+    "pattern:39": "if not events:return None",
+    "pattern:41": "if lows[-1].date<=event.date:return None",
+    "pattern:43": "if min(b.close for b in after)<level*(1-p.support_tolerance):return None",
+    "pattern:44": "if variant=='大量突破整理上緣' and recent_low<upper*(1-p.support_tolerance):return None",
+    "evaluate:59": "if len(bars)<p.lookback:return None",
+    "evaluate:62": "if any(b.turnover is None for b in liquid) or mean(b.turnover for b in liquid)<p.minimum_turnover:return None",
+    "evaluate:63": "if today.close<p.minimum_price or today.volume<=0:return None",
+    "evaluate:65": "if today.close<=max(today.open,previous.high) or location<p.close_location:return None",
+    "evaluate:71": "if combined is None:return None",
+    "evaluate:75": "if len(highs)<2 or len(lows)<2 or highs[-1].high<=highs[-2].high or lows[-1].low<=lows[-2].low:return None",
+    "evaluate:78": "if abs(recent_low/support-1)>p.support_tolerance or today.close<support:return None",
+    "evaluate:84": "if upper/lower-1>p.range_width:return None",
+    "evaluate:86": "if not breaks:return None",
+    "evaluate:88": "if not retest or today.low>upper*(1+p.support_tolerance) or min(b.low for b in retest)<upper*(1-p.support_tolerance):return None",
+    "evaluate:89": "if today.close<upper*(1+p.confirmation_buffer):return None",
+    "evaluate:93": "if len(lows)<p.support_touches or not highs:return None",
+    "evaluate:96": "if any(locations[b.date]-locations[a.date]<p.touch_spacing for a,b in zip(touches,touches[1:])):return None",
+    "evaluate:97": "if any(abs(b.low/support-1)>p.support_tolerance for b in touches):return None",
+    "evaluate:98": "if abs(today.low/support-1)>p.support_tolerance or today.close<support*(1+p.confirmation_buffer) or today.low<=previous.low:return None",
+    "evaluate:103": "if stop<=0 or risk<=0 or risk/today.close>p.max_risk or rr<p.min_reward_risk:return None"
+  },
+  "funnel": {
+    "quoted": 428441,
+    "price_or_liquidity": 277923,
+    "admitted": 131078,
+    "insufficient_history": 8078,
+    "unsupported_corporate_action": 8292,
+    "suspension_or_unquoted": 722,
+    "unresolved_reference_or_event": 2348,
+    "signals": 0
+  },
+  "original_code_version": {
+    "git_commit": "0ac24732c780580676cbce5df398f73fdf909527",
+    "code_sha256": "b1238f4c2343ef0929b3837c807f444353fe6fad3e81e27540223eb8fc3e45ce",
+    "working_tree_dirty": false
+  },
+  "harness_sha256": "a9c88b556fb4da511b5140bb0788c59b1a3308a3b1379d7d491ca91df3be1e43"
+}
