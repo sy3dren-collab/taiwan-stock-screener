@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       lookback_days:
-        description: 'Cold-start calendar days (minimum 100; default 180)'
+        description: 'Cold-start calendar days (minimum 100; yearly research also backfills warmup)'
         default: '180'
         required: true
   push:
@@ -36,7 +36,9 @@ jobs:
       - name: Run meaningful offline tests
         run: python -m unittest discover -s tests -v
       - name: Check website JavaScript
-        run: node --check site/app.js
+        run: |
+          node --check site/app.js
+          node --check site/backtest.js
       - name: Prepare isolated history checkout
         uses: actions/checkout@v4
         with:
@@ -56,12 +58,19 @@ jobs:
             git checkout --orphan market-data
             git rm -rf --ignore-unmatch .
           fi
+      - name: Restore compressed official database
+        run: |
+          if [ -f .state/prices.sqlite3.gz ]; then
+            gzip -dkf .state/prices.sqlite3.gz
+          fi
       - name: Update official history and screen
         id: update
         continue-on-error: true
         env:
           LOOKBACK_DAYS: ${{ inputs.lookback_days || '180' }}
-        run: python -m screener update --lookback-days "$LOOKBACK_DAYS"
+        run: |
+          history_start=$(python -c 'from datetime import date,timedelta; from screener.__main__ import default_end; from screener.research import year_start; print(date.fromisoformat(year_start(default_end().isoformat()))-timedelta(days=120))')
+          python -m screener update --ensure-start "$history_start" --lookback-days "$LOOKBACK_DAYS"
       - name: Compare independent swing models
         id: backtest
         continue-on-error: true
@@ -82,7 +91,12 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add latest-results.json latest-backtest.json
-          if [ -f prices.sqlite3 ]; then git add prices.sqlite3; fi
+          if [ -f prices.sqlite3 ]; then
+            # Compression keeps a year plus warmup below GitHub's single-file limit.
+            gzip -n -c prices.sqlite3 > prices.sqlite3.gz
+            git rm --ignore-unmatch prices.sqlite3
+            git add prices.sqlite3.gz
+          fi
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh official market history and screening status"
             git push origin HEAD:market-data

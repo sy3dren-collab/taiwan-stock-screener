@@ -69,7 +69,7 @@ def pivots(bars: list[Bar], radius: int) -> tuple[list[Bar], list[Bar]]:
     return highs, lows
 
 
-def evaluate(bars: list[Bar], p: Parameters) -> dict | None:
+def evaluate(bars: list[Bar], p: Parameters, include_bars: bool = True) -> dict | None:
     if len(bars) < p.required_bars:
         return None
     today, yesterday = bars[-1], bars[-2]
@@ -132,11 +132,11 @@ def evaluate(bars: list[Bar], p: Parameters) -> dict | None:
                     f"接近{support_label} {support:.2f}，收盤距離 {distance:.2%}",
                     f"前 {p.pullback_days} 日均量／此前 {p.volume_baseline_days} 日均量 = {volume_ratio:.2f}",
                     f"紅 K 收盤突破前日高點 {yesterday.high:g}；回檔深度 {depth:.2%}"],
-        "bars": [asdict(b) for b in bars[-90:]],
+        "bars": [asdict(b) for b in bars[-90:]] if include_bars else [],
     }
 
 
-def screen(histories: dict[tuple[str, str], list[Bar]], as_of: str, p: Parameters) -> dict:
+def screen(histories: dict[tuple[str, str], list[Bar]], as_of: str, p: Parameters, include_bars: bool = True) -> dict:
     """Future backtests can call this with any as_of; future bars are discarded."""
     candidates = []
     eligible = 0
@@ -148,7 +148,7 @@ def screen(histories: dict[tuple[str, str], list[Bar]], as_of: str, p: Parameter
         eligible += 1
         if len(bars) >= p.required_bars:
             sufficient_history += 1
-        candidate = evaluate(bars, p)
+        candidate = evaluate(bars, p, include_bars)
         if candidate:
             candidates.append(candidate)
     candidates.sort(key=lambda c: (-c["score"], c["market"], c["code"]))

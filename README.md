@@ -6,11 +6,11 @@
 
 ## 目前狀態與驗證範圍
 
-第一版包含資料介接、歷史儲存、增量更新、策略、響應式繁體中文網站與自動發布工作流程。已成功從官方回補 **2026-04-20～2026-10-16**，共 **124 個有行情交易日、241,576 筆 OHLCV**；SQLite 完整性檢查通過。正式網站結果是截至 2026-10-16 的官方行情快照，不是即時報價。
+第一版包含資料介接、歷史儲存、增量更新、策略、響應式繁體中文網站與自動發布工作流程。已成功從官方回補 **2025-06-19～2026-10-16**，共 **325 個有行情交易日、623,320 筆 OHLCV**；SQLite 完整性檢查通過。正式網站結果是截至 2026-10-16 的官方行情快照，不是即時報價。
 
 截至該日共 1,942 檔股票有有效行情，1,927 檔歷史足夠，預設策略有 **1 檔**符合全部條件。候選少於五檔時明確提示，不會放寬條件或加入模擬行情。測試用價格只存在 tests 的合成 fixture，不會寫入正式網站或正式歷史資料。
 
-上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。程式與官方歷史資料已分別推送至 main 與 market-data。GitHub Pages 已啟用，2026-10-18 的[正式工作流程](https://github.com/sy3dren-collab/taiwan-stock-screener/actions/runs/39106182226)已成功完成官方資料更新、歷史保存及網站部署。正式首頁、行情 JSON、JavaScript、CSS、網站圖示與 manifest 均確認 HTTP 200，部署資產與儲存庫相符。
+上市與上櫃兩項正式 API 整合測試、離線解析／策略／儲存／失敗處理測試、Chromium 桌機／手機測試皆已執行通過。程式與官方歷史資料已分別推送至 main 與 market-data。GitHub Pages 已啟用，[正式工作流程紀錄](https://github.com/sy3dren-collab/taiwan-stock-screener/actions/workflows/daily.yml)可檢查每次官方資料更新、歷史保存及網站部署的最新狀態。正式首頁、行情 JSON、JavaScript、CSS、網站圖示與 manifest 均確認 HTTP 200，部署資產與儲存庫相符。
 
 ## 本機操作
 
@@ -21,7 +21,7 @@ cd /workspace/taiwan-stock-screener
 python3 -m unittest discover -s tests -v
 
 # 首次抓取約 180 個日曆日，取得至少 MA60 所需歷史。
-# 首次約 250 次官方請求，可能需要 10～30 分鐘；失敗會停止並保留已完成日期。
+# 首次約 250 次官方請求；一年研究另需下方 --ensure-start 回補暖機。失敗會停止並保留已完成日期。
 python3 -m screener update
 
 # 後續相同指令僅補缺漏日期，並重抓最近 7 個日曆日（修正／延遲行情）。
@@ -118,7 +118,7 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 1. 將這份程式碼推送至 GitHub 儲存庫的 `main`（本地提交不等於已推送）。
 2. 在 **Settings → Pages → Build and deployment → Source** 選擇 **GitHub Actions**。
 3. 確認 Actions 已啟用，允許工作流程寫入儲存庫及部署 Pages。工作流程宣告 `contents: write`、`pages: write`、`id-token: write`；組織政策／分支規則也必須允許機器帳號建立及更新 `market-data`，該分支不應啟用禁止此機器帳號直接推送的規則。
-4. 至 **Actions → Daily official data and Pages → Run workflow**，使用 `main`，首次保持 `lookback_days=180`。第一次回補較慢，後續只增量更新。
+4. 至 **Actions → Daily official data and Pages → Run workflow**，使用 `main`，首次保持 `lookback_days=180`；研究流程另自動確保一年＋120 日暖機，首次可能需數十分鐘。後續只補缺漏日期並重查最近行情。
 5. 查看 Actions summary、錯誤紀錄與 Pages deployment。成功時網站網址由 GitHub Pages 提供，專案網站通常為 `https://<帳號>.github.io/taiwan-stock-screener/`。
 
 發布後，在手機開啟正式 Pages 網址，透過瀏覽器的分享／選單選擇「加入主畫面」即可快速開啟；手機不需安裝 Python。本站不提供離線行情快取，避免把舊價格當作新行情。
@@ -127,7 +127,7 @@ NODE_PATH=/tmp/taiwan-browser-tests/node_modules node tests/browser.cjs
 
 ### 歷史持久化與錯誤發布
 
-- 第二份隔離 checkout `.state` 專用於 `market-data` 分支：保存 `prices.sqlite3`、`latest-results.json` 與 `latest-backtest.json`。首次沒有分支時，僅清空這份 CI 專用 checkout 的來源檔案以建立獨立資料分支；不動原始 main checkout。
+- 第二份隔離 checkout `.state` 專用於 `market-data` 分支：保存壓縮的 `prices.sqlite3.gz`（還原後為 SQLite）、`latest-results.json` 與 `latest-backtest.json`。首次沒有分支時，僅清空這份 CI 專用 checkout 的來源檔案以建立獨立資料分支；不動原始 main checkout。
 - 每次從資料分支恢復，不依賴易被驅逐的 Actions cache。即使更新中途失敗，也保存已完成的原子日期與錯誤結果，便於繼續回補。SQLite 是二進位檔，長期每天提交會增加 Git 大小；規模擴大時應改用物件儲存／分區檔及保留政策。
 - 完成更新後以 Pages artifact 發布 `site/`，資料庫不包含在 Pages artifact。請注意：若儲存庫公開，`market-data` 分支中的公開來源歷史與診斷 JSON 仍可被下載。
 - 官方更新失敗時仍嘗試發布明確的錯誤頁，發布後工作流程標記失敗；不悄悄繼續顯示舊候選。若 GitHub 推送／Pages 本身失敗，舊頁面可能仍在，需查看其資料日期與 Actions 紀錄。
@@ -141,6 +141,9 @@ screener/data.py        官方報表解析、下載、SQLite
 screener/strategy.py    量化參數、波段結構、評分與選股
 screener/interfaces.py 歷史資料 Protocol 與指定日期訊號入口
 screener/__main__.py    更新／離線選股 CLI、錯誤 JSON
+refinements.json       每個模型一組固定改良規則與風控
+screener/research.py    滾動一年、日期覆蓋、前八後四分段與診斷
+screener/refinements.py 獨立改良候選
 strategy.json          原策略與共同風險／流動性參數
 models.json            你的獨立型態策略及比較模型參數
 execution.json         交易成本、資金與 5～20 日持有規則
@@ -156,11 +159,12 @@ tests/                離線單元、端到端管線、選用真實 API、Chromi
 
 ## 初步回測與限制
 
-已加入四模型獨立回測，輸出 `site/backtest.json`：共同期間的估算報酬、含成本勝率、每日淨值回撤、每筆模型進出場日期與價格、未平倉部位。網站可切換四組候選，並查看各策略的交易紀錄。你的方法單獨標示，兩種型態均強制要求收復／突破當天大量，不混入其他模型條件。
+已加入四模型獨立回測及各一個固定改良候選，預設比較最近一個日曆年（另備暖機），輸出 `site/backtest.json`：共同期間與前八後四分段的估算報酬、含成本勝率、每日淨值回撤、每筆模型進出場日期與價格、未平倉部位、費稅與出場原因診斷。候選規則及風控先固定、不搜尋最佳參數，保留原版及不利結果，不自動替換每日選股。網站可切換四組候選，並查看各策略的交易紀錄。你的方法單獨標示，兩種型態均強制要求收復／突破當天大量，不混入其他模型條件。
 
 ```bash
+python3 -m screener update --ensure-start 2025-06-19 --end 2026-10-16
 python3 -m screener.backtest
-python3 -m screener.backtest --start 2026-08-01 --end 2026-10-16
+python3 -m screener.backtest --start 2025-10-17 --end 2026-10-16
 python3 -m screener screen --model user_range_reclaim
 ```
 

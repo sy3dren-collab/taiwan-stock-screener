@@ -1,0 +1,26 @@
+{
+  "version": "fixed_v1",
+  "specified_at": "2026-10-18",
+  "prior_observed_period": "2026-07-29/2026-10-16",
+  "candidate_count_per_model": 1,
+  "parameter_search": false,
+  "configuration_sha256": "487fb54826bbc4a4ee84371b42347b64e575f249f7c96c05ba37aca5b669c9de",
+  "parameters": {
+    "max_signal_risk": 0.06,
+    "min_average_turnover": 20000000,
+    "max_atr_fraction": 0.06,
+    "minimum_close_location": 0.7,
+    "confirmation_volume_multiple": 1.0,
+    "breakout_extension_atr": 1.0,
+    "breakout_ma_distance": 0.08,
+    "risk_budget_fraction": 0.01,
+    "breakeven_trigger_r": 1.0,
+    "failure_sessions": 5,
+    "failure_min_r": 0.5,
+    "rsi_recovery_level": 50.0
+  },
+  "promotion": "none; retain all original live models",
+  "development_calendar_months": 8,
+  "validation_calendar_months": 4,
+  "validation_type": "retrospective; final 55 sessions were already observed; future forward test pending"
+}

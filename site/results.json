@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T17:02:58.435592+08:00",
+  "generated_at": "2026-10-18T18:27:17.285070+08:00",
   "requested_through": "2026-10-16",
   "status": "ok",
   "as_of": "2026-10-16",
@@ -13705,6 +13705,7 @@
     "breakout_volume_multiple": 1.5,
     "breakout_stop_atr": 2.0,
     "breakout_target_r": 2.0,
+    "rsi_wilder": false,
     "rsi_days": 14,
     "rsi_recovery_level": 40,
     "rsi_stop_atr": 0.5,

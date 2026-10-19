@@ -58,6 +58,21 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     assert.match(await page.locator('#backtest-detail h3').innerText(),/你的策略/);
     await page.locator('.research-card').nth(1).getByRole('button',{name:'查看進出場'}).click();
     assert.match(await page.locator('#backtest-detail h3').innerText(),/原策略/);
+    if(realBacktest.models.every(m=>m.experiment)){
+      assert.equal(await page.locator('.experiment').count(),4);
+      assert.match(await page.locator('#research-protocol').innerText(),/不是真正未見/);
+      await page.locator('.research-card').first().getByRole('button',{name:'查看改良版進出場',exact:true}).click();
+      assert.match(await page.locator('#backtest-detail h3').innerText(),/改良候選/);
+      assert.match(await page.locator('#backtest-detail').innerText(),/尚未取代/);
+      await page.locator('.research-card').first().getByRole('button',{name:'查看進出場',exact:true}).click();
+      const inconsistent=structuredClone(realBacktest);
+      inconsistent.models[0].experiment.candidate.end='2099-01-01';
+      await page.route('**/backtest.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(inconsistent)}));
+      await page.reload();await page.locator('#backtest-status.error').waitFor();
+      assert.match(await page.locator('#backtest-status').innerText(),/期間不一致/);
+      assert.equal(await page.locator('.research-card').count(),0);
+      await page.unroute('**/backtest.json');await page.reload();await page.locator('.research-card').first().waitFor();
+    }
     const manifestResponse=await page.request.get('http://127.0.0.1:8765/manifest.webmanifest');
     assert.equal(manifestResponse.ok(),true);
     const manifest=await manifestResponse.json();

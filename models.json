@@ -22,5 +22,6 @@
   "shoulder_min_spacing": 5,
   "shoulder_max_spacing": 25,
   "shoulder_time_ratio_max": 2.0,
-  "neckline_difference_max": 0.1
+  "neckline_difference_max": 0.1,
+  "rsi_wilder": false
 }
