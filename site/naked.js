@@ -38,8 +38,8 @@
    const list=document.createElement('ul');(d.issues||[]).forEach(v=>list.append(make('li',v)));quality.append(list);
    if(d.backfill){const b=d.backfill;quality.append(make('p',`最近歷史回補：${num(b.completed_dates)} 個日期、${num(b.http_requests)} 次請求、${num(b.elapsed_seconds)} 秒；最後完成 ${b.last_completed||'尚無'}。${b.error?'來源失敗：'+b.error:b.reason==='resource_budget'?'本輪預算已用完，下一輪續接。':'本輪已結束。'}`,b.error?'notice error':''));}
    const paperResponse=await fetch('paper.json',{cache:'no-store'});if(!paperResponse.ok)throw Error(`前瞻觀察 HTTP ${paperResponse.status}`);const paper=await paperResponse.json();
-   quality.append(make('p',`檢查時間 ${d.generated_at}；最終封存樣本外：${r.final_holdout?.reason||r.final_holdout?.status||'尚未執行'}。前瞻紙上觀察：${paper.status==='inactive'?'尚未啟用':paper.status}。`));
-   const comparisons=q('#naked-comparisons');comparisons.replaceChildren();r.candidates.forEach(c=>{const card=document.createElement('article');card.className='naked-candidate';card.append(make('h4',`${c.model_id}｜${c.name}`),make('p',c.status==='blocked'?'資料檢查未通過，未執行有效比較':c.status==='walk_forward_candidate'?'通過開發驗證，仍須封存樣本外與審核':'未通過／尚未完成驗證'));
+   quality.append(make('p',`檢查時間 ${new Date(d.generated_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false})}（台北）；最終封存樣本外：${r.final_holdout?.reason||r.final_holdout?.status||'尚未執行'}。前瞻紙上觀察：${paper.status==='inactive'?'尚未啟用':paper.status}。`));
+   const comparisons=q('#naked-comparisons');comparisons.replaceChildren();r.candidates.forEach(c=>{const card=document.createElement('article');card.className='naked-candidate';card.append(make('h4',`${c.model_id}｜${c.name}`),make('p',c.status==='blocked'?'資料檢查未通過，未執行有效回測':c.status==='walk_forward_candidate'?'通過開發驗證，仍須封存樣本外與審核':'未通過／尚未完成驗證'));
     if(c.metrics)card.append(make('p',`跨折平均驗證報酬 ${pct(c.metrics.mean_validation_return)}，已平倉 ${c.metrics.closed_count} 筆。這不是全年連續帳戶報酬。`));else card.append(make('p','淨報酬、勝率與回撤：—（沒有有效結果）'));comparisons.append(card);});
    const history=q('#optimization-history');history.replaceChildren();
    if(!r.experiments.length)history.append(make('p','尚未執行有效實驗：資料檢查未通過。未捏造優化成功紀錄。'));

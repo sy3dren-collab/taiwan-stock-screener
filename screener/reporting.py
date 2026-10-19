@@ -3,6 +3,7 @@ from datetime import datetime,timezone
 import json,re,uuid
 from pathlib import Path
 from statistics import mean
+from zoneinfo import ZoneInfo
 
 from .__main__ import write_json
 from .fusion import MODEL_ID,MODEL_NAME
@@ -26,7 +27,8 @@ def trial_summary(record):
 def markdown(run):
     pct=lambda value:'—' if value is None else f'{value:.2%}'
     clean=lambda text:str(text).replace('|','／').replace('\n',' ')
-    rows=[f"## 每次回測報告｜{MODEL_NAME}",f"- 執行：{run['run_id']}（{run['generated_at']}）",
+    displayed_time=datetime.fromisoformat(run['generated_at']).astimezone(ZoneInfo('Asia/Taipei')).isoformat()
+    rows=[f"## 每次回測報告｜{MODEL_NAME}",f"- 執行：{run['run_id']}（{displayed_time}，台北）",
           f"- 狀態：{run['status']}；有效實驗 {run['completed_experiments']} 次；正式策略未因研究自動啟用。",
           '- 85%為長期研究目標，不是晉級門檻。各驗證折重設現金，平均報酬不是連續帳戶年報酬。',
           '', '| 輪次 | 勝率 | 已平倉 | 跨折平均淨報酬 | 最大單折回撤 | 保留 |', '| --- | ---: | ---: | ---: | ---: | --- |']

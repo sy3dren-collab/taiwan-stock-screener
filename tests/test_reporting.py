@@ -18,6 +18,7 @@ class ReportingTests(unittest.TestCase):
             self.assertEqual(history['total_runs'],2);self.assertEqual(history['runs'][0]['run_id'],second['run_id'])
             self.assertNotEqual(first['run_id'],second['run_id']);self.assertEqual(first['trials'],[])
             self.assertTrue((state/(first['run_id']+'.json')).exists());self.assertIn('quote failed',summary.read_text())
+            self.assertIn('台北',summary.read_text())
             self.assertIn('不是',summary.read_text());self.assertNotIn('0.00%',summary.read_text())
             self.assertEqual(len((state/'ledger.jsonl').read_text().splitlines()),2)
             self.assertTrue((site/history['runs'][0]['download_url']).exists())
