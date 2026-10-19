@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T22:06:27.658844+08:00",
+  "generated_at": "2026-10-19T22:13:08.245575+08:00",
   "requested_through": "2026-10-19",
   "as_of": "2026-10-19",
-  "status": "ok",
+  "status": "error",
   "mode": "research",
   "active_strategy": null,
   "active_model": null,
@@ -38,19 +38,15 @@
     "minimum_event_age": 2,
     "extension_max": 0.04
   },
-  "universe_count": 1948,
+  "universe_count": 0,
   "qualified_count": 0,
   "sufficient_history_count": 0,
   "shortfall": true,
-  "warnings": [
-    "離線讀取，未宣稱已重新更新官方行情",
-    "尚無通過驗證的策略"
+  "warnings": [],
+  "source_warnings": [],
+  "errors": [
+    "TPEX 2026-10-12 官方資料取得失敗：IncompleteRead(719230 bytes read)"
   ],
-  "source_warnings": [
-    "離線讀取，未宣稱已重新更新官方行情",
-    "尚無通過驗證的策略"
-  ],
-  "errors": [],
   "sources": {
     "TWSE": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
     "TPEX": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes"
