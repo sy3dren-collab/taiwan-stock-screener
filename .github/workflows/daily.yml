@@ -1,136 +1,71 @@
 name: Daily official data and Pages
-
 on:
   schedule:
-    # 18:30 Asia/Taipei, Monday–Friday. Official empty reports handle holidays.
-    - cron: '30 10 * * 1-5'
+    - cron: '30 10 * * 1-5' # 18:30 Asia/Taipei; official no-data reports handle holidays.
   workflow_dispatch:
-    inputs:
-      lookback_days:
-        description: 'Cold-start calendar days (minimum 100; default 180)'
-        default: '180'
-        required: true
   push:
     branches: [main]
-    paths-ignore: ['README.md', 'docs/**']
-
+    paths-ignore: ['README.md', 'docs/**', 'audit_report.md']
 concurrency:
-  group: daily-market-pages
+  group: official-research-state
   cancel-in-progress: false
-
 permissions:
   contents: write
   pages: write
   id-token: write
-
 jobs:
   build:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 25
+    outputs:
+      update_outcome: ${{ steps.update.outcome }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Run meaningful offline tests
+        with: {python-version: '3.12'}
+      - name: Regression and execution tests
         run: python -m unittest discover -s tests -v
-      - name: Check website JavaScript
-        run: node --check site/app.js
-      - name: Prepare isolated history checkout
-        uses: actions/checkout@v4
-        with:
-          path: .state
-          fetch-depth: 1
-      - name: Restore durable history branch
-        working-directory: .state
-        shell: bash
+      - name: Check JavaScript
         run: |
-          set -euo pipefail
-          remote_ref=$(git ls-remote origin refs/heads/market-data)
-          if [ -n "$remote_ref" ]; then
-            git fetch origin refs/heads/market-data
-            git checkout -B market-data FETCH_HEAD
-          else
-            # Only this disposable secondary checkout is cleared, never the source checkout.
-            git checkout --orphan market-data
-            git rm -rf --ignore-unmatch .
-          fi
-      - name: Update official history and screen
+          node --check site/app.js
+          node --check site/naked.js
+          node --check site/backtest.js
+      - uses: actions/checkout@v4
+        with: {path: .history, fetch-depth: 1}
+      - name: Restore isolated research state
+        run: bash scripts/restore-history.sh
+      - name: Update official data and the sole approved strategy
         id: update
         continue-on-error: true
-        env:
-          LOOKBACK_DAYS: ${{ inputs.lookback_days || '180' }}
-        run: python -m screener update --lookback-days "$LOOKBACK_DAYS"
-      - name: Compare independent swing models
-        id: backtest
-        continue-on-error: true
-        env:
-          UPDATE_OUTCOME: ${{ steps.update.outcome }}
+        run: python -m screener.daily screen
+      - name: Evidence and paper observation
         run: |
-          if [ "$UPDATE_OUTCOME" = "success" ]; then
-            python -m screener.backtest
-          else
-            python -m screener.backtest --upstream-error
-          fi
-      - name: Preserve history and diagnostic result
-        run: |
-          set -euo pipefail
-          cp site/results.json .state/latest-results.json
-          cp site/backtest.json .state/latest-backtest.json
-          cd .state
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add latest-results.json latest-backtest.json
-          if [ -f prices.sqlite3 ]; then git add prices.sqlite3; fi
-          if ! git diff --cached --quiet; then
-            git commit -m "data: refresh official market history and screening status"
-            git push origin HEAD:market-data
-          fi
+          python -m screener.quality audit
+          python -m screener.daily paper --output site/paper.json
+      - name: Durable checksummed backup
+        run: bash scripts/save-history.sh
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
+        with: {path: site}
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          path: site
-      - name: Record update outcome
-        run: |
-          echo '### Official market update' >> "$GITHUB_STEP_SUMMARY"
-          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import json
-          result = json.load(open('site/results.json'))
-          print('Status:', result['status'])
-          print('As of:', result.get('as_of'))
-          print('Candidates:', len(result['candidates']))
-          backtest = json.load(open('site/backtest.json'))
-          print('Backtest:', backtest['status'])
-          for model in backtest.get('models', []):
-              print(model['name'], 'closed:', model['closed_count'], 'estimated return:', model['metrics']['total_return'])
-          for error in result.get('errors', []) + backtest.get('errors', []):
-              print('Error:', error)
-          PY
-      - name: Export result
-        id: outcome
-        env:
-          OUTCOME: ${{ steps.update.outcome }}
-          BACKTEST_OUTCOME: ${{ steps.backtest.outcome }}
-        run: |
-          echo "update_outcome=$OUTCOME" >> "$GITHUB_OUTPUT"
-          echo "backtest_outcome=$BACKTEST_OUTCOME" >> "$GITHUB_OUTPUT"
-    outputs:
-      update_outcome: ${{ steps.outcome.outputs.update_outcome }}
-      backtest_outcome: ${{ steps.outcome.outputs.backtest_outcome }}
-
+          name: daily-diagnostics
+          retention-days: 7
+          path: |
+            site/results.json
+            site/data-quality.json
+            site/paper.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.publish.outputs.page_url }}
     steps:
-      - name: Publish results or explicit source error page
-        id: deployment
-        uses: actions/deploy-pages@v4
-      - name: Fail run if official data update failed
-        if: needs.build.outputs.update_outcome != 'success' || needs.build.outputs.backtest_outcome != 'success'
-        run: |
-          echo 'Official update or preliminary backtest failed. An explicit error was deployed; no fabricated prices or returns were used.' >&2
-          exit 1
+      - uses: actions/deploy-pages@v4
+        id: publish
+      - name: Report source failure after publishing explicit error
+        if: needs.build.outputs.update_outcome != 'success'
+        run: exit 1

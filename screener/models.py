@@ -20,6 +20,7 @@ class ModelSettings:
     breakout_volume_multiple: float = 1.5
     breakout_stop_atr: float = 2.0
     breakout_target_r: float = 2.0
+    rsi_wilder: bool = False
     rsi_days: int = 14
     rsi_recovery_level: float = 40
     rsi_stop_atr: float = 0.5
@@ -46,6 +47,10 @@ class ModelSettings:
                     'pattern_days', 'pattern_pivot_radius', 'shoulder_min_spacing', 'shoulder_max_spacing'}
         for field in fields(self):
             value = getattr(self, field.name)
+            if field.name == 'rsi_wilder':
+                if not isinstance(value, bool):
+                    raise ValueError('rsi_wilder 必須是布林值')
+                continue
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
                 raise ValueError(f'{field.name} 必須是正的有限數值')
             if field.name in integers and not isinstance(value, int):
@@ -75,6 +80,18 @@ def required_bars(p: Parameters, m: ModelSettings, model: str) -> int:
 def rsi(closes: list[float], days: int = 14) -> float:
     changes = [b-a for a, b in zip(closes[-days-1:], closes[-days:])]
     gain, loss = mean(max(x, 0) for x in changes), mean(max(-x, 0) for x in changes)
+    return 100 if loss == 0 and gain > 0 else 50 if loss == gain == 0 else 100-100/(1+gain/loss)
+
+
+def wilder_rsi(closes: list[float], days: int = 14) -> float:
+    if len(closes) < days+1:
+        raise ValueError('Wilder RSI 歷史不足')
+    changes = [b-a for a,b in zip(closes,closes[1:])]
+    gain = mean(max(x,0) for x in changes[:days])
+    loss = mean(max(-x,0) for x in changes[:days])
+    for change in changes[days:]:
+        gain = (gain*(days-1)+max(change,0))/days
+        loss = (loss*(days-1)+max(-change,0))/days
     return 100 if loss == 0 and gain > 0 else 50 if loss == gain == 0 else 100-100/(1+gain/loss)
 
 
@@ -139,7 +156,7 @@ def user_pattern(bars: list[Bar], p: Parameters, m: ModelSettings, atr: float) -
                         '目標為頸線加頭部深度的型態等幅估算，非已發生行情']}
 
 
-def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | None = None) -> dict | None:
+def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | None = None, include_bars: bool = True) -> dict | None:
     m = m or ModelSettings()
     if len(bars) < required_bars(p, m, model):
         return None
@@ -174,13 +191,14 @@ def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | N
                        'reasons': [f'收盤突破前 {m.breakout_days} 日高點 {peak:.2f}', f'量比 {ratio:.2f} ≥ {m.breakout_volume_multiple:g}',
                                    f'停損採 MA 或 {m.breakout_stop_atr:g} ATR；目標為模型 {m.breakout_target_r:g}R']}
         elif model == 'rsi_recovery':
-            previous, current = rsi(closes[:-1], m.rsi_days), rsi(closes, m.rsi_days)
+            rsi_function = wilder_rsi if m.rsi_wilder else rsi
+            previous, current = rsi_function(closes[:-1], m.rsi_days), rsi_function(closes, m.rsi_days)
             if not (previous <= m.rsi_recovery_level < current and today.close > yesterday.high and today.close > today.open and today.close/fast-1 <= p.support_distance_max):
                 return None
             pattern = {'variant': 'RSI 回升', 'support': fast,
                        'stop': min(b.low for b in bars[-p.pullback_days-1:-1])-m.rsi_stop_atr*atr,
                        'target': peak, 'score': 50+min(current-m.rsi_recovery_level, 30)/30*50,
-                       'reasons': [f'簡單平均 RSI{m.rsi_days} {previous:.2f} → {current:.2f}，向上穿越 {m.rsi_recovery_level:g}',
+                       'reasons': [f"{'Wilder 平滑' if m.rsi_wilder else '簡單平均'} RSI{m.rsi_days} {previous:.2f} → {current:.2f}，向上穿越 {m.rsi_recovery_level:g}",
                                    '紅 K 收盤突破前日高點，且接近短均線', f'參考目標為前 {m.breakout_days} 日高點 {peak:.2f}']}
         else:
             raise ValueError('未知策略')
@@ -193,13 +211,13 @@ def alternative(bars: list[Bar], p: Parameters, model: str, m: ModelSettings | N
             'stop': round(pattern['stop'], 3), 'target': round(pattern['target'], 3), 'support': round(pattern['support'], 3),
             'reward_risk': round(rr, 4), 'score': round(pattern['score'], 4), 'reasons': pattern['reasons'],
             'variant': pattern['variant'], 'metrics': {'average_volume': average_volume}, 'model_id': model,
-            'bars': [asdict(b) for b in bars[-90:]]}
+            'bars': [asdict(b) for b in bars[-90:]] if include_bars else []}
 
 
-def screen_model(histories: dict, as_of: str, p: Parameters, model: str, m: ModelSettings | None = None) -> dict:
+def screen_model(histories: dict, as_of: str, p: Parameters, model: str, m: ModelSettings | None = None, include_bars: bool = True) -> dict:
     m = m or ModelSettings()
     if model == 'trend_pullback':
-        return screen(histories, as_of, p)
+        return screen(histories, as_of, p, include_bars)
     if model not in MODELS:
         raise ValueError('未知策略')
     candidates, universe, sufficient = [], 0, 0
@@ -209,7 +227,7 @@ def screen_model(histories: dict, as_of: str, p: Parameters, model: str, m: Mode
             continue
         universe += 1
         sufficient += len(bars) >= required_bars(p, m, model)
-        signal = alternative(bars, p, model, m)
+        signal = alternative(bars, p, model, m, include_bars)
         if signal:
             candidates.append(signal)
     candidates.sort(key=lambda c: (-c['score'], c['market'], c['code']))

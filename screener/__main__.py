@@ -22,17 +22,17 @@ def default_end() -> date:
     return now.date() if now.hour >= 18 else now.date() - timedelta(days=1)
 
 
-def update(store: Store, client: OfficialClient, end: date, lookback_days: int, start: date | None = None) -> int:
+def update(store: Store, client: OfficialClient, end: date, lookback_days: int, start: date | None = None, missing_only: bool = False) -> int:
     last = store.last_checked()
     if start is None:
         start = last - timedelta(days=7) if last else end - timedelta(days=lookback_days)
     count = 0
     day = start
     while day <= end:
-        if day.weekday() < 5:
+        if day.weekday() < 5 and not (missing_only and store.db.execute("SELECT 1 FROM sessions WHERE date = ?", (day.isoformat(),)).fetchone()):
             # Fetch both markets first. A failed source cannot mark a date complete.
             reports = {market: client.daily(market, day) for market in URLS}
-            store.save_day(day, reports)
+            store.save_day(day, reports, getattr(client, "provenance", None))
             count += 1
             logging.info("%s 上市 %d / 上櫃 %d", day, len(reports["TWSE"]), len(reports["TPEX"]))
         day += timedelta(days=1)
@@ -69,6 +69,11 @@ def run(args) -> int:
         Path(args.db).parent.mkdir(parents=True, exist_ok=True)
         store = Store(args.db)
         if args.command == "update":
+            ensure_start = getattr(args, "ensure_start", None)
+            if ensure_start:
+                if ensure_start > args.end:
+                    raise ValueError('ensure-start 不可晚於 end')
+                update(store, OfficialClient(delay=args.delay), args.end, args.lookback_days, ensure_start, missing_only=True)
             update(store, OfficialClient(delay=args.delay), args.end, args.lookback_days, getattr(args, "start", None))
         as_of = store.db.execute("SELECT MAX(date) FROM bars WHERE date <= ?", (args.end.isoformat(),)).fetchone()[0]
         if not as_of:
@@ -122,6 +127,7 @@ def main():
     parser.add_argument("--execution-config", default="execution.json")
     parser.add_argument("--end", type=date.fromisoformat, default=default_end())
     parser.add_argument("--start", type=date.fromisoformat, help="指定補抓起日；省略則增量更新")
+    parser.add_argument("--ensure-start", type=date.fromisoformat, help="只補齊指定起日以後缺漏日期，再進行最近日期更新")
     parser.add_argument("--lookback-days", type=int, default=180)
     parser.add_argument("--delay", type=float, default=2.0)
     args = parser.parse_args()

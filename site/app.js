@@ -64,7 +64,7 @@ function card(stock, rank) {
   quote.append(node('strong','',format(stock.close)),node('small','',`${stock.change_pct > 0 ? '+' : ''}${format(stock.change_pct)}% · 收盤`));
   top.append(identity,quote);
   const graph = node('div','chart'); graph.append(chart(stock));
-  const caption = node('p','chart-caption');caption.append(node('span','','最近 60 個交易日 · 下方為成交量'),node('span','','┄ 支撐'));
+  const caption = node('p','chart-caption');caption.append(node('span','',stock.chart_price_basis||'最近 60 個交易日 · 下方為成交量'),node('span','','┄ 支撐'));
   const levels = node('dl','levels');
   [['支撐價格',stock.support],['參考停損',stock.stop],['參考目標',stock.target],['風險報酬比',`${format(stock.reward_risk)} 倍`]].forEach(([label,value])=>{
     const item=node('div'); item.append(node('dt','',label),node('dd','',typeof value==='number'?format(value,3):value));levels.append(item);
@@ -80,19 +80,29 @@ function card(stock, rank) {
     box.append(node('h4','','波段進場計畫'),node('p','',`收盤訊號確認後，觀察下一交易日開盤；參考開盤上限 ${format(plan.maximum_open,3)} 元。超過上限或滑價後風報比不足時跳過。`),node('p','',`目標持有 ${plan.profit_min_sessions}～${plan.max_hold_sessions} 個交易日；${plan.stop_rule}。${plan.time_rule}。`));
     el.append(box);
   }
+  if(stock.strategy_version)el.append(node('p','',`凍結版本 ${stock.strategy_version.slice(0,12)}｜進場至停損風險 ${(stock.risk_fraction*100).toFixed(2)}%｜${stock.signal_status}`));
   el.append(node('p','reason-title','入選依據'),reasons,foot);
   return el;
 }
 function render() {
   $('#cards').replaceChildren();
   if (!data || data.status !== 'ok') return;
+  if(data.mode==='research'){
+    $('#count').textContent='0';$('#universe').textContent=format(data.universe_count,0);
+    $('#status').className='notice warning';$('#status').replaceChildren(node('strong','',data.message||'尚無通過驗證的策略'));
+    (data.warnings||[]).forEach(w=>$('#status').append(node('p','',w)));
+    $('#empty').hidden=false;$('#empty-message').textContent='尚無通過驗證的策略。今日不提供正式選股名單，也不以封存模型補入。';
+    $('.strategy-picker').hidden=true;return;
+  }
+  $('.strategy-picker').hidden=Object.keys(data.strategies||{}).length<=1;
   const query = $('#search').value.trim().toLowerCase();
   const sort = $('#sort').value;
   const view=data.strategies?.[strategyId] || data;
   $('#count').textContent=view.candidates.length;
   $('#universe').textContent=format(view.universe_count,0);
   const warnings=[...(data.source_warnings || data.warnings || [])];
-  if(view.shortfall && data.strategies) warnings.push(`此策略僅 ${view.candidates.length} 檔符合全部條件，少於目標 ${data.parameters.target_count} 檔；未放寬條件湊數。`);
+  if(view.shortfall && data.mode==='active') warnings.push('今日無符合策略條件的股票，未放寬標準。');
+  else if(view.shortfall && data.strategies) warnings.push(`此策略僅 ${view.candidates.length} 檔符合全部條件，少於目標 ${data.parameters.target_count} 檔；未放寬條件湊數。`);
   if(data.strategies && view.sufficient_history_count<view.universe_count) warnings.push(`${view.universe_count-view.sufficient_history_count} 檔歷史不足 ${view.required_bars} 根，未參與此策略判斷。`);
   if((Date.now()-new Date(`${data.as_of}T00:00:00+08:00`).getTime())/86400000>4) warnings.push('行情距今超過 4 天，請核對休市公告與更新排程。');
   $('#status').className=`notice ${warnings.length?'warning':''}`;

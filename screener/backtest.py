@@ -33,11 +33,13 @@ class Position:
     target: float
     cost: float
     signal_variant: str = ''
+    initial_stop: float = 0.0
 
 
 def simulate(histories: dict, parameters: Parameters, execution: Execution,
              model: str = 'trend_pullback', start: str | None = None,
-             end: str | None = None, signal_function=None, model_settings: ModelSettings | None = None) -> dict:
+             end: str | None = None, signal_function=None, model_settings: ModelSettings | None = None,
+             refinement_settings=None) -> dict:
     """Entries use only the preceding close. Closing triggers execute next open.
 
     signal_function is an injectable point-in-time signal boundary for testing.
@@ -123,13 +125,17 @@ def simulate(histories: dict, parameters: Parameters, execution: Execution,
             price = fill_price(bar.open, True, execution)
             risk = price-signal['stop']
             rr = (signal['target']-price)/risk if risk > 0 else 0
-            if risk <= 0 or risk/price > parameters.max_risk_fraction or rr < parameters.min_reward_risk:
+            max_risk = min(parameters.max_risk_fraction, refinement_settings.max_signal_risk) if refinement_settings else parameters.max_risk_fraction
+            if risk <= 0 or risk/price > max_risk or rr < parameters.min_reward_risk:
                 rejected['次日開盤後風險條件不合格'] += 1
                 continue
             budget = min(cash, execution.initial_capital/execution.max_positions)
             average_volume = signal['metrics']['average_volume']
             capacity = int(average_volume*execution.max_participation/execution.lot_size)*execution.lot_size
             quantity = min(int(budget/price/execution.lot_size)*execution.lot_size, capacity)
+            if refinement_settings:
+                risk_quantity = int(execution.initial_capital*refinement_settings.risk_budget_fraction/risk/execution.lot_size)*execution.lot_size
+                quantity = min(quantity, risk_quantity)
             while quantity > 0 and price*quantity+commission(price*quantity, execution) > budget:
                 quantity -= execution.lot_size
             if quantity <= 0 or bar.volume < quantity:
@@ -139,7 +145,7 @@ def simulate(histories: dict, parameters: Parameters, execution: Execution,
             cost = round(price*quantity+fee, 2)
             cash = round(cash-cost, 2)
             positions[key] = Position(*key, signal['name'], signal['date'], day, day_index,
-                                      price, quantity, fee, signal['stop'], signal['target'], cost, signal.get('variant', '趨勢回檔再轉強'))
+                                      price, quantity, fee, signal['stop'], signal['target'], cost, signal.get('variant', '趨勢回檔再轉強'), signal['stop'])
         # 3. Closing data now becomes available; use it only for tomorrow's orders.
         for key, bar in quotes.items():
             if key in positions and key in last_close and abs(bar.close/last_close[key]-1) > parameters.max_daily_gap:
@@ -150,10 +156,15 @@ def simulate(histories: dict, parameters: Parameters, execution: Execution,
             bar = quotes.get(key)
             if key in exits:
                 continue
+            initial_risk = position.entry_price-position.initial_stop
+            if refinement_settings and bar and bar.close >= position.entry_price+refinement_settings.breakeven_trigger_r*initial_risk:
+                position.stop = max(position.stop, position.entry_price)
             if bar and bar.close <= position.stop:
                 exits[key] = '收盤停損'
             elif bar and holding >= execution.profit_min_sessions and bar.close >= position.target:
                 exits[key] = '收盤達目標'
+            elif refinement_settings and bar and holding >= refinement_settings.failure_sessions and bar.close < position.entry_price+refinement_settings.failure_min_r*initial_risk:
+                exits[key] = '轉強未延續，時間失敗出場'
             elif holding >= execution.max_hold_sessions-1:
                 exits[key] = '持有時間到期'
         value = cash
@@ -189,11 +200,11 @@ def simulate(histories: dict, parameters: Parameters, execution: Execution,
     warnings = ['原始未還原權息價格：未計入股息、除權／減資調整，結果不能視為完整投資報酬。',
                 '日線開盤價與滑價僅為成交模型，未模擬完整漲跌停參考價、開盤委託佇列及部分成交。',
                 '收盤觸發後次日開盤執行，跳空可能使停損失效；停牌／成交受限可能超過 20 個交易日。',
-                '只比較固定策略，未進行參數最佳化；尚未完成跨年度與獨立樣本外驗證。']
+                '每個原策略只測試一個預先固定的改良候選，未搜尋參數；尚未完成真正未見資料及跨市場循環驗證。']
     if len(closed) < 30:
         warnings.append(f'僅 {len(closed)} 筆已平倉交易，樣本不足以推論穩定勝率。')
-    if len(active_dates) < 252:
-        warnings.append(f'有效模擬僅 {len(active_dates)} 個交易日，不涵蓋完整年度與多種市場循環。')
+    if (date.fromisoformat(active_dates[-1])-date.fromisoformat(active_dates[0])).days < 350:
+        warnings.append(f'有效模擬僅 {len(active_dates)} 個交易日，不涵蓋完整日曆年與多種市場循環。')
     if discontinuities:
         warnings.append(f'{len(discontinuities)} 次持股價格異常跳動，可能含公司行動，未做權息調整。')
     if any(p['last_quote_date'] != active_dates[-1] for p in open_positions):
@@ -209,7 +220,10 @@ def simulate(histories: dict, parameters: Parameters, execution: Execution,
                         'profit_factor': round(gross_profit/gross_loss, 6) if gross_loss else None,
                         'average_trade_return': mean(t['net_return'] for t in closed) if closed else None,
                         'average_holding_sessions': mean(t['holding_sessions'] for t in closed) if closed else None,
-                        'realized_net_pnl': round(sum(t['net_pnl'] for t in closed), 2)},
+                        'realized_net_pnl': round(sum(t['net_pnl'] for t in closed), 2),
+                        'closed_fees_tax': round(sum(t['entry_fee']+t['exit_fee']+t['sell_tax'] for t in closed), 2),
+                        'average_winner': mean(t['net_pnl'] for t in winners) if winners else None,
+                        'average_loser': mean(t['net_pnl'] for t in losses) if losses else None},
             'closed_trades': closed, 'open_positions': open_positions, 'equity_curve': curve,
             'rejected_orders': dict(rejected), 'deferred_exits': dict(deferred),
             'warnings': warnings}
@@ -225,6 +239,7 @@ def main():
     parser.add_argument('--start', type=date.fromisoformat)
     parser.add_argument('--end', type=date.fromisoformat)
     parser.add_argument('--upstream-error', action='store_true')
+    parser.add_argument('--refinement-config', default='refinements.json')
     args = parser.parse_args()
     result = {'schema_version': 1, 'status': 'error', 'generated_at': datetime.now(ZoneInfo('Asia/Taipei')).isoformat(), 'models': [], 'errors': []}
     try:
@@ -243,17 +258,17 @@ def main():
             if not end:
                 raise DataError('沒有可用的官方歷史行情')
             histories = store.histories(end)
+            from .research import verify_coverage, year_start
+            coverage = verify_coverage(store, histories, args.start.isoformat() if args.start else year_start(end), end,
+                                       max(required_bars(p, model_settings, model) for model in MODELS))
         finally:
             store.close()
-        all_dates = sorted({b.date for bars in histories.values() for b in bars})
-        common_required = max(required_bars(p, model_settings, model) for model in MODELS)
-        if len(all_dates) <= common_required:
-            raise DataError('歷史資料不足以在相同區間比較所有策略')
-        common_start = max(args.start.isoformat() if args.start else all_dates[0], all_dates[common_required-1])
-        result.update(status='preliminary', price_basis='unadjusted',
-                      strategy_parameters=asdict(p), execution_parameters=asdict(execution),
-                      model_parameters=asdict(model_settings), active_model='trend_pullback', user_model='user_range_reclaim',
-                      models=[simulate(histories, p, execution, model, common_start, end, model_settings=model_settings) for model in MODELS])
+        from .research import run_research
+        from .refinements import Refinements
+        refinements = Refinements(**json.loads(Path(args.refinement_config).read_text()))
+        result.update(run_research(histories, p, execution, model_settings, refinements,
+                                   start=args.start.isoformat() if args.start else None, end=end))
+        result['source_coverage'] = coverage
         code = 0
     except Exception as exc:
         result.update(status='error', models=[], errors=[str(exc)])

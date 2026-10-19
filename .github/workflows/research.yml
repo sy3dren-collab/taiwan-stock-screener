@@ -1,0 +1,58 @@
+name: Bounded naked K research
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'backfill / research / final-test (final requires a pristine, frozen study)'
+        type: choice
+        options: [backfill, research, final-test]
+        default: research
+  schedule:
+    - cron: '0 17 * * *' # 01:00 Taipei, bounded incremental backfill and research only.
+permissions:
+  contents: write
+concurrency:
+  group: official-research-state
+  cancel-in-progress: false
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Engine, leakage and validation tests
+        run: python -m unittest discover -s tests -v
+      - uses: actions/checkout@v4
+        with: {path: .history, fetch-depth: 1}
+      - run: bash scripts/restore-history.sh
+      - name: Bounded backfill
+        id: backfill
+        if: inputs.task == 'backfill' || github.event_name == 'schedule'
+        continue-on-error: true
+        run: python -m screener.quality backfill
+      - name: Bounded research
+        if: inputs.task != 'final-test'
+        run: python -m screener.optimizer research
+      - name: One-use final holdout
+        if: inputs.task == 'final-test'
+        run: python -m screener.optimizer final-test
+      - name: Data status and safe daily output
+        run: |
+          python -m screener.quality audit
+          python -m screener.daily screen --offline
+      - run: bash scripts/save-history.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: naked-k-evidence
+          retention-days: 7
+          path: |
+            site/research.json
+            site/data-quality.json
+            site/final-test.json
+            .state/experiments/
+      - name: Preserve ingestion error as failure
+        if: steps.backfill.outcome == 'failure'
+        run: exit 1

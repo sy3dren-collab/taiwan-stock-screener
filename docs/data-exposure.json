@@ -1,0 +1,4 @@
+{
+  "schema_version": 1,
+  "exposures": [{"start":"2025-10-17","end":"2026-10-16","kind":"performance_and_strategy_design","recorded":"2026-10-19","evidence":"archive/year-2026-10-16.json","reason":"舊四模型全年與前八後四績效已讀取，並據末段55日提出改良"}]
+}

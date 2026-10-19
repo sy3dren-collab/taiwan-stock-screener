@@ -1,0 +1,22 @@
+{
+  "study": {
+    "data_start": "2021-06-19", "analysis_start": "2021-10-17", "as_of": "2026-10-16",
+    "holdout_start": "2025-10-17", "holdout_end": "2026-10-16",
+    "holdout_status": "contaminated", "contamination_reason": "最近一年已被舊策略與前輪改良研究使用，不可重新宣稱獨立樣本外",
+    "train_sessions": 378, "validation_sessions": 63, "step_sessions": 63, "purge_sessions": 20, "embargo_sessions": 5
+  },
+  "signal": {
+    "lookback": 100, "structure_days": 90, "pivot_radius": 2, "pullback_days": 5,
+    "range_days": 60, "event_days": 15, "range_width": 0.25, "support_tolerance": 0.02,
+    "confirmation_buffer": 0.005, "close_location": 0.7, "stop_buffer": 0.005,
+    "minimum_price": 20, "minimum_turnover": 50000000, "liquidity_days": 20,
+    "min_reward_risk": 1.5, "max_risk": 0.08, "support_touches": 3, "touch_spacing": 5
+  },
+  "risk": {"risk_budget": 0.01, "trailing_activation_r": 1.5, "trailing_buffer": 0.005, "max_unquoted_sessions": 3},
+  "gates": {
+    "minimum_folds": 3, "minimum_trades": 60, "minimum_fold_trades": 10,
+    "max_drawdown": 0.15, "minimum_profit_factor": 1.2, "minimum_positive_folds": 0.67,
+    "maximum_top_two_profit_share": 0.5, "target_win_rate": 0.85, "stress_cost_multiple": 2
+  },
+  "budget": {"max_experiments": 9, "max_seconds": 600, "max_backfill_days": 30, "max_requests": 60, "backfill_seconds": 300}
+}

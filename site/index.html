@@ -10,30 +10,34 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <title>台股波段觀察室｜每日量化選股</title>
   <meta name="description" content="根據證交所及櫃買中心公開行情，以透明、可調整的波段策略篩選台灣股票。">
-  <link rel="stylesheet" href="styles.css?v=955798ccd1f1">
-  <script src="app.js?v=cf2829a150aa" defer></script>
-  <script src="backtest.js?v=55fe2805bc0d" defer></script>
+  <link rel="stylesheet" href="styles.css?v=64b3268e2c3e">
+  <script src="app.js?v=67445e442ffd" defer></script>
+  <script src="naked.js?v=b9f6534038fc" defer></script>
+  <script src="backtest.js?v=8fe692aef0e6" defer></script>
 </head>
 <body>
   <header class="topbar"><a class="brand" href="./"><span class="brandmark" aria-hidden="true">↗</span> 台股波段觀察室</a><span class="edition">TAIWAN MARKET · DAILY SCREEN</span></header>
   <main>
     <section class="hero">
-      <div><p class="eyebrow">收盤後的研究筆記 / 01</p><h1>順著趨勢，<br>等待好的位置。</h1><p class="intro">以獨立規則觀察整理區間、回檔轉強與帶量突破。<br>比較約 1–4 週的波段訊號，保留每個策略的判斷依據。</p></div>
+      <div><p class="eyebrow">收盤後的研究筆記 / 01</p><h1>先驗證裸 K，<br>再決定是否進場。</h1><p class="intro">集中比較三類裸 K 候選，只有通過驗證的唯一策略能產生正式名單。<br>85% 勝率是研究目標，不是保證或單一晉級條件。</p></div>
       <aside class="overview" aria-label="資料摘要"><span class="live-label"><i></i> 官方收盤資料</span><dl><div><dt>行情日期</dt><dd id="as-of">—</dd></div><div><dt>本日候選</dt><dd><span id="count">—</span><small> 檔</small></dd></div><div><dt>納入股票</dt><dd><span id="universe">—</span><small> 檔</small></dd></div></dl><p id="updated">等待資料載入</p></aside>
     </section>
     <section id="status" class="notice" aria-live="polite">正在讀取選股結果…</section>
     <section class="results-section" aria-labelledby="results-title">
-      <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">今日波段候選</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
+      <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">今日符合唯一策略的候選</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
       <div class="strategy-picker"><label for="strategy-select">選股策略</label><select id="strategy-select"><option value="trend_pullback">原策略：趨勢回檔再轉強</option></select><p id="strategy-description"></p></div>
       <div class="toolbar"><div class="market-tabs" role="group" aria-label="市場篩選"><button class="active" data-market="all" aria-pressed="true">全部市場</button><button data-market="TWSE" aria-pressed="false">上市</button><button data-market="TPEX" aria-pressed="false">上櫃</button></div><div class="tools"><label><span class="sr-only">搜尋股票名稱或代號</span><input id="search" type="search" placeholder="搜尋名稱或代號" autocomplete="off"></label><label><span class="sr-only">排序方式</span><select id="sort"><option value="score">綜合分數</option><option value="reward_risk">風險報酬比</option><option value="code">股票代號</option></select></label></div></div>
       <div id="cards" class="cards" aria-live="polite"></div>
       <div id="empty" class="empty" hidden><span aria-hidden="true">⌁</span><h3>耐心，也是策略的一部分。</h3><p id="empty-message">目前沒有符合條件的股票。</p></div>
     </section>
-    <section class="personal-strategy" aria-labelledby="personal-title"><p class="eyebrow">YOUR INDEPENDENT STRATEGY</p><h2 id="personal-title">你的策略，獨立觀察。</h2><p>長時間整理後，觀察「假跌破後收復區間」或「量化近似頭肩底突破」。<strong>收復／突破當天必須出大量。</strong>這組規則不混入其他策略的均線條件。</p><button id="show-user-strategy" type="button" disabled>查看我的策略候選</button><details><summary>查看你的量化條件與可調參數</summary><div id="personal-parameters"></div><p>頭肩底是確認後轉折點的量化近似，不代表人工確認型態。所有門檻都可在 models.json 調整。</p></details></section>
-    <section class="backtest-section" aria-labelledby="backtest-title"><div class="section-heading"><div><p class="eyebrow">PRELIMINARY RESEARCH</p><h2 id="backtest-title">獨立策略，初步比較。</h2></div><span class="research-badge">未還原權息</span></div><div id="backtest-status" class="notice" aria-live="polite">正在讀取初步回測…</div><p id="backtest-period"></p><div id="backtest-models" class="backtest-models"></div><div id="backtest-assumptions"></div><div id="backtest-detail"></div></section>
-    <section class="method" aria-labelledby="method-title"><div><p class="eyebrow">A DISCIPLINED APPROACH</p><h2 id="method-title">每一個條件，<br>都有明確的依據。</h2><p>下列五項對應原策略「趨勢回檔再轉強」。<br>你的區間策略及其他比較策略各自獨立判斷，不混用。</p></div><ol><li><span>01</span><div><h3>趨勢向上</h3><p>收盤高於短均線，短均線高於長均線，且短均線持續上升。</p></div></li><li><span>02</span><div><h3>多頭結構</h3><p>最近兩個確認波段高點與低點，皆依序抬高。</p></div></li><li><span>03</span><div><h3>回到支撐</h3><p>回檔低點接近短均線或確認波段低點，收盤仍在支撐之上。</p></div></li><li><span>04</span><div><h3>量縮整理</h3><p>回檔期間的平均成交量，小於此前基準期間的一定比例。</p></div></li><li><span>05</span><div><h3>重新轉強</h3><p>紅 K 收盤突破前日高點，並通過停損距離及風險報酬比門檻。</p></div></li></ol></section>
+    <section hidden class="personal-strategy" aria-labelledby="personal-title"><p class="eyebrow">YOUR INDEPENDENT STRATEGY</p><h2 id="personal-title">你的策略，獨立觀察。</h2><p>長時間整理後，觀察「假跌破後收復區間」或「量化近似頭肩底突破」。<strong>收復／突破當天必須出大量。</strong>這組規則不混入其他策略的均線條件。</p><button id="show-user-strategy" type="button" disabled>查看我的策略候選</button><details><summary>查看你的量化條件與可調參數</summary><div id="personal-parameters"></div><p>頭肩底是確認後轉折點的量化近似，不代表人工確認型態。所有門檻都可在 models.json 調整。</p></details></section>
+    <section class="naked-research" aria-labelledby="naked-title"><p class="eyebrow">ONE VERIFIED STRATEGY</p><h2 id="naked-title">單一策略驗證狀態</h2><div id="naked-active" class="notice" aria-live="polite">讀取研究狀態中…</div><div id="naked-performance"></div><h3>官方資料與驗證缺口</h3><div id="naked-quality"></div><h3>三類裸 K 候選的公平比較</h3><p>研究階段可比較三類；正式引擎同時只允許一套通過驗證的凍結版本。無有效回測時顯示缺口，不填入範例績效。</p><div id="naked-comparisons" class="naked-comparisons"></div><h3>策略優化紀錄</h3><div id="optimization-history"></div><h3>績效分析與完整交易</h3><div id="naked-charts"></div></section>
+    <details id="legacy-research" class="legacy-archive"><summary>封存的四模型與一年歷史研究（未作正式策略）</summary><p>以下資料只保留稽核用途，未還原權息，最近一年已被使用，不是獨立封存樣本外。原策略沒有刪除，也不再啟用為首頁選股策略。</p><details id="legacy-watchlist"><summary>查看封存的 2026-10-16 名單與 K 線</summary><p>封存快照，原策略已停用；以下不是今日推薦。</p><div id="legacy-cards" class="cards"></div></details>
+    <section class="backtest-section" aria-labelledby="backtest-title"><div class="section-heading"><div><p class="eyebrow">PRELIMINARY RESEARCH</p><h2 id="backtest-title">封存四模型：已使用的歷史研究。</h2></div><span class="research-badge">未還原權息</span></div><div id="backtest-status" class="notice" aria-live="polite">正在讀取初步回測…</div><p id="backtest-period"></p><div id="research-protocol"></div><div id="backtest-models" class="backtest-models"></div><div id="backtest-assumptions"></div><div id="backtest-detail"></div></section>
+    </details>
+    <section hidden class="method" aria-labelledby="method-title"><div><p class="eyebrow">A DISCIPLINED APPROACH</p><h2 id="method-title">每一個條件，<br>都有明確的依據。</h2><p>下列五項對應原策略「趨勢回檔再轉強」。<br>你的區間策略及其他比較策略各自獨立判斷，不混用。</p></div><ol><li><span>01</span><div><h3>趨勢向上</h3><p>收盤高於短均線，短均線高於長均線，且短均線持續上升。</p></div></li><li><span>02</span><div><h3>多頭結構</h3><p>最近兩個確認波段高點與低點，皆依序抬高。</p></div></li><li><span>03</span><div><h3>回到支撐</h3><p>回檔低點接近短均線或確認波段低點，收盤仍在支撐之上。</p></div></li><li><span>04</span><div><h3>量縮整理</h3><p>回檔期間的平均成交量，小於此前基準期間的一定比例。</p></div></li><li><span>05</span><div><h3>重新轉強</h3><p>紅 K 收盤突破前日高點，並通過停損距離及風險報酬比門檻。</p></div></li></ol></section>
     <details class="parameters"><summary>查看本次策略參數與計算方式</summary><p>參數可在儲存庫的 strategy.json 調整，再執行更新或重新選股。所有比例以小數表示，成交量單位為股。</p><div id="parameters"></div><p>停損＝min（支撐、回檔最低價）− ATR × 緩衝倍數；參考目標＝最近確認波段高點；風險報酬比＝（目標−最新收盤）÷（最新收盤−停損）。尚未扣除手續費、稅、滑價；參考價未作交易單位進位。</p><p>排序分數＝40 ×（1−支撐距離／上限）＋30 ×（1−量比）＋20 × min（風報比／3, 1）＋10 × min（均線升幅／5%, 1）。分數僅供候選排序，不是勝率。波段轉折須等待左右指定根數確認；只使用資料日以前已知行情。</p></details>
-    <aside class="disclaimer"><strong>研究工具，不是交易指令。</strong><p>公開原始行情未做除權息還原，異常價格跳動採保守排除，仍可能受公司行動影響。僅納入四位數普通股（排除上市 91xx 存託憑證），不含 ETF、權證；歷史不足及當日無成交者不參與。已加入原始未還原權息的初步回測，尚未完成完整權息與樣本外驗證。選股與參考停損不保證獲利或成交。本站不提供自動下單。</p></aside>
+    <aside class="disclaimer"><strong>研究工具，不是交易指令。</strong><p>公開原始行情未做除權息還原，異常價格跳動採保守排除，仍可能受公司行動影響。僅納入四位數普通股（排除上市 91xx 存託憑證），不含 ETF、權證；歷史不足及當日無成交者不參與。現有裸 K 研究仍受五年資料及完整公司行動證據限制；未通過驗證時不產生正式推薦。封存四模型資料不作成熟策略宣稱。選股與參考停損不保證獲利或成交。本站不提供自動下單。</p></aside>
   </main>
   <footer><span>台股波段觀察室 · 開放資料，透明規則。</span><span>資料來源：<a href="https://www.twse.com.tw/" target="_blank" rel="noopener noreferrer">臺灣證券交易所 ↗</a> / <a href="https://www.tpex.org.tw/" target="_blank" rel="noopener noreferrer">證券櫃檯買賣中心 ↗</a></span></footer>
   <noscript><p class="notice error">請啟用 JavaScript 以讀取每日結果及繪製 K 線圖。</p></noscript>

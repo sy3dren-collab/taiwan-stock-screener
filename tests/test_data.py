@@ -105,6 +105,15 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(max(d for _,d in calls),date(2025,1,8))
         self.assertEqual(len(calls),16)
 
+    def test_ensure_history_skips_only_officially_checked_dates(self):
+        self.store.save_day(DAY,self.reports())
+        calls=[]
+        class Client:
+            def daily(self,market,day):calls.append((market,day));return []
+        update(self.store,Client(),date(2025,1,7),180,start=DAY,missing_only=True)
+        self.assertEqual(calls,[('TWSE',date(2025,1,7)),('TPEX',date(2025,1,7))])
+        self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM bars').fetchone()[0],2)
+
     def test_failed_second_market_does_not_mark_complete(self):
         class Client:
             def daily(_,market,day):

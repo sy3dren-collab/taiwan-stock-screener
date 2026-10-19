@@ -28,6 +28,8 @@ class Bar:
     low: float
     close: float
     volume: int  # shares, never lots
+    turnover: float | None = None  # official traded NTD, never close * volume
+    reference: float | None = None  # current session official change reference
 
 
 URLS = {
@@ -129,7 +131,28 @@ def parse_report(market: str, day: date, payload: object) -> list[Bar]:
             if code in seen:
                 raise DataError(f"{market} {code} 出現重複資料")
             seen.add(code)
-            bars.append(Bar(market, code, str(raw["name"]).strip(), day.isoformat(), **prices, volume=int(volume)))
+            amount_columns = [i for i,h in enumerate(headers) if h in ('成交金額','成交金額(元)','成交金額(千元)','成交金額(仟元)')]
+            turnover = number(row[amount_columns[0]]) if amount_columns else None
+            if amount_columns and headers[amount_columns[0]] in ('成交金額(千元)','成交金額(仟元)'):
+                turnover *= 1000
+            if turnover is not None and (turnover < 0 or (volume > 0 and turnover <= 0)):
+                raise DataError(f'{market} {code} 官方成交金額不合法')
+            reference = None
+            if '漲跌價差' in headers and '漲跌(+/-)' in headers:
+                sign=normalize(row[headers.index('漲跌(+/-)')])
+                if sign in ('+','-',''):
+                    try:
+                        delta=number(row[headers.index('漲跌價差')]) * (-1 if sign=='-' else 1)
+                        reference=round(prices['close']-delta,6)
+                    except DataError:
+                        pass
+            elif '漲跌' in headers:
+                try:reference=round(prices['close']-number(row[headers.index('漲跌')]),6)
+                except DataError:pass
+            if reference is not None and reference <= 0:
+                raise DataError(f'{market} {code} 漲跌參考價不合法')
+            bars.append(Bar(market, code, str(raw["name"]).strip(), day.isoformat(), **prices,
+                            volume=int(volume), turnover=turnover, reference=reference))
         if rows and not bars:
             raise DataError(f"{market} 行情表沒有可辨識的普通股資料")
         return bars
@@ -137,9 +160,12 @@ def parse_report(market: str, day: date, payload: object) -> list[Bar]:
 
 
 class OfficialClient:
-    def __init__(self, delay: float = 2.0, retries: int = 3):
-        self.delay, self.retries = delay, retries
+    def __init__(self, delay: float = 2.0, retries: int = 3, timeout: float = 40, request_budget: int | None = None, deadline: float | None = None):
+        self.delay, self.retries, self.timeout = delay, retries, timeout
         self.last_request = 0.0
+        self.provenance = {}
+        self.request_count = 0
+        self.request_budget, self.deadline = request_budget, deadline
 
     def daily(self, market: str, day: date) -> list[Bar]:
         params = ({"date": day.strftime("%Y%m%d"), "type": "ALLBUT0999", "response": "json"}
@@ -147,13 +173,23 @@ class OfficialClient:
         url = URLS[market] + "?" + urlencode(params)
         last = None
         for attempt in range(self.retries):
+            if self.request_budget is not None and self.request_count>=self.request_budget:raise DataError('官方請求預算已用完')
+            if self.deadline and time.monotonic()>=self.deadline:raise DataError('官方時間預算已用完')
             time.sleep(max(0, self.delay - (time.monotonic() - self.last_request)))
             self.last_request = time.monotonic()
             try:
                 request = Request(url, headers={"User-Agent": "TaiwanStockScreener/0.1 (public daily report research)", "Accept": "application/json"})
-                with urlopen(request, timeout=40) as response:
+                if self.deadline and time.monotonic()>=self.deadline:raise DataError('官方時間預算已用完')
+                timeout=min(self.timeout,max(.1,self.deadline-time.monotonic())) if self.deadline else self.timeout
+                self.request_count+=1
+                with urlopen(request, timeout=timeout) as response:
                     payload = json.loads(response.read().decode("utf-8-sig"))
-                return parse_report(market, day, payload)
+                bars = parse_report(market, day, payload)
+                import hashlib
+                from datetime import datetime, timezone
+                self.provenance[market]={'url':url,'sha256':hashlib.sha256(json.dumps(payload,sort_keys=True,ensure_ascii=False).encode()).hexdigest(),
+                                         'fetched_at':datetime.now(timezone.utc).isoformat()}
+                return bars
             except Exception as exc:
                 last = exc
                 if attempt + 1 < self.retries:
@@ -176,7 +212,15 @@ class Store:
           date TEXT PRIMARY KEY, twse_count INTEGER NOT NULL, tpex_count INTEGER NOT NULL);
         """)
 
-    def save_day(self, day: date, reports: dict[str, list[Bar]]) -> None:
+        columns={row[1] for row in self.db.execute('PRAGMA table_info(bars)')}
+        with self.db:
+            for name in ('turnover','reference'):
+                if name not in columns:self.db.execute(f'ALTER TABLE bars ADD COLUMN {name} REAL')
+            self.db.execute("""CREATE TABLE IF NOT EXISTS source_batches(
+              market TEXT, date TEXT, source_url TEXT NOT NULL, payload_sha256 TEXT NOT NULL,
+              fetched_at TEXT NOT NULL, PRIMARY KEY(market,date))""")
+
+    def save_day(self, day: date, reports: dict[str, list[Bar]], provenance: dict | None = None) -> None:
         if set(reports) != set(URLS):
             raise DataError("上市與上櫃資料必須一起成功才能儲存")
         if bool(reports["TWSE"]) != bool(reports["TPEX"]):
@@ -185,9 +229,16 @@ class Store:
             raise DataError("儲存日期或市場與行情不符")
         with self.db:
             self.db.execute("DELETE FROM bars WHERE date = ?", (day.isoformat(),))
-            self.db.executemany("INSERT INTO bars VALUES (:market,:code,:name,:date,:open,:high,:low,:close,:volume)",
+            self.db.executemany("INSERT INTO bars VALUES (:market,:code,:name,:date,:open,:high,:low,:close,:volume,:turnover,:reference)",
                                 [asdict(b) for bars in reports.values() for b in bars])
             self.db.execute("INSERT OR REPLACE INTO sessions VALUES (?,?,?)", (day.isoformat(), len(reports["TWSE"]), len(reports["TPEX"])))
+            self.db.execute('DELETE FROM source_batches WHERE date=?',(day.isoformat(),))
+            if provenance:
+                if set(provenance)!=set(URLS):raise DataError('兩市場來源證據必須完整')
+                for market,proof in provenance.items():
+                    if not proof['url'].startswith(URLS[market]+'?') or len(proof['sha256'])!=64:raise DataError('官方來源證據不合法')
+                    self.db.execute('INSERT INTO source_batches VALUES (?,?,?,?,?)',
+                                    (market,day.isoformat(),proof['url'],proof['sha256'],proof['fetched_at']))
 
     def last_checked(self) -> date | None:
         value = self.db.execute("SELECT MAX(date) FROM sessions").fetchone()[0]
