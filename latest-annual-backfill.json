@@ -1,9 +1,9 @@
 {
   "status": "complete",
-  "completed_dates": 137,
-  "last_completed": "2026-10-08",
-  "http_requests": 290,
-  "elapsed_seconds": 472.2,
+  "completed_dates": 0,
+  "last_completed": null,
+  "http_requests": 0,
+  "elapsed_seconds": 0.09,
   "error": null,
   "reason": "complete",
   "requested_start": "2025-04-01",

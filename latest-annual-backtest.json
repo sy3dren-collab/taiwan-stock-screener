@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T14:24:23.906310+00:00",
+  "generated_at": "2026-10-19T21:21:24.890873+00:00",
   "research_model_id": "F",
   "status": "completed",
   "classification": "retrospective_diagnostic",
@@ -11,7 +11,7 @@
     "issues": [],
     "data_sha256": "683957587f50b3b2190d01794f8fb0a43f81337d9aee4bef70e7e95372a68a33",
     "fingerprint_version": 2,
-    "evidence_sha256": "1abec1600131407939c2c55eca97bfcadbd57f28cd2570c06ac1f6b1d3803ffb",
+    "evidence_sha256": "faea380c16c1d3adbb40489a1f3ff93b3b1288eb7752d4d1dbd1acb7acf04e65",
     "requested_start": "2025-04-01",
     "requested_end": "2026-10-16",
     "test_start": "2025-10-17",
@@ -30,7 +30,7 @@
     ]
   },
   "version": {
-    "git_commit": "493df9542b400634d03d436bf3c51c23d425859f",
+    "git_commit": "1dc4355bccb307461c5cc477958aa1eb53d4c33d",
     "code_sha256": "8df37e1e4c04d8e90cba260807896830d4c397c3ff5260ab013b7b18fd32ad2d",
     "working_tree_dirty": false
   },
@@ -5126,7 +5126,7 @@
       "signals": 0
     }
   ],
-  "elapsed_seconds": 52.142,
+  "elapsed_seconds": 50.552,
   "reconciliation": {
     "cash_events_imported": 2683,
     "references_restored": 0,
@@ -7768,5 +7768,5 @@
     ],
     "limitation": "僅支援核對過的純現金除息；配股、減資、身份變更全集未齊。公告保守採生效日；付款日未知的股利不再投入。"
   },
-  "run_id": "20261019T142549611681-F-annual-research-dc7a5eda"
+  "run_id": "20261019T212246358636-F-annual-research-3ab16685"
 }
