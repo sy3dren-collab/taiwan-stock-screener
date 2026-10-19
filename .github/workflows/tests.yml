@@ -1,0 +1,30 @@
+name: Validate research branch
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Offline regression and research safety tests
+        run: python -m unittest discover -s tests -v
+      - name: JavaScript and shell syntax
+        run: |
+          node --check site/app.js
+          node --check site/naked.js
+          node --check site/backtest.js
+          bash -n scripts/restore-history.sh scripts/save-history.sh
+      - name: Browser testing tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-tools" --no-package-lock playwright@1.56.1
+          "$RUNNER_TEMP/browser-tools/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Mobile, desktop, archived data and error states
+        env:
+          NODE_PATH: ${{ runner.temp }}/browser-tools/node_modules
+        run: |
+          node tests/naked-browser.cjs
+          node tests/browser.cjs

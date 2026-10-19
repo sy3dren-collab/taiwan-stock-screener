@@ -32,7 +32,7 @@ def update(store: Store, client: OfficialClient, end: date, lookback_days: int, 
         if day.weekday() < 5 and not (missing_only and store.db.execute("SELECT 1 FROM sessions WHERE date = ?", (day.isoformat(),)).fetchone()):
             # Fetch both markets first. A failed source cannot mark a date complete.
             reports = {market: client.daily(market, day) for market in URLS}
-            store.save_day(day, reports)
+            store.save_day(day, reports, getattr(client, "provenance", None))
             count += 1
             logging.info("%s 上市 %d / 上櫃 %d", day, len(reports["TWSE"]), len(reports["TPEX"]))
         day += timedelta(days=1)
