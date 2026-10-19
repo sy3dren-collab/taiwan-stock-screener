@@ -133,7 +133,11 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
             if bar.low<=pos['stop']:close(key,pos,day,pos['stop'],'盤中結構停損（同根衝突停損優先）',session);continue
             if bar.high>=pos['target']:close(key,pos,day,pos['target'],'盤中目標',session);continue
         for key,bar in quotes.items():latest[key]=bar
-        known={k:bars[:bisect_right(index[k],day)] for k,bars in histories.items()}
+        # Built-in rules need only the configured past window. Custom providers retain full history.
+        known={}
+        for k,bars in histories.items():
+            end_index=bisect_right(index[k],day)
+            known[k]=bars[max(0,end_index-p.lookback) if signal_provider is None else 0:end_index]
         from .quality import signal_histories
         for key,pos in positions.items():
             bar=quotes.get(key)

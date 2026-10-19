@@ -91,10 +91,13 @@ def adjusted_history(bars, day, events):
 
 def signal_histories(histories, day, events):
     from dataclasses import replace
-    result={}
+    result={};by_security={}
+    for event in events:
+        if event.announced_date<=day and event.effective_date<=day:by_security.setdefault((event.market,event.code),[]).append(event)
     identities=sorted((a for a in events if a.kind=='identity' and a.announced_date<=day and a.effective_date<=day),key=lambda a:a.effective_date)
     for bars in histories.values():
-        for b in adjusted_history(bars,day,events):
+        relevant=by_security.get((bars[0].market,bars[0].code),[]) if bars else []
+        for b in adjusted_history(bars,day,relevant):
             key=(b.market,b.code)
             for a in identities:
                 if key==(a.market,a.code) and b.date<a.effective_date:key=(a.new_market,a.new_code)
