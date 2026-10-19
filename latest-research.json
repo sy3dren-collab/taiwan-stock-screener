@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T12:09:17.944956+00:00",
+  "generated_at": "2026-10-19T12:31:20.170714+00:00",
   "status": "blocked",
   "mode": "research",
   "active_strategy": null,
@@ -89,7 +89,7 @@
     "trading_sessions": 148
   },
   "version": {
-    "git_commit": "1cf756857dbfac162b3d4d79d960561a9b8f7122",
+    "git_commit": "936abcf6a21cd6637989115d6d031258cda8a307",
     "code_sha256": "05a5a80158f8a66048e8743478b3e1096f7f7d7360528c2f65900f6387e121e7",
     "working_tree_dirty": false
   },
@@ -116,6 +116,6 @@
     "orders_enabled": false
   },
   "stop_reason": "data_quality",
-  "run_id": "20261019T120917959282-F-research-55138e09",
+  "run_id": "20261019T123120185367-F-research-c2e91a59",
   "history_url": "research-history.json"
 }
