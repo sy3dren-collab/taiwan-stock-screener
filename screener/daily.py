@@ -110,7 +110,9 @@ def main():
             if not a.offline:
                 try:
                     import time
-                    client=OfficialClient(delay=2,retries=2,request_budget=40,deadline=time.monotonic()+300)
+                    # Eight refreshed dates × two markets × up to three tries.
+                    # Leave the final fresh-cache retry reachable in this caller.
+                    client=OfficialClient(delay=2,retries=3,request_budget=50,deadline=time.monotonic()+600)
                     start=end-timedelta(days=25) if not s.last_checked() else None
                     update(s,client,end,180,start)
                 except Exception as exc:error=str(exc)
