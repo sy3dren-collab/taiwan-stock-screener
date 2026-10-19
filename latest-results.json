@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T09:04:26.381561+08:00",
+  "generated_at": "2026-10-19T09:09:41.632191+08:00",
   "requested_through": "2026-10-18",
   "as_of": "2026-10-16",
-  "status": "error",
+  "status": "ok",
   "mode": "research",
   "active_strategy": null,
   "active_model": null,
@@ -29,15 +29,19 @@
     "support_touches": 3,
     "touch_spacing": 5
   },
-  "universe_count": 0,
+  "universe_count": 1942,
   "qualified_count": 0,
   "sufficient_history_count": 0,
   "shortfall": true,
-  "warnings": [],
-  "source_warnings": [],
-  "errors": [
-    "TPEX 2026-10-15 官方資料取得失敗：IncompleteRead(522806 bytes read)"
+  "warnings": [
+    "請求截至 2026-10-18，最新官方行情 2026-10-16；請核對休市與資料公布狀態，不是今日新訊號",
+    "尚無通過驗證的策略"
   ],
+  "source_warnings": [
+    "請求截至 2026-10-18，最新官方行情 2026-10-16；請核對休市與資料公布狀態，不是今日新訊號",
+    "尚無通過驗證的策略"
+  ],
+  "errors": [],
   "sources": {
     "TWSE": "https://www.twse.com.tw/exchangeReport/MI_INDEX",
     "TPEX": "https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes"
