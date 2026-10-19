@@ -4,7 +4,7 @@
 
 沿用 sy3dren-collab/taiwan-stock-screener，基準 main 為 c3527dd。開發分支 research/naked-k-validation；不覆寫 main、不部署未驗證策略。保留 Python 標準函式庫、SQLite、手機版靜態網站、GitHub Pages 與原始碼。舊模型保留並封存；新研究沒有通過驗證時，正式引擎必須為空。
 
-原有四模型與交易規則：user_range_reclaim（60 日整理，假跌破大量收復或量化近似頭肩底，量≥前20日1.5倍）、trend_pullback（MA20>MA60、抬高轉折、近支撐量縮與突破前高）、volume_breakout（MA多頭、20日高點突破、量≥1.5倍、2R目標）、rsi_recovery（簡單平均RSI14越40、MA多頭及突破前高）。皆收盤確認、次日開盤進出；收盤停損可早於5日，停利自第5日檢查，預定第20日出場。完整規則保留於 docs/strategies.md。
+原有四模型與交易規則：user_range_reclaim（60 日整理，假跌破大量收復或量化近似頭肩底，量≥前20日1.5倍）、trend_pullback（MA20>MA60、抬高轉折、近支撐量縮與突破前高）、volume_breakout（MA多頭、20日高點突破、量≥1.5倍、2R目標）、rsi_recovery（簡單平均RSI14越40、MA多頭及突破前高）。皆收盤確認、次日開盤進出；收盤停損可早於5日，停利自第5日檢查，預定第20日出場。完整規則保留於 docs/legacy-strategies.md。
 
 ## 已完成的一年結果
 

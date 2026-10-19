@@ -9,6 +9,5 @@
   "risk_budget_fraction": 0.01,
   "breakeven_trigger_r": 1.0,
   "failure_sessions": 5,
-  "failure_min_r": 0.5,
-  "rsi_recovery_level": 50.0
+  "failure_min_r": 0.5
 }

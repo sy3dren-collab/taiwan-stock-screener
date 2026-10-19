@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "model_id": "F",
+  "runs": [
+    {
+      "schema_version": 1,
+      "run_id": "20261019T120329546997-F-research-c4ba5e32",
+      "generated_at": "2026-10-19T12:03:29.546997+00:00",
+      "model_id": "F",
+      "model_name": "整理收復・趨勢回測・放量轉強",
+      "command": "research",
+      "status": "blocked",
+      "stop_reason": "data_quality",
+      "completed_experiments": 0,
+      "version": {
+        "git_commit": "b32e446d1cf98bf45109f1d5a263fcea032eb601",
+        "code_sha256": "05a5a80158f8a66048e8743478b3e1096f7f7d7360528c2f65900f6387e121e7",
+        "working_tree_dirty": true
+      },
+      "data_sha256": "1abed6b7b1b5fc281511859535e25d44331c9ff2d4a4bd35fae34c33dff79d9e",
+      "issues": [
+        "尚缺 978 個工作日官方日報／休市證據",
+        "613582 筆缺官方成交金額；禁止用收盤×成交量補值",
+        "614873 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
+        "682 份市場日報缺來源雜湊／抓取時間證據，須補抓",
+        "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
+        "最近一年已使用，封存樣本外已污染，禁止最終晉級"
+      ],
+      "trials": [],
+      "download_url": "runs/20261019T120329546997-F-research-c4ba5e32.json"
+    }
+  ],
+  "total_runs": 1
+}

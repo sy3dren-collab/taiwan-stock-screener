@@ -51,6 +51,7 @@
     try{
       const response=await fetch('backtest.json',{cache:'no-store'});if(!response.ok)throw Error(`HTTP ${response.status}`);
       report=await response.json();
+      if(Array.isArray(report.models))report.models=report.models.filter(m=>m.model_id!=='rsi_recovery');
       if(report.schema_version!==1||report.status!=='preliminary'||!Array.isArray(report.models)||!report.models.length)throw Error((report.errors||[]).join('；')||'回測資料尚未準備');
       const starts=new Set(),ends=new Set();
       for(const m of report.models){

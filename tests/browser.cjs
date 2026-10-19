@@ -56,11 +56,12 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     await page.locator('.research-card').first().waitFor();
     assert.equal(await page.locator('.research-card').count(),realBacktest.models.length);
     assert.match(await page.locator('#backtest-status').innerText(),/未還原權息/);
+    assert.doesNotMatch(await page.locator('#backtest-models').innerText(),/RSI/);
     assert.match(await page.locator('#backtest-detail h3').innerText(),/你的策略/);
     await page.locator('.research-card').nth(1).getByRole('button',{name:'查看進出場'}).click();
     assert.match(await page.locator('#backtest-detail h3').innerText(),/原策略/);
     if(realBacktest.models.every(m=>m.experiment)){
-      assert.equal(await page.locator('.experiment').count(),4);
+      assert.equal(await page.locator('.experiment').count(),realBacktest.models.length);
       assert.match(await page.locator('#research-protocol').innerText(),/不是真正未見/);
       await page.locator('.research-card').first().getByRole('button',{name:'查看改良版進出場',exact:true}).click();
       assert.match(await page.locator('#backtest-detail h3').innerText(),/改良候選/);
@@ -125,6 +126,6 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     assert.match(await page.locator('#backtest-status').innerText(),/HTTP 503/);
     assert.equal(await page.locator('.research-card').count(),0);
     assert.deepEqual(errors,[]);
-    console.log('PASS browser: independent user strategy, four research models, trade records, real snapshot, charts, filters, mobile layout and source/report errors');
+    console.log('PASS browser: independent user strategy, three archived models, trade records, real snapshot, charts, filters, mobile layout and source/report errors');
   } finally {if(browser)await browser.close();server.kill();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

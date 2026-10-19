@@ -71,25 +71,25 @@ class ValidationTests(unittest.TestCase):
             return {'training':[self.fake(-.1)]*len(plan),'validation':[self.fake(-.1)]*len(plan)}
         with tempfile.TemporaryDirectory() as d,patch('screener.optimizer.audit_dataset',return_value=quality),patch('screener.optimizer.actions',return_value=[]):
             out=research(Feed(),cfg,d,evaluator=ev,benchmark_function=lambda *a:self.fake(.01))
-            self.assertEqual(len(out['experiments']),3);self.assertEqual({x['model_id'] for x in out['experiments']},{'A','B','C'});self.assertTrue(all(not x['retained'] for x in out['experiments']))
+            self.assertEqual(len(out['experiments']),3);self.assertEqual({x['model_id'] for x in out['experiments']},{'F'});self.assertTrue(all(not x['retained'] for x in out['experiments']))
             self.assertIsNone(out['active_strategy']);self.assertEqual(len(Path(d,'ledger.jsonl').read_text().splitlines()),3)
             self.assertTrue(all(date<cfg['study']['holdout_start'] for date in seen))
             self.assertFalse(Path(d,'frozen_candidate.json').exists())
 
-    def test_full_round_robin_compares_three_baselines_before_refinements(self):
+    def test_single_strategy_baseline_then_two_single_rule_refinements(self):
         cfg=json.loads(Path('naked_k.json').read_text());cfg['study']=self.study();cfg['gates']['minimum_folds']=1;cfg['budget'].update(max_experiments=9,max_seconds=5)
         h={('TWSE','2330'):bars(220)};quality={'status':'ready','research_ready':True,'data_sha256':'fixed'}
         class Feed:
             def histories(self,end):return {k:[b for b in bs if b.date<=end] for k,bs in h.items()}
         def ev(hist,p,e,r,model,plan,events,deadline):
-            ret={'A':.05,'B':.04,'C':.03}[model]+(.01 if p.support_tolerance<.02 else 0)+(.01 if p.close_location>.7 else 0)
+            ret={'F':.05}[model]+(.01 if p.support_tolerance<.02 else 0)+(.01 if p.close_location>.7 else 0)
             return {'training':[self.fake(ret)]*len(plan),'validation':[self.fake(ret)]*len(plan)}
         with tempfile.TemporaryDirectory() as d,patch('screener.optimizer.audit_dataset',return_value=quality),patch('screener.optimizer.actions',return_value=[]):
             out=research(Feed(),cfg,d,evaluator=ev,benchmark_function=lambda *a:self.fake(.001))
-            self.assertEqual([e['model_id'] for e in out['experiments'][:3]],['A','B','C'])
-            self.assertEqual(len(out['experiments']),9);self.assertEqual(out['comparison_status'],'complete')
-            self.assertEqual(out['frozen_candidate']['model_id'],'A');self.assertIsNone(out['active_strategy'])
-            for e in out['experiments'][3:]:
+            self.assertEqual([e['model_id'] for e in out['experiments'][:3]],['F','F','F'])
+            self.assertEqual(len(out['experiments']),3);self.assertEqual(out['comparison_status'],'complete')
+            self.assertEqual(out['frozen_candidate']['model_id'],'F');self.assertIsNone(out['active_strategy'])
+            for e in out['experiments'][1:]:
                 self.assertEqual(len([k for k in e['parameters'] if e['parameters'][k]!=e['baseline_parameters'][k]]),1)
             self.assertTrue(Path(d,'frozen_candidate.json').exists())
 
@@ -104,7 +104,7 @@ class ValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d,patch('screener.optimizer.audit_dataset',return_value=quality),patch('screener.optimizer.actions',return_value=[]):
             out=research(Feed(),cfg,d,evaluator=ev,benchmark_function=lambda *a:self.fake(.001))
             self.assertFalse(any(e['retained'] for e in out['experiments']));self.assertNotIn('frozen_candidate',out)
-            self.assertTrue(all('成本或參數微擾不穩健' in e['assessment']['reasons'] for e in out['experiments']))
+            self.assertIn('成本或參數微擾不穩健',out['experiments'][0]['assessment']['reasons'])
 
     def test_data_block_stops_before_fitting_instead_of_zero_return(self):
         cfg=json.loads(Path('naked_k.json').read_text());quality={'status':'blocked','research_ready':False,'data_sha256':'x','issues':['missing data']}

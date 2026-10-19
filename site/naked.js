@@ -8,10 +8,28 @@
   const values=points.map(p=>p[key]);if(!values.length||values.some(v=>!Number.isFinite(v)))throw Error('曲線資料不合法');
   const lo=Math.min(...values),hi=Math.max(...values),line=document.createElementNS(ns,'polyline');line.setAttribute('points',points.map((p,i)=>`${10+i/(points.length-1||1)*580},${185-(p[key]-lo)/(hi-lo||1)*170}`).join(' '));line.setAttribute('fill','none');line.setAttribute('stroke','#176559');line.setAttribute('stroke-width','2');svg.append(line);return svg;
  }
+ async function loadRuns(){
+  const box=q('#run-history');box.replaceChildren();
+  try{const response=await fetch('research-history.json',{cache:'no-store'});if(!response.ok)throw Error(`HTTP ${response.status}`);const h=await response.json();
+   if(h.schema_version!==1||h.model_id!=='F'||!Array.isArray(h.runs))throw Error('回測紀錄格式不完整');
+   if(!h.runs.length){box.append(make('p','尚未執行本合併策略的回測。'));return;}
+   const labels={blocked:'資料／驗證條件未通過',error:'執行失敗',completed:'本輪已結束，請看是否通過驗證'};
+   const archive=make('a','完整回測歷史（資料分支）');archive.href='https://github.com/sy3dren-collab/taiwan-stock-screener/tree/research-data/runs';box.append(make('p',`共 ${h.total_runs} 次執行；下方依時間顯示最近20次，沒有依績效挑選。`),archive);
+   for(const run of h.runs.slice(0,20)){
+    if(run.model_id!=='F')throw Error('回測紀錄與目前策略不同');
+    const entry=document.createElement('details');entry.className='run-entry';const summary=make('summary',`${new Date(run.generated_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false})}（台北）｜${run.command==='final-test'?'封存測試檢查':'研究回測'}｜${labels[run.status]||run.status}｜${run.completed_experiments} 次有效實驗`);entry.append(summary);
+    if(!run.trials.length)entry.append(make('p','本輪未產出有效回測：勝率／淨報酬／回撤皆為 —，不是0%。'));
+    else entry.append(table(['輪次／修改','勝率／平倉筆數','平均驗證淨報酬','最大單折回撤','PF／期望值','是否保留'],run.trials.map(t=>[`${t.iteration}／${t.changed_rules.join(', ')||'固定基準'}`,`${pct(t.win_rate)}／${num(t.closed_count)}`,pct(t.mean_validation_return),pct(t.max_fold_drawdown),`${num(t.profit_factor)}／${num(t.expectancy)}`,t.retained?'保留研究候選':'未保留'])));
+    const issues=document.createElement('ul');run.issues.forEach(v=>issues.append(make('li',v)));run.trials.forEach(t=>issues.append(make('li',`${t.reason}；${t.error||t.rejection_reasons.join('；')||t.status}`)));entry.append(issues,make('p',`程式版本 ${run.version?.git_commit?.slice(0,12)||'未取得'}。平均跨折報酬不是連續帳戶年報酬，85%僅為長期研究目標。`));
+    if(run.download_url&&/^runs\/[A-Za-z0-9_-]+\.json$/.test(run.download_url)){const link=make('a','下載本次完整回測報告');link.href=run.download_url;link.download='';entry.append(link);}
+    box.append(entry);
+   }
+  }catch(error){box.replaceChildren(make('p',`回測紀錄無法讀取：${error.message}。未以範例結果代替。`));}
+ }
  async function load(){
   try{
    const response=await fetch('research.json',{cache:'no-store'});if(!response.ok)throw Error(`HTTP ${response.status}`);const r=await response.json();
-   if(r.schema_version!==1||!Array.isArray(r.candidates)||!Array.isArray(r.experiments)||!r.data_quality)throw Error('研究報告格式不完整');
+   if(r.schema_version!==1||r.research_model_id!=='F'||!Array.isArray(r.candidates)||r.candidates.length!==1||r.candidates[0].model_id!=='F'||!Array.isArray(r.experiments)||!r.data_quality)throw Error('研究報告尚未切換為目前唯一合併策略');
    q('#naked-active').className='notice warning';q('#naked-active').textContent=r.message||'尚無通過驗證的策略';
    const quality=q('#naked-quality');quality.replaceChildren();
    const qualityResponse=await fetch('data-quality.json',{cache:'no-store'});if(!qualityResponse.ok)throw Error(`資料檢查 HTTP ${qualityResponse.status}`);const d=await qualityResponse.json();
@@ -46,5 +64,5 @@
    if(snapshot.status!=='ok')throw Error('封存快照不可用');snapshot.candidates.forEach((s,i)=>q('#legacy-cards').append(card(s,i+1)));
   }catch(error){q('#legacy-cards').replaceChildren(make('p',`封存資料無法讀取：${error.message}`));}
  });
- load();
+ load();loadRuns();
 })();
