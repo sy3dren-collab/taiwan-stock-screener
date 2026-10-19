@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-19T00:51:07.739295+00:00",
+  "status": "blocked",
+  "mode": "research",
+  "active_strategy": null,
+  "message": "尚無通過驗證的策略",
+  "data_quality": {
+    "status": "blocked",
+    "research_ready": false,
+    "requested_start": "2021-06-19",
+    "requested_end": "2026-10-16",
+    "actual_start": "2021-06-21",
+    "actual_end": "2026-10-16",
+    "bars": 685256,
+    "missing_turnover": 613582,
+    "missing_reference": 614173,
+    "missing_weekdays": 1007,
+    "first_missing_dates": [
+      "2021-08-10",
+      "2021-08-11",
+      "2021-08-12",
+      "2021-08-13",
+      "2021-08-16",
+      "2021-08-17",
+      "2021-08-18",
+      "2021-08-19",
+      "2021-08-20",
+      "2021-08-23",
+      "2021-08-24",
+      "2021-08-25",
+      "2021-08-26",
+      "2021-08-27",
+      "2021-08-30"
+    ],
+    "source_proofs": 84,
+    "issues": [
+      "尚缺 1007 個工作日官方日報／休市證據",
+      "613582 筆缺官方成交金額；禁止用收盤×成交量補值",
+      "614173 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
+      "682 份市場日報缺來源雜湊／抓取時間證據，須補抓",
+      "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
+      "最近一年已使用，封存樣本外已污染，禁止最終晉級"
+    ],
+    "data_sha256": "f214558a824fcc9a9444fdf7bdf4843a2110a61ade708e100d719933765077a5",
+    "corporate_actions_imported": 0,
+    "trading_sessions": 361
+  },
+  "training_data_quality": {
+    "status": "blocked",
+    "research_ready": false,
+    "requested_start": "2021-06-19",
+    "requested_end": "2025-10-16",
+    "actual_start": "2021-06-21",
+    "actual_end": "2025-10-16",
+    "bars": 217842,
+    "missing_turnover": 155906,
+    "missing_reference": 156481,
+    "missing_weekdays": 1007,
+    "first_missing_dates": [
+      "2021-08-10",
+      "2021-08-11",
+      "2021-08-12",
+      "2021-08-13",
+      "2021-08-16",
+      "2021-08-17",
+      "2021-08-18",
+      "2021-08-19",
+      "2021-08-20",
+      "2021-08-23",
+      "2021-08-24",
+      "2021-08-25",
+      "2021-08-26",
+      "2021-08-27",
+      "2021-08-30"
+    ],
+    "source_proofs": 72,
+    "issues": [
+      "尚缺 1007 個工作日官方日報／休市證據",
+      "155906 筆缺官方成交金額；禁止用收盤×成交量補值",
+      "156481 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
+      "172 份市場日報缺來源雜湊／抓取時間證據，須補抓",
+      "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
+      "最近一年已使用，封存樣本外已污染，禁止最終晉級"
+    ],
+    "data_sha256": "23e2a502b76da7008c24829a75e4c3a2f178ae5609ca167d2eb9f8eec8b5c67f",
+    "corporate_actions_imported": 0,
+    "trading_sessions": 119
+  },
+  "version": {
+    "git_commit": "d26ba926ba94ee3cecef3bdf3994c3d1a59258c2",
+    "code_sha256": "16cd8f856bd890d7acb297c616fae66a7a445ed2fc945b057746f1665d87ae7b",
+    "working_tree_dirty": false
+  },
+  "experiments": [],
+  "candidates": [
+    {
+      "model_id": "A",
+      "name": "上升結構回調",
+      "status": "blocked",
+      "metrics": null
+    },
+    {
+      "model_id": "B",
+      "name": "盤整突破回測",
+      "status": "blocked",
+      "metrics": null
+    },
+    {
+      "model_id": "C",
+      "name": "多次支撐反轉",
+      "status": "blocked",
+      "metrics": null
+    }
+  ],
+  "final_holdout": {
+    "status": "blocked",
+    "executed": false,
+    "reason": "封存測試集非未見資料，禁止宣稱獨立樣本外"
+  },
+  "budget": {
+    "maximum_experiments": 9,
+    "maximum_seconds": 600
+  },
+  "paper_trading": {
+    "status": "inactive",
+    "orders_enabled": false
+  },
+  "stop_reason": "data_quality"
+}

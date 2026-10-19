@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "format": "sqlite-gzip-split",
+  "parts": [
+    {
+      "name": "prices.e36477288ba09cc21f6875ad2f3557e8ac0e9c35fa32f273f4b53083dd95ebc4.part0000",
+      "sha256": "e36477288ba09cc21f6875ad2f3557e8ac0e9c35fa32f273f4b53083dd95ebc4",
+      "bytes": 29714656
+    }
+  ],
+  "sqlite_sha256": "269fc4927f5022d33db0dd6cfc5dc145c5e2e723953f2425153605211beeaa7f"
+}
