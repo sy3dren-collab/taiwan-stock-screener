@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T21:45:52.274468+08:00",
+  "generated_at": "2026-10-19T22:06:27.658844+08:00",
   "requested_through": "2026-10-19",
   "as_of": "2026-10-19",
   "status": "ok",
@@ -43,9 +43,11 @@
   "sufficient_history_count": 0,
   "shortfall": true,
   "warnings": [
+    "離線讀取，未宣稱已重新更新官方行情",
     "尚無通過驗證的策略"
   ],
   "source_warnings": [
+    "離線讀取，未宣稱已重新更新官方行情",
     "尚無通過驗證的策略"
   ],
   "errors": [],
