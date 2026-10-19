@@ -35,6 +35,27 @@ class DailyTests(unittest.TestCase):
         f={'walk_forward_passed':True,'model_id':'A','frozen_sha256':'fake','parameters':{'max_risk':.9}}
         self.assertIn('雜湊',approved(r,f,{}))
 
+    def test_active_plan_uses_intraday_stop_and_open_risk_cap(self):
+        c={'market':'TWSE','code':'2330','date':self.day,'close':100,'stop':94,'target':115}
+        view={'candidates':[c],'qualified_count':1,'universe_count':1,'sufficient_history_count':1}
+        frozen={'parameters':self.cfg['signal'],'model_id':'A','frozen_sha256':'a'*64}
+        with patch('screener.daily.approved',return_value=None),patch('screener.daily.audit_dataset',return_value={'research_ready':True}),patch('screener.daily.screen',return_value=view):
+            r=produce(self.s,self.cfg,self.registry,frozen,{},self.day)
+        plan=r['candidates'][0]['entry_plan']
+        self.assertEqual(r['mode'],'active');self.assertIn('盤中觸及',plan['stop_rule']);self.assertIn('不強迫',plan['target_rule'])
+        self.assertLessEqual(plan['maximum_open']*(1+Execution().slippage_rate),94/(1-self.cfg['signal']['max_risk']))
+
+    def test_forward_paper_never_reads_quotes_after_requested_end(self):
+        from dataclasses import replace
+        from datetime import date
+        past=bars()[100];future=replace(past,date='2099-01-01')
+        self.s.save_day(date.fromisoformat(future.date),{'TWSE':[future],'TPEX':[replace(future,market='TPEX',code='6488')]})
+        registry={'approved_at':self.day+'T18:00:00+08:00'}
+        with patch('screener.daily.approved',return_value=None),patch('screener.daily.audit_dataset',return_value={'research_ready':True}):
+            with tempfile.TemporaryDirectory() as d:
+                result=paper(self.s,self.cfg,registry,{'frozen_sha256':'a'*64},{},Path(d)/'ledger',self.day)
+        self.assertEqual(result['status'],'pending');self.assertIn('不足兩日',result['reason'])
+
     def test_promoted_version_is_isolated_from_research_proposal(self):
         with tempfile.TemporaryDirectory() as d,patch('screener.daily.approved',return_value=None):
             registry=Path(d)/'registry.json';registry.write_text(json.dumps(self.registry))

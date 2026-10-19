@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 
 from .__main__ import default_end,update,write_json
 from .data import Store,DataError,OfficialClient,URLS
-from .execution import Execution,entry_plan
+from .execution import Execution,entry_plan,tick_price
 from .naked import NakedParameters,NAMES,screen
 from .naked_backtest import Risk,simulate
 from .optimizer import code_version
@@ -49,7 +49,11 @@ def produce(store,cfg,registry,frozen,final,end,offline=False,update_error=None)
     if not q.get('research_ready'):result['warnings']+=q['issues'];result['source_warnings']=result['warnings'][:];return result
     p=NakedParameters(**frozen['parameters']);result['parameters']=asdict(p);view=screen(store.histories(asof),asof,frozen['model_id'],p,actions(store),True)
     for c in view['candidates']:
-        c['entry_plan']=entry_plan(c,e,p);c['strategy_version']=frozen['frozen_sha256'];c['signal_status']='收盤確認，下一交易日仍須符合開盤及風險條件'
+        plan=entry_plan(c,e,p)
+        plan['maximum_open']=min(plan['maximum_open'],tick_price(c['stop']/(1-p.max_risk)/(1+e.slippage_rate),False))
+        plan['stop_rule']='盤中觸及結構停損即依模型出場；跳空採不利開盤，同根停損停利衝突先停損'
+        plan['target_rule']='觸及結構目標可提前出場，不強迫持有滿5日；漲跌停／停牌可能延後'
+        c['entry_plan']=plan;c['strategy_version']=frozen['frozen_sha256'];c['signal_status']='收盤確認，下一交易日仍須符合開盤及風險條件'
     view.update(name=NAMES[frozen['model_id']],description='已凍結且通過驗證的唯一策略；不提供自動下單',required_bars=p.lookback,shortfall=not view['candidates'])
     result.update(view,mode='active',active_strategy=frozen['model_id'],active_model=frozen['model_id'],strategies={frozen['model_id']:view},
                   message='今日無符合策略條件的股票' if not view['candidates'] else '收盤確認候選；非成交保證',strategy_version=frozen['frozen_sha256'])

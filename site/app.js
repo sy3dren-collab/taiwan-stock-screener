@@ -64,7 +64,7 @@ function card(stock, rank) {
   quote.append(node('strong','',format(stock.close)),node('small','',`${stock.change_pct > 0 ? '+' : ''}${format(stock.change_pct)}% · 收盤`));
   top.append(identity,quote);
   const graph = node('div','chart'); graph.append(chart(stock));
-  const caption = node('p','chart-caption');caption.append(node('span','','最近 60 個交易日 · 下方為成交量'),node('span','','┄ 支撐'));
+  const caption = node('p','chart-caption');caption.append(node('span','',stock.chart_price_basis||'最近 60 個交易日 · 下方為成交量'),node('span','','┄ 支撐'));
   const levels = node('dl','levels');
   [['支撐價格',stock.support],['參考停損',stock.stop],['參考目標',stock.target],['風險報酬比',`${format(stock.reward_risk)} 倍`]].forEach(([label,value])=>{
     const item=node('div'); item.append(node('dt','',label),node('dd','',typeof value==='number'?format(value,3):value));levels.append(item);
