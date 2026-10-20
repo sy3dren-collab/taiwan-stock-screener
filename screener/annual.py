@@ -157,7 +157,8 @@ def audit_year(store,cfg):
 
 class GuardedSignals:
     """Past-only per-security admission; never exclude using future outcomes."""
-    def __init__(self,p,events,sessions,barriers=()):
+    def __init__(self,p,events,sessions,barriers=(),evaluator=None):
+        self.evaluator=evaluator
         self.p=p;self.events=events;self.history_limit=p.lookback+1
         self.sessions={day:i for i,day in enumerate(sessions)}
         self.by_day={};self.by_security={}
@@ -192,7 +193,7 @@ class GuardedSignals:
             if invalid:funnel[invalid]+=1;continue
             funnel['admitted']+=1
             relevant=[a for a in self.by_security.get(key,[]) if a.effective_date<=day and a.announced_date<=day]
-            result=evaluate(adjusted_history(window[-self.p.lookback:],day,relevant),'F',self.p)
+            result=(self.evaluator or evaluate)(adjusted_history(window[-self.p.lookback:],day,relevant),'F',self.p)
             if result:selected.append(result)
         selected.sort(key=lambda s:(-s['score'],s['market'],s['code']))
         funnel['signals']=len(selected);self.counts.update(funnel);self.daily.append({'date':day,**funnel})

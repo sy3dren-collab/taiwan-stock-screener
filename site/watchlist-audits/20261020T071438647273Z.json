@@ -1,0 +1,1229 @@
+{
+  "classification": "observation_coverage_not_performance_backtest",
+  "status": "completed",
+  "generated_at": "2026-10-20T07:14:38.647095+00:00",
+  "period": {
+    "start": "2026-07-17",
+    "end": "2026-10-16"
+  },
+  "trading_sessions": 63,
+  "target_count": 10,
+  "minimum_daily_count": 10,
+  "average_daily_count": 10.0,
+  "days_with_ten": 63,
+  "daily": [
+    {
+      "date": "2026-07-17",
+      "eligible": 41,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TPEX:4105",
+        "TWSE:1210",
+        "TWSE:2889",
+        "TWSE:2206",
+        "TWSE:1216",
+        "TWSE:4536",
+        "TWSE:2801",
+        "TWSE:5880",
+        "TWSE:2646",
+        "TWSE:2845"
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "eligible": 37,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TPEX:4105",
+        "TWSE:1210",
+        "TWSE:1216",
+        "TWSE:2889",
+        "TWSE:2206",
+        "TWSE:2801",
+        "TWSE:4536",
+        "TWSE:2884",
+        "TWSE:2845",
+        "TWSE:5880"
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "eligible": 43,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:1216",
+        "TWSE:1210",
+        "TWSE:2206",
+        "TPEX:4105",
+        "TWSE:2889",
+        "TWSE:9938",
+        "TWSE:4536",
+        "TWSE:2845",
+        "TWSE:2801",
+        "TWSE:5880"
+      ]
+    },
+    {
+      "date": "2026-07-22",
+      "eligible": 44,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:2889",
+        "TPEX:4105",
+        "TWSE:1210",
+        "TWSE:9938",
+        "TWSE:2206",
+        "TWSE:2801",
+        "TWSE:4536",
+        "TWSE:2845",
+        "TWSE:1232",
+        "TWSE:5876"
+      ]
+    },
+    {
+      "date": "2026-07-23",
+      "eligible": 38,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:9938",
+        "TWSE:2801",
+        "TWSE:2206",
+        "TWSE:4536",
+        "TWSE:2845",
+        "TWSE:2884",
+        "TWSE:5876",
+        "TWSE:5880",
+        "TWSE:2615"
+      ]
+    },
+    {
+      "date": "2026-07-24",
+      "eligible": 42,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:9938",
+        "TPEX:4105",
+        "TWSE:2801",
+        "TWSE:1210",
+        "TWSE:2206",
+        "TWSE:4536",
+        "TWSE:2884",
+        "TWSE:2845",
+        "TWSE:5876"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "eligible": 46,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:2897",
+        "TPEX:4105",
+        "TWSE:9938",
+        "TWSE:1210",
+        "TWSE:4536",
+        "TWSE:2615",
+        "TWSE:2845",
+        "TWSE:2206",
+        "TWSE:5880"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "eligible": 41,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:2897",
+        "TWSE:9938",
+        "TWSE:1210",
+        "TWSE:2615",
+        "TWSE:4536",
+        "TWSE:2845",
+        "TWSE:2027",
+        "TWSE:5880",
+        "TWSE:2206"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "eligible": 39,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:5880",
+        "TWSE:2897",
+        "TWSE:9938",
+        "TWSE:2889",
+        "TWSE:1210",
+        "TWSE:2207",
+        "TWSE:1232",
+        "TWSE:4536",
+        "TWSE:2845",
+        "TWSE:2615"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "eligible": 35,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:5880",
+        "TWSE:2889",
+        "TWSE:1210",
+        "TWSE:1232",
+        "TWSE:4536",
+        "TWSE:2615",
+        "TWSE:2845",
+        "TWSE:2633",
+        "TWSE:9917"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "eligible": 37,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2889",
+        "TWSE:1232",
+        "TWSE:2006",
+        "TWSE:9939",
+        "TWSE:5880",
+        "TWSE:4536",
+        "TWSE:2615",
+        "TWSE:9917",
+        "TWSE:2633"
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "eligible": 39,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2889",
+        "TWSE:5880",
+        "TWSE:1232",
+        "TWSE:9939",
+        "TWSE:4536",
+        "TWSE:2615",
+        "TWSE:2207",
+        "TWSE:2539",
+        "TWSE:2633"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "eligible": 29,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:5880",
+        "TWSE:2539",
+        "TWSE:2207",
+        "TWSE:2615",
+        "TWSE:4536",
+        "TWSE:9939",
+        "TWSE:9917",
+        "TWSE:2633",
+        "TWSE:2027"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "eligible": 27,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2207",
+        "TWSE:2615",
+        "TWSE:4536",
+        "TWSE:9917",
+        "TWSE:2027",
+        "TWSE:2412",
+        "TWSE:2633",
+        "TWSE:9939",
+        "TWSE:2845"
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "eligible": 23,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:9917",
+        "TWSE:2615",
+        "TWSE:1232",
+        "TWSE:2633",
+        "TWSE:2412",
+        "TWSE:4536",
+        "TWSE:2027",
+        "TWSE:2539",
+        "TWSE:2002"
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "eligible": 25,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 5,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2615",
+        "TWSE:9917",
+        "TWSE:2633",
+        "TWSE:2412",
+        "TWSE:1232",
+        "TWSE:2539",
+        "TWSE:4536",
+        "TWSE:3045",
+        "TWSE:2002"
+      ]
+    },
+    {
+      "date": "2026-08-10",
+      "eligible": 22,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2539",
+        "TWSE:2633",
+        "TWSE:1232",
+        "TWSE:2615",
+        "TWSE:4536",
+        "TWSE:2206",
+        "TWSE:1101",
+        "TWSE:2542",
+        "TWSE:6605"
+      ]
+    },
+    {
+      "date": "2026-08-11",
+      "eligible": 29,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2615",
+        "TWSE:9939",
+        "TWSE:1232",
+        "TWSE:2633",
+        "TWSE:4536",
+        "TWSE:2206",
+        "TWSE:1101",
+        "TPEX:4123",
+        "TWSE:2542"
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2897",
+        "TPEX:3293",
+        "TWSE:9939",
+        "TWSE:2615",
+        "TWSE:2633",
+        "TWSE:1232",
+        "TWSE:4536",
+        "TWSE:1101",
+        "TWSE:6177",
+        "TWSE:2542"
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 5,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2615",
+        "TWSE:4536",
+        "TWSE:1232",
+        "TWSE:2633",
+        "TPEX:3293",
+        "TWSE:1101",
+        "TWSE:2002",
+        "TPEX:8436",
+        "TWSE:2609"
+      ]
+    },
+    {
+      "date": "2026-08-14",
+      "eligible": 29,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 2,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2615",
+        "TWSE:2633",
+        "TWSE:2002",
+        "TWSE:1101",
+        "TWSE:2609",
+        "TWSE:2727",
+        "TWSE:6177",
+        "TWSE:2347",
+        "TWSE:9941"
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2609",
+        "TWSE:2207",
+        "TWSE:3005",
+        "TWSE:1101",
+        "TWSE:9941",
+        "TWSE:2731",
+        "TWSE:6670",
+        "TWSE:2206",
+        "TWSE:6177"
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "eligible": 26,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 2,
+      "codes": [
+        "TWSE:2542",
+        "TWSE:2207",
+        "TWSE:1101",
+        "TWSE:3706",
+        "TWSE:6670",
+        "TWSE:3029",
+        "TWSE:2330",
+        "TWSE:2727",
+        "TWSE:9941",
+        "TWSE:2206"
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "eligible": 31,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 2,
+      "codes": [
+        "TWSE:2542",
+        "TWSE:1101",
+        "TWSE:2330",
+        "TWSE:3706",
+        "TWSE:2727",
+        "TWSE:6177",
+        "TWSE:6782",
+        "TWSE:2393",
+        "TWSE:2206",
+        "TWSE:9941"
+      ]
+    },
+    {
+      "date": "2026-08-20",
+      "eligible": 39,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:1808",
+        "TWSE:2204",
+        "TWSE:1402",
+        "TWSE:9939",
+        "TWSE:2002",
+        "TWSE:2845",
+        "TWSE:1101",
+        "TWSE:6670",
+        "TWSE:2727",
+        "TPEX:6279"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "eligible": 41,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2207",
+        "TWSE:2204",
+        "TWSE:2633",
+        "TWSE:2002",
+        "TPEX:6279",
+        "TWSE:2845",
+        "TWSE:9939",
+        "TWSE:9941",
+        "TWSE:2727",
+        "TWSE:1101"
+      ]
+    },
+    {
+      "date": "2026-08-24",
+      "eligible": 41,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2542",
+        "TWSE:2204",
+        "TWSE:2633",
+        "TWSE:2207",
+        "TPEX:4105",
+        "TWSE:2002",
+        "TPEX:6279",
+        "TWSE:2727",
+        "TWSE:2845",
+        "TWSE:1101"
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "eligible": 51,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2204",
+        "TWSE:2542",
+        "TWSE:5607",
+        "TWSE:1402",
+        "TWSE:2002",
+        "TPEX:4105",
+        "TWSE:2207",
+        "TWSE:2633",
+        "TWSE:2393",
+        "TPEX:6279"
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "eligible": 63,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 8,
+      "codes": [
+        "TWSE:4736",
+        "TWSE:2204",
+        "TWSE:2542",
+        "TWSE:2636",
+        "TWSE:5607",
+        "TWSE:2617",
+        "TWSE:1402",
+        "TWSE:2633",
+        "TWSE:9933",
+        "TPEX:4105"
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "eligible": 67,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:2542",
+        "TWSE:2204",
+        "TWSE:2636",
+        "TWSE:2520",
+        "TWSE:1402",
+        "TWSE:2393",
+        "TWSE:9933",
+        "TWSE:2617",
+        "TWSE:2633"
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "eligible": 49,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 2,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:2393",
+        "TWSE:2633",
+        "TWSE:1216",
+        "TWSE:2002",
+        "TWSE:2845",
+        "TWSE:6605",
+        "TPEX:6279",
+        "TWSE:2201",
+        "TWSE:2727"
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "eligible": 57,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:2889",
+        "TWSE:2204",
+        "TWSE:2201",
+        "TWSE:2617",
+        "TWSE:2520",
+        "TWSE:2633",
+        "TWSE:2393",
+        "TWSE:9933",
+        "TPEX:6279",
+        "TWSE:6605"
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "eligible": 58,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 8,
+      "codes": [
+        "TWSE:2542",
+        "TWSE:2204",
+        "TWSE:3706",
+        "TWSE:2520",
+        "TWSE:9933",
+        "TWSE:2617",
+        "TWSE:2393",
+        "TWSE:2633",
+        "TWSE:6605",
+        "TWSE:1402"
+      ]
+    },
+    {
+      "date": "2026-09-02",
+      "eligible": 66,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2204",
+        "TWSE:2542",
+        "TWSE:3706",
+        "TWSE:2617",
+        "TWSE:2520",
+        "TWSE:1402",
+        "TWSE:2636",
+        "TWSE:9933",
+        "TWSE:9945"
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "eligible": 48,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2204",
+        "TWSE:2542",
+        "TWSE:1402",
+        "TWSE:2393",
+        "TWSE:2636",
+        "TWSE:9945",
+        "TWSE:9933",
+        "TWSE:2617",
+        "TWSE:2633"
+      ]
+    },
+    {
+      "date": "2026-09-04",
+      "eligible": 56,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2204",
+        "TWSE:2542",
+        "TWSE:1808",
+        "TWSE:1402",
+        "TWSE:2636",
+        "TWSE:2393",
+        "TWSE:9945",
+        "TWSE:2633",
+        "TWSE:2617"
+      ]
+    },
+    {
+      "date": "2026-09-07",
+      "eligible": 50,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 9,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2204",
+        "TWSE:2897",
+        "TWSE:2542",
+        "TWSE:1402",
+        "TWSE:1808",
+        "TWSE:2636",
+        "TWSE:2520",
+        "TWSE:2201",
+        "TWSE:2633"
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "eligible": 43,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2542",
+        "TWSE:2897",
+        "TWSE:1402",
+        "TWSE:1808",
+        "TWSE:2633",
+        "TWSE:2204",
+        "TWSE:2520",
+        "TWSE:2617",
+        "TWSE:2903"
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "eligible": 43,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2897",
+        "TWSE:2542",
+        "TWSE:1402",
+        "TWSE:2633",
+        "TWSE:1808",
+        "TWSE:2204",
+        "TWSE:2520",
+        "TWSE:2903",
+        "TWSE:9904"
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "eligible": 31,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2897",
+        "TWSE:1402",
+        "TWSE:2633",
+        "TWSE:2881",
+        "TWSE:2520",
+        "TWSE:1102",
+        "TWSE:2636",
+        "TWSE:6177",
+        "TWSE:2330"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "eligible": 25,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2897",
+        "TWSE:1402",
+        "TWSE:3029",
+        "TWSE:2633",
+        "TWSE:2520",
+        "TWSE:2881",
+        "TWSE:1102",
+        "TWSE:2330",
+        "TWSE:2412"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "eligible": 23,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2201",
+        "TWSE:2897",
+        "TWSE:2617",
+        "TWSE:2633",
+        "TWSE:2520",
+        "TWSE:3029",
+        "TWSE:1102",
+        "TWSE:6670",
+        "TWSE:2618"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "eligible": 15,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 5,
+      "codes": [
+        "TWSE:1712",
+        "TWSE:2201",
+        "TWSE:2897",
+        "TWSE:2520",
+        "TWSE:1102",
+        "TWSE:3029",
+        "TWSE:2412",
+        "TWSE:3045",
+        "TWSE:2207",
+        "TWSE:4904"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "eligible": 22,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2201",
+        "TWSE:2520",
+        "TWSE:2633",
+        "TWSE:1102",
+        "TWSE:2636",
+        "TWSE:2412",
+        "TWSE:4904",
+        "TWSE:2207",
+        "TWSE:2474"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "eligible": 35,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 5,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:2897",
+        "TWSE:2201",
+        "TWSE:2633",
+        "TWSE:2520",
+        "TWSE:1102",
+        "TWSE:3029",
+        "TWSE:2820",
+        "TWSE:2330",
+        "TWSE:6670"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2897",
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2820",
+        "TWSE:2520",
+        "TWSE:6670",
+        "TWSE:2330",
+        "TWSE:2882",
+        "TWSE:2886",
+        "TWSE:3045"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "eligible": 34,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 2,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:2897",
+        "TWSE:1102",
+        "TWSE:2820",
+        "TWSE:6670",
+        "TWSE:2207",
+        "TWSE:2330",
+        "TWSE:4904",
+        "TWSE:2886",
+        "TWSE:2317"
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "eligible": 36,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:2897",
+        "TWSE:2820",
+        "TWSE:1102",
+        "TWSE:2520",
+        "TWSE:2330",
+        "TWSE:4904",
+        "TWSE:2886",
+        "TWSE:3045",
+        "TWSE:2353"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "eligible": 36,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:1102",
+        "TWSE:2412",
+        "TWSE:2897",
+        "TWSE:2820",
+        "TWSE:2520",
+        "TWSE:2886",
+        "TWSE:3045",
+        "TWSE:6670",
+        "TWSE:4904",
+        "TWSE:2474"
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "eligible": 36,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:1102",
+        "TWSE:2412",
+        "TWSE:2897",
+        "TWSE:2820",
+        "TWSE:2617",
+        "TPEX:6690",
+        "TWSE:3045",
+        "TWSE:6670",
+        "TWSE:4904",
+        "TWSE:2520"
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2897",
+        "TWSE:3045",
+        "TWSE:4904",
+        "TWSE:2520",
+        "TWSE:6670",
+        "TWSE:8464",
+        "TWSE:2330",
+        "TWSE:2317"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "eligible": 32,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TPEX:6690",
+        "TWSE:9904",
+        "TWSE:2474",
+        "TWSE:2330",
+        "TWSE:2317",
+        "TWSE:4915",
+        "TWSE:3005",
+        "TWSE:7765"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "eligible": 34,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TPEX:6690",
+        "TWSE:9904",
+        "TWSE:4904",
+        "TWSE:3045",
+        "TWSE:4915",
+        "TWSE:2520",
+        "TWSE:3005",
+        "TWSE:2330"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "eligible": 30,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 3,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TPEX:6690",
+        "TWSE:9904",
+        "TWSE:4915",
+        "TWSE:5269",
+        "TWSE:2330",
+        "TWSE:3005",
+        "TWSE:3045",
+        "TWSE:4904"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "eligible": 36,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 4,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2330",
+        "TPEX:6690",
+        "TWSE:4915",
+        "TWSE:3005",
+        "TWSE:1513",
+        "TWSE:2520",
+        "TWSE:4904",
+        "TWSE:2353"
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "eligible": 41,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 5,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2330",
+        "TPEX:6690",
+        "TWSE:4915",
+        "TWSE:4904",
+        "TWSE:9945",
+        "TWSE:2476",
+        "TWSE:1513",
+        "TWSE:5269"
+      ]
+    },
+    {
+      "date": "2026-10-07",
+      "eligible": 39,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:2330",
+        "TWSE:1102",
+        "TWSE:3014",
+        "TPEX:6690",
+        "TWSE:9904",
+        "TWSE:5269",
+        "TWSE:3005",
+        "TWSE:4904",
+        "TWSE:2476"
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "eligible": 50,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 6,
+      "codes": [
+        "TWSE:2330",
+        "TWSE:1102",
+        "TWSE:2412",
+        "TWSE:3014",
+        "TPEX:6690",
+        "TWSE:2476",
+        "TWSE:9904",
+        "TWSE:2317",
+        "TWSE:3005",
+        "TWSE:4904"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "eligible": 52,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:2330",
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:3014",
+        "TWSE:5269",
+        "TWSE:1101",
+        "TPEX:6690",
+        "TWSE:4904",
+        "TWSE:3005",
+        "TWSE:3045"
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "eligible": 55,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2347",
+        "TWSE:1101",
+        "TWSE:3014",
+        "TWSE:5269",
+        "TPEX:6690",
+        "TWSE:1513",
+        "TWSE:2727",
+        "TWSE:9945"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "eligible": 75,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 7,
+      "codes": [
+        "TWSE:3014",
+        "TWSE:2412",
+        "TWSE:1102",
+        "TWSE:2347",
+        "TWSE:5269",
+        "TWSE:1101",
+        "TPEX:8936",
+        "TPEX:6690",
+        "TWSE:4915",
+        "TWSE:2727"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "eligible": 63,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TPEX:4105",
+        "TWSE:2727",
+        "TWSE:2412",
+        "TWSE:5269",
+        "TWSE:3014",
+        "TWSE:1102",
+        "TWSE:1101",
+        "TWSE:2347",
+        "TWSE:4904",
+        "TWSE:3045"
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "eligible": 72,
+      "selected": 10,
+      "confirmed": 0,
+      "event_observations": 10,
+      "codes": [
+        "TWSE:5269",
+        "TWSE:2412",
+        "TWSE:2727",
+        "TPEX:4105",
+        "TWSE:9904",
+        "TWSE:3014",
+        "TWSE:2850",
+        "TWSE:3592",
+        "TWSE:4904",
+        "TWSE:2347"
+      ]
+    }
+  ],
+  "parameters": {
+    "target_count": 10,
+    "minimum_price": 10,
+    "minimum_turnover": 50000000,
+    "range_width": 0.35,
+    "range_drift_max": 0.15,
+    "support_distance_max": 0.1,
+    "ma_distance_min": -0.01,
+    "five_day_return_min": -0.03,
+    "event_volume_multiple": 1.2,
+    "minimum_ma_slope": 0,
+    "maximum_average_daily_range": 0.045
+  },
+  "elapsed_seconds": 23.401,
+  "orders_enabled": false,
+  "note": "只檢查每日研究觀察名單數量，不將觀察股票當作進場、不計算或宣稱策略收益。進場規則與三個月交易回測分開。"
+}

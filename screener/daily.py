@@ -43,6 +43,8 @@ def produce(store,cfg,registry,frozen,final,end,offline=False,update_error=None)
     result['universe_count']=store.db.execute('SELECT COUNT(*) FROM bars WHERE date=?',(asof,)).fetchone()[0]
     if offline:result['warnings'].append('離線讀取，未宣稱已重新更新官方行情')
     if asof!=end:result['warnings'].append(f'請求截至 {end}，最新官方行情 {asof}；請核對休市與資料公布狀態，不是今日新訊號')
+    from .watchlist import build
+    result['watchlist']=build(store,asof,p)
     reason=approved(registry,frozen,final)
     if reason:result['warnings'].append(reason);result['source_warnings']=result['warnings'][:];return result
     q=audit_dataset(store,{**cfg['study'],'as_of':asof})
