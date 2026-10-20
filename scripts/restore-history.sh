@@ -33,11 +33,17 @@ for folder in experiments paper runs; do
 done
 python - <<'PY'
 import json,shutil
+from datetime import datetime
 from pathlib import Path
 for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest'):
     source=Path(f'.history/latest-{report}.json')
     if not source.exists():continue
     data=json.loads(source.read_text())
+    if report=='fast-backtest':
+        target=Path('site/fast-backtest.json')
+        if target.exists():
+            current=json.loads(target.read_text())
+            if datetime.fromisoformat(current['generated_at'])>=datetime.fromisoformat(data['generated_at']):continue
     if report in ('research','final-test') and data.get('research_model_id')!='F':continue
     shutil.copyfile(source,Path('site')/f'{report}.json')
 PY

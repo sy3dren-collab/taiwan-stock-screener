@@ -13,11 +13,11 @@ from .__main__ import write_json
 
 # Fixed before running; preserve every failure and never search until profitable.
 CANDIDATES = [
-    ('baseline', {}),
-    ('wider-base', {'range_width': .30, 'range_drift_max': .12}),
-    ('flexible-retest', {'range_width': .30, 'range_drift_max': .12,
-                         'extension_max': .06, 'support_tolerance': .03,
-                         'pullback_volume_max': .95}),
+    ('baseline', {'fusion_revision': 1}),
+    ('causal-recovery-v2', {'fusion_revision': 2}),
+    ('flexible-retest-v2', {'fusion_revision': 2, 'range_width': .30,
+                          'range_drift_max': .12, 'extension_max': .06,
+                          'support_tolerance': .03, 'pullback_volume_max': .95}),
 ]
 
 
@@ -25,6 +25,7 @@ def qualifies(result, minimum):
     report = result.get('strategy', {})
     return (result.get('status') == 'completed'
             and len(report.get('closed_trades', [])) >= minimum
+            and not report.get('unsettled_stock_dividends', 0)
             and report.get('metrics', {}).get('net_return', 0) > 0)
 
 
@@ -46,7 +47,7 @@ def run(store, annual, config, runner=run_year, auditor=audit_year):
     output = {'generated_at': datetime.now(timezone.utc).isoformat(),
               'classification': 'retrospective_diagnostic', 'promotion_allowed': False,
               'active_strategy': None, 'config': config, 'short_runs': [],
-              'long_run': None, 'long_gate': '未通過短期正收益與最低交易數門檻，未執行一年回測',
+              'long_run': None, 'long_gate': '未通過短期正收益、至少五筆交易及無未撥股估值門檻，未執行一年回測',
               'limitations': ['短期篩選可能過度擬合；一年包含這三個月，並非獨立樣本外驗證。',
                               '費用、交易稅、滑價沿用原設定；期末預留20交易日平倉，零交易不合格。']}
     deadline = time.monotonic() + config['short_budget_seconds']
@@ -88,6 +89,11 @@ def main():
     args = parser.parse_args()
     store = Store(args.db)
     try:
+        from .distributions import import_verified_details
+        if import_verified_details(store):
+            marker=Path('.state/research-db-changed')
+            marker.parent.mkdir(parents=True,exist_ok=True)
+            marker.touch()
         output = run(store, json.loads(Path('annual_research.json').read_text()),
                      json.loads(Path('fast_research.json').read_text()))
     finally:

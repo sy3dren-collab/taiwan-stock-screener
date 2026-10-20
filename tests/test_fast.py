@@ -31,6 +31,6 @@ class FastTests(unittest.TestCase):
     def test_only_best_gets_one_annual_run(self):
         report, runner = self.execute([result(.01, 5), result(.03, 5), result(), result(-.1, 20)])
         self.assertEqual(runner.call_count, 4)
-        self.assertEqual(report['long_run']['candidate'], 'wider-base')
+        self.assertEqual(report['long_run']['candidate'], 'causal-recovery-v2')
         self.assertFalse(report['promotion_allowed'])
         self.assertEqual(runner.call_args.kwargs['seconds'], 120)

@@ -28,7 +28,7 @@ def fusion_bars():
 
 
 class FusionTests(unittest.TestCase):
-    def setUp(self):self.p=NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal']);self.seq=fusion_bars()
+    def setUp(self):self.p=replace(NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal']),fusion_revision=1);self.seq=fusion_bars()
     def test_exactly_one_current_strategy_and_rsi_is_removed_from_all_execution_routes(self):
         self.assertEqual(set(NAMES),{'F'});self.assertNotIn('rsi_recovery',MODELS)
         for fn in [lambda:alternative(self.seq,Parameters(),'rsi_recovery'),

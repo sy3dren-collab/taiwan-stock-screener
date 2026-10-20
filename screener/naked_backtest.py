@@ -81,7 +81,12 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
                 else:receivables.append({'amount':dividend,'payable_date':a.payable_date,'paid':False})
             quantity=pos['quantity']*a.share_factor
             if abs(quantity-round(quantity))>1e-7:raise DataError('公司行動產生零股小數，缺官方畸零股補償條件')
-            pos['quantity']=int(round(quantity))
+            if a.kind=='distribution' and a.share_factor>1:
+                # Stock dividends are entitlements, not shares available to sell
+                # on the ex-date. Unknown delivery dates never replenish cash.
+                receivables.append({'amount':0,'stock_quantity':int(round(quantity))-pos['quantity'],
+                                    'market':a.market,'code':a.code,'payable_date':None,'paid':False})
+            else:pos['quantity']=int(round(quantity))
             for field in ('stop','target','basis','initial_risk'):pos[field]*=a.price_factor
         # Fixed closing list; no replacement after seeing today's unavailable orders.
         for signal in orders:
@@ -155,6 +160,12 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
                 _,lows=pivots(adjusted[-p.structure_days:],p.pivot_radius)
                 if lows:pos['stop']=max(pos['stop'],min(bar.close,lows[-1].low)*(1-risk.trailing_buffer))
         value=cash+sum(x['amount'] for x in receivables if not x['paid'])
+        for item in receivables:
+            if item.get('stock_quantity') and not item['paid']:
+                bar=quotes.get((item['market'],item['code']))
+                if not bar:raise DataError('未撥入股票股利缺當日估值行情')
+                item['estimated_value']=sell_proceeds(fill_price(bar.close,False,e),item['stock_quantity'],e)[0]
+                value+=item['estimated_value']
         for key,pos in positions.items():
             bar=latest.get(key)
             if not bar:raise DataError('持倉無合法估值價格')
@@ -172,4 +183,5 @@ def simulate(histories,p:NakedParameters,e:Execution,risk:Risk,model,start,end,e
     result=metrics(curve,trades,e.initial_capital,costs+estimated)
     return {'model_id':model,'start':days[0],'end':days[-1],'metrics':result,'closed_trades':trades,
             'open_positions':list(positions.values()),'equity_curve':curve,'rejected_orders':rejected,'deferred_exits':deferred,
-            'receivables':receivables,'limitations':['日線限價與滑價為保守撮合模型，未模擬開盤佇列／部分成交。','5～20日為正常目標，風險停損或目標可更早，停牌與跌停可能更晚。','股息採已知應收款；未指定支付日不得動用，未模擬個人所得稅。']}
+            'receivables':receivables,'unsettled_stock_dividends':sum(bool(x.get('stock_quantity')) and not x['paid'] for x in receivables),
+            'limitations':['日線限價與滑價為保守撮合模型，未模擬開盤佇列／部分成交。','5～20日為正常目標，風險停損或目標可更早，停牌與跌停可能更晚。','股息採已知應收款；未指定支付日不得動用，未模擬個人所得稅。','未取得撥股日的股票股利單獨列應收，以當日賣出費稅滑價估值，不能賣出或再投入；含此估值的報酬不得通過長期研究門檻。']}

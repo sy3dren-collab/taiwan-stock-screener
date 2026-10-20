@@ -10,6 +10,9 @@ const server=spawn('python3',['-m','http.server','8771','--bind','127.0.0.1','--
   await p.goto('http://127.0.0.1:8771');
   await p.waitForFunction(()=>document.querySelector('#fast-results').textContent.includes('總耗時'));
   assert.match(await p.locator('#fast-results').innerText(),/未執行一年回測|只對最佳/);
+  const actual=JSON.parse(require('node:fs').readFileSync('site/fast-backtest.json'));
+  if(actual.short_runs.some(r=>r.strategy?.unsettled_stock_dividends))
+    assert.match(await p.locator('#fast-results').innerText(),/不能視為全數已實現/);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await p.close();
  }

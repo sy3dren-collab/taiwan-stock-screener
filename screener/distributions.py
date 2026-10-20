@@ -1,4 +1,4 @@
-"""Official ex-distribution tables, with narrowly supported cash-only events.
+"""Official ex-distribution tables and verified cash/stock detail evidence.
 
 These tables are not a complete security lifecycle master. Unsupported events
 remain explicit barriers, never guessed stock ratios or cash settlements.
@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import re
+from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -18,6 +19,48 @@ ENDPOINTS={
     'TWSE':'https://www.twse.com.tw/rwd/zh/exRight/TWT49U',
     'TPEX':'https://www.tpex.org.tw/www/zh-tw/bulletin/exDailyQ',
 }
+
+
+def import_verified_details(store, directory='data/verified-distributions'):
+    """Import original official stock/cash terms; never infer ratios from prices."""
+    changed=0
+    for path in sorted(Path(directory).glob('*.json')):
+        evidence=json.loads(path.read_text());raw=evidence['raw_response']
+        if hashlib.sha256(raw.encode()).hexdigest()!=evidence['payload_sha256']:
+            raise DataError('除權息明細原始證據雜湊不符')
+        market,code,day=(evidence[k] for k in ('market','code','date'))
+        expected='https://www.twse.com.tw/rwd/zh/exRight/TWT49UDetail?response=json&STK_NO='+code+'&T1='+day.replace('-','')
+        if market!='TWSE' or evidence['source_url']!=expected:raise DataError('除權息明細來源或日期不符')
+        payload=json.loads(raw)
+        if payload.get('stat')!='ok' or len(payload.get('data',[]))!=1:raise DataError('官方配股明細無效')
+        r=dict(zip(payload['fields'],payload['data'][0]))
+        def term(name,unit):
+            text=normalize(r[name]).replace(',','')
+            match=re.fullmatch(r'(\d+(?:\.\d+)?)\s*'+re.escape(unit),text)
+            if not match:raise DataError('配股明細數字或單位不符')
+            return float(match[1])
+        if normalize(r['股票代號'])!=code:raise DataError('配股明細代號不符')
+        cash=term('(每股配發現金股利)除息','元／股')
+        shares=term('A. 按普通股股東持股比例每千股無償配股','股')
+        if any(term(k,'股')!=0 for k in ('B. 員工紅利轉增資','C. (有償) 現金增資')):
+            raise DataError('尚未支援員工配股或現金增資明細')
+        found=store.db.execute('SELECT payload FROM distribution_rows WHERE market=? AND code=? AND date=?',(market,code,day)).fetchone()
+        if not found:continue  # This verified event is outside the local dataset.
+        row=json.loads(found[0]);factor=1+shares/1000
+        if abs((row['before']-cash)/factor-row['after'])>.021:raise DataError('官方配股現金條件與參考價不一致')
+        action=CorporateAction(event_id=f'detail-{market}-{code}-{day}',market=market,code=code,
+              effective_date=day,announced_date=day,kind='distribution',source_url=expected,
+              price_factor=row['after']/row['before'],share_factor=factor,
+              cash_per_share=cash,reference_price=row['reference'])
+        import_actions(store,[asdict(action)])
+        if row.get('detail_source')==expected and row.get('supported'):
+            continue
+        row.update(supported=True,cash=cash,share_factor=factor,detail_source=expected)
+        with store.db:
+            store.db.execute('UPDATE distribution_rows SET payload=? WHERE market=? AND code=? AND date=?',
+                             (json.dumps(row,ensure_ascii=False),market,code,day))
+        changed+=1
+    return changed
 
 
 def source_url(market,start,end):
@@ -106,7 +149,7 @@ def reconcile_distributions(store,start,end):
     Missing/unsupported events remain barriers for diagnostic signals, and stop
     simulation if an already-held position encounters an unexplained event.
     """
-    event_tables(store);records=[];restored=0;unsupported=[]
+    event_tables(store);import_verified_details(store);records=[];restored=0;unsupported=[]
     query='SELECT d.payload,s.source_url FROM distribution_rows d JOIN corporate_source_evidence s ON s.payload_sha256=d.source_sha256 WHERE d.date BETWEEN ? AND ? ORDER BY d.date,d.market,d.code'
     for payload,url in store.db.execute(query,(start,end)).fetchall():
         row=json.loads(payload);key=(row['market'],row['code'],row['date'])
@@ -125,8 +168,9 @@ def reconcile_distributions(store,start,end):
         if previous and previous[0]>=start and previous[0]==previous_session and abs(previous[1]-row['before'])>.005:
             raise DataError(f'{key} 除息前收盤與官方日報矛盾，禁止猜測調整比率')
         records.append(asdict(CorporateAction(
-            event_id=f'cash-{key[0]}-{key[1]}-{key[2]}',market=key[0],code=key[1],effective_date=key[2],
-            announced_date=key[2],kind='distribution',source_url=url,price_factor=row['after']/row['before'],
+            event_id=f"{'detail' if row.get('detail_source') else 'cash'}-{key[0]}-{key[1]}-{key[2]}",market=key[0],code=key[1],effective_date=key[2],
+            announced_date=key[2],kind='distribution',source_url=row.get('detail_source',url),price_factor=row['after']/row['before'],
+            share_factor=row.get('share_factor',1),
             cash_per_share=row['cash'],reference_price=row['reference'])))
     import_actions(store,records)
     return {'cash_events_imported':len(records),'references_restored':restored,'unsupported_events':unsupported,

@@ -12,6 +12,7 @@ ARCHIVED_NAMES={'A':'上升結構回調','B':'盤整突破回測','C':'多次支
 
 @dataclass(frozen=True)
 class NakedParameters:
+    fusion_revision:int=1
     lookback:int=100
     structure_days:int=90
     pivot_radius:int=2
@@ -41,12 +42,13 @@ class NakedParameters:
     extension_max:float=.04
 
     def __post_init__(self):
-        integers={'lookback','structure_days','pivot_radius','pullback_days','range_days','event_days','liquidity_days','support_touches','touch_spacing','range_edge_days','minimum_event_age'}
+        integers={'fusion_revision','lookback','structure_days','pivot_radius','pullback_days','range_days','event_days','liquidity_days','support_touches','touch_spacing','range_edge_days','minimum_event_age'}
         for f in fields(self):
             v=getattr(self,f.name)
             if isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) or v<=0:raise ValueError(f'{f.name} 須為正有限數值')
             if f.name in integers and not isinstance(v,int):raise ValueError(f'{f.name} 須為正整數')
         if self.lookback<max(self.structure_days,self.range_days+self.event_days,self.liquidity_days)+1:raise ValueError('lookback 不足以觀察完整結構')
+        if self.fusion_revision not in (1,2):raise ValueError('未知合併策略版本')
         if self.structure_days<2*self.pivot_radius+5 or self.support_touches<2:raise ValueError('結構確認日數不足')
         if any(getattr(self,k)>=1 for k in ('range_width','support_tolerance','confirmation_buffer','stop_buffer','max_risk')) or self.close_location>1:raise ValueError('比例門檻不合法')
         if self.range_edge_days*2>self.range_days or self.minimum_event_age>=self.event_days:raise ValueError('整理與事件等待日數不合法')
