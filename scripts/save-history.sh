@@ -4,22 +4,26 @@ if [ "${GITHUB_ACTIONS:-}" != 'true' ]; then
   echo 'This helper operates only on the disposable Actions .history checkout.' >&2
   exit 1
 fi
-python -m screener.backup save --directory .history/backup
+if [ "${REPORTS_ONLY:-false}" != true ]; then
+  python -m screener.backup save --directory .history/backup
+fi
 for folder in experiments paper runs; do
   if [ -d ".state/$folder" ]; then cp -R ".state/$folder" .history/; fi
 done
-for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events annual-wider-range; do
+for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events annual-wider-range fast-backtest; do
   if [ -f "site/$report.json" ]; then cp "site/$report.json" ".history/latest-$report.json"; fi
 done
+if [ -d site/fast-runs ]; then mkdir -p .history/fast-runs; cp -n site/fast-runs/*.json .history/fast-runs/; fi
 cd .history
 git config user.name 'github-actions[bot]'
 git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 git rm --ignore-unmatch prices.sqlite3 prices.sqlite3.gz
 git add backup
+if [ -d fast-runs ]; then git add fast-runs; fi
 for folder in experiments paper runs; do
   if [ -d "$folder" ]; then git add "$folder"; fi
 done
-for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events annual-wider-range; do
+for report in results research data-quality final-test paper annual-backtest annual-backfill annual-events annual-wider-range fast-backtest; do
   if [ -f "latest-$report.json" ]; then git add "latest-$report.json"; fi
 done
 if ! git diff --cached --quiet; then

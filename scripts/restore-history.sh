@@ -34,11 +34,12 @@ done
 python - <<'PY'
 import json,shutil
 from pathlib import Path
-for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range'):
+for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest'):
     source=Path(f'.history/latest-{report}.json')
     if not source.exists():continue
     data=json.loads(source.read_text())
     if report in ('research','final-test') and data.get('research_model_id')!='F':continue
     shutil.copyfile(source,Path('site')/f'{report}.json')
 PY
+if [ -d .history/fast-runs ]; then mkdir -p site/fast-runs; cp -n .history/fast-runs/*.json site/fast-runs/; fi
 python -m screener.reporting export
