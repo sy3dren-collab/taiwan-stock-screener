@@ -1,0 +1,7 @@
+{
+  "short_start": "2026-07-17",
+  "minimum_trades": 5,
+  "max_candidates": 3,
+  "short_budget_seconds": 180,
+  "long_budget_seconds": 120
+}

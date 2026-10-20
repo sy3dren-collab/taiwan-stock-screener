@@ -5,8 +5,8 @@ on:
       task:
         description: 'One-year diagnostics / five-year qualification; reports never auto-promote'
         type: choice
-        options: [annual-backfill, annual-research, backfill, research, final-test]
-        default: annual-research
+        options: [fast-research, annual-backfill, annual-research, backfill, research, final-test]
+        default: fast-research
       variant:
         description: 'One-year only: baseline or one predeclared wider-range diagnostic'
         type: choice
@@ -32,6 +32,7 @@ jobs:
       final_outcome: ${{ steps.final.outcome }}
       annual_backfill_outcome: ${{ steps.annual_backfill.outcome }}
       events_outcome: ${{ steps.events.outcome }}
+      fast_outcome: ${{ steps.fast.outcome }}
       annual_outcome: ${{ steps.annual.outcome }}
     steps:
       - uses: actions/checkout@v4
@@ -52,19 +53,24 @@ jobs:
         if: inputs.task == 'research' || inputs.task == 'backfill'
         continue-on-error: true
         run: python -m screener.optimizer research
+      - name: Three-month screen then gated annual confirmation
+        id: fast
+        if: inputs.task == 'fast-research' || github.event_name == 'schedule'
+        continue-on-error: true
+        run: timeout 600 python -m screener.fast
       - name: Priority one-year official backfill
         id: annual_backfill
-        if: inputs.task == 'annual-backfill' || github.event_name == 'schedule'
+        if: inputs.task == 'annual-backfill'
         continue-on-error: true
         run: python -m screener.annual backfill
       - name: Official cash distributions and ex-date references
         id: events
-        if: startsWith(inputs.task, 'annual-') || github.event_name == 'schedule'
+        if: startsWith(inputs.task, 'annual-')
         continue-on-error: true
         run: python -m screener.annual events
       - name: One-year retrospective diagnostic and per-run report
         id: annual
-        if: startsWith(inputs.task, 'annual-') || github.event_name == 'schedule'
+        if: startsWith(inputs.task, 'annual-')
         continue-on-error: true
         env:
           ANNUAL_VARIANT: ${{ inputs.variant || 'baseline' }}
@@ -75,11 +81,14 @@ jobs:
         continue-on-error: true
         run: python -m screener.optimizer final-test
       - name: Data status and safe daily output
+        if: inputs.task != 'fast-research' && github.event_name != 'schedule'
         run: |
           python -m screener.quality audit
           python -m screener.daily screen --offline
           python -m scripts.preserve_quote_error
       - name: Save all run reports, experiments and history
+        env:
+          REPORTS_ONLY: ${{ (inputs.task == 'fast-research' || github.event_name == 'schedule') && 'true' || 'false' }}
         run: bash scripts/save-history.sh
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
@@ -96,6 +105,8 @@ jobs:
             site/data-quality.json
             site/final-test.json
             site/annual-*.json
+            site/fast-*.json
+            site/fast-runs/
             .state/runs/
             .state/experiments/
   publish:
@@ -108,5 +119,5 @@ jobs:
       - uses: actions/deploy-pages@v4
         id: publish
       - name: Preserve failure after publishing the recorded result
-        if: needs.study.outputs.backfill_outcome == 'failure' || needs.study.outputs.research_outcome == 'failure' || needs.study.outputs.final_outcome == 'failure' || needs.study.outputs.annual_backfill_outcome == 'failure' || needs.study.outputs.events_outcome == 'failure' || needs.study.outputs.annual_outcome == 'failure'
+        if: needs.study.outputs.fast_outcome == 'failure' || needs.study.outputs.backfill_outcome == 'failure' || needs.study.outputs.research_outcome == 'failure' || needs.study.outputs.final_outcome == 'failure' || needs.study.outputs.annual_backfill_outcome == 'failure' || needs.study.outputs.events_outcome == 'failure' || needs.study.outputs.annual_outcome == 'failure'
         run: exit 1

@@ -17,6 +17,7 @@ jobs:
           node --check site/app.js
           node --check site/naked.js
           node --check site/backtest.js
+          node --check site/fast.js
           bash -n scripts/restore-history.sh scripts/save-history.sh
       - name: Browser testing tools
         run: |
@@ -29,3 +30,4 @@ jobs:
           node tests/naked-browser.cjs
           node tests/browser.cjs
           node tests/annual-browser.cjs
+          node tests/fast-browser.cjs

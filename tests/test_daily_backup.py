@@ -23,6 +23,29 @@ class DailyTests(unittest.TestCase):
     def test_source_error_does_not_show_old_candidates(self):
         r=produce(self.s,self.cfg,self.registry,{}, {},self.day,update_error='official unavailable')
         self.assertEqual(r['status'],'error');self.assertEqual(r['candidates'],[])
+    def test_daily_entrypoint_reaches_fresh_third_attempt_after_two_partial_transfers(self):
+        import io
+        from http.client import IncompleteRead
+        from screener.daily import main
+        from screener.data import parse_report
+        from test_data import DAY,twse,tpex
+        class Broken:
+            def __enter__(self):return self
+            def __exit__(self,*args):return False
+            def read(self):raise IncompleteRead(b'{"incomplete":')
+        def update_one_day(store,client,end,*args):
+            # Exercise the real client constructed by daily.main, rather than
+            # a separate default-configured client that the caller never uses.
+            rows=client.daily('TPEX',DAY)
+            store.save_day(DAY,{'TWSE':parse_report('TWSE',DAY,twse()),'TPEX':rows})
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory)/'results.json';db=Path(directory)/'prices.db'
+            with patch('sys.argv',['daily','screen','--db',str(db),'--output',str(output)]),patch('screener.daily.default_end',return_value=DAY),patch('screener.daily.update',side_effect=update_one_day),patch('screener.data.urlopen',side_effect=[Broken(),Broken(),io.BytesIO(json.dumps(tpex()).encode())]) as request,patch('screener.data.time.sleep'):
+                main()
+            result=json.loads(output.read_text())
+            self.assertEqual(request.call_count,3);self.assertIn('_=',request.call_args_list[-1].args[0].full_url)
+            self.assertEqual(result['status'],'ok');self.assertEqual(result['as_of'],DAY.isoformat())
+            self.assertEqual(result['candidates'],[]);self.assertFalse(result['orders_enabled'])
     def test_unverified_promotion_and_paper_are_blocked(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'registry.json';p.write_text(json.dumps(self.registry));old=p.read_bytes()

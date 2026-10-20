@@ -199,14 +199,14 @@ class GuardedSignals:
         return {'candidates':selected[:10]}
 
 
-def run_year(store,cfg,parameters=None,execution=None,seconds=None,variant='baseline'):
+def run_year(store,cfg,parameters=None,execution=None,seconds=None,variant='baseline',quality=None):
     from .naked import NakedParameters
     from .naked_backtest import Risk,simulate
     from .execution import Execution
     from .optimizer import code_version
     if variant not in VARIANTS:raise ValueError('未知的一年研究版本')
     now=datetime.now(timezone.utc).isoformat();version=code_version()
-    quality=audit_year(store,cfg)
+    quality=audit_year(store,cfg) if quality is None else quality
     result={'schema_version':1,'generated_at':now,'research_model_id':'F','status':'blocked',
             'classification':'retrospective_diagnostic','promotion_allowed':False,'active_strategy':None,
             'data_quality':quality,'version':version,'experiments':[],'variant':{'id':variant,**VARIANTS[variant]},
