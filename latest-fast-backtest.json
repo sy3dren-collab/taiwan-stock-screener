@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T02:15:48.551878+00:00",
+  "generated_at": "2026-10-20T20:17:48.276622+00:00",
   "classification": "retrospective_diagnostic",
   "promotion_allowed": false,
   "active_strategy": null,
@@ -13,7 +13,7 @@
   "short_runs": [
     {
       "schema_version": 1,
-      "generated_at": "2026-10-20T02:15:48.558936+00:00",
+      "generated_at": "2026-10-20T20:17:48.281802+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -22,9 +22,9 @@
       "data_quality": {
         "status": "diagnostic_ready",
         "issues": [],
-        "data_sha256": "bbfe3fd351d79c33f5249b79484c899eef62b7448d0cf030d2b5dd9e0d64589d",
+        "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "fea718fd392898aede061e2f584098b55e5568d5dcde3a766be9c0da76f58c07",
+        "evidence_sha256": "5b74e11e8cf21d7c4a8f27d21b345a62b568ad45fd2486807720b5c7795f52cf",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -33,7 +33,7 @@
         "warmup_sessions": 136,
         "trading_sessions": 242,
         "missing_turnover": 0,
-        "missing_reference": 844,
+        "missing_reference": 851,
         "formal_research_ready": false,
         "promotion_allowed": false,
         "limitations": [
@@ -43,9 +43,9 @@
         ]
       },
       "version": {
-        "git_commit": "990c25fc1ca3a658ccb1ab39af7a850952715af7",
-        "code_sha256": "578115870c226b29c9554d07fd6a1dae925f1c585df47a9028fafe543686c0f2",
-        "working_tree_dirty": true
+        "git_commit": "a32bcf0ea1274efc629f66b181c3f0d443f09c72",
+        "code_sha256": "d712bdbbb0f0fa9046f42902dc279d9964cc89e1a8e83475c9136ba14dc0201b",
+        "working_tree_dirty": false
       },
       "experiments": [],
       "variant": {
@@ -147,7 +147,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 179.9999982570007,
+      "budget_seconds": 179.999997736,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -1345,7 +1345,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 13.286,
+      "elapsed_seconds": 16.477,
       "candidate": "baseline",
       "changed_parameters": {
         "fusion_revision": 1
@@ -1354,7 +1354,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-10-20T02:16:05.643274+00:00",
+      "generated_at": "2026-10-20T20:18:09.294336+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -1363,9 +1363,9 @@
       "data_quality": {
         "status": "diagnostic_ready",
         "issues": [],
-        "data_sha256": "bbfe3fd351d79c33f5249b79484c899eef62b7448d0cf030d2b5dd9e0d64589d",
+        "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "fea718fd392898aede061e2f584098b55e5568d5dcde3a766be9c0da76f58c07",
+        "evidence_sha256": "5b74e11e8cf21d7c4a8f27d21b345a62b568ad45fd2486807720b5c7795f52cf",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -1374,7 +1374,7 @@
         "warmup_sessions": 136,
         "trading_sessions": 242,
         "missing_turnover": 0,
-        "missing_reference": 844,
+        "missing_reference": 851,
         "formal_research_ready": false,
         "promotion_allowed": false,
         "limitations": [
@@ -1384,9 +1384,9 @@
         ]
       },
       "version": {
-        "git_commit": "990c25fc1ca3a658ccb1ab39af7a850952715af7",
-        "code_sha256": "578115870c226b29c9554d07fd6a1dae925f1c585df47a9028fafe543686c0f2",
-        "working_tree_dirty": true
+        "git_commit": "a32bcf0ea1274efc629f66b181c3f0d443f09c72",
+        "code_sha256": "d712bdbbb0f0fa9046f42902dc279d9964cc89e1a8e83475c9136ba14dc0201b",
+        "working_tree_dirty": false
       },
       "experiments": [],
       "variant": {
@@ -1488,7 +1488,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 162.90868539600342,
+      "budget_seconds": 158.98241750699998,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -2686,7 +2686,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 14.488,
+      "elapsed_seconds": 16.696,
       "candidate": "causal-recovery-v2",
       "changed_parameters": {
         "fusion_revision": 2
@@ -2695,7 +2695,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-10-20T02:16:24.079154+00:00",
+      "generated_at": "2026-10-20T20:18:30.576149+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -2704,9 +2704,9 @@
       "data_quality": {
         "status": "diagnostic_ready",
         "issues": [],
-        "data_sha256": "bbfe3fd351d79c33f5249b79484c899eef62b7448d0cf030d2b5dd9e0d64589d",
+        "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "fea718fd392898aede061e2f584098b55e5568d5dcde3a766be9c0da76f58c07",
+        "evidence_sha256": "5b74e11e8cf21d7c4a8f27d21b345a62b568ad45fd2486807720b5c7795f52cf",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -2715,7 +2715,7 @@
         "warmup_sessions": 136,
         "trading_sessions": 242,
         "missing_turnover": 0,
-        "missing_reference": 844,
+        "missing_reference": 851,
         "formal_research_ready": false,
         "promotion_allowed": false,
         "limitations": [
@@ -2725,9 +2725,9 @@
         ]
       },
       "version": {
-        "git_commit": "990c25fc1ca3a658ccb1ab39af7a850952715af7",
-        "code_sha256": "578115870c226b29c9554d07fd6a1dae925f1c585df47a9028fafe543686c0f2",
-        "working_tree_dirty": true
+        "git_commit": "a32bcf0ea1274efc629f66b181c3f0d443f09c72",
+        "code_sha256": "d712bdbbb0f0fa9046f42902dc279d9964cc89e1a8e83475c9136ba14dc0201b",
+        "working_tree_dirty": false
       },
       "experiments": [],
       "variant": {
@@ -2829,7 +2829,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 144.47280721699644,
+      "budget_seconds": 137.700565106,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -4089,7 +4089,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 13.001,
+      "elapsed_seconds": 16.768,
       "candidate": "flexible-retest-v2",
       "changed_parameters": {
         "fusion_revision": 2,
@@ -4103,11 +4103,11 @@
     }
   ],
   "long_run": null,
-  "long_gate": "未通過短期正收益與最低交易數門檻，未執行一年回測",
+  "long_gate": "未通過短期正收益、至少五筆交易及無未撥股估值門檻，未執行一年回測",
   "limitations": [
     "短期篩選可能過度擬合；一年包含這三個月，並非獨立樣本外驗證。",
     "費用、交易稅、滑價沿用原設定；期末預留20交易日平倉，零交易不合格。"
   ],
-  "elapsed_seconds": 78.056,
+  "elapsed_seconds": 100.217,
   "status": "completed"
 }
