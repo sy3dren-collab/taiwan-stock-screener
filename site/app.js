@@ -88,10 +88,17 @@ function render() {
   $('#cards').replaceChildren();
   if (!data || data.status !== 'ok') return;
   if(data.mode==='research'){
-    $('#count').textContent='0';$('#universe').textContent=format(data.universe_count,0);
-    $('#status').className='notice warning';$('#status').replaceChildren(node('strong','',data.message||'尚無通過驗證的策略'));
+    const view=data.watchlist || {candidates:[]};
+    const query=$('#search').value.trim().toLowerCase();
+    const stocks=view.candidates.filter(s=>(market==='all'||s.market===market)&&`${s.code} ${s.name}`.toLowerCase().includes(query));
+    stocks.sort((a,b)=>$('#sort').value==='code'?a.code.localeCompare(b.code):b[$('#sort').value]-a[$('#sort').value]||a.code.localeCompare(b.code));
+    $('#count').textContent=String(view.candidates.length);$('#universe').textContent=format(data.universe_count,0);
+    $('#status').className='notice warning';$('#status').replaceChildren(node('strong','',view.candidates.length?`研究觀察名單 ${view.candidates.length} 檔｜行情 ${data.as_of}｜正式策略尚未啟用`:data.message||'尚無通過驗證的策略'));
+    if(view.candidates.length)$('#status').append(node('p','',`目標每日約10檔，合格觀察標的 ${view.qualified_count} 檔。尚待條件確認者不是進場訊號；不足10檔不補假名單。`));
     (data.warnings||[]).forEach(w=>$('#status').append(node('p','',w)));
-    $('#empty').hidden=false;$('#empty-message').textContent='尚無通過驗證的策略。今日不提供正式選股名單，也不以封存模型補入。';
+    stocks.forEach((stock,i)=>$('#cards').append(card(stock,i+1)));
+    $('#empty').hidden=stocks.length>0;$('#empty-message').textContent=view.candidates.length?'此市場或搜尋條件沒有觀察股票。':'尚無通過驗證的策略，也沒有合格研究觀察標的。';
+    $('#strategy-description').textContent='先觀察整理與放量事件，再等待回檔轉強。卡片停損與目標僅為結構參考；風報比不足時不能進場。';
     $('.strategy-picker').hidden=true;return;
   }
   $('.strategy-picker').hidden=Object.keys(data.strategies||{}).length<=1;
@@ -123,7 +130,7 @@ function validateResult(result) {
   if (result.status==='ok') {
     if (!result.as_of || !result.parameters || !Number.isFinite(result.universe_count)) throw new Error('結果缺少行情日期或策略參數');
     const candidates=result.strategies?Object.values(result.strategies).flatMap(view=>{if(!view || !Array.isArray(view.candidates) || !Number.isFinite(view.universe_count))throw new Error('策略資料不完整');return view.candidates;}):result.candidates;
-    for (const s of candidates) {
+    for (const s of [...candidates,...(result.watchlist?.candidates || [])]) {
       if (typeof s.code!=='string' || typeof s.name!=='string' || !['TWSE','TPEX'].includes(s.market) || !Array.isArray(s.reasons) || !s.reasons.every(r=>typeof r==='string') || !Array.isArray(s.bars) || s.bars.length<2) throw new Error('候選股票資料不完整');
       for (const k of ['close','change_pct','support','stop','target','reward_risk','score']) if (!Number.isFinite(s[k])) throw new Error('候選股票數值不合法');
       if (s.date!==result.as_of) throw new Error('候選股票行情日期不一致');

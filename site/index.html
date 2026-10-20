@@ -11,7 +11,7 @@
   <title>台股波段觀察室｜每日量化選股</title>
   <meta name="description" content="根據證交所及櫃買中心公開行情，以透明、可調整的波段策略篩選台灣股票。">
   <link rel="stylesheet" href="styles.css?v=8b3d528786e9">
-  <script src="app.js?v=67445e442ffd" defer></script>
+  <script src="app.js?v=cff44b4776f0" defer></script>
   <script src="naked.js?v=6d5edbdb6473" defer></script>
   <script src="backtest.js?v=58bbb01a6f8d" defer></script>
   <script src="fast.js?v=2" defer></script>
@@ -20,10 +20,17 @@
   <header class="topbar"><a class="brand" href="./"><span class="brandmark" aria-hidden="true">↗</span> 台股波段觀察室</a><span class="edition">TAIWAN MARKET · DAILY SCREEN</span></header>
   <main>
     <section class="hero">
-      <div><p class="eyebrow">收盤後的研究筆記 / 01</p><h1>專注一套策略，<br>再決定是否進場。</h1><p class="intro">整合整理大量收復、趨勢回檔與帶量轉強，只有通過驗證後才產生正式名單。<br>85% 勝率是研究目標，不是保證或單一晉級條件。</p></div>
-      <aside class="overview" aria-label="資料摘要"><span class="live-label"><i></i> 官方收盤資料</span><dl><div><dt>行情日期</dt><dd id="as-of">—</dd></div><div><dt>本日候選</dt><dd><span id="count">—</span><small> 檔</small></dd></div><div><dt>納入股票</dt><dd><span id="universe">—</span><small> 檔</small></dd></div></dl><p id="updated">等待資料載入</p></aside>
+      <div><p class="eyebrow">收盤後的研究筆記 / 01</p><h1>每日波段觀察，<br>看清機會與風險。</h1><p class="intro">優先挑成交活躍、均線走穩、靠近支撐的股票，每天約10檔供你自行複選。<br>清楚標示入選理由與待確認條件；排序分數不是上漲機率。</p></div>
+      <aside class="overview" aria-label="資料摘要"><span class="live-label"><i></i> 官方收盤資料</span><dl><div><dt>行情日期</dt><dd id="as-of">—</dd></div><div><dt>本日觀察</dt><dd><span id="count">—</span><small> 檔</small></dd></div><div><dt>納入股票</dt><dd><span id="universe">—</span><small> 檔</small></dd></div></dl><p id="updated">等待資料載入</p></aside>
     </section>
     <section id="status" class="notice" aria-live="polite">正在讀取選股結果…</section>
+    <section class="results-section" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">每日股票觀察名單</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
+      <div class="strategy-picker"><label for="strategy-select">選股策略</label><select id="strategy-select"><option value="trend_pullback">原策略：趨勢回檔再轉強</option></select><p id="strategy-description"></p></div>
+      <div class="toolbar"><div class="market-tabs" role="group" aria-label="市場篩選"><button class="active" data-market="all" aria-pressed="true">全部市場</button><button data-market="TWSE" aria-pressed="false">上市</button><button data-market="TPEX" aria-pressed="false">上櫃</button></div><div class="tools"><label><span class="sr-only">搜尋股票名稱或代號</span><input id="search" type="search" placeholder="搜尋名稱或代號" autocomplete="off"></label><label><span class="sr-only">排序方式</span><select id="sort"><option value="score">綜合分數</option><option value="reward_risk">風險報酬比</option><option value="code">股票代號</option></select></label></div></div>
+      <div id="cards" class="cards" aria-live="polite"></div>
+      <div id="empty" class="empty" hidden><span aria-hidden="true">⌁</span><h3>耐心，也是策略的一部分。</h3><p id="empty-message">目前沒有符合條件的股票。</p></div>
+    </section>
     <section class="naked-research" aria-labelledby="fast-title"><h2 id="fast-title">三個月快速初篩</h2><p>只測三個固定版本，扣成本後淨收益為正且至少五筆交易，才執行一次一年確認。短期正收益不代表未來獲利。</p><div id="fast-results">讀取回測報告中…</div></section>
     <section class="naked-research" aria-labelledby="annual-title">
       <p class="eyebrow">ONE-YEAR STRATEGY RESEARCH</p><h2 id="annual-title">新合併策略・一年回測</h2>
@@ -31,20 +38,13 @@
       <div id="annual-metrics"></div><div id="annual-comparison"></div><div id="annual-evidence"></div>
       <details id="annual-detail"><summary>查看淨值、每月績效與完整交易</summary><div id="annual-charts"></div></details>
     </section>
-    <section class="results-section" aria-labelledby="results-title">
-      <div class="section-heading"><div><p class="eyebrow">THE WATCHLIST</p><h2 id="results-title">今日符合唯一策略的候選</h2></div><span class="legend"><b class="up">━ 紅漲</b><b class="down">━ 綠跌</b></span></div>
-      <div class="strategy-picker"><label for="strategy-select">選股策略</label><select id="strategy-select"><option value="trend_pullback">原策略：趨勢回檔再轉強</option></select><p id="strategy-description"></p></div>
-      <div class="toolbar"><div class="market-tabs" role="group" aria-label="市場篩選"><button class="active" data-market="all" aria-pressed="true">全部市場</button><button data-market="TWSE" aria-pressed="false">上市</button><button data-market="TPEX" aria-pressed="false">上櫃</button></div><div class="tools"><label><span class="sr-only">搜尋股票名稱或代號</span><input id="search" type="search" placeholder="搜尋名稱或代號" autocomplete="off"></label><label><span class="sr-only">排序方式</span><select id="sort"><option value="score">綜合分數</option><option value="reward_risk">風險報酬比</option><option value="code">股票代號</option></select></label></div></div>
-      <div id="cards" class="cards" aria-live="polite"></div>
-      <div id="empty" class="empty" hidden><span aria-hidden="true">⌁</span><h3>耐心，也是策略的一部分。</h3><p id="empty-message">目前沒有符合條件的股票。</p></div>
-    </section>
     <section hidden class="personal-strategy" aria-labelledby="personal-title"><p class="eyebrow">YOUR INDEPENDENT STRATEGY</p><h2 id="personal-title">你的策略，獨立觀察。</h2><p>長時間整理後，觀察「假跌破後收復區間」或「量化近似頭肩底突破」。<strong>收復／突破當天必須出大量。</strong>這組規則不混入其他策略的均線條件。</p><button id="show-user-strategy" type="button" disabled>查看我的策略候選</button><details><summary>查看你的量化條件與可調參數</summary><div id="personal-parameters"></div><p>頭肩底是確認後轉折點的量化近似，不代表人工確認型態。所有門檻都可在 models.json 調整。</p></details></section>
     <section class="naked-research" aria-labelledby="naked-title"><p class="eyebrow">ONE VERIFIED STRATEGY</p><h2 id="naked-title">單一策略驗證狀態</h2><div id="naked-active" class="notice" aria-live="polite">讀取研究狀態中…</div><div id="naked-performance"></div><h3>五年正式驗證的剩餘缺口</h3><div id="naked-quality"></div><h3>目前唯一研究策略</h3><p>長整理與大量收復／突破 → 確認高低點抬高 → 量縮回測結構支撐 → 再放量轉強。初始事件量至少1.5倍、進場量至少1.2倍；回檔量比至多0.8。85%僅為長期目標。</p><div id="naked-comparisons" class="naked-comparisons"></div><h3>每次回測結果</h3><p>包含虧損、失敗與資料不足。每次研究執行後自動更新；可展開查看與下載報告。</p><div id="run-history"></div><h3>本輪策略優化紀錄</h3><div id="optimization-history"></div><h3>績效分析與完整交易</h3><div id="naked-charts"></div></section>
     <details id="legacy-research" class="legacy-archive"><summary>封存的三個原策略與一年歷史研究（未作正式策略）</summary><p>以下資料只保留稽核用途，未還原權息，最近一年已被使用，不是獨立封存樣本外。原策略沒有刪除，也不再啟用為首頁選股策略。</p><details id="legacy-watchlist"><summary>查看封存的 2026-10-16 名單與 K 線</summary><p>封存快照，原策略已停用；以下不是今日推薦。</p><div id="legacy-cards" class="cards"></div></details>
     <section class="backtest-section" aria-labelledby="backtest-title"><div class="section-heading"><div><p class="eyebrow">PRELIMINARY RESEARCH</p><h2 id="backtest-title">封存三個原策略：已使用的歷史研究。</h2></div><span class="research-badge">未還原權息</span></div><div id="backtest-status" class="notice" aria-live="polite">正在讀取初步回測…</div><p id="backtest-period"></p><div id="research-protocol"></div><div id="backtest-models" class="backtest-models"></div><div id="backtest-assumptions"></div><div id="backtest-detail"></div></section>
     </details>
     <section hidden class="method" aria-labelledby="method-title"><div><p class="eyebrow">A DISCIPLINED APPROACH</p><h2 id="method-title">每一個條件，<br>都有明確的依據。</h2><p>下列五項對應原策略「趨勢回檔再轉強」。<br>你的區間策略及其他比較策略各自獨立判斷，不混用。</p></div><ol><li><span>01</span><div><h3>趨勢向上</h3><p>收盤高於短均線，短均線高於長均線，且短均線持續上升。</p></div></li><li><span>02</span><div><h3>多頭結構</h3><p>最近兩個確認波段高點與低點，皆依序抬高。</p></div></li><li><span>03</span><div><h3>回到支撐</h3><p>回檔低點接近短均線或確認波段低點，收盤仍在支撐之上。</p></div></li><li><span>04</span><div><h3>量縮整理</h3><p>回檔期間的平均成交量，小於此前基準期間的一定比例。</p></div></li><li><span>05</span><div><h3>重新轉強</h3><p>紅 K 收盤突破前日高點，並通過停損距離及風險報酬比門檻。</p></div></li></ol></section>
-    <details class="parameters"><summary>查看本次策略參數與計算方式</summary><p>參數可在儲存庫的 strategy.json 調整，再執行更新或重新選股。所有比例以小數表示，成交量單位為股。</p><div id="parameters"></div><p>停損＝min（支撐、回檔最低價）− ATR × 緩衝倍數；參考目標＝最近確認波段高點；風險報酬比＝（目標−最新收盤）÷（最新收盤−停損）。尚未扣除手續費、稅、滑價；參考價未作交易單位進位。</p><p>排序分數＝40 ×（1−支撐距離／上限）＋30 ×（1−量比）＋20 × min（風報比／3, 1）＋10 × min（均線升幅／5%, 1）。分數僅供候選排序，不是勝率。波段轉折須等待左右指定根數確認；只使用資料日以前已知行情。</p></details>
+    <details class="parameters"><summary>查看觀察名單的條件與計算方式</summary><p>觀察門檻：股價至少10元、20日官方平均成交金額至少5,000萬元；20日均線近5日不能下彎，收盤至少為均線的99%。60日區間振幅不超過35%、首尾均價漂移不超過15%；距10日低點不超過10%，近5日跌幅不超過3%，20日日均K線振幅不超過4.5%。</p><p>優先排序依據：已確認研究進場條件、近期放量收復／突破、均線趨勢、較小振幅與靠近支撐。一般放量事件須至少為前20日均量1.2倍；尚未有事件者只列整理觀察。最多顯示10檔，合格不足不補名額。</p><p>觀察參考支撐＝近10日低點；停損參考＝支撐×0.995；目標參考＝近60日高點與最新收盤的較高者。這些是結構觀察價位，風報比不足1.5或尚未滿足完整進場條件時須繼續等待。完整進場策略仍保留原有風險門檻。分數不是勝率，這份名單尚未證明具有特定上漲機率。</p><div id="parameters"></div></details>
     <aside class="disclaimer"><strong>研究工具，不是交易指令。</strong><p>官方原始行情保留原價；研究訊號與實際成交價分開處理，尚缺完整公司行動資料。僅納入四位數普通股（排除上市 91xx 存託憑證），不含 ETF、權證；歷史不足及當日無成交者不參與。現有裸 K 研究仍受五年資料及完整公司行動證據限制；未通過驗證時不產生正式推薦。封存三個來源策略的結果僅供稽核。選股與參考停損不保證獲利或成交。本站不提供自動下單。</p></aside>
   </main>
   <footer><span>台股波段觀察室 · 開放資料，透明規則。</span><span>資料來源：<a href="https://www.twse.com.tw/" target="_blank" rel="noopener noreferrer">臺灣證券交易所 ↗</a> / <a href="https://www.tpex.org.tw/" target="_blank" rel="noopener noreferrer">證券櫃檯買賣中心 ↗</a></span></footer>

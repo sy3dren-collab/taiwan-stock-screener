@@ -1,0 +1,13 @@
+{
+  "target_count": 10,
+  "minimum_price": 10,
+  "minimum_turnover": 50000000,
+  "range_width": 0.35,
+  "range_drift_max": 0.15,
+  "support_distance_max": 0.1,
+  "ma_distance_min": -0.01,
+  "five_day_return_min": -0.03,
+  "event_volume_multiple": 1.2,
+  "minimum_ma_slope": 0,
+  "maximum_average_daily_range": 0.045
+}

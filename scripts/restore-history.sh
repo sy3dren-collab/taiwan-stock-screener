@@ -35,12 +35,12 @@ python - <<'PY'
 import json,shutil
 from datetime import datetime
 from pathlib import Path
-for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest'):
+for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest','watchlist-audit'):
     source=Path(f'.history/latest-{report}.json')
     if not source.exists():continue
     data=json.loads(source.read_text())
-    if report=='fast-backtest':
-        target=Path('site/fast-backtest.json')
+    if report in ('fast-backtest','watchlist-audit'):
+        target=Path('site')/(report+'.json')
         if target.exists():
             current=json.loads(target.read_text())
             if datetime.fromisoformat(current['generated_at'])>=datetime.fromisoformat(data['generated_at']):continue
@@ -48,4 +48,5 @@ for report in ('research','data-quality','final-test','annual-backtest','annual-
     shutil.copyfile(source,Path('site')/f'{report}.json')
 PY
 if [ -d .history/fast-runs ]; then mkdir -p site/fast-runs; cp -n .history/fast-runs/*.json site/fast-runs/; fi
+if [ -d .history/watchlist-audits ]; then mkdir -p site/watchlist-audits; cp -n .history/watchlist-audits/*.json site/watchlist-audits/; fi
 python -m screener.reporting export

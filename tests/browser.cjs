@@ -38,7 +38,7 @@ const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     await page.goto('http://127.0.0.1:8765/');
     if(snapshot.status==='ok') {
       await page.waitForFunction(()=>document.querySelector('#as-of').textContent!=='—');
-      assert.equal(await page.locator('.stock-card').count(),snapshot.candidates.length);
+      assert.equal(await page.locator('.stock-card').count(),(snapshot.mode==='research'?snapshot.watchlist?.candidates.length||0:snapshot.candidates.length));
       assert.equal(await page.locator('#as-of').innerText(),snapshot.as_of);
     } else {
       await page.locator('#status.error').waitFor();

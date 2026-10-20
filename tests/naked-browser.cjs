@@ -7,8 +7,16 @@ const server=spawn('python3',['-m','http.server','8766','--bind','127.0.0.1','--
   const p=await browser.newPage({viewport:{width,height:844},isMobile:width<500,hasTouch:width<500});const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   await p.goto('http://127.0.0.1:8766');await p.locator('.naked-candidate').first().waitFor();
   assert.equal(await p.locator('.naked-candidate').count(),1);assert.match(await p.locator('#naked-active').innerText(),/尚無通過驗證/);
-  await p.waitForFunction(()=>document.querySelector('#empty-message').textContent.includes('尚無通過驗證'));
-  assert.equal(await p.locator('.stock-card').count(),0);assert.equal(await p.locator('#naked-charts svg').count(),0);
+  const snapshot=JSON.parse(require('node:fs').readFileSync('site/results.json','utf8'));
+  await p.waitForFunction(()=>document.querySelector('#as-of').textContent!=='—');
+  assert.equal(snapshot.candidates.length,0);assert.equal(snapshot.orders_enabled,false);
+  assert.equal(await p.locator('.stock-card').count(),snapshot.watchlist?.candidates.length||0);
+  if(snapshot.watchlist?.candidates.length){
+    assert.match(await p.locator('#status').innerText(),/研究觀察名單/);
+    assert.match(await p.locator('#status').innerText(),/不是進場訊號/);
+    assert.equal(snapshot.watchlist.candidates.every(s=>s.observation_only),true);
+  }
+  assert.equal(await p.locator('#naked-charts svg').count(),0);
   assert.match(await p.locator('#optimization-history').innerText(),/未捏造/);
   await p.locator('.run-entry').first().waitFor();assert.equal(await p.locator('.naked-candidate').filter({hasText:'F｜'}).count(),1);
   await p.locator('.run-entry summary').first().click();
