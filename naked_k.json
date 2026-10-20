@@ -40,7 +40,8 @@
     "minimum_break_fraction": 0.005,
     "maximum_break_fraction": 0.08,
     "minimum_event_age": 2,
-    "extension_max": 0.04
+    "extension_max": 0.04,
+    "fusion_revision": 2
   },
   "risk": {
     "risk_budget": 0.01,

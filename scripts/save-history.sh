@@ -4,7 +4,7 @@ if [ "${GITHUB_ACTIONS:-}" != 'true' ]; then
   echo 'This helper operates only on the disposable Actions .history checkout.' >&2
   exit 1
 fi
-if [ "${REPORTS_ONLY:-false}" != true ]; then
+if [ "${REPORTS_ONLY:-false}" != true ] || [ -f .state/research-db-changed ]; then
   python -m screener.backup save --directory .history/backup
 fi
 for folder in experiments paper runs; do

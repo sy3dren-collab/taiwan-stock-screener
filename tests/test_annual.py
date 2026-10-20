@@ -71,7 +71,7 @@ class DistributionTests(unittest.TestCase):
 
 class AnnualAdmissionTests(unittest.TestCase):
     def setUp(self):
-        self.seq=fusion_bars();self.p=NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal'])
+        self.seq=fusion_bars();self.p=replace(NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal']),fusion_revision=1)
         self.sessions=[b.date for b in self.seq];self.day=self.seq[129].date
 
     def test_unknown_event_excludes_only_affected_stock_and_cannot_erase_other_signals(self):
@@ -125,7 +125,7 @@ class AnnualIntegrationTests(unittest.TestCase):
             self.assertNotEqual(changed['data_sha256'],audit_year(s,cfg)['data_sha256'])
         finally:s.close()
     def test_predeclared_variant_changes_one_rule_without_altering_cost_or_formal_strategy(self):
-        p=NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal'])
+        p=replace(NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal']),fusion_revision=1)
         changed=replace(p,**VARIANTS['wider-range']['changes'])
         from dataclasses import asdict
         self.assertEqual([k for k,v in asdict(p).items() if asdict(changed)[k]!=v],['range_width'])
@@ -174,7 +174,7 @@ class AnnualIntegrationTests(unittest.TestCase):
             cfg={'data_start':seq[0].date,'start':seq[101].date,'end':seq[-1].date,'simulation_seconds':5}
             q=audit_year(s,cfg);self.assertEqual(q['status'],'diagnostic_ready')
             self.assertFalse(q['promotion_allowed']);self.assertFalse(q['formal_research_ready'])
-            r=run_year(s,cfg)
+            r=run_year(s,cfg,parameters=replace(NakedParameters(**json.loads(Path('naked_k.json').read_text())['signal']),fusion_revision=1))
             self.assertEqual(r['status'],'completed');self.assertEqual(r['strategy']['metrics']['closed_count'],2)
             self.assertLess(r['strategy']['metrics']['net_return'],0);self.assertFalse(r['promotion_allowed']);self.assertIsNone(r['active_strategy'])
             self.assertEqual(r['strategy']['closed_trades'][0]['entry_date'],seq[130].date)
