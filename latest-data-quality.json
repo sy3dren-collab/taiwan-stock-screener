@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T21:22:46.530036+00:00",
+  "generated_at": "2026-10-20T01:49:14.202653+00:00",
   "backfill": {
     "status": "complete",
     "completed_dates": 0,
@@ -20,7 +20,7 @@
   "actual_end": "2026-10-16",
   "bars": 834070,
   "missing_turnover": 0,
-  "missing_reference": 2119,
+  "missing_reference": 2126,
   "missing_weekdays": 921,
   "first_missing_dates": [
     "2021-09-20",
@@ -42,11 +42,11 @@
   "source_proofs": 938,
   "issues": [
     "尚缺 921 個工作日官方日報／休市證據",
-    "2119 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
+    "2126 筆缺當日官方漲跌參考價；公司行動及漲跌停無法完整核對",
     "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
     "最近一年已使用，封存樣本外已污染，禁止最終晉級"
   ],
-  "data_sha256": "65bf22b3141d46a723c9fd86a1d4e074f7f2afb9b90443c55ff9bb9a7d274d96",
+  "data_sha256": "d0df4f06ca5a5abcb82727f268ca04a97e3c60e771a6c3a0c7f7012e829c1c40",
   "corporate_actions_imported": 2683,
   "trading_sessions": 443
 }
