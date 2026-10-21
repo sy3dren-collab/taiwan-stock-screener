@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T15:16:02.587838+00:00",
+  "generated_at": "2026-10-21T15:28:03.369136+00:00",
   "backfill": {
     "status": "complete",
     "completed_dates": 0,
@@ -46,7 +46,7 @@
     "尚缺完整官方分割／減資／下市及代碼轉換事件母表，未宣稱公司行動已全部處理",
     "最近一年已使用，封存樣本外已污染，禁止最終晉級"
   ],
-  "data_sha256": "d0df4f06ca5a5abcb82727f268ca04a97e3c60e771a6c3a0c7f7012e829c1c40",
-  "corporate_actions_imported": 2683,
+  "data_sha256": "4a9af4411ae9b13e49dca309826c3e2d0d99ffaeab0db262523ce28b31d30227",
+  "corporate_actions_imported": 2684,
   "trading_sessions": 443
 }
