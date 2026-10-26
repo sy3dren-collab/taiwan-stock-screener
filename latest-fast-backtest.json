@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T19:27:54.245431+00:00",
+  "generated_at": "2026-10-26T21:20:56.308211+00:00",
   "classification": "retrospective_diagnostic",
   "promotion_allowed": false,
   "active_strategy": null,
@@ -13,7 +13,7 @@
   "short_runs": [
     {
       "schema_version": 1,
-      "generated_at": "2026-10-25T19:27:54.249672+00:00",
+      "generated_at": "2026-10-26T21:20:56.313509+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -24,7 +24,7 @@
         "issues": [],
         "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "38f2d47a332fad867d3e41b2aadb0b07d2bb00ef2bdb34b0a73b007f79b35b9f",
+        "evidence_sha256": "26ad5ee3696ed7595a138cf902744be193654c251d101129105e110ee9ccfa53",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -147,7 +147,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 179.999997426,
+      "budget_seconds": 179.99999753499992,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -1345,7 +1345,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 12.948,
+      "elapsed_seconds": 16.109,
       "candidate": "baseline",
       "changed_parameters": {
         "fusion_revision": 1
@@ -1354,7 +1354,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-10-25T19:28:11.087610+00:00",
+      "generated_at": "2026-10-26T21:21:16.918088+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -1365,7 +1365,7 @@
         "issues": [],
         "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "38f2d47a332fad867d3e41b2aadb0b07d2bb00ef2bdb34b0a73b007f79b35b9f",
+        "evidence_sha256": "26ad5ee3696ed7595a138cf902744be193654c251d101129105e110ee9ccfa53",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -1488,7 +1488,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 163.15791911899998,
+      "budget_seconds": 159.390220806,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -2686,7 +2686,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 13.442,
+      "elapsed_seconds": 16.359,
       "candidate": "causal-recovery-v2",
       "changed_parameters": {
         "fusion_revision": 2
@@ -2695,7 +2695,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-10-25T19:28:28.363251+00:00",
+      "generated_at": "2026-10-26T21:21:37.764051+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -2706,7 +2706,7 @@
         "issues": [],
         "data_sha256": "95f87bab8876af53f11da84600e1c42126be1bdb073eae016d5d0992f427e793",
         "fingerprint_version": 2,
-        "evidence_sha256": "38f2d47a332fad867d3e41b2aadb0b07d2bb00ef2bdb34b0a73b007f79b35b9f",
+        "evidence_sha256": "26ad5ee3696ed7595a138cf902744be193654c251d101129105e110ee9ccfa53",
         "requested_start": "2025-04-01",
         "requested_end": "2026-10-16",
         "test_start": "2025-10-17",
@@ -2829,7 +2829,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 145.882285877,
+      "budget_seconds": 138.54424849199995,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -4089,7 +4089,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 12.934,
+      "elapsed_seconds": 16.435,
       "candidate": "flexible-retest-v2",
       "changed_parameters": {
         "fusion_revision": 2,
@@ -4108,6 +4108,6 @@
     "短期篩選可能過度擬合；一年包含這三個月，並非獨立樣本外驗證。",
     "費用、交易稅、滑價沿用原設定；期末預留20交易日平倉，零交易不合格。"
   ],
-  "elapsed_seconds": 78.648,
+  "elapsed_seconds": 100.097,
   "status": "completed"
 }
