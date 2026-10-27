@@ -38,7 +38,7 @@ function showFailure(error){document.querySelector('#brief-status').className='n
 document.querySelector('#collect-now').addEventListener('click',async()=>{
   if(!apiBase)return;const button=document.querySelector('#collect-now');button.disabled=true;
   document.querySelector('#refresh-status').textContent='正在向原始來源收集，請稍候…';
-  try{const data=await retrieve(apiBase+'/api/brief');document.querySelector('#refresh-status').textContent=data.cache_status==='hit'?`使用120秒內共用收集結果，產生時間 ${when(data.generated_at)}；不是本次重新抓取。`:`本次收集已完成（${data.status==='ok'?'各來源成功':'部分來源失敗，請查看提示'}），時間 ${when(data.generated_at)}。`;}
+  try{const data=await retrieve(apiBase+'/api/brief');document.querySelector('#refresh-status').textContent=data.cache_status==='hit'?`使用120秒內共用收集結果，產生時間 ${when(data.generated_at)}；不是本次重新抓取。`:`本次收集已完成（${data.status==='ok'?'各來源成功':data.status==='error'?'全部來源失敗，沒有有效更新':'部分來源失敗，請查看提示'}），時間 ${when(data.generated_at)}。`;}
   catch(error){showFailure(error);document.querySelector('#refresh-status').textContent='即時服務未完成本次收集；請核對來源或服務狀態。';}finally{button.disabled=false;}
 });
 document.querySelector('#reload-published').addEventListener('click',()=>retrieve('premarket.json').catch(showFailure));

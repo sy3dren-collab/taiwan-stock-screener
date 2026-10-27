@@ -13,6 +13,8 @@ const assert=require('node:assert/strict');
  assert.equal(parseFutures([row],now)[0].session,'盤後');assert.equal(parseFutures([row],now)[0].last,24100);
  assert.throws(()=>parseFutures([{...row,LastPrice:'--'}],now),/缺漏/);
  const failed=await collect(now,async()=>{throw Error('offline');});assert.equal(failed.status,'error');assert.equal(failed.markets.some(q=>'close' in q),false);assert.equal(failed.futures.rows.length,0);
+ const locked=await collect(now,async()=>new Response('login required',{status:401}));assert.ok(locked.markets.every(m=>m.skip_reason==='requires_login'));assert.ok(locked.feeds.every(f=>f.skip_reason==='requires_login'));assert.equal(locked.futures.skip_reason,'requires_login');
+ const paid=await collect(now,async()=>new Response('subscription required',{status:402}));assert.ok(paid.markets.every(m=>m.skip_reason==='requires_payment'));assert.equal(paid.news['台灣'].length,0);
  const origin='https://app.test';assert.equal((await worker.fetch(new Request('https://api.test/api/brief',{headers:{Origin:'https://evil.test'}}),{ALLOWED_ORIGIN:origin})).status,403);
  assert.equal((await worker.fetch(new Request('https://api.test/api/brief',{method:'POST',headers:{Origin:origin}}),{ALLOWED_ORIGIN:origin})).status,405);
  let calls=0;const originalFetch=global.fetch,originalCache=global.caches;const cached=new Map(),pending=[];

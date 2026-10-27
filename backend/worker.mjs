@@ -66,9 +66,17 @@ export function parseFutures(rows,now){
   });
 }
 
+export function sourceFailure(error){
+  return {error:String(error.message),skip_reason:error.accessStatus||'unavailable'};
+}
+
 async function body(url,fetcher){
   const response=await fetcher(url,{headers:{'User-Agent':'TaiwanMarketBrief/1.0'},signal:AbortSignal.timeout(12000)});
-  if(!response.ok)throw Error('來源 HTTP '+response.status);
+  if(!response.ok){
+    const reasons={401:['requires_login','來源要求驗證，已跳過；不登入或索取金鑰'],402:['requires_payment','來源要求付費，已跳過；不開通訂閱'],403:['access_denied','來源拒絕存取，已跳過；不嘗試登入或繞過限制'],429:['rate_limited','來源暫時限流，已跳過此輪']};
+    const [kind,message]=reasons[response.status]||['unavailable','來源 HTTP '+response.status];
+    const error=Error(message);error.accessStatus=kind;throw error;
+  }
   const reader=response.body.getReader();let size=0;const chunks=[];
   for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>700000){await reader.cancel();throw Error('來源回應超過安全大小上限');}chunks.push(value);}
   const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
@@ -81,15 +89,15 @@ export async function collect(at=null,fetcher=fetch){
   const markets=await Promise.all(sources.markets.map(async m=>{
     const url='https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(m[0])+'?interval=1d&range=10d';
     try{const raw=await body(url,fetcher);return {...parseQuote(JSON.parse(raw.text),m,clock()),data_url:url,payload_sha256:raw.hash};}
-    catch(error){return {symbol:m[0],name:m[1],group:m[2],status:'error',error:String(error.message),data_url:url};}
+    catch(error){return {symbol:m[0],name:m[1],group:m[2],status:'error',...sourceFailure(error),data_url:url};}
   }));
   const feeds=await Promise.all(sources.feeds.map(async([source,category,url])=>{
     try{const raw=await body(url,fetcher);const items=parseNews(raw.text,source,category,clock());return {source,category,url,status:items.length?'ok':'empty',items,payload_sha256:raw.hash};}
-    catch(error){return {source,category,url,status:'error',error:String(error.message),items:[]};}
+    catch(error){return {source,category,url,status:'error',...sourceFailure(error),items:[]};}
   }));
   let futures;
   try{const raw=await body(FUTURES_URL,fetcher);const rows=parseFutures(JSON.parse(raw.text),clock());const stale=clock()-Date.parse(rows[0].trading_date+'T00:00:00+08:00')>5*86400000;futures={status:stale?'stale':'ok',rows,warning:stale?'期貨報表超過4個完整日曆日，請核對休市與來源狀態':null,source_url:FUTURES_URL,payload_sha256:raw.hash};}
-  catch(error){futures={status:'error',rows:[],error:String(error.message),source_url:FUTURES_URL};}
+  catch(error){futures={status:'error',rows:[],...sourceFailure(error),source_url:FUTURES_URL};}
   const seen=new Set(),news=feeds.flatMap(f=>f.items).sort((a,b)=>b.relevance_tags.length-a.relevance_tags.length||b.published_at.localeCompare(a.published_at)).filter(n=>{const k=n.title.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});
   const healthy=markets.filter(m=>m.status==='ok').length+feeds.filter(f=>f.status==='ok').length+(futures.status==='ok'?1:0);
   const failures=markets.filter(m=>m.status!=='ok').length+feeds.filter(f=>f.status==='error').length+(futures.status==='error'?1:0);
@@ -100,6 +108,7 @@ export async function collect(at=null,fetcher=fetch){
       '期交所資料為公開交易報表，日盤／夜盤依原始欄位標示；不能當作當下台指期即時價格。月份排序不代表建議交易合約。',
       '新聞依台指期相關主題標記與發布時間整理；不自動推論利多利空，不保證事件已完整收錄。',
       '美國公布時間、日光節約時間與台灣到期／休市請以官方公告為準；沒有可信來源時不填猜測時間。',
+      '僅使用免登入、免金鑰的公開回應；來源要求登入或付款便跳過，不自動註冊、不開通訂閱。',
       '未提供即時委買賣、成交逐筆、大單或漲跌預測；來源失敗會明示，沒有假資料補值。']};
 }
 
