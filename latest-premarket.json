@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "status": "error",
+  "mode": "latest",
+  "generated_at": "2026-10-28T07:42:11.056063+08:00",
+  "briefing_date": "2026-10-28",
+  "cutoff_at": "2026-10-28T07:42:11.056063+08:00",
+  "news_window_hours": 48,
+  "markets": [
+    {
+      "symbol": "^GSPC",
+      "name": "標普500",
+      "group": "美股",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^DJI",
+      "name": "道瓊工業",
+      "group": "美股",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^IXIC",
+      "name": "那斯達克",
+      "group": "美股",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^SOX",
+      "name": "費城半導體",
+      "group": "美股",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESOX?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^VIX",
+      "name": "VIX 波動率",
+      "group": "風險指標",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^STOXX50E",
+      "name": "歐洲50",
+      "group": "歐股",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^N225",
+      "name": "日經225",
+      "group": "亞股前次收盤",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^HSI",
+      "name": "香港恆生",
+      "group": "亞股前次收盤",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^TWII",
+      "name": "台灣加權",
+      "group": "台股前次收盤",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1d&range=10d"
+    },
+    {
+      "symbol": "TSM",
+      "name": "台積電 ADR",
+      "group": "權值股線索",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TSM?interval=1d&range=10d"
+    },
+    {
+      "symbol": "TWD=X",
+      "name": "美元／新台幣",
+      "group": "匯率",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TWD%3DX?interval=1d&range=10d"
+    },
+    {
+      "symbol": "^TNX",
+      "name": "美國10年期殖利率指標",
+      "group": "利率",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=10d"
+    },
+    {
+      "symbol": "CL=F",
+      "name": "WTI 原油近月",
+      "group": "能源／地緣風險",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=10d"
+    },
+    {
+      "symbol": "GC=F",
+      "name": "黃金近月",
+      "group": "避險背景",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?interval=1d&range=10d"
+    }
+  ],
+  "feeds": [
+    {
+      "source": "中央社財經",
+      "category": "台灣",
+      "url": "https://feeds.feedburner.com/rsscna/finance",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "中央社即時",
+      "category": "台灣",
+      "url": "https://feeds.feedburner.com/rsscna/mainnews",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "Google 新聞・台灣財經彙整",
+      "category": "台灣",
+      "url": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "BBC World（英文）",
+      "category": "國際",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "BBC Business（英文）",
+      "category": "國際",
+      "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "status": "error",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ],
+  "news": {
+    "台灣": [],
+    "國際": []
+  },
+  "notes": [
+    "盤前模式截止於台北08:20，僅用已結束時段；最新模式使用來源最新可取得報價，可能延遲，非逐筆即時。",
+    "漲跌比較該指數最近兩個已結束交易時段；各市場休市日不同，請看每張卡片日期。",
+    "新聞為來源RSS標題與原文連結，依發布時間整理，未推論台股漲跌；英文標題保留原文。",
+    "新聞限截止前48小時內；RSS不是完整新聞歷史庫。週末與休市日也須核對資料日期。",
+    "自動更新目標為週一至週五台北08:10；GitHub Actions可能延遲，請核對產生時間。"
+  ]
+}
