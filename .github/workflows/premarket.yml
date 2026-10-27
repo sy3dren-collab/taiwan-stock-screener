@@ -3,12 +3,14 @@ on:
   schedule:
     - cron: '10 0 * * 1-5' # 08:10 Asia/Taipei; check timestamps if Actions is delayed.
   workflow_dispatch:
-    inputs:
-      mode:
-        description: Latest quotes/news or pre-open completed sessions
-        type: choice
-        options: [latest, premarket]
-        default: latest
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'market_sources.json'
+      - 'site/premarket*'
+      - 'scripts/publish_premarket.mjs'
+      - '.github/workflows/premarket.yml'
 permissions:
   contents: write
   pages: write
@@ -27,15 +29,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
       - uses: actions/checkout@v4
         with: {path: .history, fetch-depth: 1}
       - run: bash scripts/restore-history.sh
       - name: Collect completed-session quotes and source news
         id: collect
         continue-on-error: true
-        env:
-          BRIEF_MODE: ${{ inputs.mode || 'premarket' }}
-        run: timeout 180 python -m screener.premarket --mode "$BRIEF_MODE"
+        run: timeout 180 node scripts/publish_premarket.mjs
       - name: Save reports without rewriting the stock database
         env: {REPORTS_ONLY: 'true'}
         run: bash scripts/save-history.sh

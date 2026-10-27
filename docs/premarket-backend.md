@@ -33,6 +33,6 @@ Yahoo報價採 `regularMarketTime`／`regularMarketPrice`，與最近一個更�
 
 新聞只呈現原始RSS標題、來源媒體、發布時間與原文連結。後端以半導體／權值股、央行／數據、地緣／政策、股匯市等關鍵字作相關性標籤，排序不是利多利空判斷，關鍵字也可能漏掉重要事件。只保留48小時內新聞，RSS不代表完整歷史庫。
 
-`python -m screener.premarket --mode latest` 為GitHub來源收集備援；`--mode premarket` 截至台北08:20並僅使用已結束時段。排程週一到週五08:10，Actions可能排隊或延遲。GitHub備援不是一按即時後端，需如實區分。
+`python -m screener.premarket --mode latest` 為GitHub來源收集備援；`--mode premarket` 截至台北08:20並僅使用已結束時段。排程週一到週五08:10，Actions可能排隊或延遲。GitHub排程實際採 `node scripts/publish_premarket.mjs` 共用同一份後端來源邏輯與期貨報表；Python模式僅為備援工具。GitHub備援不是一按即時後端，需如實區分。
 
 本地受限網路已補存來源網域草稿，草稿儲存不等於執行環境已套用。網路未開放時只記錄真實失敗，不以測試資料發布。測試fixture只存在測試攔截或記憶體中。
