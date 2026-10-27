@@ -90,6 +90,10 @@ jobs:
         env:
           REPORTS_ONLY: ${{ (inputs.task == 'fast-research' || github.event_name == 'schedule') && 'true' || 'false' }}
         run: bash scripts/save-history.sh
+      - name: Configure public market collector URL
+        env:
+          MARKET_BRIEF_API: ${{ vars.MARKET_BRIEF_API }}
+        run: python -m scripts.configure_premarket
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with: {path: site}

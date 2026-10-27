@@ -18,6 +18,9 @@ jobs:
           node --check site/naked.js
           node --check site/backtest.js
           node --check site/fast.js
+          node --check site/premarket.js
+          node --check backend/worker.mjs
+          node tests/premarket-worker.cjs
           bash -n scripts/restore-history.sh scripts/save-history.sh
       - name: Browser testing tools
         run: |
@@ -31,3 +34,14 @@ jobs:
           node tests/browser.cjs
           node tests/annual-browser.cjs
           node tests/fast-browser.cjs
+          node tests/premarket-browser.cjs
+
+      - name: Read-only live market and news source probe
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: node scripts/probe_premarket.mjs
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event_name == 'pull_request'
+        with:
+          name: market-source-probe
+          path: .state/premarket-source-probe.json

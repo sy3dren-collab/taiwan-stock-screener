@@ -148,3 +148,10 @@ GitHub每次研究的Actions頁面會顯示本次報告，並自動重新部署�
 排序分數由完整研究進場條件100分、近期放量事件最多35分（隨事件變舊遞減）、均線趨勢最多20分、低振幅最多20分、靠近支撐最多30分與整理幅度最多20分組成。分數不是機率。滿足1.2倍量收復／突破者優先；沒有事件者標為早期整理觀察，等待條件。若不足10檔則如實顯示，不隨機補名額。保留相同歷史長度、停牌、缺參考價與未知公司行動的逐股檢查，全部只使用當日已知行情。
 
 `python -m scripts.audit_watchlist` 用固定三個月期間檢查每日數量（180秒上限），輸出 `site/watchlist-audit.json` 與 `site/watchlist-audits/` 不可覆寫時間戳快照。這是名單覆蓋檢查，沒有把觀察股票當成交易，不能用來宣稱獲利或上漲勝率。完整進場財務績效仍由 `python -m screener.fast` 檢查；進場條件與成本沒有因名單目標而放寬。
+
+
+### 台指期當沖情報站
+
+新增 `premarket.html`，與選股回測分頁。收集美股、費半、台積電ADR、匯率、利率、台指期日／夜盤公開交易報表，以及相關台灣與國際新聞；每筆標來源與時間。即時更新後端在 `backend/worker.mjs`，共用120秒快取並明示快取狀態，不含任何付費訂閱或部署憑證。**目前仍需連接Cloudflare Free帳號並取得公開Worker網址，才可啟用一按收集；未連接時按鈕停用，不假裝即時可用。** 詳見 [部署與費用界線](docs/premarket-backend.md)。
+
+驗證：`python -m unittest discover -s tests`、`node tests/premarket-worker.cjs`；GitHub PR會額外讀取真實來源並保留診斷artifact，來源錯誤不替換成測試行情。GitHub備援收集：`python -m screener.premarket --mode latest`，手動／排程來源失敗時仍發布明示錯誤的報告。`MARKET_BRIEF_API`只存公開網址，不能填入密鑰。

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#133c38"><title>台指期當沖情報站｜台股波段觀察室</title>
+  <link rel="stylesheet" href="styles.css?v=8b3d528786e9"><link rel="stylesheet" href="premarket.css?v=1">
+  <script src="premarket.js?v=1" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="./">↗ 台股波段觀察室</a><a href="./">每日股票觀察 ↗</a></header>
+  <main>
+    <section class="hero"><div><p class="eyebrow">BEFORE THE OPEN</p><h1>台指期當沖，<br>先掌握市場背景。</h1><p class="intro">前晚美股、台積電ADR、匯率與重要事件，集中整理供你判讀。<br>各市場交易日不同，請先看行情日期與資料來源。</p></div></section>
+    <section class="refresh-panel"><button id="collect-now" class="refresh-action" type="button" disabled>收集目前最新資料</button><button id="reload-published" type="button">讀取已發布資料</button><p>即時收集需接上免費後端服務。連接後，按一次就向來源重新收集；120秒內共用快取以節省額度，並清楚顯示時間。報價可能延遲，不是台指期逐筆即時報價。</p><p id="refresh-status" aria-live="polite">正在檢查即時服務設定…</p></section>
+    <section id="brief-status" class="notice" aria-live="polite">正在讀取盤前資料…</section>
+    <section aria-labelledby="futures-title"><h2 id="futures-title">台指期・日盤與夜盤參考</h2><p>期交所公開交易報表不是即時報價，交易日期、合約月份與交易時段分開列示。請核對到期與換月；不以加權指數冒充台指期。</p><div id="futures-data" class="market-grid"></div><p><a href="https://mis.taifex.com.tw/futures/" target="_blank" rel="noopener noreferrer">查看期交所官方即時行情 ↗</a></p></section>
+    <section aria-labelledby="indices-title"><h2 id="indices-title">影響台指期的市場線索</h2><p>漲跌數值紅漲綠跌，但不同資料的方向意義不同：VIX上升代表波動預期增加；美元／新台幣上升代表美元走強；殖利率上升也不等於台指期上漲。</p><div id="indices" class="market-grid"></div></section>
+    <section aria-labelledby="taiwan-title"><h2 id="taiwan-title">台灣・半導體與股匯市事件</h2><p>中央社與公開新聞彙整來源；依發布時間整理，點標題閱讀原文。</p><div id="taiwan-news" class="news-list"></div></section>
+    <section aria-labelledby="world-title"><h2 id="world-title">國際・央行與地緣事件</h2><p>國際媒體原始標題，英文保留原文；未自動推論利多或利空。</p><div id="world-news" class="news-list"></div></section>
+    <section><h2>重要數據與事件行事曆</h2><p>美國CPI、非農、PCE與FOMC常影響開盤與盤中波動。以下為官方公布日程，時間需核對時區與美國夏令時間；本站未取得資料時不填猜測數字或日期。</p><ul><li><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" target="_blank" rel="noopener noreferrer">聯準會 FOMC 官方日程</a></li><li><a href="https://www.bls.gov/schedule/news_release/" target="_blank" rel="noopener noreferrer">美國勞工統計局：CPI、就業報告</a></li><li><a href="https://www.bea.gov/news/schedule" target="_blank" rel="noopener noreferrer">美國經濟分析局：GDP、PCE</a></li><li><a href="https://www.cbc.gov.tw/" target="_blank" rel="noopener noreferrer">台灣中央銀行公告</a></li></ul></section>
+    <details><summary>資料來源、缺漏與更新方式</summary><div id="source-status"></div><ul id="brief-notes"></ul></details>
+    <aside class="disclaimer"><strong>台指期當沖背景資料，供你自行判讀。</strong><p>資料可能延遲；來源失敗會保留錯誤提示，不以舊值或假資料冒充最新行情。新聞收集不是完整新聞庫，也不是投資指令。</p></aside>
+  </main><footer><a href="./">返回每日股票觀察</a><span>台股波段觀察室</span></footer>
+</body></html>

@@ -35,11 +35,11 @@ python - <<'PY'
 import json,shutil
 from datetime import datetime
 from pathlib import Path
-for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest','watchlist-audit'):
+for report in ('research','data-quality','final-test','annual-backtest','annual-backfill','annual-events','annual-wider-range','fast-backtest','watchlist-audit','premarket'):
     source=Path(f'.history/latest-{report}.json')
     if not source.exists():continue
     data=json.loads(source.read_text())
-    if report in ('fast-backtest','watchlist-audit'):
+    if report in ('fast-backtest','watchlist-audit','premarket'):
         target=Path('site')/(report+'.json')
         if target.exists():
             current=json.loads(target.read_text())
@@ -49,4 +49,5 @@ for report in ('research','data-quality','final-test','annual-backtest','annual-
 PY
 if [ -d .history/fast-runs ]; then mkdir -p site/fast-runs; cp -n .history/fast-runs/*.json site/fast-runs/; fi
 if [ -d .history/watchlist-audits ]; then mkdir -p site/watchlist-audits; cp -n .history/watchlist-audits/*.json site/watchlist-audits/; fi
+if [ -d .history/premarket-runs ]; then mkdir -p site/premarket-runs; cp -n .history/premarket-runs/*.json site/premarket-runs/; fi
 python -m screener.reporting export
