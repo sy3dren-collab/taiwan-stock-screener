@@ -4,7 +4,7 @@ const server=spawn('python3',['-m','http.server','8791','--bind','127.0.0.1','--
 const fixture={schema_version:1,status:'partial',mode:'latest',generated_at:new Date().toISOString(),briefing_date:'2026-10-27',cutoff_at:new Date().toISOString(),
  markets:[{symbol:'^SOX',name:'純測試費半',group:'美股',status:'ok',close:101,change:1,change_pct:1,session_date:'2026-10-26',previous_session_date:'2026-10-23',quoted_at:'2026-10-26T20:00:00Z',source:'測試來源',source_url:'https://example.org/quote',data_url:'https://example.org/data'}],
  futures:{status:'ok',rows:[{contract:'TX',contract_month:'202611',session:'盤後',trading_date:'2026-10-26',last:24100,open:24000,high:24200,low:23900,volume:500,open_interest:1000,source:'純測試期貨來源（非即時）',source_url:'https://example.org/futures'}]},
- news:{'台灣':[{title:'<img src=x onerror=alert(1)> 純測試半導體新聞',url:'https://example.org/news',publisher:'測試媒體',published_at:'2026-10-26T22:00:00Z',relevance_tags:['半導體／權值股']}],'國際':[]},
+ news:{'台灣':[{title:'<img src=x onerror=alert(1)> 純測試半導體新聞',description:'來源提供的摘要：半導體產業公布新資料。',url:'https://example.org/news',publisher:'測試媒體',published_at:'2026-10-26T22:00:00Z',relevance_tags:['半導體／權值股']}],'國際':[]},
  feeds:[{source:'測試RSS',status:'ok',url:'https://example.org/rss'}],notes:['純測試：不冒充即時、不預測漲跌']};
 (async()=>{let browser;try{
  for(let i=0;i<30;i++){try{if((await fetch('http://127.0.0.1:8791')).ok)break}catch{}await new Promise(r=>setTimeout(r,100));}
@@ -18,7 +18,12 @@ const fixture={schema_version:1,status:'partial',mode:'latest',generated_at:new 
   assert.match(await p.locator('#refresh-status').innerText(),/沒有外部後端帳號需求/);
   assert.match(await p.locator('#collect-now').getAttribute('href'),/github.com.*premarket.yml/);
   assert.match(await p.locator('#futures-data').innerText(),/盤後/);assert.match(await p.locator('#futures-data').innerText(),/非即時/);
-  assert.equal(await p.locator('#taiwan-news img').count(),0);assert.match(await p.locator('#taiwan-news').innerText(),/測試媒體/);
+  assert.equal(await p.locator('#taiwan-news img').count(),0);
+  assert.match(await p.locator('#morning-overview').innerText(),/純測試費半/);
+  assert.match(await p.locator('#brief-metrics').innerText(),/101/);
+  assert.match(await p.locator('#brief-headlines').innerText(),/來源提供的摘要：半導體產業公布新資料/);
+  assert.match(await p.locator('#brief-calendar').innerText(),/不能推定/);
+  assert.equal(await p.locator('#brief-headlines img').count(),0);assert.match(await p.locator('#taiwan-news').innerText(),/測試媒體/);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await p.locator('#reload-published').click();await p.waitForFunction(()=>document.querySelector('#refresh-status').textContent.includes('沒有啟動新的來源收集'));
   await p.clock.install();
@@ -30,7 +35,7 @@ const fixture={schema_version:1,status:'partial',mode:'latest',generated_at:new 
   assert.ok(publishedCalls>before);
   await p.route('**/premarket.json',r=>r.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'source test unavailable'})}));
   await p.locator('#reload-published').click();await p.waitForFunction(()=>document.querySelector('#brief-status').textContent.includes('source test unavailable'));
-  assert.equal(await p.locator('#indices .market-tile').count(),0);assert.equal(await p.locator('#futures-data .market-tile').count(),0);
+  assert.equal(await p.locator('#indices .market-tile').count(),0);assert.equal(await p.locator('#futures-data .market-tile').count(),0);assert.equal(await p.locator('#brief-metrics article').count(),0);assert.equal(await p.locator('#brief-headlines article').count(),0);
   assert.deepEqual(errors,[]);await p.close();
  }
  console.log('PASS premarket mobile/desktop: GitHub-only refresh, explicit manual collection, new-result polling, attributed news, futures sessions, source failure clears old values');

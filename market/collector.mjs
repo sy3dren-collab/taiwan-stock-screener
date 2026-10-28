@@ -1,10 +1,11 @@
 // Public source collector run by GitHub Actions; no external hosting account.
+import {CALENDAR_URL,parseEconomicCalendar} from './calendar.mjs';
 import sources from '../market_sources.json' with {type:'json'};
 export const FUTURES_URL='https://openapi.taifex.com.tw/v1/DailyMarketReportFut';
 const formatters=new Map();
 const zonedDate=(stamp,tz)=>{if(!formatters.has(tz))formatters.set(tz,new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}));return formatters.get(tz).format(new Date(stamp));};
 const iso=stamp=>new Date(stamp).toISOString();
-const clean=value=>String(value||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+const clean=value=>String(value||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
 export function safeUrl(url){const u=new URL(url);if(!['http:','https:'].includes(u.protocol)||u.username||u.password)throw Error('無效來源連結');return u.href;}
 const decode=value=>clean(value.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&#(x[0-9a-f]+|\d+);/gi,(_,n)=>{const point=n[0].toLowerCase()==='x'?parseInt(n.slice(1),16):Number(n);return point>=0&&point<=0x10ffff?String.fromCodePoint(point):'';}).replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
 const THEMES=[['半導體／權值股',/台積電|半導體|晶片|輝達|鴻海|聯發科|tsmc|semiconductor|nvidia|chip|apple|micron/i],['央行／重要經濟數據',/央行|利率|通膨|非農|就業|聯準會|cpi|pce|fomc|federal reserve|inflation|interest rate|payroll|gdp|jobs/i],['地緣／政策風險',/戰爭|關稅|台海|制裁|中東|石油|油價|地震|颱風|war|tariff|sanction|iran|israel|ukraine|earthquake/i],['股匯市／資金',/台指|台股|期貨|外資|美股|股市|新台幣|匯率|美元|stocks|markets|dollar|treasury|yields/i]];
@@ -39,7 +40,9 @@ export function parseNews(xml,source,category,now){
     const title=get('title'),published=Date.parse(get('pubDate'));
     if(!title||!Number.isFinite(published)||published>now||now-published>48*3600000)continue;
     const relevant=tags(title);if(!relevant.length)continue;
-    items.push({title,url:safeUrl(get('link')),publisher:get('source')||source,feed_source:source,category,published_at:iso(published),relevance_tags:relevant});
+    const description=get('description');const chars=Array.from(description);
+    const comparable=s=>s.replace(/[\p{P}\p{S}\s]/gu,'');
+    items.push({title,description:description&&comparable(description)!==comparable(title)?chars.slice(0,240).join('')+(chars.length>240?'…':''):null,url:safeUrl(get('link')),publisher:get('source')||source,feed_source:source,category,published_at:iso(published),relevance_tags:relevant});
     if(items.length>=40)break;
   }return items;
 }
@@ -69,7 +72,7 @@ export function sourceFailure(error){
   return {error:String(error.message),skip_reason:error.accessStatus||'unavailable'};
 }
 
-async function body(url,fetcher){
+async function body(url,fetcher,limit=700000){
   const response=await fetcher(url,{headers:{'User-Agent':'TaiwanMarketBrief/1.0'},signal:AbortSignal.timeout(12000)});
   if(!response.ok){
     const reasons={401:['requires_login','來源要求驗證，已跳過；不登入或索取金鑰'],402:['requires_payment','來源要求付費，已跳過；不開通訂閱'],403:['access_denied','來源拒絕存取，已跳過；不嘗試登入或繞過限制'],429:['rate_limited','來源暫時限流，已跳過此輪']};
@@ -77,7 +80,7 @@ async function body(url,fetcher){
     const error=Error(message);error.accessStatus=kind;throw error;
   }
   const reader=response.body.getReader();let size=0;const chunks=[];
-  for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>700000){await reader.cancel();throw Error('來源回應超過安全大小上限');}chunks.push(value);}
+  for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>limit){await reader.cancel();throw Error('來源回應超過安全大小上限');}chunks.push(value);}
   const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
   return {text:new TextDecoder().decode(bytes),hash};
@@ -95,13 +98,16 @@ export async function collect(at=null,fetcher=fetch){
     catch(error){return {source,category,url,status:'error',...sourceFailure(error),items:[]};}
   }));
   let futures;
-  try{const raw=await body(FUTURES_URL,fetcher);const rows=parseFutures(JSON.parse(raw.text),clock());const stale=clock()-Date.parse(rows[0].trading_date+'T00:00:00+08:00')>5*86400000;futures={status:stale?'stale':'ok',rows,warning:stale?'期貨報表超過4個完整日曆日，請核對休市與來源狀態':null,source_url:FUTURES_URL,payload_sha256:raw.hash};}
+  try{const raw=await body(FUTURES_URL,fetcher,8000000);const rows=parseFutures(JSON.parse(raw.text),clock());const stale=clock()-Date.parse(rows[0].trading_date+'T00:00:00+08:00')>5*86400000;futures={status:stale?'stale':'ok',rows,warning:stale?'期貨報表超過4個完整日曆日，請核對休市與來源狀態':null,source_url:FUTURES_URL,payload_sha256:raw.hash};}
   catch(error){futures={status:'error',rows:[],...sourceFailure(error),source_url:FUTURES_URL};}
+  let calendar;
+  try{const raw=await body(CALENDAR_URL,fetcher);calendar={...parseEconomicCalendar(raw.text,clock()),payload_sha256:raw.hash};}
+  catch(error){calendar={status:'error',events:[],...sourceFailure(error),source_url:CALENDAR_URL};}
   const seen=new Set(),news=feeds.flatMap(f=>f.items).sort((a,b)=>b.relevance_tags.length-a.relevance_tags.length||b.published_at.localeCompare(a.published_at)).filter(n=>{const k=n.title.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});
-  const healthy=markets.filter(m=>m.status==='ok').length+feeds.filter(f=>f.status==='ok').length+(futures.status==='ok'?1:0);
-  const failures=markets.filter(m=>m.status!=='ok').length+feeds.filter(f=>f.status==='error').length+(futures.status==='error'?1:0);
+  const healthy=markets.filter(m=>m.status==='ok').length+feeds.filter(f=>f.status==='ok').length+(futures.status==='ok'?1:0)+(calendar.status==='ok'?1:0);
+  const failures=markets.filter(m=>m.status!=='ok').length+feeds.filter(f=>f.status==='error').length+(futures.status==='error'?1:0)+(calendar.status!=='ok'?1:0);
   return {schema_version:1,mode:'latest',status:healthy?(failures?'partial':'ok'):'error',generated_at:iso(clock()),
-    briefing_date:zonedDate(now,'Asia/Taipei'),cutoff_at:iso(clock()),news_window_hours:48,markets,futures,
+    briefing_date:zonedDate(now,'Asia/Taipei'),cutoff_at:iso(clock()),news_window_hours:48,markets,futures,calendar,
     feeds:feeds.map(({items,...f})=>f),news:Object.fromEntries(['台灣','國際'].map(c=>[c,news.filter(n=>n.category===c).slice(0,20)])),
     notes:['GitHub工作收集來源最新可取得資料；頁面讀取已發布結果。報價可能延遲，非逐筆即時行情。',
       '期交所資料為公開交易報表，日盤／夜盤依原始欄位標示；不能當作當下台指期即時價格。月份排序不代表建議交易合約。',

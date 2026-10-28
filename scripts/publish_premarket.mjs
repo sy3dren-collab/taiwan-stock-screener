@@ -1,7 +1,9 @@
 // GitHub-hosted backup: real source collection, no external backend deployment.
 import {mkdir,writeFile} from 'node:fs/promises';
+import {buildMorningBrief} from '../site/brief-summary.mjs';
 import {collect} from '../market/collector.mjs';
 const result=await collect();
+result.morning_brief=buildMorningBrief(result);
 await mkdir('site/premarket-runs',{recursive:true});
 const body=JSON.stringify(result,null,2)+'\n';
 await writeFile('site/premarket.json',body);

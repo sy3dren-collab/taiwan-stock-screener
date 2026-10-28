@@ -19,8 +19,10 @@ jobs:
           node --check site/backtest.js
           node --check site/fast.js
           node --check site/premarket.js
+          node --check site/brief-summary.mjs
           node --check market/collector.mjs
           node tests/market-collector.cjs
+          node tests/morning-brief.cjs
           bash -n scripts/restore-history.sh scripts/save-history.sh
       - name: Browser testing tools
         run: |

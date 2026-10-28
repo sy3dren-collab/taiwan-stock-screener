@@ -1,7 +1,7 @@
 name: Pre-open markets and news
 on:
   schedule:
-    - cron: '10 0 * * 1-5' # 08:10 Asia/Taipei; check timestamps if Actions is delayed.
+    - cron: '0 0 * * *' # Daily 08:00 Asia/Taipei; publication can be delayed by Actions.
   workflow_dispatch:
   push:
     branches: [main]
@@ -9,6 +9,7 @@ on:
       - 'market/**'
       - 'market_sources.json'
       - 'site/premarket*'
+      - 'site/brief-summary.mjs'
       - 'scripts/publish_premarket.mjs'
       - '.github/workflows/premarket.yml'
 permissions:
