@@ -2,9 +2,9 @@
   "schema_version": 1,
   "mode": "latest",
   "status": "partial",
-  "generated_at": "2026-10-27T23:55:28.311Z",
+  "generated_at": "2026-10-28T00:09:17.617Z",
   "briefing_date": "2026-10-28",
-  "cutoff_at": "2026-10-27T23:55:28.311Z",
+  "cutoff_at": "2026-10-28T00:09:17.617Z",
   "news_window_hours": 48,
   "markets": [
     {
@@ -27,7 +27,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EGSPC/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d&range=10d",
-      "payload_sha256": "dc26f0e35c72ff68e0094375cb463ad3dd6e88625904a4ce9bd06703f0e05db4"
+      "payload_sha256": "697dec46eddcab0a00848c07e8343b44443e78556c1a8eb44db43cf6270b24e1"
     },
     {
       "symbol": "^DJI",
@@ -49,7 +49,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EDJI/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?interval=1d&range=10d",
-      "payload_sha256": "eb2739c677631eb5d0a24a438b0f7c1987580e478e6d8861f9995717f0810e28"
+      "payload_sha256": "3c845c7caf84cb3ca65b7f1ebc08125bc237850c925997b7002818f37b8e6b20"
     },
     {
       "symbol": "^IXIC",
@@ -71,7 +71,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EIXIC/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?interval=1d&range=10d",
-      "payload_sha256": "b0690f3311273305b39e9b8d1fd97ef7730973ab18f52f980a0049cbf5fabbf6"
+      "payload_sha256": "be270df4935c88c7bfec9c2da74cc1bab1e652da838bee4cd70ce52fa5a003da"
     },
     {
       "symbol": "^SOX",
@@ -93,7 +93,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5ESOX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESOX?interval=1d&range=10d",
-      "payload_sha256": "b77d785bae31d56d5080aeededf2ff898977aa66f0192a11e732908d724ad4cb"
+      "payload_sha256": "0f0d1dc55fa10b26a44b9c43e22837f835578667ca7e7de599ba6f576cb3cc82"
     },
     {
       "symbol": "^VIX",
@@ -115,7 +115,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EVIX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=10d",
-      "payload_sha256": "153e11833ea68a748cd86ba7323daa5905b03ab7879e96855481bf2e697cfffe"
+      "payload_sha256": "c187db16292319331904ea68bb5edab98a0d4bc66381f640276c6b90502dc1a2"
     },
     {
       "symbol": "^STOXX50E",
@@ -131,13 +131,13 @@
       "quoted_at": "2026-10-27T17:00:00.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "Europe/Paris",
-      "currency": "EUR",
+      "currency": null,
       "unit": "",
       "source": "Yahoo Finance 公開行情（非交易所逐筆即時）",
       "source_url": "https://finance.yahoo.com/quote/%5ESTOXX50E/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?interval=1d&range=10d",
-      "payload_sha256": "3f826a34d716746663342bc390b06eba64712170d51537ff3afde85e1e611ebd"
+      "payload_sha256": "b1ad9ae8683ec51bec500c7f388c4dc8cc560ce6920fa58a7f30fb292ae4cdf0"
     },
     {
       "symbol": "^N225",
@@ -159,7 +159,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EN225/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?interval=1d&range=10d",
-      "payload_sha256": "018471f7bc1a5859f93c1c783dc8dc7e559e489095f4bb870815fe889fa690da"
+      "payload_sha256": "fa6f66a3f0b94e8fa4ca5ef02d7db224a88c19a327795c5f438870c53c730221"
     },
     {
       "symbol": "^HSI",
@@ -181,7 +181,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EHSI/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?interval=1d&range=10d",
-      "payload_sha256": "f12ed6ab0a739562d9c1f9c433b372c1eb534e025ea6ec3b77b9a9836eb0366b"
+      "payload_sha256": "b2a710c50fde637ec4a620a0a868d2865afeb73ca7df6feff6fba6e819e18e38"
     },
     {
       "symbol": "^TWII",
@@ -203,7 +203,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5ETWII/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1d&range=10d",
-      "payload_sha256": "c8139efbbcf2a2d60baf05b24383c9e731a2359647a58b8d7bb182bed35e5281"
+      "payload_sha256": "ed8ea2c99c7843bde68d63cc01590e72a4f06bfc93f4b16973847b36d494fc03"
     },
     {
       "symbol": "TSM",
@@ -225,20 +225,20 @@
       "source_url": "https://finance.yahoo.com/quote/TSM/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TSM?interval=1d&range=10d",
-      "payload_sha256": "c46aed44d574c69c636839eedb966d408b1cc172cebea46e4a5b9914b7731902"
+      "payload_sha256": "eb999936cdb922b1c5546cf81fd4d0c7c80224de6a00fa52f073f774bbd117db"
     },
     {
       "symbol": "TWD=X",
       "name": "美元／新台幣",
       "group": "匯率",
       "status": "ok",
-      "close": 32.428,
-      "previous_close": 32.428001403808594,
-      "change": -0.000001403808596478484,
-      "change_pct": -0.0000043290012796681765,
+      "close": 32.419,
+      "previous_close": 32.5348014831543,
+      "change": -0.11580148315429994,
+      "change_pct": -0.3559311195252213,
       "session_date": "2026-10-27",
       "previous_session_date": "2026-10-26",
-      "quoted_at": "2026-10-27T23:54:37.000Z",
+      "quoted_at": "2026-10-28T00:09:16.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "TWD",
@@ -247,7 +247,7 @@
       "source_url": "https://finance.yahoo.com/quote/TWD%3DX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TWD%3DX?interval=1d&range=10d",
-      "payload_sha256": "d31ef6813af4cdae586f9a9e98a8fc8d14ea1ee9fc625a89b2620716e2fb0a81"
+      "payload_sha256": "1dcb1d687c4f1651140a44c99482c053f6158cfab1cb9b91f07c83070e7b4b73"
     },
     {
       "symbol": "^TNX",
@@ -269,20 +269,20 @@
       "source_url": "https://finance.yahoo.com/quote/%5ETNX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=10d",
-      "payload_sha256": "b8bf2cb4094a39ffaa0a4d90bd447d5317949f9d2769a2b128e26347bcb39cca"
+      "payload_sha256": "d8bc691bb26b7c8683ae77ef7a1f6deee8ecfc2bd37c6cc487c2a8f0129dc990"
     },
     {
       "symbol": "CL=F",
       "name": "WTI 原油近月",
       "group": "能源／地緣風險",
       "status": "ok",
-      "close": 100.08,
+      "close": 100.15,
       "previous_close": 101.76000213623047,
-      "change": -1.6800021362304705,
-      "change_pct": -1.6509454608514829,
+      "change": -1.610002136230463,
+      "change_pct": -1.5821561541194629,
       "session_date": "2026-10-27",
       "previous_session_date": "2026-10-26",
-      "quoted_at": "2026-10-27T23:45:23.000Z",
+      "quoted_at": "2026-10-27T23:59:13.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "USD",
@@ -291,20 +291,20 @@
       "source_url": "https://finance.yahoo.com/quote/CL%3DF/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=10d",
-      "payload_sha256": "0fa3380acdb182c99a1280721b7ea20421a8f77c819d4b166a6392736920b039"
+      "payload_sha256": "c3c7e9e4bdb48d4842ba68f0291fda6c8c3811ddd8c9b59fd51569b9ed75cde3"
     },
     {
       "symbol": "GC=F",
       "name": "黃金近月",
       "group": "避險背景",
       "status": "ok",
-      "close": 4073.7,
+      "close": 4075.8,
       "previous_close": 4038.39990234375,
-      "change": 35.30009765624982,
-      "change_pct": 0.8741109971739824,
+      "change": 37.40009765625018,
+      "change_pct": 0.9261117908244909,
       "session_date": "2026-10-27",
       "previous_session_date": "2026-10-26",
-      "quoted_at": "2026-10-27T23:45:21.000Z",
+      "quoted_at": "2026-10-27T23:59:05.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "USD",
@@ -313,13 +313,14 @@
       "source_url": "https://finance.yahoo.com/quote/GC%3DF/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?interval=1d&range=10d",
-      "payload_sha256": "34bf3c6b6c116b0e98e0aad22b8f48b0dc75a69f615ec8e6771c8d3b65c48542"
+      "payload_sha256": "8a8140424a0bf802260b7a6bae36f0e8a44f513eae1c216bc8790ff2106d25d4"
     }
   ],
   "futures": {
     "status": "error",
     "rows": [],
     "error": "來源回應超過安全大小上限",
+    "skip_reason": "unavailable",
     "source_url": "https://openapi.taifex.com.tw/v1/DailyMarketReportFut"
   },
   "feeds": [
@@ -335,32 +336,45 @@
       "category": "台灣",
       "url": "https://feeds.feedburner.com/rsscna/mainnews",
       "status": "error",
-      "error": "來源 HTTP 404"
+      "error": "來源 HTTP 404",
+      "skip_reason": "unavailable"
     },
     {
       "source": "Google 新聞・台灣財經彙整",
       "category": "台灣",
       "url": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
       "status": "ok",
-      "payload_sha256": "51b84d0f985251b5eebd0f7006de5e7690e9d1b1ad2ac17b479649dc6ce93867"
+      "payload_sha256": "19b107602a33153e5e40b09752a38a8dfc2e8da45cc036321c29bb36f9eba11f"
     },
     {
       "source": "BBC World（英文）",
       "category": "國際",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "status": "ok",
-      "payload_sha256": "e14db8e565025b6b163bf1a75ba902c22c09e7331a2ca0a67188eb7bb7122e42"
+      "payload_sha256": "564964c1f05890602502b56a1e4bd4a2b6fb05263a79df1c4458c90bf3f62d67"
     },
     {
       "source": "BBC Business（英文）",
       "category": "國際",
       "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
       "status": "ok",
-      "payload_sha256": "391781370b7311be96e2d2597129d1e9cda4a2bf2391f2bc200d8f672d800b40"
+      "payload_sha256": "dd8f813ffbc74cfbd6bd21617c4f6975c92db871185df21d7b9731bca1ccc766"
     }
   ],
   "news": {
     "台灣": [
+      {
+        "title": "美股收盤》AI股提振！費半勁揚3.6％ 台積電ADR漲近3％ - 自由財經",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5hR3FHOEhpS0VybDh1QllCbFJDcFI2cXVERmptNHpRTktVTVBJOW9IWkJ5VXY1akotUG5Ob2Y1S19nLVVhSVVwUGZyMERXN3RKT1FsT2hqN252SHBfdVVJ0gFkQVVfeXFMT2YzbHU3QXBkMjFkeWpOUUVBeUxiMHdvRzNtUlNpdW9rdzcwYjJhLTB6cDZMeGpCek5BSmhhbk1OZzd0Y3dBZlZMYnRndlZPOWQxNzVZb2pTMUFmOFd5Sm1IQkxoVQ?oc=5",
+        "publisher": "自由財經",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-10-27T22:01:51.000Z",
+        "relevance_tags": [
+          "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
       {
         "title": "台積電ADR勁揚近2%！美股漲多跌少「費半噴2%、特斯拉飆3%」 台指期夜盤一度強漲600點 - Yahoo股市",
         "url": "https://news.google.com/rss/articles/CBMiiANBVV95cUxOTDRsZTQyV0pGQVZYblQtckFNRFdBS0pqdVRocFVWWUZUR2x4Q2xRLWdHWTFLSEFPdnVNZFVCcDVaMkJVVFUtVDJSUXVDSnM5WElMTlU2OU5kRHR3ZnZpVHJSdGpWd3pXY2RUTXRlM1RtWkhrZ1lxN2ZSRHctdFhmcHYyd1BldnN6dEx2Yng2X2VPb3pyaU12MVQxdzNNbnQzSVlwQmcxb21uVWlraDk3aUJWNkdUS1lCUEwwVEZmcTNfdmVoaTVQcnZmSnQweENfeWdzYkV4Z1lLQUxxbUpxUnZHYkhORDJ0RUduOThHN1NFVjFLVGlhbWtyZzhVcmcwTU1sbnRWZkh6THQyM2pDTkN0enhaNV9wY2w0SFJCV0hIRERQOUUzSzhESlpCNHpBT01WcnRsS2tjQm9xY19MdXJ6ZWpENUxEa3lSM25uMzZmS0FFRkdvcnVQSndkMDZwQXlEVGhkczV0aGtFRENMQnZ6OG5PY2Q5TGt0aTNfZ3FmbHVJUVAybg?oc=5",
@@ -370,6 +384,18 @@
         "published_at": "2026-10-27T14:50:00.000Z",
         "relevance_tags": [
           "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "外資近四個月淨匯出543億美元 央行：遠超上半年 - UDN",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBnRjNtbVg2N3U2ZVQtT09VSDdSWmNFWEY5cnlqcUdHOEUtV2FRbDRZRnVjRGtsc29BaFR4ek5IV1djMkRna3hlRmpqd2ttZjg50gFWQVVfeXFMT2h5WHpPRTZ2NjBtVzBOZGJjZkY1eVo3VXBKUzROdW0tdC1CVC1IYnViS0hCZlVZamxTRGpuLUNxSnBxOXBEd29Qd0lSSXB6YUxZbGhsV1E?oc=5",
+        "publisher": "UDN",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-10-27T08:04:14.000Z",
+        "relevance_tags": [
+          "央行／重要經濟數據",
           "股匯市／資金"
         ]
       },
@@ -392,17 +418,6 @@
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
         "published_at": "2026-10-27T22:53:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "〈美股盤後〉Anthropic IPO熱潮延燒 費半漲3.6% 波音崩逾10%壓抑道瓊 - Yahoo股市",
-        "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPeVlLbjhqZ0pxUTlDZVJqYnA1VTlUYXFiSXYtU0NzYklCODN4dmhqMlFUSkpRMXhwUy1RQ2o3Y3VPU1FJelpMYkh2RmFSaEpxUV9oVzlhYWxBMk1jSXI5aVI2MVNrMmVsQzhrdzh2eFpNbmNqb0xKY3UtNU9sYzEtcnFBWFJ4bEJYRGpCNWRiRW9SamNTSm4wa2dxbG1ybGJKX2pkOXNNWWljTll0TThlLXpqUDNwSDluZk15SlNpc2s1bVpzZ205dXhTSlRVdG81UUhXcjA0WjJnaHJOcnByUUpjS21MRFpFdmhYbFlfM3hpT1lWeDdj?oc=5",
-        "publisher": "Yahoo股市",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-27T21:26:49.000Z",
         "relevance_tags": [
           "股匯市／資金"
         ]
@@ -562,25 +577,14 @@
         ]
       },
       {
-        "title": "【10月ETF風雲榜】打敗00919、0056 、00878！前20強高股息霸榜 最大黑馬出爐 - Yahoo股市",
-        "url": "https://news.google.com/rss/articles/CBMimgNBVV95cUxQTjFrbS1NNXhQTjVPeE82QXlFNWlmZU96WmlaWDhKX1BKU2hoN0VSN1NaODI5WFhPSXBxRTRibHUzeUVwUjZ3TF80ZnpCeFJOdktmYTVZaHVrTHVmY3VSLXlhQ3hGYV9xajJVQ1V0Ym5DY0ZtN3prV2RjTmJrbVVHSFlIZVBra0lSUTY4a1FHc1MyalhpRno5d3dubWJmX0RmZFQxOXVzTmFqSWNRX3lJb3ZRTXBkTnlKc2NUWGJvY2g0dE9ONXZzX045QWk3b3RVeHhKTzlENHBDaTBrVlU4dVNGaGtTSWRZXzRqQlRFelpyankxZVd0dnRmUU5fMW9SNkIzSjBKRlRJZnZyejk1LVBiYkxUNnlId05KYzdqZDRwUVlUM0VuZ2dWeUQ0WVZsb3VqRzJRYXItTE9wUm1JQVlNaFozQjJBRHhQWVNTeEJVZWsyWm1SWVpDTUhrd0pnT204V3ZUUmt4bjdkS1FLc3hHU2tWMDVCVXdqNGdKS0xzbS1uWGxSNkxaNlNhLXNSZXBISmRDNkdjZw?oc=5",
-        "publisher": "Yahoo股市",
+        "title": "台股後市 股怪教授：國家隊護盤3利多 內外資看衝「5字頭」 - Yahoo新聞",
+        "url": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxNVzlJcGR3ekczMmVjaHJhUmQ5cVV0R0F3bVRQcnR0MDBPNXBQaGg4ZnJOZHhSNUhxSTA5by1ENkJhRG5Pd01qWEY5bjI3dElkREtERFlSbDBnbS1CQ1dPa19tUy1YaHFmUm9DR3F0SDJTTVZjRllsWUhVUUV2SVNhdU5xX2NVdXEtR2ZpZXNheURpNzR3WWtKNWVfdm5WT0hoR2xLVjJyX2NiM29FX0FBelpCeUlCT29BQ1gyMTAzOEI3Q294X3hMMEVtOW0xSkRDbm1uVjZITm55RVJfRlQzbW9uUFZ2RkV2em1CNW40dGNBY3dpQ3VCUnVJR0FiVEloTjFmcEQzTmVGdC1pUUlXTmJXTXdSbWN3UU9VbmR2b2JLZ3F0eUZrNnAzSC01bndyQjNUN1BOYWNlSW11Q20xRmctUkVNdFh2TEVWSXYxOHd3UGUtTXdacUVkUHBRcFlCUGpJ?oc=5",
+        "publisher": "Yahoo新聞",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-27T04:56:41.000Z",
+        "published_at": "2026-10-27T05:12:34.000Z",
         "relevance_tags": [
           "股匯市／資金"
-        ]
-      },
-      {
-        "title": "台幣重貶原因找到了！央行總裁楊金龍將赴立院報告書面資料先曝光- 金融 - 工商時報",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1QSjBWQXdCSER4eHAyNzdYME5YeFRmcGtoaDMtRnhvQjJaMVdJS3BJMV9MYV9MVUN1dUpkb1BxUWlmRElmUDZWUGhsMmZPRjdfYWpSYktaMVg1eFF6NERv?oc=5",
-        "publisher": "工商時報",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-27T04:40:00.000Z",
-        "relevance_tags": [
-          "央行／重要經濟數據"
         ]
       }
     ],
@@ -591,7 +595,7 @@
         "publisher": "BBC World（英文）",
         "feed_source": "BBC World（英文）",
         "category": "國際",
-        "published_at": "2026-10-27T23:27:13.000Z",
+        "published_at": "2026-10-28T00:04:29.000Z",
         "relevance_tags": [
           "地緣／政策風險"
         ]
@@ -687,10 +691,11 @@
     ]
   },
   "notes": [
-    "每次更新收集來源最新可取得資料；120秒內共用快取，報價可能延遲，非逐筆即時行情。",
+    "GitHub工作收集來源最新可取得資料；頁面讀取已發布結果。報價可能延遲，非逐筆即時行情。",
     "期交所資料為公開交易報表，日盤／夜盤依原始欄位標示；不能當作當下台指期即時價格。月份排序不代表建議交易合約。",
     "新聞依台指期相關主題標記與發布時間整理；不自動推論利多利空，不保證事件已完整收錄。",
     "美國公布時間、日光節約時間與台灣到期／休市請以官方公告為準；沒有可信來源時不填猜測時間。",
+    "僅使用免登入、免金鑰的公開回應；來源要求登入或付款便跳過，不自動註冊、不開通訂閱。",
     "未提供即時委買賣、成交逐筆、大單或漲跌預測；來源失敗會明示，沒有假資料補值。"
   ]
 }
