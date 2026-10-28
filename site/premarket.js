@@ -2,7 +2,7 @@
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const fmt=n=>Number(n).toLocaleString('zh-TW',{maximumFractionDigits:2});
 const when=s=>new Date(s).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false});
-let apiBase=null;
+let collectionTimer=null;
 function link(text,url){const parsed=new URL(url);if(!['https:','http:'].includes(parsed.protocol))throw Error('來源連結格式錯誤');const a=el('a',text);a.href=parsed.href;a.target='_blank';a.rel='noopener noreferrer';return a;}
 function news(items,target){const root=document.querySelector(target);root.replaceChildren();if(!items.length){root.append(el('p','截止時間前48小時內，未取得可列示的相關新聞；請查看來源狀態。'));return;}for(const item of items){const card=el('article',undefined,'news-item');card.append(link(item.title,item.url),el('p',`${item.publisher}｜${when(item.published_at)}（台北）`));if(item.relevance_tags?.length)card.append(el('p',item.relevance_tags.join(' · ')));root.append(card);}}
 function render(data){
@@ -35,15 +35,19 @@ function render(data){
 }
 async function retrieve(url){const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(60000)});const data=await response.json();if(!response.ok&&!data.schema_version)throw Error(data.error||`HTTP ${response.status}`);render(data);return data;}
 function showFailure(error){document.querySelector('#brief-status').className='notice error';document.querySelector('#brief-status').textContent=`本次收集失敗：${error.message}；未以舊行情冒充更新結果。`;for(const id of ['indices','futures-data','taiwan-news','world-news'])document.getElementById(id).replaceChildren();}
-document.querySelector('#collect-now').addEventListener('click',async()=>{
-  if(!apiBase)return;const button=document.querySelector('#collect-now');button.disabled=true;
-  document.querySelector('#refresh-status').textContent='正在向原始來源收集，請稍候…';
-  try{const data=await retrieve(apiBase+'/api/brief');document.querySelector('#refresh-status').textContent=data.cache_status==='hit'?`使用120秒內共用收集結果，產生時間 ${when(data.generated_at)}；不是本次重新抓取。`:`本次收集已完成（${data.status==='ok'?'各來源成功':data.status==='error'?'全部來源失敗，沒有有效更新':'部分來源失敗，請查看提示'}），時間 ${when(data.generated_at)}。`;}
-  catch(error){showFailure(error);document.querySelector('#refresh-status').textContent='即時服務未完成本次收集；請核對來源或服務狀態。';}finally{button.disabled=false;}
+document.querySelector('#collect-now').addEventListener('click',()=>{
+  const requested=Date.now();if(collectionTimer)clearInterval(collectionTimer);
+  document.querySelector('#refresh-status').textContent='請在 GitHub 按 Run workflow 啟動收集。本頁每15秒等候新發布結果，最多20分鐘；目前仍是已發布資料。';
+  collectionTimer=setInterval(async()=>{
+    try{
+      const data=await retrieve('premarket.json');
+      if(Date.parse(data.generated_at)>=requested){clearInterval(collectionTimer);collectionTimer=null;document.querySelector('#refresh-status').textContent=`已收到新發布結果，產生時間 ${when(data.generated_at)}；請核對各來源狀態。`;}
+      else if(Date.now()-requested>=20*60*1000){clearInterval(collectionTimer);collectionTimer=null;document.querySelector('#refresh-status').textContent='尚未收到新的發布結果，請查看 GitHub 工作是否已啟動或失敗。';}
+    }catch(error){showFailure(error);if(Date.now()-requested>=20*60*1000){clearInterval(collectionTimer);collectionTimer=null;document.querySelector('#refresh-status').textContent='等待更新逾時，請查看 GitHub 工作狀態。';}}
+  },15000);
 });
-document.querySelector('#reload-published').addEventListener('click',()=>retrieve('premarket.json').catch(showFailure));
-(async()=>{
-  try{const r=await fetch('premarket-config.json',{cache:'no-store'});if(!r.ok)throw Error('設定檔無法讀取');const config=await r.json();if(config.api_base_url){const u=new URL(config.api_base_url);if(u.protocol!=='https:'||u.username||u.password)throw Error('後端網址需為不含密碼的HTTPS網址');apiBase=u.origin;document.querySelector('#collect-now').disabled=false;document.querySelector('#refresh-status').textContent='已連接收集服務。按一次開始；來源報價可能延遲，120秒內共用收集快取。';}else document.querySelector('#refresh-status').textContent='即時收集尚未啟用：等待連接免費後端帳號。按鈕暫停使用，以下只讀取已發布資料。';}
-  catch(error){document.querySelector('#refresh-status').textContent='即時服務尚未就緒：'+error.message;}
-  await retrieve('premarket.json').catch(showFailure);
-})();
+document.querySelector('#reload-published').addEventListener('click',async()=>{
+  try{const data=await retrieve('premarket.json');document.querySelector('#refresh-status').textContent=`已讀取發布資料，產生時間 ${when(data.generated_at)}；這個動作沒有啟動新的來源收集。`;}
+  catch(error){showFailure(error);}
+});
+retrieve('premarket.json').catch(showFailure);

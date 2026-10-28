@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'backend/**'
+      - 'market/**'
       - 'market_sources.json'
       - 'site/premarket*'
       - 'scripts/publish_premarket.mjs'
@@ -41,9 +41,7 @@ jobs:
       - name: Save reports without rewriting the stock database
         env: {REPORTS_ONLY: 'true'}
         run: bash scripts/save-history.sh
-      - name: Configure public market collector URL
-        env:
-          MARKET_BRIEF_API: ${{ vars.MARKET_BRIEF_API }}
+      - name: Keep market page on GitHub collection
         run: python -m scripts.configure_premarket
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

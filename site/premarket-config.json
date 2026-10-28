@@ -1,4 +1,5 @@
 {
+  "mode": "github_actions",
   "api_base_url": null,
-  "deployment_status": "awaiting_free_backend_account"
+  "deployment_status": "no_external_backend_required"
 }

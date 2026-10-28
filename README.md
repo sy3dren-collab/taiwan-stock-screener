@@ -152,6 +152,8 @@ GitHub每次研究的Actions頁面會顯示本次報告，並自動重新部署�
 
 ### 台指期當沖情報站
 
-新增 `premarket.html`，與選股回測分頁。收集美股、費半、台積電ADR、匯率、利率、台指期日／夜盤公開交易報表，以及相關台灣與國際新聞；每筆標來源與時間。即時更新後端在 `backend/worker.mjs`，共用120秒快取並明示快取狀態，不含任何付費訂閱或部署憑證。**目前仍需連接Cloudflare Free帳號並取得公開Worker網址，才可啟用一按收集；未連接時按鈕停用，不假裝即時可用。** 詳見 [部署與費用界線](docs/premarket-backend.md)。
+新增 `premarket.html`，首頁提供入口，與選股回測分頁。收集美股、費半、台積電ADR、匯率、利率、台指期日／夜盤公開交易報表，以及相關台灣與國際新聞，每筆標來源與時間。
 
-驗證：`python -m unittest discover -s tests`、`node tests/premarket-worker.cjs`；GitHub PR會額外讀取真實來源並保留診斷artifact，來源錯誤不替換成測試行情。GitHub備援收集：`python -m screener.premarket --mode latest`，手動／排程來源失敗時仍發布明示錯誤的報告。`MARKET_BRIEF_API`只存公開網址，不能填入密鑰。
+**依使用者要求跳過Cloudflare，不需要新增後端帳號。** 改由既有GitHub在週一至週五台北08:10收集與發布；頁面可重新讀取已發布資料，或開啟GitHub工作手動執行。本頁等候新發布結果，不能將重新整理當作即時抓取。舊的外部API變數不會啟用服務。
+
+共用收集器 `market/collector.mjs`；發布命令 `node scripts/publish_premarket.mjs`。來源需要登入或付款時跳過並標示，不索取來源帳密、不開通訂閱。詳見[更新方式與資料限制](docs/premarket-backend.md)。驗證：`python -m unittest discover -s tests`、`node tests/market-collector.cjs`、`node tests/premarket-browser.cjs`。

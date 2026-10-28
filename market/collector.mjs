@@ -1,6 +1,5 @@
-// Public read-only collector. Deploy only under Workers Free; no paid bindings.
+// Public source collector run by GitHub Actions; no external hosting account.
 import sources from '../market_sources.json' with {type:'json'};
-const CACHE_SECONDS=120;
 export const FUTURES_URL='https://openapi.taifex.com.tw/v1/DailyMarketReportFut';
 const formatters=new Map();
 const zonedDate=(stamp,tz)=>{if(!formatters.has(tz))formatters.set(tz,new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}));return formatters.get(tz).format(new Date(stamp));};
@@ -104,33 +103,10 @@ export async function collect(at=null,fetcher=fetch){
   return {schema_version:1,mode:'latest',status:healthy?(failures?'partial':'ok'):'error',generated_at:iso(clock()),
     briefing_date:zonedDate(now,'Asia/Taipei'),cutoff_at:iso(clock()),news_window_hours:48,markets,futures,
     feeds:feeds.map(({items,...f})=>f),news:Object.fromEntries(['台灣','國際'].map(c=>[c,news.filter(n=>n.category===c).slice(0,20)])),
-    notes:['每次更新收集來源最新可取得資料；120秒內共用快取，報價可能延遲，非逐筆即時行情。',
+    notes:['GitHub工作收集來源最新可取得資料；頁面讀取已發布結果。報價可能延遲，非逐筆即時行情。',
       '期交所資料為公開交易報表，日盤／夜盤依原始欄位標示；不能當作當下台指期即時價格。月份排序不代表建議交易合約。',
       '新聞依台指期相關主題標記與發布時間整理；不自動推論利多利空，不保證事件已完整收錄。',
       '美國公布時間、日光節約時間與台灣到期／休市請以官方公告為準；沒有可信來源時不填猜測時間。',
       '僅使用免登入、免金鑰的公開回應；來源要求登入或付款便跳過，不自動註冊、不開通訂閱。',
       '未提供即時委買賣、成交逐筆、大單或漲跌預測；來源失敗會明示，沒有假資料補值。']};
 }
-
-let inflight=null;
-export default {
-  async fetch(request,env={},ctx={waitUntil(){}}){
-    const origin=request.headers.get('Origin'),allowed=env.ALLOWED_ORIGIN||'https://sy3dren-collab.github.io';
-    const headers={'Access-Control-Allow-Origin':allowed,'Vary':'Origin','Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
-    const reply=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
-    if(origin!==allowed)return reply({error:'不允許的網站來源'},403);
-    if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'Access-Control-Allow-Methods':'GET, OPTIONS'}});
-    if(request.method!=='GET')return reply({error:'只提供唯讀更新'},405);
-    if(new URL(request.url).pathname!=='/api/brief')return reply({error:'不存在的 API'},404);
-    const cache=globalThis.caches?.default;
-    const key=new Request(new URL('/_cache/latest-v1',request.url));
-    const cached=await cache?.match(key);
-    if(cached){const data=await cached.json();return reply({...data,cache_status:'hit',cache_max_age_seconds:CACHE_SECONDS},data.status==='error'?502:200);}
-    if(!inflight)inflight=collect().finally(()=>{inflight=null;});
-    try{
-      const data=await inflight;
-      if(cache){const stored=new Response(JSON.stringify(data),{headers:{'Cache-Control':'public, max-age='+ (data.status==='error'?30:CACHE_SECONDS)}});ctx.waitUntil(cache.put(key,stored));}
-      return reply({...data,cache_status:'miss',cache_max_age_seconds:CACHE_SECONDS},data.status==='error'?502:200);
-    }catch(error){return reply({error:'收集失敗：'+error.message},502);}
-  }
-};

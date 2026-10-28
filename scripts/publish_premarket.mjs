@@ -1,6 +1,6 @@
-// GitHub-hosted backup: real source collection, not a replacement for a live Worker.
+// GitHub-hosted backup: real source collection, no external backend deployment.
 import {mkdir,writeFile} from 'node:fs/promises';
-import {collect} from '../backend/worker.mjs';
+import {collect} from '../market/collector.mjs';
 const result=await collect();
 await mkdir('site/premarket-runs',{recursive:true});
 const body=JSON.stringify(result,null,2)+'\n';

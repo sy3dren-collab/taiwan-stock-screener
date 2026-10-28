@@ -12,22 +12,26 @@ const fixture={schema_version:1,status:'partial',mode:'latest',generated_at:new 
  for(const width of [320,390,1280]){
   const p=await browser.newPage({viewport:{width,height:844}});const errors=[];p.on('pageerror',e=>errors.push(String(e)));
   await p.route('**/premarket.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(fixture)}));
-  await p.route('**/premarket-config.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({api_base_url:null})}));
+  let publishedCalls=0,newResult=false;
+  await p.route('**/premarket.json',r=>{publishedCalls++;return r.fulfill({contentType:'application/json',body:JSON.stringify({...fixture,generated_at:newResult?new Date(Date.now()+1000).toISOString():fixture.generated_at})});});
   await p.goto('http://127.0.0.1:8791/premarket.html');await p.locator('#indices .market-tile').waitFor();
-  assert.equal(await p.locator('#collect-now').isDisabled(),true);assert.match(await p.locator('#refresh-status').innerText(),/尚未啟用/);
+  assert.match(await p.locator('#refresh-status').innerText(),/沒有外部後端帳號需求/);
+  assert.match(await p.locator('#collect-now').getAttribute('href'),/github.com.*premarket.yml/);
   assert.match(await p.locator('#futures-data').innerText(),/盤後/);assert.match(await p.locator('#futures-data').innerText(),/非即時/);
   assert.equal(await p.locator('#taiwan-news img').count(),0);assert.match(await p.locator('#taiwan-news').innerText(),/測試媒體/);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  await p.route('**/premarket-config.json',r=>r.fulfill({contentType:'application/json',body:JSON.stringify({api_base_url:'https://market-api.example.test'})}));
-  let calls=0;
-  await p.route('https://market-api.example.test/api/brief',r=>{calls++;return r.fulfill({headers:{'access-control-allow-origin':'*'},contentType:'application/json',body:JSON.stringify({...fixture,cache_status:calls===1?'miss':'hit'})});});
-  await p.reload();await p.waitForFunction(()=>!document.querySelector('#collect-now').disabled);
-  await p.locator('#collect-now').click();await p.waitForFunction(()=>document.querySelector('#refresh-status').textContent.includes('本次收集已完成'));assert.equal(calls,1);
-  await p.locator('#collect-now').click();await p.waitForFunction(()=>document.querySelector('#refresh-status').textContent.includes('不是本次重新抓取'));assert.equal(calls,2);
-  await p.route('https://market-api.example.test/api/brief',r=>r.fulfill({status:503,headers:{'access-control-allow-origin':'*'},contentType:'application/json',body:JSON.stringify({error:'free quota test'})}));
-  await p.locator('#collect-now').click();await p.waitForFunction(()=>document.querySelector('#brief-status').textContent.includes('free quota test'));
+  await p.locator('#reload-published').click();await p.waitForFunction(()=>document.querySelector('#refresh-status').textContent.includes('沒有啟動新的來源收集'));
+  await p.clock.install();
+  await p.evaluate(()=>document.querySelector('#collect-now').addEventListener('click',e=>e.preventDefault()));
+  const before=publishedCalls;
+  await p.locator('#collect-now').click();assert.match(await p.locator('#refresh-status').innerText(),/Run workflow/);assert.equal(publishedCalls,before);
+  newResult=true;await p.clock.runFor(15001);
+  await p.waitForFunction(()=>document.querySelector('#refresh-status').textContent.includes('已收到新發布結果'));
+  assert.ok(publishedCalls>before);
+  await p.route('**/premarket.json',r=>r.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'source test unavailable'})}));
+  await p.locator('#reload-published').click();await p.waitForFunction(()=>document.querySelector('#brief-status').textContent.includes('source test unavailable'));
   assert.equal(await p.locator('#indices .market-tile').count(),0);assert.equal(await p.locator('#futures-data .market-tile').count(),0);
   assert.deepEqual(errors,[]);await p.close();
  }
- console.log('PASS premarket mobile/desktop: disabled without backend, one-click collect, attributed news, futures sessions, honest cache, source failure clears old values');
+ console.log('PASS premarket mobile/desktop: GitHub-only refresh, explicit manual collection, new-result polling, attributed news, futures sessions, source failure clears old values');
 }finally{if(browser)await browser.close();server.kill();}})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,5 +1,5 @@
 import {mkdir,writeFile} from 'node:fs/promises';
-import {collect} from '../backend/worker.mjs';
+import {collect} from '../market/collector.mjs';
 const result=await collect();
 await mkdir('.state',{recursive:true});
 await writeFile('.state/premarket-source-probe.json',JSON.stringify(result,null,2));

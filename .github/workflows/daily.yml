@@ -45,9 +45,7 @@ jobs:
           python -m screener.daily paper --output site/paper.json
       - name: Durable checksummed backup
         run: bash scripts/save-history.sh
-      - name: Configure public market collector URL
-        env:
-          MARKET_BRIEF_API: ${{ vars.MARKET_BRIEF_API }}
+      - name: Keep market page on GitHub collection
         run: python -m scripts.configure_premarket
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
