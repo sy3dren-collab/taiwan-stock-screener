@@ -2,9 +2,9 @@
   "schema_version": 1,
   "mode": "latest",
   "status": "partial",
-  "generated_at": "2026-11-01T04:46:04.095Z",
-  "briefing_date": "2026-11-01",
-  "cutoff_at": "2026-11-01T04:46:04.095Z",
+  "generated_at": "2026-11-02T04:45:30.927Z",
+  "briefing_date": "2026-11-02",
+  "cutoff_at": "2026-11-02T04:45:30.927Z",
   "news_window_hours": 48,
   "markets": [
     {
@@ -27,7 +27,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EGSPC/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d&range=10d",
-      "payload_sha256": "e89c1ec5824652ab8f98e153c664fac3705860f5f1b33028eac24ec0f9d1c8eb"
+      "payload_sha256": "fe9f03b550f72f07dfc8f00a3b8b35eeea4095b40e44931e7a85be6c97e8423c"
     },
     {
       "symbol": "^DJI",
@@ -49,7 +49,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EDJI/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?interval=1d&range=10d",
-      "payload_sha256": "77040935158d81b60f07b6701da78087938a88c406cff80bf2837c45bfdebdad"
+      "payload_sha256": "8a38f3e6c20805af4a06cd8c4413d3e35fd3685d87f0ae48ae4856938f64c791"
     },
     {
       "symbol": "^IXIC",
@@ -71,7 +71,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EIXIC/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?interval=1d&range=10d",
-      "payload_sha256": "60e9d70b9c75e28cf6c8bbc21bcae6c8fe9ec22f2a6b6931328536eefde57582"
+      "payload_sha256": "47dad2eca5ec63bf6efb73e0ecfe2b3404c41792e930022e3ba228e892d0d72b"
     },
     {
       "symbol": "^SOX",
@@ -93,7 +93,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5ESOX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESOX?interval=1d&range=10d",
-      "payload_sha256": "ccbad402d493f25002acc31967678b31c7737ed1630cbfbdcdb500d8d664fb52"
+      "payload_sha256": "ae2739488041b9a4a26da99e75597a764de0a87d79bf3c0ba79102869ad096ed"
     },
     {
       "symbol": "^VIX",
@@ -115,7 +115,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5EVIX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=10d",
-      "payload_sha256": "9340d5c66cea4cf732fba7787723b6e429756eabbe4cadafaab00d7c9fbcbe3b"
+      "payload_sha256": "6a0e65bb406792b0cb42ea0787ef5446c73b85eaa33157b4cf3d3de1cebff759"
     },
     {
       "symbol": "^STOXX50E",
@@ -137,20 +137,20 @@
       "source_url": "https://finance.yahoo.com/quote/%5ESTOXX50E/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?interval=1d&range=10d",
-      "payload_sha256": "606be88d98b01537f3e8adda0d7c65205b13ffe7c783d9e903cf82498b8133ed"
+      "payload_sha256": "da268a729964cc20cadef3e1e98d08b1973cfea093ad19bc91d87e4c8e716aba"
     },
     {
       "symbol": "^N225",
       "name": "日經225",
       "group": "亞股前次收盤",
       "status": "ok",
-      "close": 63290.11,
-      "previous_close": 64659.46875,
-      "change": -1369.3587499999994,
-      "change_pct": -2.117800805469805,
-      "session_date": "2026-10-30",
-      "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T06:45:03.000Z",
+      "close": 63600.65,
+      "previous_close": 63290.109375,
+      "change": 310.54062500000146,
+      "change_pct": 0.49066217149351665,
+      "session_date": "2026-11-02",
+      "previous_session_date": "2026-10-30",
+      "quoted_at": "2026-11-02T04:30:25.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "Asia/Tokyo",
       "currency": "JPY",
@@ -159,20 +159,20 @@
       "source_url": "https://finance.yahoo.com/quote/%5EN225/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?interval=1d&range=10d",
-      "payload_sha256": "2579e6922696e4a5bda106ed79f6f3365b867943b268030718b06e727e3a5fee"
+      "payload_sha256": "2bf279dc11d9c03d0573991b514ee588e26fa48a897a3abf5ff87c6be089bb35"
     },
     {
       "symbol": "^HSI",
       "name": "香港恆生",
       "group": "亞股前次收盤",
       "status": "ok",
-      "close": 23294.42,
-      "previous_close": 22958.650390625,
-      "change": 335.76960937499825,
-      "change_pct": 1.462497157551157,
-      "session_date": "2026-10-30",
-      "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T08:08:32.000Z",
+      "close": 23437.41,
+      "previous_close": 23294.419921875,
+      "change": 142.99007812499985,
+      "change_pct": 0.6138383295422711,
+      "session_date": "2026-11-02",
+      "previous_session_date": "2026-10-30",
+      "quoted_at": "2026-11-02T04:05:00.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "Asia/Hong_Kong",
       "currency": "HKD",
@@ -181,20 +181,20 @@
       "source_url": "https://finance.yahoo.com/quote/%5EHSI/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?interval=1d&range=10d",
-      "payload_sha256": "0b185fe39ade3fdb5272e64b92d1af408846dbf68f53d70336c27310e8ef5c12"
+      "payload_sha256": "47bf79d03763cfaa7590b97effe63bf50e635292867d2702270c0daf4c88c77d"
     },
     {
       "symbol": "^TWII",
       "name": "台灣加權",
       "group": "台股前次收盤",
       "status": "ok",
-      "close": 45211.83,
-      "previous_close": 46368.328125,
-      "change": -1156.4981249999983,
-      "change_pct": -2.4941553249069104,
-      "session_date": "2026-10-30",
-      "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T05:33:15.000Z",
+      "close": 45083.05,
+      "previous_close": 45211.828125,
+      "change": -128.7781249999971,
+      "change_pct": -0.2848328199513528,
+      "session_date": "2026-11-02",
+      "previous_session_date": "2026-10-30",
+      "quoted_at": "2026-11-02T04:25:25.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "Asia/Taipei",
       "currency": "TWD",
@@ -203,7 +203,7 @@
       "source_url": "https://finance.yahoo.com/quote/%5ETWII/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1d&range=10d",
-      "payload_sha256": "d24e025468def281bb6e0e401bd4ca16d7920e19af71b63ad6cb30711569e48f"
+      "payload_sha256": "a0edb45c2e7b1e9d2ce3889ed779532a33e1c9fc6a181fb315f04a08b53c9b71"
     },
     {
       "symbol": "TSM",
@@ -225,20 +225,20 @@
       "source_url": "https://finance.yahoo.com/quote/TSM/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TSM?interval=1d&range=10d",
-      "payload_sha256": "3573cb377529ac78852c3491f50467e4071e828c1836ac520e3170c920ea83f8"
+      "payload_sha256": "fd2a505cf7575d31e8c4c023043d69f2feb8f7f852d2e2e0ca6b1a86b2077255"
     },
     {
       "symbol": "TWD=X",
       "name": "美元／新台幣",
       "group": "匯率",
       "status": "ok",
-      "close": 32.605,
+      "close": 32.586,
       "previous_close": 32.566898345947266,
-      "change": 0.03810165405273125,
-      "change_pct": 0.1169950347988058,
-      "session_date": "2026-10-30",
+      "change": 0.019101654052732897,
+      "change_pct": 0.058653586994439344,
+      "session_date": "2026-11-01",
       "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T22:08:10.000Z",
+      "quoted_at": "2026-11-02T04:45:27.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "TWD",
@@ -247,7 +247,7 @@
       "source_url": "https://finance.yahoo.com/quote/TWD%3DX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TWD%3DX?interval=1d&range=10d",
-      "payload_sha256": "ea462d228614fdd9fc561bbd04c94a43fa772ef25093f9d44e255f6d072c979c"
+      "payload_sha256": "a1478030e8e93d42174d7250b87430fd9b2300f727b149b852bd57634e69389d"
     },
     {
       "symbol": "^TNX",
@@ -269,20 +269,20 @@
       "source_url": "https://finance.yahoo.com/quote/%5ETNX/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=10d",
-      "payload_sha256": "7bac5793a5363d777821442e269e5ff69426ce5352756a43b87c11aacb887c03"
+      "payload_sha256": "59c7399b1de300bf26691f67ec4bca8862ba2c0398ab7413c6b683ede501b000"
     },
     {
       "symbol": "CL=F",
       "name": "WTI 原油近月",
       "group": "能源／地緣風險",
       "status": "ok",
-      "close": 104.12,
-      "previous_close": 102,
-      "change": 2.1200000000000045,
-      "change_pct": 2.0784313725490167,
-      "session_date": "2026-10-30",
-      "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T20:59:59.000Z",
+      "close": 100.84,
+      "previous_close": 104.12000274658203,
+      "change": -3.280002746582028,
+      "change_pct": -3.1502138494610255,
+      "session_date": "2026-11-01",
+      "previous_session_date": "2026-10-30",
+      "quoted_at": "2026-11-02T04:35:20.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "USD",
@@ -291,20 +291,20 @@
       "source_url": "https://finance.yahoo.com/quote/CL%3DF/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=10d",
-      "payload_sha256": "ca95f22f967c2cc6e844d5f946d69760f8a1e33f31a98d3df50742887f23940b"
+      "payload_sha256": "ef94d3a990751c0cd5356c1f715b1a041749277fb4fcf3eee533e91df0fe989b"
     },
     {
       "symbol": "GC=F",
       "name": "黃金近月",
       "group": "避險背景",
       "status": "ok",
-      "close": 3898.9,
-      "previous_close": 4031.39990234375,
-      "change": -132.4999023437499,
-      "change_pct": -3.286697066860522,
-      "session_date": "2026-10-30",
-      "previous_session_date": "2026-10-29",
-      "quoted_at": "2026-10-30T20:59:59.000Z",
+      "close": 3910.5,
+      "previous_close": 3898.89990234375,
+      "change": 11.60009765625,
+      "change_pct": 0.2975223254456205,
+      "session_date": "2026-11-01",
+      "previous_session_date": "2026-10-30",
+      "quoted_at": "2026-11-02T04:35:25.000Z",
       "quote_type": "來源最新報價（可能延遲）",
       "exchange_timezone": "America/New_York",
       "currency": "USD",
@@ -313,7 +313,7 @@
       "source_url": "https://finance.yahoo.com/quote/GC%3DF/",
       "warning": null,
       "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?interval=1d&range=10d",
-      "payload_sha256": "a510c3d6c559469febcfbb4f94bfebc6c854e56d77c14180d62d67341c3da899"
+      "payload_sha256": "bb582abcd09f02d29017245fea452ffadf5121faf0f95187bb0fb3674bc5df91"
     }
   ],
   "futures": {
@@ -338,299 +338,327 @@
       "category": "台灣",
       "url": "https://feeds.feedburner.com/rsscna/finance",
       "status": "ok",
-      "payload_sha256": "72a761807d1d40fe1b68b8a85d37c65725f8cc079d99d3481eaad140edd1774a"
+      "payload_sha256": "53cb79502d1bec949ff70049e354382491dd23868d7362e5a6e9aa8eb33f873d"
     },
     {
       "source": "Google 新聞・台灣財經彙整",
       "category": "台灣",
       "url": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
       "status": "ok",
-      "payload_sha256": "766f23e749a13608cda7d370ecc02f66970ea148a3266e7ee46d43bfde48024e"
+      "payload_sha256": "d7a5fd30ffeeecb24f6ecdcbbeae0039d33c54f88eb051c919adabe455b02581"
     },
     {
       "source": "BBC World（英文）",
       "category": "國際",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "status": "ok",
-      "payload_sha256": "1bd4ec51ebf16d379fe05d91580adf3f938d0da9aa63287bbd425dee0c5ca9e8"
+      "payload_sha256": "aabd704cf8930dfbec31b2223441ab128f4a7eb62fa39a2a06e58ca0547ea5b3"
     },
     {
       "source": "BBC Business（英文）",
       "category": "國際",
       "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
       "status": "ok",
-      "payload_sha256": "7ba5d6489d37a414373d7ea87f0fa865cbffd643f89147474a41aa2ead1bbfdf"
+      "payload_sha256": "135ce5554781bc22b76a2053d0ec42c6f29dd3ac6ecc0caad124edf6c0891185"
     }
   ],
   "news": {
     "台灣": [
       {
-        "title": "台股拋售逃得掉？策略師點出台積電抗壓韌性超越美韓市場 - 自由財經",
-        "description": "台股拋售逃得掉？策略師點出台積電抗壓韌性超越美韓市場 &nbsp;&nbsp; 自由財經 美股激烈反應 CSP 與 Intel 財報 分析師看好台股 AI 供應鏈 &nbsp;&nbsp; UDN 台積電ADR暴跌近6％台股拋售逃得掉？策略師點出護國神山抗壓韌性 &nbsp;&nbsp; 聚財網 黑色星期五剛過又迎暴跌星期一? 法人看AI需求支撐中長線 &nbsp;&nbsp; 自由財經 【23:20 即時新聞】TSMC 台積電(Taiwan Semiconductor Ma…",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE95cXFUVW9NQmlyMjBJTVVJdVRHNDJEMm15V3B6NjBzMWl0RXZVZEhJaThCcGE5UVFNMFNSU1JnY3d5cnk0MmJpR0oxTUZDTUl0d0pqMHF4VGxhU2JDaWow0gFkQVVfeXFMTTR3RUxPU2Q2bnBxb296WmYxbE1JTXFCbXdwOE1TSWtJQVpET005WjNkMjE1UUJQbEFaYnJtZzRObnhXNzU3YmFpcG5mNVRfRTM4STVKTFlqcklTcnc1akJubkoxQg?oc=5",
-        "publisher": "自由財經",
+        "title": "輝達陷「女間諜案」痛失市值一哥！黃仁勳身價一個月暴跌近9600億元 - Yahoo股市",
+        "description": "輝達陷「女間諜案」痛失市值一哥！黃仁勳身價一個月暴跌近9600億元 &nbsp;&nbsp; Yahoo股市 川普萬聖節扮「他」超好認！首談黃仁勳捲間諜案 恐被踢出總統委員會 &nbsp;&nbsp; udn 黃仁勳捲共諜疑雲 川普表態「將緊密調查」仍力挺：相信他光明磊落 &nbsp;&nbsp; Yahoo新聞 中國女主管與黃仁勳關係密切疑為北京間諜，川普：會仔細了解 &nbsp;&nbsp; TechNews 科技新報 黃仁勳身邊藏共諜？ 川普喊調查「這事涉及複雜問題」 …",
+        "url": "https://news.google.com/rss/articles/CBMivANBVV95cUxPUEdkUnh5YWtIalVyOW41TlBYZFZOYnlqYzVrb1ROOC1keFM3azBqeGh1c0FWQUd5VmJ0ZXNGb1BBbEhTMmkxaUg4SHJ5dEZiVHpQNTNSVFVMZjZUVWUtQXB0NXRFVm9VWUlNNFFlUy1YWnJObk81bWhlZW9rOVF6TUFjNkxOLTlFVEJYd204M0VHSTZGSEtRNFNGbTNmT0lZT1p4bmdiM2dZbW1XeU9tLTlzcVd1RDJGelVoMXhaaGtrZGJvZk15Y3E2OTVwcllhMHRQNjVTMWc0clowM0thWnRFTTM2MUhxWjhuSzFYZ1JxdnJCanNtVHpOZTdNWnQxM2RYRi1xOGJ0aEI3MUdLZkpMQUtNQmViRHRkZE96OXNCdHUybV9HWnV1bmZ2cS1hbVF4aE1Kc2t6SjR4UzFJU3FLN0pzLW13aU9tYTJtVHJJd3lPcGhnVkZtZTNtUGdSQzNiWW03cTZ0ZEswSTJhaHBkTjB5anNDWFp6a3d2M2xDY05PUzZCN193VnFqY2NYSWc3UzVCX2cyd01EaTBVUThPYXhJcnNMQUhkYUpPNHdEV21zMGZXaUxhZGc?oc=5",
+        "publisher": "Yahoo股市",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-31T09:37:46.000Z",
+        "published_at": "2026-11-02T02:39:46.000Z",
         "relevance_tags": [
           "半導體／權值股",
           "股匯市／資金"
         ]
       },
       {
-        "title": "美科技股重挫台積電ADR跌近6% 法人：台股下週開盤恐承壓",
-        "description": "（中央社記者鍾榮峰台北31日電）市場對人工智慧（AI）投資變現疑慮升溫，美科技股重挫，台積電ADR挫跌5.95%，英特爾暴跌3成，台指期夜盤跌破45000點，下跌867點收44433點，台積電期貨夜盤下跌87點收2289點，外資在台指期淨空單增至9.22萬口。",
-        "url": "https://www.cna.com.tw/news/afe/202610310073.aspx",
+        "title": "台積電遭誤殺！ 總經學家曝「1情況」：股價有望衝8000元 - Yahoo股市",
+        "description": "台積電遭誤殺！ 總經學家曝「1情況」：股價有望衝8000元 &nbsp;&nbsp; Yahoo股市 前往 Google 新聞瀏覽更多頭條新聞和觀點",
+        "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxQaU1vRmo3cmFaNkh5d2lYNzRnSFhnSURlazdrWThjWWJUd1QtNVl2Ukdma21rX19UUmxTWmJpQVJFQk8tYnhiRV9OTkg4MXFQQ0h2WGtpek8tTVJYM01IeWIxSS1VeDhJbWw0MUdfU2RpOTJkR3F1YkF5ejhUNDlVVDFyNEFTTlV5LTdfclJnUE5RNWw0OW5jTlVrWnRXcjNJaHdUUzBSSDRzX2VmVDYxRGk2NU5PTW5lTjR2OGpJdnhHczZNRWs5bzF2WmdPRXBWOW9GNk1vclNZbWtyVkZvXzZuQWdLc1FvWFNsOG1WQ3JlS0VFSEtFQzQxb2hZejRuMy1QODJWX25JUUtXRFo3MzZtbG5DN2ZUVDc0RG1DZXlXY0xFaXFVQVJpaXNvZWF2VXE3T0FJeVpENW9LZjlpYjM3QzQyOFloeHc?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:52:44.000Z",
+        "relevance_tags": [
+          "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "聯發科、鴻海、群創翻紅了！台股跌幅收斂 下跌428點 - Yahoo股市",
+        "description": "聯發科、鴻海、群創翻紅了！台股跌幅收斂 下跌428點 &nbsp;&nbsp; Yahoo股市 70萬散戶提早進場！台股跌800點慘住套房 投顧董座喊免驚「最壞就這周」 &nbsp;&nbsp; Yahoo股市 快訊／台積電跌45元至2325 台股跌652點來到44560點 &nbsp;&nbsp; ETtoday財經雲 台股週報》外資提款撤退 4萬5千點攻防 &nbsp;&nbsp; 卡優新聞網 郭哲榮喊台股跌破4萬點再砸千萬買0050！看好年底反彈 股民酸「永遠有錢買」 …",
+        "url": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxNb0stQTYwbUh3TllKOThWRU1ydFRiS24xMlAwSXEybm5KLUNTYUZweXVPYUdaeGRDeDRveEdlUlhlMDEtak8xRjhLRGQ1dXJXcVJQcGdhRWxUdnhGN3pqV2tBNFB6OUFZQ0xiWWc5TVlzOEZ6M001Ym05S21LdS03aDF0VnROSWxVdmdKNEdvekJKVkhIakRTUjZYQzFpQXNEc2tZa2VjZDhoajQ2SkVJSGV6NGUyanRUZU1qREhMaWpHbVpSVXlNMnZpeWQzNGgwMWdjY0Y2S0NvVUIzMjdReTYzTVlDSXplbHpfY0ItVGFoT1RtUWF3dGRqTF93V3c5TUxlMVh1Mi14UEU5WnROb2haNlpIUnZqUU41Q1gtaVpCc1RXRUlaSlJCVHBMdnBZamNIbXU5QjBTRExaa3ZEejQ5SjkwWHJm?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:30:42.000Z",
+        "relevance_tags": [
+          "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "聯發科法說會後慶祝行情！盤中漲155元 僅花1個交易日站回4000元關卡 - Yahoo股市",
+        "description": "聯發科法說會後慶祝行情！盤中漲155元 僅花1個交易日站回4000元關卡 &nbsp;&nbsp; Yahoo股市 聯發科賺近282億！現金流卻意外轉負 阮慕驊揭「真正危機」不在這一代 &nbsp;&nbsp; Yahoo股市 11／2盤中熱門焦點股- 證券 &nbsp;&nbsp; 工商時報 聯發科現金流轉負！ 阮慕驊揭核心關鍵：風險在下一代 &nbsp;&nbsp; 東森電視 〈台股盤前要聞〉鴻海AI伺服器機架產能翻倍、聯發科ASIC Q4營收上修至25億美元 &nbsp…",
+        "url": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxNbkZEMWUxV3ViMEpNcW9uVElaQnEzLU5XT056bzJuMEV2TGExSWpLU2UxM0tNRTE5YnljQzl5QjVjSmI4VF82Sl9GUDZweVZjc056bGZmX1M2Y0p4bDY1NWxMMHFSeUw0eUNFZU81T014c3dyRUZLYnlWbmpVM2FReUtoS0xkV0Y5ckk4TW1DdUllVXdhWGxlRFNTRUVLVUszTGNwTGRHZl9sYWplVDJlZ1RjeVJ0OGxGenU5RkZ2Y1VzbkpFQkFRR3ZzXy12djF5d1didFQ4VGpLSmVORl95ZW1NY0d0cDh2Q3hPOTZ6ek55M0hKOXRWY2RSR1lJNlZRZTBFV3B3dE5ub2J3RldKQ05YMWVMVkE5Y29QTnBtU0E3VFBERXpXWjNXZ2tkT1llbDNMczJDVzBzS2VFV0NHYW1JaW4wUXBZdWFnUllTS3h6djdmZGV4azRaNzB0eEMtT1NudC1LenFPNUgtUEFPbGtza1NyTFNVa0lkdjROTWJTUVJ4X1huRzMtQi1UN2t4NUpFTHdiOEdMbTZBTmVIOVRjT3pVQnladFRZ?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:30:17.000Z",
+        "relevance_tags": [
+          "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "台積電跌60元 台股早盤挫812點失守45000點",
+        "description": "（中央社記者曾仁凱台北2日電）英特爾上週五股價暴跌近3成，美股半導體族群重摔，台積電ADR股價大跌5.95%，拖累台股今天早盤最多下跌812點，失守45000點大關。至9時10分，台股加權指數下跌386點，至44825點。",
+        "url": "https://www.cna.com.tw/news/afe/202611020018.aspx",
         "publisher": "中央社財經",
         "feed_source": "中央社財經",
         "category": "台灣",
-        "published_at": "2026-10-31T04:19:31.000Z",
+        "published_at": "2026-11-02T01:15:28.000Z",
         "relevance_tags": [
           "半導體／權值股",
           "股匯市／資金"
         ]
       },
       {
-        "title": "央行力挽狂瀾進場阻貶守住32.5關卡 台幣匯率終場小升1.4分32.478作收 - UDN",
-        "description": "央行力挽狂瀾進場阻貶守住32.5關卡 台幣匯率終場小升1.4分32.478作收 &nbsp;&nbsp; UDN 外資匯出成重傷害新台幣10月狂貶逾6角、亞幣最弱- 金融 &nbsp;&nbsp; 工商時報 尾盤翻紅 台幣10月仍重貶6.26角 &nbsp;&nbsp; 自由時報 台幣10月大貶逾6角！匯銀揭後市主導關鍵 &nbsp;&nbsp; Yahoo新聞 央行重手強拉 台幣小升守住32.520 &nbsp;&nbsp; UDN",
-        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9FY29Ba1lTSGEyVi1Ib2ZUZHZ5WjFSTUUyR0RUeTVvU3FWLWJoTjMybktkZjc2dEpjclZTZ2NCVzRTaERXR0xkS1BSaFJaODF50gFWQVVfeXFMUFJxUWEyR1E1X1prZHFqSHlCVmpMSjlCVG9ZV250U0QycmVqMGE4YWhDTzVmSzV0Vm8wX2lNLXVVV21SWUVRd1RMY1Y3V1VETzlkbzRNNVE?oc=5",
-        "publisher": "UDN",
+        "title": "費半崩跌7.2%、台積電ADR重挫近6%！台股最慘還沒到→還有更大的崩跌在後？ - 鉅亨網",
+        "description": "費半崩跌7.2%、台積電ADR重挫近6%！台股最慘還沒到→還有更大的崩跌在後？ &nbsp;&nbsp; 鉅亨網 「別人恐懼我貪婪」錯了嗎？他喊這波下殺不單純 網淡定：台積電都敢加蓋了 &nbsp;&nbsp; Yahoo股市 科技股回檔是買點？法人看好2027年AI供應鏈需求 &nbsp;&nbsp; 經濟日報 台股45000點守不住怎辦？ 法人揭2大操作區間 &nbsp;&nbsp; ETtoday財經雲 台股高點回檔近一成 籌碼沉澱有利中長期行情續航 &nbsp;&nb…",
+        "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9IblZJLTZCMi1DSW90cTN1WWVqN3ZWMXo2UlRCNEhLcm1KX2xMOUxUX1ZSSmZjdllVc0g5RXEwTVV3X25PYVhlRmJpeU1QeE0?oc=5",
+        "publisher": "鉅亨網",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-30T08:34:14.000Z",
+        "published_at": "2026-11-02T00:09:03.000Z",
+        "relevance_tags": [
+          "半導體／權值股",
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "目標價1050元！「封測大廠」EPS放眼至近35元 LEAP毛利率衝擊30%＋CoWoS相關營收有望破10億美元 - FTNN 新聞網",
+        "description": "目標價1050元！「封測大廠」EPS放眼至近35元 LEAP毛利率衝擊30%＋CoWoS相關營收有望破10億美元 &nbsp;&nbsp; FTNN 新聞網 先進封裝需求強勁！「這大廠」喊Q4營收增8% 目標價上看800元 &nbsp;&nbsp; Yahoo新聞 日月光目標價 喊到908 &nbsp;&nbsp; 經濟日報 供不應求封測雙雄權證夯- 日報 &nbsp;&nbsp; 工商時報 先進封裝需求強勁 這大廠目標價至800元 &nbsp;&nbsp; 鏡週刊Mirro…",
+        "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9EdEZQSTg5RWNHWXBmZXMtYUhzZjVYLUxzc2xtQ3BEUE9KUDRFS3RqbVM2UVo4M3NvOFV6UUlKNjFad2h1a05KOWJoTQ?oc=5",
+        "publisher": "FTNN 新聞網",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-01T15:25:00.000Z",
         "relevance_tags": [
           "央行／重要經濟數據",
           "股匯市／資金"
         ]
       },
       {
-        "title": "外匯存底恐失守6千億大關 10月CPI連6月衝破2％警戒線 - 自由財經",
-        "description": "外匯存底恐失守6千億大關 10月CPI連6月衝破2％警戒線 &nbsp;&nbsp; 自由財經 新台幣匯率33元受惠股| 雜誌 &nbsp;&nbsp; UDN 外資撤離引爆新台幣貶勢｜新聞事件整理與重點摘要 &nbsp;&nbsp; Yahoo股市 外資10月賣超台股近兆元法人為何仍估淨匯入？關鍵藏在統計口徑- 日報 &nbsp;&nbsp; 工商時報 外資撤退新台幣狂貶法人曝「這樣做」成獲利契機- 財經新聞 &nbsp;&nbsp; PChome Online 新聞",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1FWnVfOHFSUGVORGhrN1dfc25EeDZPUkQ3NVVsNG1BRlE3WlNhMzJHdXNFRlpfQ2lCM0ZWUTBJdHFsclJ4MUZaMGFxLWEtRWNURGh3Wko3aW9YSm1FLW5j0gFkQVVfeXFMT2dHYkhsSEZuNW42MEpNZlhxOGhiQ1RZSy1QTnI2MmZMajV3STc5QnktNjhRbEhUWnNKUHphNjRKWGdWdlJGbVJoQ01XWWJsLVpZdGxKTVRzbXZEWmw3OGNTcVprcQ?oc=5",
-        "publisher": "自由財經",
+        "title": "股匯雙殺！新台幣貶逾2角跌破32.7大關 近3周盤中最低價 - Yahoo股市",
+        "description": "股匯雙殺！新台幣貶逾2角跌破32.7大關 近3周盤中最低價 &nbsp;&nbsp; Yahoo股市 MoneyDJ新聞 2026-11-02 12:09:48 陳怡潔 發佈 &nbsp;&nbsp; MoneyDJ 外匯存底恐失守6千億大關 10月CPI連6月衝破2％警戒線 &nbsp;&nbsp; 自由時報 阻貶新台幣 央行10月減發存單逾2000億元 &nbsp;&nbsp; UDN 外資撤退新台幣狂貶 法人曝「這樣做」成獲利契機 &nbsp;&nbsp; 三立新聞網S…",
+        "url": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxPRnNzNUxkQThPTGFzRkp1Y1Zoem9qRDhlZXJfN285akZBUXhRV3dDeUhJcXp1NkZhdEVMNDVSaTltQlZ6OUlfR2ZhbzBsSl9TREpBeE5fWmpKVFh4ZzJTWEhjaEZfU3FBRVp3OWhYSjh4ZEJmQUdqd2J5QUVIdU1NZDF3elJtWEVpNDVsc2hFOVk0dUMyUDZjUFV5MGFlWFBIU1B4ZjhTNHM0NUcyT2o2elVjMTJaR2JneC1fZDd4R1ZNVUpVdHBpQkhOMEhrZjJBcEJqV2RjTEZMNXlSVTFNX3Rrd2dDVGpfZ3BhbGJuRjJ1Q0pUSVpmZ3BYcUxsTzNuOW13TmktaWoyRjhxM2dtVVVzN21SdGdMVWlFdHJnZ3FWeFktOHdOa3FibEg1NWpsa0Q4SmNTVmx6Tm03QU5TVlRDMWV2elVCejJLaFU2Mmc3TlQyWGdsM0k3SF9mZmZzSEZqM2sweDBhdk0?oc=5",
+        "publisher": "Yahoo股市",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-11-01T02:50:00.000Z",
+        "published_at": "2026-11-02T03:30:50.000Z",
         "relevance_tags": [
-          "央行／重要經濟數據"
+          "股匯市／資金"
         ]
       },
       {
-        "title": "AI通膨席捲手機市場 業者：價格壓力恐燒至2028年",
-        "description": "（中央社記者江明晏台北1日電）AI基礎建設需求暴增，推升記憶體價格飆升，外溢至消費電子市場，各大手機品牌今年迎來一波波漲價潮。業者直言，AI對記憶體的需求只會更多，漲價壓力恐一路延續至2028年，手機產業將面臨成本壓力和消費端需求的雙重考驗。",
-        "url": "https://www.cna.com.tw/news/afe/202611010029.aspx",
-        "publisher": "中央社財經",
-        "feed_source": "中央社財經",
+        "title": "黃金可能繼續下跌？高盛揭金價跌破4000美元原因 - 鉅亨網",
+        "description": "黃金可能繼續下跌？高盛揭金價跌破4000美元原因 &nbsp;&nbsp; 鉅亨網 前往 Google 新聞瀏覽更多頭條新聞和觀點",
+        "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE95ZXdtaTh2eXZSM3Vqb3I0aEl6cEpCQ3pPLWpnNndEQ2JmdmdHT0ZwTWEyNmpmbVlqbU1BemV4UWVCR3NiRVpQQllFanM0YkE?oc=5",
+        "publisher": "鉅亨網",
+        "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-11-01T02:43:01.000Z",
+        "published_at": "2026-11-02T02:20:41.000Z",
         "relevance_tags": [
-          "央行／重要經濟數據"
+          "股匯市／資金"
         ]
       },
       {
-        "title": "台積電0050今年各增百萬持有人 正2、主動式ETF崛起",
-        "description": "（中央社記者高華謙台北1日電）台股今年表現亮眼，截至10月22日，持有人數突破百萬的證券增至8檔，0050與台積電各增逾100萬名持有人，部分正2、主動式ETF受益人數翻數倍。專家認為，相較韓國股市因槓桿交易引發劇烈震盪，台股有國內資金承接，「台灣投資人有撐住」。",
-        "url": "https://www.cna.com.tw/news/afe/202611010025.aspx",
+        "title": "外資賣壓延燒匯市 新台幣重貶逾2角逼近32.7元",
+        "description": "（中央社記者潘姿羽台北2日電）美國科技大廠財報欠佳，加深市場對於AI投資熱潮的疑慮，美科技股重挫，台灣股匯市今天同步下跌，新台幣匯率早盤重挫逾2.1角，逼近32.7元。",
+        "url": "https://www.cna.com.tw/news/afe/202611020031.aspx",
         "publisher": "中央社財經",
         "feed_source": "中央社財經",
         "category": "台灣",
-        "published_at": "2026-11-01T02:14:52.000Z",
+        "published_at": "2026-11-02T02:12:56.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "台達電失守1300元大關後跌幅收斂...分析師曝「已轉空」：止跌仍難強彈 - Yahoo股市",
+        "description": "台達電失守1300元大關後跌幅收斂...分析師曝「已轉空」：止跌仍難強彈 &nbsp;&nbsp; Yahoo股市 「這龍頭」曾大跌4次 最後全漲回 專家驚：一次比一次快 &nbsp;&nbsp; Yahoo股市 焦點股》台達電：買盤逢低買進 止瀉反彈 &nbsp;&nbsp; 自由財經 台達電跌停能抄底？ 大和、花旗齊砍目標價卻喊買 &nbsp;&nbsp; 東森電視 台達電法說後慘跌停！法人目標價砍530元卻喊買- 證券 &nbsp;&nbsp; 工商時報",
+        "url": "https://news.google.com/rss/articles/CBMivANBVV95cUxQNl8zZ2NwcXRscEdpcEZLRm4tV3FfMVFSaklBODE3MGZPYjR5NmxOcDB2Y2tKcGpqZkVNSGh4NHphbkw2V1FQak1lWEpCSjVES1lrcXVEWUZzUFQ4cnJTdHFqUmhfVTRlV3pMQnVDNWxZQnBzd2lwOU1rU2hNVzJKTUxVcmZraUk2NUdLTU9uYkt6V0dhRXJJaG1OUEN3U19IbFFqTzAyNU04dUNNYWxQME45RFZNTUFnWGFWMnVpN0lZWGctRHAxQTB0MHlFeGxHalVpTkc1ZjVVSTdoZUdiSC1MMkljVUJYUUdiaURtTm8xR2pXcHJRQXpNa1NPNHVrM2xQTXlycUxwdERDRkJZYjE5dkFNbnhianVTeEc2U2syT0lOMHZBZUJfWm5sclBhYTUxVFB1UlhabHlKVXFja3RmcFBEaXN3NWM0dFEzeUtQTHBzejIzb1ZldmdzUU9WVklFQVp4RDJJWkVXNmVkSUVOOUl2YzFBaHd1LXJWeVVzNFNkX2FXUkFaY1ozdWVzZkU0X0tjZDBOUHpFM3BOejlUYnFWZVpXZlJXeG1URkRZSHpRbFhzTkYwQVM?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:52:44.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "台股開盤跌177.30點",
+        "description": "（中央社台北2日電）台北股市今天開盤跌177.30點，加權股價指數為45034.53點，成交金額新台幣88.12億元。1151102",
+        "url": "https://www.cna.com.tw/news/afe/202611020017.aspx",
+        "publisher": "中央社財經",
+        "feed_source": "中央社財經",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:06:26.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "新台幣開盤貶2.2分 為32.5元",
+        "description": "（中央社台北2日電）台北外匯市場新台幣兌美元匯率今天以32.5元開盤，貶2.2分。",
+        "url": "https://www.cna.com.tw/news/afe/202611020016.aspx",
+        "publisher": "中央社財經",
+        "feed_source": "中央社財經",
+        "category": "台灣",
+        "published_at": "2026-11-02T01:04:23.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "台股10月底開戶數1482.7萬人續創高 月增6.4萬人",
+        "description": "（中央社記者曾仁凱台北2日電）台股10月先盛後衰，月初一度進逼5萬點大關，隨後近關情怯回檔，全月下跌2728.30點，回測45000點關卡。根據台灣證券交易所統計，截至10月底，台股累積總開戶數達到1482萬7469人，較9月底增加6萬4168人，續創歷史新高。",
+        "url": "https://www.cna.com.tw/news/afe/202611020015.aspx",
+        "publisher": "中央社財經",
+        "feed_source": "中央社財經",
+        "category": "台灣",
+        "published_at": "2026-11-02T00:53:21.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "法人看台股短線難逃賣壓 靜待國際股市回穩",
+        "description": "（中央社記者曾仁凱台北2日電）AI熱潮降溫，台股上週五大跌1156.50點，以45211.83點作收，失守半年線約45314點。美股續挫，半導體股跌勢慘重，英特爾股價暴跌28.58%，單日市值蒸發逾1400億美元，創半世紀以來最大單日跌幅。法人看台股中長線基本面穩健，但無法獨善其身，短線難逃外資賣壓，靜待國際股市回穩。",
+        "url": "https://www.cna.com.tw/news/afe/202611020013.aspx",
+        "publisher": "中央社財經",
+        "feed_source": "中央社財經",
+        "category": "台灣",
+        "published_at": "2026-11-02T00:25:16.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "外資狂砍9943億創史上新高！國家隊豪砸4553億救台股 16檔強勢股拚反攻5萬點 - Yahoo股市",
+        "description": "外資狂砍9943億創史上新高！國家隊豪砸4553億救台股 16檔強勢股拚反攻5萬點 &nbsp;&nbsp; Yahoo股市 內資國家隊護台股加碼16檔扮反攻急先鋒這家封測大廠買超第一名- 日報 &nbsp;&nbsp; 工商時報 16檔公股護航拚反攻 仍獲買盤力挺 有望扮穩盤要角 | 市場焦點 | 證券 &nbsp;&nbsp; 經濟日報 台股跳樓大拍賣來了！別只看0050？「三大法人、八大官股籌碼大公開」內資獨鍾2檔主動式ETF - 上市櫃 &nbsp;&nbsp; 旺得…",
+        "url": "https://news.google.com/rss/articles/CBMivANBVV95cUxQcDRyMVpHUE1oQzRSWC0ySWgzVW5YZEtFUzZZY0xPU0NJVTRudEFJVUFTSVNHSzkzS09qZkl2dUhyaGpGODBlbnFCaTYxX3dlUkdpNEJsZkI2SS1DRFJZSDZGLWh3bTNKM19RWnFScEd2cTk1c2UzZ1RNMzZqU3BCM3Nrejk1X1VGNktvTkpWMWFMMUlnblBLUXMxakJhRmNjWWl0RzhiQnV3cFVkYW9ZOUJPejNNMHFpd2t2elRodmF1aUY1Y1R5aWcya2ZENzl1dlFBMzF5ckFpRVVaXzg0RGVtQ0YzWnRwVGZveHE4Mm1VdzcwcXdGSHNTMm1wdno4aW5HRjdHa0RMRG1fYndyTDM3M3oxejB3bHJGaW9JNTBlbFZfTjMtMHhrRDJWZFpic3pkaS1OOGdJNFlTd204RGRBUzBhNkxXSmZCMDI4TjdGSkd0TG1KNzVZcWc3LWVWcXJ0c3pWZDlBT0FTZF9QYkY0OXhGSWNjbkdqYldmRGN2VV9MSXdVc241cENQZUc2SGFMbU1CVVpYdEVybDlTd1JDQXV4VW5LMUI3dzRVQW5BRi13UnBsWTZFOXY?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-01T22:47:00.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "【盤前】AI神話破滅英特爾暴跌！台指期夜盤跌867點 開盤恐迎空頭殺盤 - Yahoo新聞",
+        "description": "【盤前】AI神話破滅英特爾暴跌！台指期夜盤跌867點 開盤恐迎空頭殺盤 &nbsp;&nbsp; Yahoo新聞 全球股市拉警報！ 謝金河揭台灣處境：衝擊不會那麼大 &nbsp;&nbsp; Yahoo股市 本周開盤前 五件國際事不可不知 &nbsp;&nbsp; 經濟日報 英特爾暴跌拖累美股！台股危險了？分析師揭聯電、台達電操作關鍵、點名3大族群成避風港- 證券 &nbsp;&nbsp; 工商時報 AI伺服器需求強勁難抵PC寒冬 英特爾面臨供應、製造與代工考驗 &nbsp;…",
+        "url": "https://news.google.com/rss/articles/CBMilgNBVV95cUxQdjI2dkg3R3lWeGZFSk1DcWp2alVWSU5mV1ZzaDEzcHFsTVY3RDJaeGt0WG8wZXpSLUE1SFY1S2dqSTJCYXFkX1V4eDV3enVMSzZWaGJZaVNCblhrR0tEZVRSbDVhdDdNS2s2VUNtTm9qamVQdTVOOU9KTjZ2UUtmZUtPNHNfcHhha3REa2JKYjZ6M3RUbmItd1pubkY5TWRNWFNScmdUbnMzYnl5bkN5SnJkV2dFajNIOXRoQm1OUTgzcDlRYnBNUHFkbmg0UE9rbTh5aTQ5dkozYUxxaE5YQXRIMUhZRmEtdVV1R0dBNEpJTmc3UWZ2eDBCcThNUkdOVVhmdU9WckNENnhmaXBwY2RUUTlRa00xUXV3d2paSk1XS0tVandURFlNUDZ1dWFSRjU4LTFiMTJuSHphMzFLNVhkUjE3c1BVTkhxVnRvQ2lYR2hsQkdDbVVwRmFSRUZrT2VaZWpLaUJrYlBqQldWZllna3dSSTNFdzB6NGRlYmZkbFIxRTg4WFNFWXRjMFRuU2psOG9R?oc=5",
+        "publisher": "Yahoo新聞",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-01T22:17:00.000Z",
+        "relevance_tags": [
+          "股匯市／資金"
+        ]
+      },
+      {
+        "title": "美國期中選舉倒數！民主黨橫掃國會機率升至70％ 台灣半導體恐受衝擊- 日報 - 工商時報",
+        "description": "美國期中選舉倒數！民主黨橫掃國會機率升至70％ 台灣半導體恐受衝擊- 日報 &nbsp;&nbsp; 工商時報 期中選舉最大懸念在參院！民主黨能否奪53席 決定美股走勢 &nbsp;&nbsp; 鉅亨網 選舉與通膨數據雙重審判將至！債市巨頭罕見「按兵不動」 AI投資與財政政策面臨重新定價 &nbsp;&nbsp; Yahoo股市 天下財經週報：美國期中選舉會成為AI產業發展的黑天鵝嗎？ &nbsp;&nbsp; 天下雜誌 解讀｜ 特朗普力挺，共和黨人踩煞車：反數據中心浪潮如何…",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE05OXE0cFBCUVlCbFk1dEp2NnVNTF9QOGRFa3pUUmRXbk53b01qOFJJLUlJV3pMWmlZNGx2RWF1cHlnY2JRR2w4czZPNjZtLXpfNDdkMlJJT2tnQUtiTjFN?oc=5",
+        "publisher": "工商時報",
+        "feed_source": "Google 新聞・台灣財經彙整",
+        "category": "台灣",
+        "published_at": "2026-11-01T19:00:00.000Z",
         "relevance_tags": [
           "半導體／權值股"
         ]
       },
       {
-        "title": "財報公布前就有警訊！欣興跌破千元、聯電法說後連摔 杜金龍揭「利多不漲」關鍵 - Yahoo股市",
-        "description": "財報公布前就有警訊！欣興跌破千元、聯電法說後連摔 杜金龍揭「利多不漲」關鍵 &nbsp;&nbsp; Yahoo股市 前往 Google 新聞瀏覽更多頭條新聞和觀點",
-        "url": "https://news.google.com/rss/articles/CBMiyANBVV95cUxOV2ptNjRaNW9uUHJ5TmVCLUJPSXNyTkVjbFFTRlBfV01Jc3dvMjJnOFY0MlVIUFhtNVZuQUdleXlKT1FyMml1LXBuX0dESHhaVWhRd1VldUxsZDRfYm5TOVNVWDhUMlRfLWVmSnJSOVdnV1hhRU55TEZXOXBnTG9qeDJ2UDRuNGRlTldYck5QWW1oSXVtN3pJZmRJRWlubGhEMkR3NTB1cWJmMEw0anFDRWVaNGlzcFc0djk4U3BlQlNPOWhHazV3VG82cnJJVXB2RWd2dGRXOHE1eEYyd1Y2Z3VZMm5iQnYzMHVIc1RvWmNOQkptb0dybGhzNEstT25CWjdTREVsbnNYbnRUZzJ1Z3dyemhCQU00SXRrcEoyZUozQVNObzF3eUhvaHVjS0U2ZjZnNGo2Sm9tNHBvNmVuMnpId3A2SjhBTGp4N3pTSmFyWW5yN01xMm4tU1VQRm1fRmtyXzZRUG4wRi1ncmhta2dBdWVKdDRIVnhvampQcWxYcEZGbExzUHJkQ05PUWo0eVhlcGMta0gySDZCdHVlYmpNTTAwQmNJQy1xUWRxU1ZabGhPRVRUUXpYTDlrWmd6SFIyYW4xUXI?oc=5",
-        "publisher": "Yahoo股市",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-11-01T01:58:43.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "英特爾暴跌拖累美股！台股危險了？分析師揭聯電、台達電操作關鍵、點名3大族群成避風港- 證券 - 工商時報",
-        "description": "英特爾暴跌拖累美股！台股危險了？分析師揭聯電、台達電操作關鍵、點名3大族群成避風港- 證券 &nbsp;&nbsp; 工商時報 AI警報！美國晶片股大跌 美選、財報考驗市場信心 &nbsp;&nbsp; UDN 晶圓代工的它血崩暴跌29% 引股災骨牌效應？未來2週全球關鍵大事一次看 &nbsp;&nbsp; Yahoo新聞 Intel 第三季營收年增 21%，PC 市場與 Q4 展望轉弱拖累股價重挫近 29% &nbsp;&nbsp; XFastest News 11/1國際…",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBxN2d4VkEyaVpGamdrbG01bWFScDhIZkRMNDdQZVJaZTYyeDl5emN3LXJ5eUlYRDE4Z1RQXzlIRmpGdGhETXhIV2tPejlTcVh3WkxWZkpfSEw3Nl9lWnZR?oc=5",
+        "title": "奧特曼來台固樁催動台廠大商機傳下一站密訪台積電、廣達、緯創- 日報 - 工商時報",
+        "description": "奧特曼來台固樁催動台廠大商機傳下一站密訪台積電、廣達、緯創- 日報 &nbsp;&nbsp; 工商時報 Sam Altman週末突襲訪韓 接連會三星、SK擬為確保HBM供應與AIDC合作 &nbsp;&nbsp; DIGITIMES OpenAI執行長奧特曼快閃韓國 會晤三星、SK高層 &nbsp;&nbsp; 工商時報 加速推進自研ASIC晶片及星際之門奧特曼再訪台AI鏈商機大動- 財經要聞- 工商時報 &nbsp;&nbsp; 中時新聞網 Sam Altman 的伴手禮是…",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9CTzF5ZncwM0MtbFk4ZE0wb0txNGdleDRRQlhXYWFyNjhrQTNWNzJ5TjhCNlhwWVY3Z1V1eGhTN2o2QTJtNGUyUmhyTm1xQkNCd2JZSXkyajcySTZpeFlF?oc=5",
         "publisher": "工商時報",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-11-01T01:20:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "聯發科「5480殺到3915元」 法人揭4大利空 - ETtoday財經雲",
-        "description": "聯發科「5480殺到3915元」 法人揭4大利空 &nbsp;&nbsp; ETtoday財經雲 聯發科重挫2／跌近3成能撿便宜？温建勳喊美選後AI反彈 揭發哥止跌關鍵 &nbsp;&nbsp; 鏡週刊Mirror Media 聯發科殺到4字頭！ 他抖問「會跟國巨一樣」 內行勸：賣掉恐成韭菜 &nbsp;&nbsp; 東森電視 〈社論〉外資股匯雙殺，政府該救到什麼程度？ &nbsp;&nbsp; 中華新聞雲／中華日報 聯發科跌到3字頭、高點回檔近3成！外資狠捲1800億連16…",
-        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4xSjhMY0dEajJvMWVXQ1FDV3hwLTNVMHVnQUxNSEsyYUFaTEl0M2dZZkJEMDNlZlYtVmlKUlFCRXdBUmRJdkY5S3VJdUllOTZOZUHSAVBBVV95cUxQUDVYMHprWF9OV3hoUlV3ZGRVNzlWYWNIaVBFUHFrUE93M1FBNTZxNGtaRFpqZmZuNDlRcnVHWXNybDEzdlZKd0ZDSDdHQW1EUQ?oc=5",
-        "publisher": "ETtoday財經雲",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-11-01T00:11:00.000Z",
+        "published_at": "2026-11-01T19:00:00.000Z",
         "relevance_tags": [
           "半導體／權值股"
         ]
       },
       {
-        "title": "股價越跌、股東越多！「被動元件龍頭」千元行情還有戲？ 大咖法人下修目標價、原因全說了 - Yahoo股市",
-        "description": "股價越跌、股東越多！「被動元件龍頭」千元行情還有戲？ 大咖法人下修目標價、原因全說了 &nbsp;&nbsp; Yahoo股市 從天價1,220到500元震盪！國巨套牢不如當存股？「法人曝被動元件短線致命硬傷」真正能無腦存的只有這幾檔... &nbsp;&nbsp; 旺得富理財網 國巨：估Q4營收續揚，全年營運有望創高- 新聞 &nbsp;&nbsp; MoneyDJ 國巨股價失守500元打到快跌停，10月又崩掉快3成、3大投顧現在喊買…目標價有7成空間能成真？ &nbsp;…",
-        "url": "https://news.google.com/rss/articles/CBMiyANBVV95cUxNWlFVbHBsREF5M282Z3pkdW42Mmk1Nkd6WFZURGxBVVJsZWhGMVBJeElBYl9qZ21paXdoWEFINEFIUVhSb0VOWGtKaGlxNG1QSTJ2eE9kcXVER3pYREFWak1NUzlyU2Q0Y0hTZ0FWZWhPUHZ1SF9wczlxT20ycDJtM2NSWHRCaTU4Z3g1YTM5Y1BMdVhfUzVKVmJKMVB0dHB6Tm5zOF9SNzNhdk5SUFlwR0VWcE4tN1lvM1ZVR0RsUC1PbTdYbl9KUUZxbzJlRHF4UmY4OU5YUVhzM1ZEaGFxN3h4VFdRcWFwbUI1Q3Y2emNSTWRrV2NEc3pDWFE1Z1dhbC1VaFNjOTh5NGNNWlhkME56S1hUYVB6OEU5b2lvc052dTFhWE42SmdQRXZsb0hIaGNtTmc3NTAtamdVR0YtUkVJTDMxSFVKUm9hVDRwcVZaRVNEaHdRY0c2ejRsa2ZjYkM4YzRIX1BZOURxb0ZqS29yTmhodWxjQU5yXzdLOHZxUExYXzJxTXZHaDZXUkl5UmJPTE5EaHRNMzdocEVHUkpKd2RQUkRWM2lqdDRKdkltVTlBMzRkc1daZ2taYlNJMnVwUlpSenc?oc=5",
-        "publisher": "Yahoo股市",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T23:30:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "ETF買盤大洗牌！ 國家隊單週掃貨這「主動式ETF」35.9萬張居冠 押寶名單出爐 - Yahoo股市",
-        "description": "ETF買盤大洗牌！ 國家隊單週掃貨這「主動式ETF」35.9萬張居冠 押寶名單出爐 &nbsp;&nbsp; Yahoo股市 16檔公股護航拚反攻 仍獲買盤力挺 有望扮穩盤要角 | 市場焦點 | 證券 &nbsp;&nbsp; 經濟日報 台股跳樓大拍賣來了！別只看0050？「三大法人、八大官股籌碼大公開」內資獨鍾2檔主動式ETF &nbsp;&nbsp; 旺得富理財網 2千億銀彈護盤！官股連買12日鎖定標的曝光- 日報 &nbsp;&nbsp; 工商時報 內外資挺台股5字頭信…",
-        "url": "https://news.google.com/rss/articles/CBMi3AJBVV95cUxPVG1LMFhXLXQzcHN0Q3M5YTRyRWJKY1ROUHktQU93VVl3VEdXVXZqM3dtRGNPcmRUTk1sOTEtdHp6SnpxZWNfMFN4aVBKQlkxMVk2bkFEV2NaT0NtSEppZWNrWVUtM2ZxTVJXYU9saFd2TFk4X1pxMXp6QnJJN0VhNlkycWJNOUZYUFE1SFpuR1dfYmhLdVBLTTZUeE0xMFNsT3JnWEljb0UwODRybElVY1MwNWdfLTZYQjFJank2bnpDaDI2cy1VWjRoT0FWbFQzTDQzRldDMjJsNlRZUXQyVm9jeXZsakFFUWZFUWFVUmctXzlYNmoxLXpMS0VTcGxlRVBPeENBZGFaeVhLNkthbExNdGY3bWRSYlIzNG9VVkVmV1ItX2pyYUhQZ1h3VWt3cVpybmhPdTU0YU1KMFVPZXFTN2VFa2lvOVhrMFpXTnFmVHY3LUsyRDItOFI?oc=5",
-        "publisher": "Yahoo股市",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T23:00:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "美股AI股賣壓擴大 下週3大考驗接連登場 - Yahoo新聞",
-        "description": "美股AI股賣壓擴大 下週3大考驗接連登場 &nbsp;&nbsp; Yahoo新聞 安聯00412A：緊盯CSP、HBM與先進製程三大訊號- 財經新聞 &nbsp;&nbsp; PChome Online 新聞 全球金融一週要聞 央行政策、AI燒錢與巴西市場震盪 | 民視新聞網 &nbsp;&nbsp; LINE TODAY 本周科技巨頭財報牽動Fed 12月升息？華許拒釋前瞻指引 留給市場自己找答案 &nbsp;&nbsp; 鉅亨網 AI憂慮拖累四大指數收黑...美股下周再…",
-        "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxOWVYzNUFNWENjTlVCV1Nob05peWhaVkJOTXFiaHZGemNCSFB1Z1Q0bUNPOWo0Vy1aTWdpYmZJQUt5VlBrdHBiSm45bGNPQWZnREh5Y0VPakNrNDdWeFpfc0hKdS1PU2pidDJTa3RmX1RCcmI0MXFwVmttRUh3UVMxVUY4VjFXNi0yZzRXZ0YtRi1VQVNuNXBRbUR0OW53bzNlU0hsRTg4ZG9TQkVNXzhOZGpCOW5jbHk5enFFVEFQWHJLT0FIQXNqZWFPZ05aMFAtcmlzQWJTY3NUQVRnVDd1dlNiRmxzRzFlZVRKWmdBbnpVaFFmdDNvWTh0SFJwMlFJcGFEaFVWajlfbDAzY3kxZ1doczM5bDdZ?oc=5",
-        "publisher": "Yahoo新聞",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T22:42:48.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "幣安逾60億美元資產遭竊 FBI指北韓所為",
-        "description": "（中央社華盛頓31日綜合外電報導）美國聯邦調查局（FBI）今天表示，北韓涉及加密貨幣交易所幣安（Binance）逾60億美元虛擬資產遭竊案。",
-        "url": "https://www.cna.com.tw/news/aopl/202611010008.aspx",
-        "publisher": "中央社財經",
-        "feed_source": "中央社財經",
-        "category": "台灣",
-        "published_at": "2026-10-31T22:34:10.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "張忠謀面試只考1題、沒談薪水！ 台積電一周後為他特設「技術長」 - UDN",
-        "description": "張忠謀面試只考1題、沒談薪水！ 台積電一周後為他特設「技術長」 &nbsp;&nbsp; UDN 張忠謀送水晶牌上頭只刻「5字」前技術長揭密台積電超車全球的關鍵一役 &nbsp;&nbsp; UDN 摩爾定律險止步35奈米！胡正明揭FinFET關鍵 張忠謀布局台積電超車 &nbsp;&nbsp; 壹蘋新聞網 台積電董事長魏哲家談「三維電晶體之父」胡正明：他的研究改變了半導體產業 &nbsp;&nbsp; 104職場力 台積電不必全是半導體專家！胡正明親讀35篇專利 揭人才培育…",
-        "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5QeTU4eVVZTFNBWTNiMDZvSjRCWm9uVThCUjBXUWNYVDRZaG5fdWlNNkJJVVVMNjFiV2dsRDRtZC1reE8yM0N5b2dmUzhtcDRPREo00gFYQVVfeXFMUEdYRG1lMEVuVzdBX1NYZndta0h5NElMd3E3UzRmS3dqcFZueEpxNW8zYTYtcmFTU0RyN0dIcy1sNVJWM3pzaTI5bFlyV216UjA0QnFrNFJhUA?oc=5",
-        "publisher": "UDN",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T22:00:00.000Z",
-        "relevance_tags": [
-          "半導體／權值股"
-        ]
-      },
-      {
-        "title": "股市崩盤好心慌？歷史曝應做「2件事」 - Yahoo新聞",
-        "description": "股市崩盤好心慌？歷史曝應做「2件事」 &nbsp;&nbsp; Yahoo新聞 前往 Google 新聞瀏覽更多頭條新聞和觀點",
-        "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOdHJrbmt4OENIRzBuU1FyamhQTVVFeXhIYjFsZXEtaWtNVkl1VGN1V1ZGSEsyTUxFTmQxWl9PblpQV3lJZk1JZ1ZBbkpJY29NZmNHRjduZmlSLUxGRWdPQU1PNjRTWE9IQWlkR08xSmcwbWYyTUFNVnhJTlBxbER5UFhwcmdXSTlPcnVHMDktSzJLYTJBVUhBdDFCbUoyd0oyM2VicHhWNXI0WFdId2J2TENLaFRSV3lvMnV2RGNWRWpwM0MydkF1dXlKVGRwMkxfMmFsZDQyeU13U2tvSHJMUWF1cE81ZDFVVWFUdm5IV1k3OXZRaFBPZWR4b2NPWlE?oc=5",
-        "publisher": "Yahoo新聞",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T19:15:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "外資大賣台股近兆元卻逆勢敲進15檔！這檔最受寵連17天獲加碼- 日報 - 工商時報",
-        "description": "外資大賣台股近兆元卻逆勢敲進15檔！這檔最受寵連17天獲加碼- 日報 &nbsp;&nbsp; 工商時報 15檔業績護體有看頭 華邦電、英業達等有望領軍逆襲 | 市場焦點 | 證券 &nbsp;&nbsp; 經濟日報 美股崩跌，台股明天剉咧等？不敗教主點名15檔抗跌股：像小強一樣活下去 | 張庭維 | 新聞 &nbsp;&nbsp; 風傳媒 台股大逃殺行情藏轉機18檔外資壓箱寶準備反攻- 財經 &nbsp;&nbsp; 中時新聞網 台股周一要挫著等了嗎？不敗教主喊跟小強活下去…",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5CbUhtQWJ4UExXUWFHVFlpNHk5Um5UT3RhX0tOUVliS0tiTkpCLWFMZWxoZF9fcDlqU0libkh3LWV1ZmZNV1o1NnVYbk1rNkh6TmVXSk9LYUN2Z2syM2l3?oc=5",
+        "title": "台股何時迎反彈？法人估11月先下後上4大止跌關鍵曝- 日報 - 工商時報",
+        "description": "台股何時迎反彈？法人估11月先下後上4大止跌關鍵曝- 日報 &nbsp;&nbsp; 工商時報 台股跌夠了嗎？ 法人曝最恐慌時間點 但有四利多加持拉回逢低買 &nbsp;&nbsp; 經濟日報 台股下週能否止跌？法人揭「觀察3訊號」44726點成防線 &nbsp;&nbsp; TVBS 《其實下週走勢已經排定》含小那 &nbsp;&nbsp; 聚財網 台股11月反彈時間點曝！ 程正樺：會有技術性反彈、但行情要走遠不容易 &nbsp;&nbsp; Yahoo新聞",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1UU0YwQzJpWjcxcWhEWUJ2MlM3SU1GNFFISTFiWTI1LUw1RlM2YTIwVXhUaUN0MWg1TDBoNHk1eVlWSVVhVFpDWWVtOEEtcXhoLS0ta194ekFBZ1lxRnk0?oc=5",
         "publisher": "工商時報",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-31T19:00:00.000Z",
+        "published_at": "2026-11-01T19:00:00.000Z",
         "relevance_tags": [
           "股匯市／資金"
-        ]
-      },
-      {
-        "title": "AI股無差別下殺 台股11月開盤半年線恐掰掰、金融股成避險新標的 - Yahoo新聞",
-        "description": "AI股無差別下殺 台股11月開盤半年線恐掰掰、金融股成避險新標的 &nbsp;&nbsp; Yahoo新聞 台股11月開門恐慘綠！ 法人點３族群避風港、11月入市勝率仍高 | 太報 &nbsp;&nbsp; LINE TODAY AI大咖暴跌怎麼了? 台股破半年線，11月釀彈? &nbsp;&nbsp; 聚財網 台股破季線，趁機撿便宜！今日又是多檔漲停板 &nbsp;&nbsp; 華冠投顧 股市最錢線-20261030-高閔漳-Intel財測暴雷-盤後大跌22-台股破半年線還…",
-        "url": "https://news.google.com/rss/articles/CBMikwNBVV95cUxQamY5SHBOZ0tWYTlUakdzMUpWNEEzQ1c4aEZXLUdIYWpERjJKT2kwbUZHdWp0RURybEJITWVQOWlaVmVidDVpcVp5ek00WmVoWmR3NFotNXdwQW0wZXdKN3ZyV3I4VWc4cVJzVDBPY2k4NWU3cTRBNmNEQXN5NmR4aEdwMVZaNW5zNTg3cUFQMHoxdE10RzNpV0dLck95blJkN0x6TmZscE0zQTV3Ums2eXZ1UDVBNFNoMVZWTFNxOFp1MmVQVWprUktubUJBc2ZOUE5MWGdITjB6clM0NTFQNXlSckpwMGFBNXlUalpJbWNabTlIVUdYUlcyRHljTjZ3clpaNHNLZjN5MFVYcFZuZnl4Rm45cXFTQV9ncl9meEFJMGszQ3JWZVpPblg4T0FfNVRFWDJKSUJaOGlfSHFta3BWdFBRNGlHV1V1S0tsOTN5ZTQ4b0xlMmtuZWtIYkpKUTBwSVlOdnU3MzI3V2dNTzFjem9FUTFLMjh5TU1RVXI2bkhRbTkySHg1cS12VGtqaVlJ?oc=5",
-        "publisher": "Yahoo新聞",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T16:30:40.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "市場不在乎期中選舉？歷史數據顯示：不論誰贏誰輸 選後美股都會漲 - 經濟日報",
-        "description": "市場不在乎期中選舉？歷史數據顯示：不論誰贏誰輸 選後美股都會漲 &nbsp;&nbsp; 經濟日報 財報、選舉、利率三考驗 靈活選股迎利多 &nbsp;&nbsp; 自由時報 美股科技股跌出機會？兩位專家看好選後行情 提醒下一波贏家要過「這一關」 &nbsp;&nbsp; 工商時報 強通膨+鷹派央行+AI資金撐腰！美元將創近一年半最佳月度表現 分析師：美大選難改強勢邏輯 &nbsp;&nbsp; 鉅亨網 美國期中選舉後必漲？台股跌破半年線「甜蜜點」到了嗎 前金控操盤手這樣說 …",
-        "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBUSzY1TWlCdVVGSzA1QkpwdE9WZ2RuUW4wcHJ0cFo3V2EtaW5DQk5ldUxGMkVnUndNYVI0Q2F6RUZBakpFcmIzdWZJdmJVQk1iT0hNVVdTS3Q2RTBD0gFiQVVfeXFMUGRCY3JpWDdxUDl1d1FxRXAxa3RyOTJxS2FubUpibThYNnV2cFR0R1NQeE5JVkhjdkpHSUpndWxNV3R3ZTEyb2R4dFFsQy1VVy0yS0d2RVBBMWY2bjc5QlIyU2c?oc=5",
-        "publisher": "經濟日報",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T15:00:35.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "記憶體復活戰？外資買超榜大洗牌、單週掃貨「2指標」10.6萬張 一哥南亞科1.9萬張僅排第八 - Yahoo股市",
-        "description": "記憶體復活戰？外資買超榜大洗牌、單週掃貨「2指標」10.6萬張 一哥南亞科1.9萬張僅排第八 &nbsp;&nbsp; Yahoo股市 台股重挫能抄底了嗎？專家警告別急著接刀 &nbsp;&nbsp; Yahoo新聞 外資撤出台股後錢流去哪？他困惑「美股、黃金也沒漲」 鄉民意見分歧 &nbsp;&nbsp; Yahoo股市 外資賣千億大砍0050！ 網見買超「這檔」驚：房市要起飛？ &nbsp;&nbsp; 東森新聞 下班國際線》外資狂賣台股2兆，台股衝5萬有譜？張錫揭台積電…",
-        "url": "https://news.google.com/rss/articles/CBMi1AJBVV95cUxPNGRWbzZseE1Gd2hXLXU3OXhLV0pjQWNjX0lqMnJtOFNzS0dkb18wVXMzMDFpWkZZX3o0MnFaSl9wOE90Xzc2Q2pkNkp2NjRVN0lmeFk2RUt3NjRiTHN0ODMyc0JIS1JTNHhQZXd6a1NPWjVsdjNkeElDdzMwN2lHdkZlMl9DczFiVGJUa2pQV21JRURaRDBtMFBxNjl5dnVYWTZKMmVoUFhhdllhNGFTa041SFJJcm9pdThCc05aWmdKMU5EV3IxQ0xJR1o5LXl2bWx0NGxUc0FNaGpIYTFTNFVBTTJseDBEYnphRXQyM0FCSUs5R25ZdkNfWXZVV1FKajVpU0g5Rk5DZ1lTN0lmaTNLcTMtNTZXdWNRdHBiVUpkZmQ4b1FqMXJKOHZQdC0wU3FMVTFoY2RqMmNRYUM2cFdDakN3OE81MmM2S194TmhiUDho?oc=5",
-        "publisher": "Yahoo股市",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T15:00:00.000Z",
-        "relevance_tags": [
-          "股匯市／資金"
-        ]
-      },
-      {
-        "title": "美國計劃轟炸伊朗 油價飆漲逾2％ - 工商時報",
-        "description": "美國計劃轟炸伊朗 油價飆漲逾2％ &nbsp;&nbsp; 工商時報 〈能源盤後〉美伊衝突升級風險升高 原油漲逾2%收半年高點 布油月漲13.6% &nbsp;&nbsp; Yahoo股市 期元大 S&P 石油 盯後市 &nbsp;&nbsp; 經濟日報 油價漲不動了？美伊傳出談判新進展 國際油價上演大震盪 &nbsp;&nbsp; 自由財經 MoneyDJ新聞 2026-10-30 06:15:12 黃文章 發佈 &nbsp;&nbsp; MoneyDJ",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE54Yzh6UXBIb0M5S0VUdG5KZ0h4YmxVLWZGY2VnaXY2cXZZR3lkYlRYVVFBZmp0OG1pWEdDNi1GYzlHUWlVMnlsZXFOdDVsRFdOb1ZzbEVuSmZEX0g4RERV?oc=5",
-        "publisher": "工商時報",
-        "feed_source": "Google 新聞・台灣財經彙整",
-        "category": "台灣",
-        "published_at": "2026-10-31T14:32:00.000Z",
-        "relevance_tags": [
-          "地緣／政策風險"
         ]
       }
     ],
     "國際": [
       {
-        "title": "The fight to save Canadian town threatened by Trump's tariffs",
-        "description": "A century-old paper mill in Témiscaming, Quebec is indefinitely closed after the US imposed 50% tariffs on its products, putting hundreds out of work.",
-        "url": "https://www.bbc.co.uk/news/articles/cmly016ep243o?at_medium=RSS&at_campaign=rss",
+        "title": "Ukraine air raid app apparently hacked as users receive false radiation threat, Air Force says",
+        "description": "Hours later Russian authorities said its app was also hacked, with fake warnings sent inside the country.",
+        "url": "https://www.bbc.co.uk/news/articles/c51kdy1ew7zvo?at_medium=RSS&at_campaign=rss",
         "publisher": "BBC World（英文）",
         "feed_source": "BBC World（英文）",
         "category": "國際",
-        "published_at": "2026-10-31T02:39:25.000Z",
+        "published_at": "2026-11-02T01:18:27.000Z",
         "relevance_tags": [
           "地緣／政策風險"
         ]
       },
       {
-        "title": "US tech stocks see sharp falls as AI spending nears $1tn",
-        "description": "Shares in Intel continue to fall while the tech-heavy Nasdaq opens at its lowest level in more than two months.",
-        "url": "https://www.bbc.co.uk/news/articles/cvwy72e0n72yo?at_medium=RSS&at_campaign=rss",
+        "title": "Russian strikes cut power to thousands in Ukraine as Kherson ceasefire ends",
+        "description": "A rare humanitarian ceasefire allowed civilians to evacuate the Russian-occupied city of Oleshky.",
+        "url": "https://www.bbc.co.uk/news/articles/c64g1y90p71eo?at_medium=RSS&at_campaign=rss",
+        "publisher": "BBC World（英文）",
+        "feed_source": "BBC World（英文）",
+        "category": "國際",
+        "published_at": "2026-11-01T21:55:01.000Z",
+        "relevance_tags": [
+          "地緣／政策風險"
+        ]
+      },
+      {
+        "title": "Israeli strikes in Gaza kill eight including child, hospitals say",
+        "description": "Five officers from the Hamas-run police have been killed in Khan Younis and three people, including a child, killed in Gaza City, officials say.",
+        "url": "https://www.bbc.co.uk/news/articles/cmqln14rrzxvo?at_medium=RSS&at_campaign=rss",
+        "publisher": "BBC World（英文）",
+        "feed_source": "BBC World（英文）",
+        "category": "國際",
+        "published_at": "2026-11-01T17:06:32.000Z",
+        "relevance_tags": [
+          "地緣／政策風險"
+        ]
+      },
+      {
+        "title": "Thousands of jobs at Virgin Media O2 to be cut",
+        "description": "The broadband provider has not finalised the number of roles to be axed but it will likely be a sizeable chunk of its workforce, the BBC understands.",
+        "url": "https://www.bbc.co.uk/news/articles/c6rry8x9d9qko?at_medium=RSS&at_campaign=rss",
         "publisher": "BBC Business（英文）",
         "feed_source": "BBC Business（英文）",
         "category": "國際",
-        "published_at": "2026-10-30T20:34:46.000Z",
+        "published_at": "2026-11-01T16:57:14.000Z",
         "relevance_tags": [
-          "股匯市／資金"
+          "央行／重要經濟數據"
         ]
       }
     ]
@@ -645,14 +673,14 @@
   ],
   "morning_brief": {
     "schema_version": 1,
-    "generated_at": "2026-11-01T04:46:04.095Z",
-    "briefing_date": "2026-11-01",
+    "generated_at": "2026-11-02T04:45:30.927Z",
+    "briefing_date": "2026-11-02",
     "method": "僅依可驗證數值、公開RSS摘要與明示的主題規則整理，未生成未知事實或漲跌預測。",
-    "session_note": "今天是週末，這是市場背景整理，不代表台股今日開盤。",
+    "session_note": "請另核對台灣休市與期貨到期公告。",
     "coverage": {
       "quotes_available": 14,
       "quotes_total": 14,
-      "news_selected": 5
+      "news_selected": 6
     },
     "overview": [
       {
@@ -684,7 +712,7 @@
         ]
       },
       {
-        "text": "美元／新台幣 32.61 新台幣／美元，較前次 +0.12%。數值上升表示美元相對新台幣走強。",
+        "text": "美元／新台幣 32.59 新台幣／美元，較前次 +0.06%。數值上升表示美元相對新台幣走強。",
         "symbols": [
           "TWD=X"
         ]
@@ -717,7 +745,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5ESOX/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESOX?interval=1d&range=10d",
-        "payload_sha256": "ccbad402d493f25002acc31967678b31c7737ed1630cbfbdcdb500d8d664fb52",
+        "payload_sha256": "ae2739488041b9a4a26da99e75597a764de0a87d79bf3c0ba79102869ad096ed",
         "value_text": "10,688.8 點",
         "change_text": "-7.2%",
         "change_value_text": "-829.4 點"
@@ -742,7 +770,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5EIXIC/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?interval=1d&range=10d",
-        "payload_sha256": "60e9d70b9c75e28cf6c8bbc21bcae6c8fe9ec22f2a6b6931328536eefde57582",
+        "payload_sha256": "47dad2eca5ec63bf6efb73e0ecfe2b3404c41792e930022e3ba228e892d0d72b",
         "value_text": "25,437 點",
         "change_text": "-2.86%",
         "change_value_text": "-747.72 點"
@@ -767,7 +795,7 @@
         "source_url": "https://finance.yahoo.com/quote/TSM/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TSM?interval=1d&range=10d",
-        "payload_sha256": "3573cb377529ac78852c3491f50467e4071e828c1836ac520e3170c920ea83f8",
+        "payload_sha256": "fd2a505cf7575d31e8c4c023043d69f2feb8f7f852d2e2e0ca6b1a86b2077255",
         "value_text": "406.13 美元／ADR",
         "change_text": "-5.95%",
         "change_value_text": "-25.68 美元／ADR"
@@ -792,7 +820,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5EGSPC/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1d&range=10d",
-        "payload_sha256": "e89c1ec5824652ab8f98e153c664fac3705860f5f1b33028eac24ec0f9d1c8eb",
+        "payload_sha256": "fe9f03b550f72f07dfc8f00a3b8b35eeea4095b40e44931e7a85be6c97e8423c",
         "value_text": "7,580.07 點",
         "change_text": "-1.82%",
         "change_value_text": "-140.32 點"
@@ -817,7 +845,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5EDJI/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?interval=1d&range=10d",
-        "payload_sha256": "77040935158d81b60f07b6701da78087938a88c406cff80bf2837c45bfdebdad",
+        "payload_sha256": "8a38f3e6c20805af4a06cd8c4413d3e35fd3685d87f0ae48ae4856938f64c791",
         "value_text": "51,770.31 點",
         "change_text": "-1.09%",
         "change_value_text": "-572.25 點"
@@ -842,7 +870,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5EVIX/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=10d",
-        "payload_sha256": "9340d5c66cea4cf732fba7787723b6e429756eabbe4cadafaab00d7c9fbcbe3b",
+        "payload_sha256": "6a0e65bb406792b0cb42ea0787ef5446c73b85eaa33157b4cf3d3de1cebff759",
         "value_text": "19.42 點",
         "change_text": "+12.91%",
         "change_value_text": "+2.22 點"
@@ -852,13 +880,13 @@
         "name": "美元／新台幣",
         "group": "匯率",
         "status": "ok",
-        "close": 32.605,
+        "close": 32.586,
         "previous_close": 32.566898345947266,
-        "change": 0.03810165405273125,
-        "change_pct": 0.1169950347988058,
-        "session_date": "2026-10-30",
+        "change": 0.019101654052732897,
+        "change_pct": 0.058653586994439344,
+        "session_date": "2026-11-01",
         "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T22:08:10.000Z",
+        "quoted_at": "2026-11-02T04:45:27.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "America/New_York",
         "currency": "TWD",
@@ -867,10 +895,10 @@
         "source_url": "https://finance.yahoo.com/quote/TWD%3DX/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/TWD%3DX?interval=1d&range=10d",
-        "payload_sha256": "ea462d228614fdd9fc561bbd04c94a43fa772ef25093f9d44e255f6d072c979c",
-        "value_text": "32.61 新台幣／美元",
-        "change_text": "+0.12%",
-        "change_value_text": "+0.04 新台幣／美元"
+        "payload_sha256": "a1478030e8e93d42174d7250b87430fd9b2300f727b149b852bd57634e69389d",
+        "value_text": "32.59 新台幣／美元",
+        "change_text": "+0.06%",
+        "change_value_text": "+0.02 新台幣／美元"
       },
       {
         "symbol": "^TNX",
@@ -892,7 +920,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5ETNX/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=10d",
-        "payload_sha256": "7bac5793a5363d777821442e269e5ff69426ce5352756a43b87c11aacb887c03",
+        "payload_sha256": "59c7399b1de300bf26691f67ec4bca8862ba2c0398ab7413c6b683ede501b000",
         "value_text": "4.93 %（殖利率）",
         "change_text": "-1.2%",
         "change_value_text": "-0.06 個百分點"
@@ -902,13 +930,13 @@
         "name": "台灣加權",
         "group": "台股前次收盤",
         "status": "ok",
-        "close": 45211.83,
-        "previous_close": 46368.328125,
-        "change": -1156.4981249999983,
-        "change_pct": -2.4941553249069104,
-        "session_date": "2026-10-30",
-        "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T05:33:15.000Z",
+        "close": 45083.05,
+        "previous_close": 45211.828125,
+        "change": -128.7781249999971,
+        "change_pct": -0.2848328199513528,
+        "session_date": "2026-11-02",
+        "previous_session_date": "2026-10-30",
+        "quoted_at": "2026-11-02T04:25:25.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "Asia/Taipei",
         "currency": "TWD",
@@ -917,10 +945,10 @@
         "source_url": "https://finance.yahoo.com/quote/%5ETWII/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1d&range=10d",
-        "payload_sha256": "d24e025468def281bb6e0e401bd4ca16d7920e19af71b63ad6cb30711569e48f",
-        "value_text": "45,211.83 點",
-        "change_text": "-2.49%",
-        "change_value_text": "-1,156.5 點"
+        "payload_sha256": "a0edb45c2e7b1e9d2ce3889ed779532a33e1c9fc6a181fb315f04a08b53c9b71",
+        "value_text": "45,083.05 點",
+        "change_text": "-0.28%",
+        "change_value_text": "-128.78 點"
       },
       {
         "symbol": "^STOXX50E",
@@ -942,7 +970,7 @@
         "source_url": "https://finance.yahoo.com/quote/%5ESTOXX50E/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?interval=1d&range=10d",
-        "payload_sha256": "606be88d98b01537f3e8adda0d7c65205b13ffe7c783d9e903cf82498b8133ed",
+        "payload_sha256": "da268a729964cc20cadef3e1e98d08b1973cfea093ad19bc91d87e4c8e716aba",
         "value_text": "6,131.31 點",
         "change_text": "-1.22%",
         "change_value_text": "-75.76 點"
@@ -952,13 +980,13 @@
         "name": "日經225",
         "group": "亞股前次收盤",
         "status": "ok",
-        "close": 63290.11,
-        "previous_close": 64659.46875,
-        "change": -1369.3587499999994,
-        "change_pct": -2.117800805469805,
-        "session_date": "2026-10-30",
-        "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T06:45:03.000Z",
+        "close": 63600.65,
+        "previous_close": 63290.109375,
+        "change": 310.54062500000146,
+        "change_pct": 0.49066217149351665,
+        "session_date": "2026-11-02",
+        "previous_session_date": "2026-10-30",
+        "quoted_at": "2026-11-02T04:30:25.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "Asia/Tokyo",
         "currency": "JPY",
@@ -967,23 +995,23 @@
         "source_url": "https://finance.yahoo.com/quote/%5EN225/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?interval=1d&range=10d",
-        "payload_sha256": "2579e6922696e4a5bda106ed79f6f3365b867943b268030718b06e727e3a5fee",
-        "value_text": "63,290.11 點",
-        "change_text": "-2.12%",
-        "change_value_text": "-1,369.36 點"
+        "payload_sha256": "2bf279dc11d9c03d0573991b514ee588e26fa48a897a3abf5ff87c6be089bb35",
+        "value_text": "63,600.65 點",
+        "change_text": "+0.49%",
+        "change_value_text": "+310.54 點"
       },
       {
         "symbol": "^HSI",
         "name": "香港恆生",
         "group": "亞股前次收盤",
         "status": "ok",
-        "close": 23294.42,
-        "previous_close": 22958.650390625,
-        "change": 335.76960937499825,
-        "change_pct": 1.462497157551157,
-        "session_date": "2026-10-30",
-        "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T08:08:32.000Z",
+        "close": 23437.41,
+        "previous_close": 23294.419921875,
+        "change": 142.99007812499985,
+        "change_pct": 0.6138383295422711,
+        "session_date": "2026-11-02",
+        "previous_session_date": "2026-10-30",
+        "quoted_at": "2026-11-02T04:05:00.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "Asia/Hong_Kong",
         "currency": "HKD",
@@ -992,23 +1020,23 @@
         "source_url": "https://finance.yahoo.com/quote/%5EHSI/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EHSI?interval=1d&range=10d",
-        "payload_sha256": "0b185fe39ade3fdb5272e64b92d1af408846dbf68f53d70336c27310e8ef5c12",
-        "value_text": "23,294.42 點",
-        "change_text": "+1.46%",
-        "change_value_text": "+335.77 點"
+        "payload_sha256": "47bf79d03763cfaa7590b97effe63bf50e635292867d2702270c0daf4c88c77d",
+        "value_text": "23,437.41 點",
+        "change_text": "+0.61%",
+        "change_value_text": "+142.99 點"
       },
       {
         "symbol": "CL=F",
         "name": "WTI 原油近月",
         "group": "能源／地緣風險",
         "status": "ok",
-        "close": 104.12,
-        "previous_close": 102,
-        "change": 2.1200000000000045,
-        "change_pct": 2.0784313725490167,
-        "session_date": "2026-10-30",
-        "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T20:59:59.000Z",
+        "close": 100.84,
+        "previous_close": 104.12000274658203,
+        "change": -3.280002746582028,
+        "change_pct": -3.1502138494610255,
+        "session_date": "2026-11-01",
+        "previous_session_date": "2026-10-30",
+        "quoted_at": "2026-11-02T04:35:20.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "America/New_York",
         "currency": "USD",
@@ -1017,23 +1045,23 @@
         "source_url": "https://finance.yahoo.com/quote/CL%3DF/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?interval=1d&range=10d",
-        "payload_sha256": "ca95f22f967c2cc6e844d5f946d69760f8a1e33f31a98d3df50742887f23940b",
-        "value_text": "104.12 美元／桶",
-        "change_text": "+2.08%",
-        "change_value_text": "+2.12 美元／桶"
+        "payload_sha256": "ef94d3a990751c0cd5356c1f715b1a041749277fb4fcf3eee533e91df0fe989b",
+        "value_text": "100.84 美元／桶",
+        "change_text": "-3.15%",
+        "change_value_text": "-3.28 美元／桶"
       },
       {
         "symbol": "GC=F",
         "name": "黃金近月",
         "group": "避險背景",
         "status": "ok",
-        "close": 3898.9,
-        "previous_close": 4031.39990234375,
-        "change": -132.4999023437499,
-        "change_pct": -3.286697066860522,
-        "session_date": "2026-10-30",
-        "previous_session_date": "2026-10-29",
-        "quoted_at": "2026-10-30T20:59:59.000Z",
+        "close": 3910.5,
+        "previous_close": 3898.89990234375,
+        "change": 11.60009765625,
+        "change_pct": 0.2975223254456205,
+        "session_date": "2026-11-01",
+        "previous_session_date": "2026-10-30",
+        "quoted_at": "2026-11-02T04:35:25.000Z",
         "quote_type": "來源最新報價（可能延遲）",
         "exchange_timezone": "America/New_York",
         "currency": "USD",
@@ -1042,27 +1070,27 @@
         "source_url": "https://finance.yahoo.com/quote/GC%3DF/",
         "warning": null,
         "data_url": "https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?interval=1d&range=10d",
-        "payload_sha256": "a510c3d6c559469febcfbb4f94bfebc6c854e56d77c14180d62d67341c3da899",
-        "value_text": "3,898.9 美元／盎司",
-        "change_text": "-3.29%",
-        "change_value_text": "-132.5 美元／盎司"
+        "payload_sha256": "bb582abcd09f02d29017245fea452ffadf5121faf0f95187bb0fb3674bc5df91",
+        "value_text": "3,910.5 美元／盎司",
+        "change_text": "+0.3%",
+        "change_value_text": "+11.6 美元／盎司"
       }
     ],
     "futures": [],
     "headlines": [
       {
-        "title": "台股拋售逃得掉？策略師點出台積電抗壓韌性超越美韓市場 - 自由財經",
-        "description": "台股拋售逃得掉？策略師點出台積電抗壓韌性超越美韓市場 &nbsp;&nbsp; 自由財經 美股激烈反應 CSP 與 Intel 財報 分析師看好台股 AI 供應鏈 &nbsp;&nbsp; UDN 台積電ADR暴跌近6％台股拋售逃得掉？策略師點出護國神山抗壓韌性 &nbsp;&nbsp; 聚財網 黑色星期五剛過又迎暴跌星期一? 法人看AI需求支撐中長線 &nbsp;&nbsp; 自由財經 【23:20 即時新聞】TSMC 台積電(Taiwan Semiconductor Ma…",
-        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE95cXFUVW9NQmlyMjBJTVVJdVRHNDJEMm15V3B6NjBzMWl0RXZVZEhJaThCcGE5UVFNMFNSU1JnY3d5cnk0MmJpR0oxTUZDTUl0d0pqMHF4VGxhU2JDaWow0gFkQVVfeXFMTTR3RUxPU2Q2bnBxb296WmYxbE1JTXFCbXdwOE1TSWtJQVpET005WjNkMjE1UUJQbEFaYnJtZzRObnhXNzU3YmFpcG5mNVRfRTM4STVKTFlqcklTcnc1akJubkoxQg?oc=5",
-        "publisher": "自由財經",
+        "title": "輝達陷「女間諜案」痛失市值一哥！黃仁勳身價一個月暴跌近9600億元 - Yahoo股市",
+        "description": "輝達陷「女間諜案」痛失市值一哥！黃仁勳身價一個月暴跌近9600億元 &nbsp;&nbsp; Yahoo股市 川普萬聖節扮「他」超好認！首談黃仁勳捲間諜案 恐被踢出總統委員會 &nbsp;&nbsp; udn 黃仁勳捲共諜疑雲 川普表態「將緊密調查」仍力挺：相信他光明磊落 &nbsp;&nbsp; Yahoo新聞 中國女主管與黃仁勳關係密切疑為北京間諜，川普：會仔細了解 &nbsp;&nbsp; TechNews 科技新報 黃仁勳身邊藏共諜？ 川普喊調查「這事涉及複雜問題」 …",
+        "url": "https://news.google.com/rss/articles/CBMivANBVV95cUxPUEdkUnh5YWtIalVyOW41TlBYZFZOYnlqYzVrb1ROOC1keFM3azBqeGh1c0FWQUd5VmJ0ZXNGb1BBbEhTMmkxaUg4SHJ5dEZiVHpQNTNSVFVMZjZUVWUtQXB0NXRFVm9VWUlNNFFlUy1YWnJObk81bWhlZW9rOVF6TUFjNkxOLTlFVEJYd204M0VHSTZGSEtRNFNGbTNmT0lZT1p4bmdiM2dZbW1XeU9tLTlzcVd1RDJGelVoMXhaaGtrZGJvZk15Y3E2OTVwcllhMHRQNjVTMWc0clowM0thWnRFTTM2MUhxWjhuSzFYZ1JxdnJCanNtVHpOZTdNWnQxM2RYRi1xOGJ0aEI3MUdLZkpMQUtNQmViRHRkZE96OXNCdHUybV9HWnV1bmZ2cS1hbVF4aE1Kc2t6SjR4UzFJU3FLN0pzLW13aU9tYTJtVHJJd3lPcGhnVkZtZTNtUGdSQzNiWW03cTZ0ZEswSTJhaHBkTjB5anNDWFp6a3d2M2xDY05PUzZCN193VnFqY2NYSWc3UzVCX2cyd01EaTBVUThPYXhJcnNMQUhkYUpPNHdEV21zMGZXaUxhZGc?oc=5",
+        "publisher": "Yahoo股市",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-31T09:37:46.000Z",
+        "published_at": "2026-11-02T02:39:46.000Z",
         "relevance_tags": [
           "半導體／權值股",
           "股匯市／資金"
         ],
-        "excerpt": "台股拋售逃得掉？策略師點出台積電抗壓韌性超越美韓市場 &nbsp;&nbsp; 自由財經 美股激烈反應 CSP 與 Intel 財報 分析師看好台股 AI 供應鏈 &nbsp;&nbsp; UDN 台積電ADR暴跌近6％台股拋售逃得掉？策略師點出護國神山抗壓韌性 &nbsp;&nbsp; 聚財網 黑色星期五剛過又迎暴跌星期一? 法人看AI需求支撐中長線 &nbsp;&nbsp; 自由財經 【23:20 即時新聞】TSMC 台積電(Taiwan Semiconductor Ma…",
+        "excerpt": "輝達陷「女間諜案」痛失市值一哥！黃仁勳身價一個月暴跌近9600億元 &nbsp;&nbsp; Yahoo股市 川普萬聖節扮「他」超好認！首談黃仁勳捲間諜案 恐被踢出總統委員會 &nbsp;&nbsp; udn 黃仁勳捲共諜疑雲 川普表態「將緊密調查」仍力挺：相信他光明磊落 &nbsp;&nbsp; Yahoo新聞 中國女主管與黃仁勳關係密切疑為北京間諜，川普：會仔細了解 &nbsp;&nbsp; TechNews 科技新報 黃仁勳身邊藏共諜？ 川普喊調查「這事涉及複雜問題」 …",
         "summary_kind": "來源公開摘要摘錄",
         "watch_points": [
           "追蹤半導體與大型電子股消息，以及費半、台積電ADR的變化。",
@@ -1070,18 +1098,18 @@
         ]
       },
       {
-        "title": "美科技股重挫台積電ADR跌近6% 法人：台股下週開盤恐承壓",
-        "description": "（中央社記者鍾榮峰台北31日電）市場對人工智慧（AI）投資變現疑慮升溫，美科技股重挫，台積電ADR挫跌5.95%，英特爾暴跌3成，台指期夜盤跌破45000點，下跌867點收44433點，台積電期貨夜盤下跌87點收2289點，外資在台指期淨空單增至9.22萬口。",
-        "url": "https://www.cna.com.tw/news/afe/202610310073.aspx",
-        "publisher": "中央社財經",
-        "feed_source": "中央社財經",
+        "title": "台積電遭誤殺！ 總經學家曝「1情況」：股價有望衝8000元 - Yahoo股市",
+        "description": "台積電遭誤殺！ 總經學家曝「1情況」：股價有望衝8000元 &nbsp;&nbsp; Yahoo股市 前往 Google 新聞瀏覽更多頭條新聞和觀點",
+        "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxQaU1vRmo3cmFaNkh5d2lYNzRnSFhnSURlazdrWThjWWJUd1QtNVl2Ukdma21rX19UUmxTWmJpQVJFQk8tYnhiRV9OTkg4MXFQQ0h2WGtpek8tTVJYM01IeWIxSS1VeDhJbWw0MUdfU2RpOTJkR3F1YkF5ejhUNDlVVDFyNEFTTlV5LTdfclJnUE5RNWw0OW5jTlVrWnRXcjNJaHdUUzBSSDRzX2VmVDYxRGk2NU5PTW5lTjR2OGpJdnhHczZNRWs5bzF2WmdPRXBWOW9GNk1vclNZbWtyVkZvXzZuQWdLc1FvWFNsOG1WQ3JlS0VFSEtFQzQxb2hZejRuMy1QODJWX25JUUtXRFo3MzZtbG5DN2ZUVDc0RG1DZXlXY0xFaXFVQVJpaXNvZWF2VXE3T0FJeVpENW9LZjlpYjM3QzQyOFloeHc?oc=5",
+        "publisher": "Yahoo股市",
+        "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-31T04:19:31.000Z",
+        "published_at": "2026-11-02T01:52:44.000Z",
         "relevance_tags": [
           "半導體／權值股",
           "股匯市／資金"
         ],
-        "excerpt": "（中央社記者鍾榮峰台北31日電）市場對人工智慧（AI）投資變現疑慮升溫，美科技股重挫，台積電ADR挫跌5.95%，英特爾暴跌3成，台指期夜盤跌破45000點，下跌867點收44433點，台積電期貨夜盤下跌87點收2289點，外資在台指期淨空單增至9.22萬口。",
+        "excerpt": "台積電遭誤殺！ 總經學家曝「1情況」：股價有望衝8000元 &nbsp;&nbsp; Yahoo股市 前往 Google 新聞瀏覽更多頭條新聞和觀點",
         "summary_kind": "來源公開摘要摘錄",
         "watch_points": [
           "追蹤半導體與大型電子股消息，以及費半、台積電ADR的變化。",
@@ -1089,56 +1117,73 @@
         ]
       },
       {
-        "title": "央行力挽狂瀾進場阻貶守住32.5關卡 台幣匯率終場小升1.4分32.478作收 - UDN",
-        "description": "央行力挽狂瀾進場阻貶守住32.5關卡 台幣匯率終場小升1.4分32.478作收 &nbsp;&nbsp; UDN 外資匯出成重傷害新台幣10月狂貶逾6角、亞幣最弱- 金融 &nbsp;&nbsp; 工商時報 尾盤翻紅 台幣10月仍重貶6.26角 &nbsp;&nbsp; 自由時報 台幣10月大貶逾6角！匯銀揭後市主導關鍵 &nbsp;&nbsp; Yahoo新聞 央行重手強拉 台幣小升守住32.520 &nbsp;&nbsp; UDN",
-        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9FY29Ba1lTSGEyVi1Ib2ZUZHZ5WjFSTUUyR0RUeTVvU3FWLWJoTjMybktkZjc2dEpjclZTZ2NCVzRTaERXR0xkS1BSaFJaODF50gFWQVVfeXFMUFJxUWEyR1E1X1prZHFqSHlCVmpMSjlCVG9ZV250U0QycmVqMGE4YWhDTzVmSzV0Vm8wX2lNLXVVV21SWUVRd1RMY1Y3V1VETzlkbzRNNVE?oc=5",
-        "publisher": "UDN",
+        "title": "聯發科、鴻海、群創翻紅了！台股跌幅收斂 下跌428點 - Yahoo股市",
+        "description": "聯發科、鴻海、群創翻紅了！台股跌幅收斂 下跌428點 &nbsp;&nbsp; Yahoo股市 70萬散戶提早進場！台股跌800點慘住套房 投顧董座喊免驚「最壞就這周」 &nbsp;&nbsp; Yahoo股市 快訊／台積電跌45元至2325 台股跌652點來到44560點 &nbsp;&nbsp; ETtoday財經雲 台股週報》外資提款撤退 4萬5千點攻防 &nbsp;&nbsp; 卡優新聞網 郭哲榮喊台股跌破4萬點再砸千萬買0050！看好年底反彈 股民酸「永遠有錢買」 …",
+        "url": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxNb0stQTYwbUh3TllKOThWRU1ydFRiS24xMlAwSXEybm5KLUNTYUZweXVPYUdaeGRDeDRveEdlUlhlMDEtak8xRjhLRGQ1dXJXcVJQcGdhRWxUdnhGN3pqV2tBNFB6OUFZQ0xiWWc5TVlzOEZ6M001Ym05S21LdS03aDF0VnROSWxVdmdKNEdvekJKVkhIakRTUjZYQzFpQXNEc2tZa2VjZDhoajQ2SkVJSGV6NGUyanRUZU1qREhMaWpHbVpSVXlNMnZpeWQzNGgwMWdjY0Y2S0NvVUIzMjdReTYzTVlDSXplbHpfY0ItVGFoT1RtUWF3dGRqTF93V3c5TUxlMVh1Mi14UEU5WnROb2haNlpIUnZqUU41Q1gtaVpCc1RXRUlaSlJCVHBMdnBZamNIbXU5QjBTRExaa3ZEejQ5SjkwWHJm?oc=5",
+        "publisher": "Yahoo股市",
         "feed_source": "Google 新聞・台灣財經彙整",
         "category": "台灣",
-        "published_at": "2026-10-30T08:34:14.000Z",
+        "published_at": "2026-11-02T01:30:42.000Z",
         "relevance_tags": [
-          "央行／重要經濟數據",
+          "半導體／權值股",
           "股匯市／資金"
         ],
-        "excerpt": "央行力挽狂瀾進場阻貶守住32.5關卡 台幣匯率終場小升1.4分32.478作收 &nbsp;&nbsp; UDN 外資匯出成重傷害新台幣10月狂貶逾6角、亞幣最弱- 金融 &nbsp;&nbsp; 工商時報 尾盤翻紅 台幣10月仍重貶6.26角 &nbsp;&nbsp; 自由時報 台幣10月大貶逾6角！匯銀揭後市主導關鍵 &nbsp;&nbsp; Yahoo新聞 央行重手強拉 台幣小升守住32.520 &nbsp;&nbsp; UDN",
+        "excerpt": "聯發科、鴻海、群創翻紅了！台股跌幅收斂 下跌428點 &nbsp;&nbsp; Yahoo股市 70萬散戶提早進場！台股跌800點慘住套房 投顧董座喊免驚「最壞就這周」 &nbsp;&nbsp; Yahoo股市 快訊／台積電跌45元至2325 台股跌652點來到44560點 &nbsp;&nbsp; ETtoday財經雲 台股週報》外資提款撤退 4萬5千點攻防 &nbsp;&nbsp; 卡優新聞網 郭哲榮喊台股跌破4萬點再砸千萬買0050！看好年底反彈 股民酸「永遠有錢買」 …",
         "summary_kind": "來源公開摘要摘錄",
         "watch_points": [
-          "核對政策或數據公布時間；實際值與市場預期不同，影響也可能不同。",
+          "追蹤半導體與大型電子股消息，以及費半、台積電ADR的變化。",
           "對照股市與匯率的實際變動，不將單一市場方向直接當成台指期訊號。"
         ]
       },
       {
-        "title": "The fight to save Canadian town threatened by Trump's tariffs",
-        "description": "A century-old paper mill in Témiscaming, Quebec is indefinitely closed after the US imposed 50% tariffs on its products, putting hundreds out of work.",
-        "url": "https://www.bbc.co.uk/news/articles/cmly016ep243o?at_medium=RSS&at_campaign=rss",
+        "title": "Ukraine air raid app apparently hacked as users receive false radiation threat, Air Force says",
+        "description": "Hours later Russian authorities said its app was also hacked, with fake warnings sent inside the country.",
+        "url": "https://www.bbc.co.uk/news/articles/c51kdy1ew7zvo?at_medium=RSS&at_campaign=rss",
         "publisher": "BBC World（英文）",
         "feed_source": "BBC World（英文）",
         "category": "國際",
-        "published_at": "2026-10-31T02:39:25.000Z",
+        "published_at": "2026-11-02T01:18:27.000Z",
         "relevance_tags": [
           "地緣／政策風險"
         ],
-        "excerpt": "A century-old paper mill in Témiscaming, Quebec is indefinitely closed after the US imposed 50% tariffs on its products, putting hundreds out of work.",
+        "excerpt": "Hours later Russian authorities said its app was also hacked, with fake warnings sent inside the country.",
         "summary_kind": "來源公開摘要摘錄",
         "watch_points": [
           "留意政策或事件後續公告，以及能源、避險資產與波動指標的變化。"
         ]
       },
       {
-        "title": "US tech stocks see sharp falls as AI spending nears $1tn",
-        "description": "Shares in Intel continue to fall while the tech-heavy Nasdaq opens at its lowest level in more than two months.",
-        "url": "https://www.bbc.co.uk/news/articles/cvwy72e0n72yo?at_medium=RSS&at_campaign=rss",
-        "publisher": "BBC Business（英文）",
-        "feed_source": "BBC Business（英文）",
+        "title": "Russian strikes cut power to thousands in Ukraine as Kherson ceasefire ends",
+        "description": "A rare humanitarian ceasefire allowed civilians to evacuate the Russian-occupied city of Oleshky.",
+        "url": "https://www.bbc.co.uk/news/articles/c64g1y90p71eo?at_medium=RSS&at_campaign=rss",
+        "publisher": "BBC World（英文）",
+        "feed_source": "BBC World（英文）",
         "category": "國際",
-        "published_at": "2026-10-30T20:34:46.000Z",
+        "published_at": "2026-11-01T21:55:01.000Z",
         "relevance_tags": [
-          "股匯市／資金"
+          "地緣／政策風險"
         ],
-        "excerpt": "Shares in Intel continue to fall while the tech-heavy Nasdaq opens at its lowest level in more than two months.",
+        "excerpt": "A rare humanitarian ceasefire allowed civilians to evacuate the Russian-occupied city of Oleshky.",
         "summary_kind": "來源公開摘要摘錄",
         "watch_points": [
-          "對照股市與匯率的實際變動，不將單一市場方向直接當成台指期訊號。"
+          "留意政策或事件後續公告，以及能源、避險資產與波動指標的變化。"
+        ]
+      },
+      {
+        "title": "Israeli strikes in Gaza kill eight including child, hospitals say",
+        "description": "Five officers from the Hamas-run police have been killed in Khan Younis and three people, including a child, killed in Gaza City, officials say.",
+        "url": "https://www.bbc.co.uk/news/articles/cmqln14rrzxvo?at_medium=RSS&at_campaign=rss",
+        "publisher": "BBC World（英文）",
+        "feed_source": "BBC World（英文）",
+        "category": "國際",
+        "published_at": "2026-11-01T17:06:32.000Z",
+        "relevance_tags": [
+          "地緣／政策風險"
+        ],
+        "excerpt": "Five officers from the Hamas-run police have been killed in Khan Younis and three people, including a child, killed in Gaza City, officials say.",
+        "summary_kind": "來源公開摘要摘錄",
+        "watch_points": [
+          "留意政策或事件後續公告，以及能源、避險資產與波動指標的變化。"
         ]
       }
     ],
