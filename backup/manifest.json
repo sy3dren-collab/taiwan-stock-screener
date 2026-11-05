@@ -3,15 +3,15 @@
   "format": "sqlite-gzip-split",
   "parts": [
     {
-      "name": "prices.4b7583a5e6411b67d3bf4473a367dac8f36f7e84507957e226b5afcfbde2d790.part0000",
-      "sha256": "4b7583a5e6411b67d3bf4473a367dac8f36f7e84507957e226b5afcfbde2d790",
+      "name": "prices.a924579abfa9246338bb19fee82d9df3ab14e9910e5b79a7baad366a6960a5c7.part0000",
+      "sha256": "a924579abfa9246338bb19fee82d9df3ab14e9910e5b79a7baad366a6960a5c7",
       "bytes": 41943040
     },
     {
-      "name": "prices.dd2fb8d5350c09abe9a0cba4701a0c3ba6542357e46f8905cf98d6b4e7f16a47.part0001",
-      "sha256": "dd2fb8d5350c09abe9a0cba4701a0c3ba6542357e46f8905cf98d6b4e7f16a47",
-      "bytes": 1522972
+      "name": "prices.b37bf281ad4a1e63cb2ce43461454116db2a773feb82a91df2244b59c28b4ee3.part0001",
+      "sha256": "b37bf281ad4a1e63cb2ce43461454116db2a773feb82a91df2244b59c28b4ee3",
+      "bytes": 1607100
     }
   ],
-  "sqlite_sha256": "3e05d391f53dc3261f3aad6582b4d1efc4f765a3ecdeeb570af228b0f44a4977"
+  "sqlite_sha256": "3ee7d274796c0f9fb464df3544ef241d77f6fe868ca92d2b0fcdf1adff323bf5"
 }
