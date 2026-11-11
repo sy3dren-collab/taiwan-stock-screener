@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T22:11:10.658919+00:00",
+  "generated_at": "2026-11-11T23:18:47.244561+00:00",
   "classification": "retrospective_diagnostic",
   "promotion_allowed": false,
   "active_strategy": null,
@@ -13,7 +13,7 @@
   "short_runs": [
     {
       "schema_version": 1,
-      "generated_at": "2026-11-10T22:11:10.666954+00:00",
+      "generated_at": "2026-11-11T23:18:47.248642+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -147,7 +147,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 179.99999679000007,
+      "budget_seconds": 179.99999742,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -1345,7 +1345,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 13.916,
+      "elapsed_seconds": 12.059,
       "candidate": "baseline",
       "changed_parameters": {
         "fusion_revision": 1
@@ -1354,7 +1354,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-11-10T22:11:28.709742+00:00",
+      "generated_at": "2026-11-11T23:19:02.696174+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -1488,7 +1488,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 161.94929362200003,
+      "budget_seconds": 164.548487375,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -2686,7 +2686,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 14.07,
+      "elapsed_seconds": 12.033,
       "candidate": "causal-recovery-v2",
       "changed_parameters": {
         "fusion_revision": 2
@@ -2695,7 +2695,7 @@
     },
     {
       "schema_version": 1,
-      "generated_at": "2026-11-10T22:11:46.781806+00:00",
+      "generated_at": "2026-11-11T23:19:17.863514+00:00",
       "research_model_id": "F",
       "status": "completed",
       "classification": "retrospective_diagnostic",
@@ -2829,7 +2829,7 @@
         "max_unquoted_sessions": 3
       },
       "entry_cutoff": "2026-09-15",
-      "budget_seconds": 143.87722385200004,
+      "budget_seconds": 149.381169472,
       "period": {
         "start": "2026-07-17",
         "end": "2026-10-16",
@@ -4089,7 +4089,7 @@
           "signals": 0
         }
       ],
-      "elapsed_seconds": 14.181,
+      "elapsed_seconds": 12.174,
       "candidate": "flexible-retest-v2",
       "changed_parameters": {
         "fusion_revision": 2,
@@ -4108,6 +4108,6 @@
     "短期篩選可能過度擬合；一年包含這三個月，並非獨立樣本外驗證。",
     "費用、交易稅、滑價沿用原設定；期末預留20交易日平倉，零交易不合格。"
   ],
-  "elapsed_seconds": 81.462,
+  "elapsed_seconds": 67.867,
   "status": "completed"
 }
